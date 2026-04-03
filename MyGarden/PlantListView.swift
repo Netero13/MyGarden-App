@@ -22,6 +22,9 @@ struct PlantListView: View {
     // Controls collapsing the dashboard (tap to expand/collapse)
     @State private var dashboardExpanded: Bool = true
 
+    // Controls the location permission prompt
+    @State private var showingLocationPrompt: Bool = false
+
     var body: some View {
         // @Bindable lets us create bindings ($store.plants) from @Observable objects
         @Bindable var store = store
@@ -122,7 +125,34 @@ struct PlantListView: View {
             }
             // Fetch weather when view appears (async = non-blocking)
             .task {
-                await WeatherManager.shared.fetchWeather()
+                // If user chose GPS and we have permission, get fresh location first
+                if LocationManager.shared.useGPSForWeather && LocationManager.shared.isAuthorized {
+                    LocationManager.shared.requestLocation()
+                } else {
+                    await WeatherManager.shared.fetchWeather()
+                }
+            }
+            // On first launch, ask user if they want GPS weather
+            .onAppear {
+                if !LocationManager.shared.hasBeenAsked {
+                    // Small delay so the screen loads first, then show the prompt
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        showingLocationPrompt = true
+                    }
+                }
+            }
+            // Location permission prompt — friendly, not pushy
+            .alert("Use Your Location for Weather?", isPresented: $showingLocationPrompt) {
+                Button("Allow") {
+                    LocationManager.shared.useGPSForWeather = true
+                    LocationManager.shared.requestPermission()
+                }
+                Button("Pick City Instead", role: .cancel) {
+                    LocationManager.shared.hasBeenAsked = true
+                    LocationManager.shared.useGPSForWeather = false
+                }
+            } message: {
+                Text("MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings.")
             }
         }
     }

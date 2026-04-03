@@ -91,20 +91,49 @@ struct SettingsView: View {
 
                 // -- Weather Location --
                 Section {
-                    NavigationLink {
-                        WeatherLocationPicker()
-                    } label: {
-                        HStack {
-                            Label("Location", systemImage: "location.fill")
-                            Spacer()
-                            Text(WeatherManager.shared.locationName)
-                                .foregroundStyle(.secondary)
+                    // GPS toggle — use device location automatically
+                    Toggle(isOn: Binding(
+                        get: { LocationManager.shared.useGPSForWeather },
+                        set: { newValue in
+                            LocationManager.shared.useGPSForWeather = newValue
+                            if newValue {
+                                // If turning on GPS, request permission if needed
+                                if LocationManager.shared.isAuthorized {
+                                    LocationManager.shared.requestLocation()
+                                } else {
+                                    LocationManager.shared.requestPermission()
+                                }
+                            }
+                        }
+                    )) {
+                        Label("Use My Location", systemImage: "location.fill")
+                    }
+
+                    // Show current location name
+                    HStack {
+                        Label("Current", systemImage: "mappin.circle.fill")
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Text(WeatherManager.shared.locationName)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    // Manual city picker — always available as a fallback
+                    if !LocationManager.shared.useGPSForWeather {
+                        NavigationLink {
+                            WeatherLocationPicker()
+                        } label: {
+                            Label("Choose City", systemImage: "globe")
                         }
                     }
                 } header: {
                     Text("Weather")
                 } footer: {
-                    Text("Choose your city for accurate weather and gardening tips.")
+                    if LocationManager.shared.useGPSForWeather {
+                        Text("Weather is based on your device's current location. Turn off to pick a city manually.")
+                    } else {
+                        Text("Pick your city for accurate weather and gardening tips, or turn on location for automatic detection.")
+                    }
                 }
 
                 // -- Family --

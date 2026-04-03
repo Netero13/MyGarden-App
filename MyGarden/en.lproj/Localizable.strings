@@ -246,3 +246,12 @@
 "Check drainage — avoid waterlogged roots." = "Check drainage — avoid waterlogged roots.";
 "Protect tender plants from frost." = "Protect tender plants from frost.";
 "Keep indoors! Move potted plants to shelter." = "Keep indoors! Move potted plants to shelter.";
+
+// MARK: - Location
+"Use Your Location for Weather?" = "Use Your Location for Weather?";
+"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings.";
+"Allow" = "Allow";
+"Pick City Instead" = "Pick City Instead";
+"Use My Location" = "Use My Location";
+"Choose City" = "Choose City";
+"My Location" = "My Location";

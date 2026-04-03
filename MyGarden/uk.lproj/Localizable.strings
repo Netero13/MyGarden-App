@@ -241,3 +241,12 @@
 "Check drainage — avoid waterlogged roots." = "Перевірте дренаж — уникайте застою води біля коренів.";
 "Protect tender plants from frost." = "Захистіть ніжні рослини від морозу.";
 "Keep indoors! Move potted plants to shelter." = "Залишайтесь у приміщенні! Перенесіть вазони в укриття.";
+
+// MARK: - Location
+"Use Your Location for Weather?" = "Використати вашу геолокацію для погоди?";
+"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "MyGarden може використовувати вашу геолокацію для точної погоди та порад щодо садівництва. Ви завжди можете змінити це в Налаштуваннях.";
+"Allow" = "Дозволити";
+"Pick City Instead" = "Обрати місто";
+"Use My Location" = "Моя геолокація";
+"Choose City" = "Обрати місто";
+"My Location" = "Моя локація";
