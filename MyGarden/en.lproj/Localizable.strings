@@ -304,6 +304,12 @@
 "Fertilizing reminders" = "Fertilizing reminders";
 "Harvest alerts" = "Harvest alerts";
 
+// MARK: - Language
+"Language" = "Language";
+"Choose the app language. Restart required for full effect." = "Choose the app language. Restart required for full effect.";
+"Restart Required" = "Restart Required";
+"Please close and reopen the app for the language change to take effect." = "Please close and reopen the app for the language change to take effect.";
+
 // MARK: - Photo
 "Take Photo" = "Take Photo";
 "Choose from Library" = "Choose from Library";

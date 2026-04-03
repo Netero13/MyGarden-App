@@ -22,9 +22,20 @@ struct SettingsView: View {
     @AppStorage("reminderHour") private var reminderHour = 9
     @AppStorage("reminderMinute") private var reminderMinute = 0
 
+    // Language — stored in UserDefaults as "AppleLanguages"
+    // This overrides the system language for THIS app only.
+    @State private var selectedLanguage: String = {
+        if let langs = UserDefaults.standard.array(forKey: "AppleLanguages") as? [String],
+           let first = langs.first {
+            return first.hasPrefix("uk") ? "uk" : "en"
+        }
+        return Locale.current.language.languageCode?.identifier ?? "en"
+    }()
+
     // State
     @State private var notificationPermission: Bool = false
     @State private var showingPermissionAlert = false
+    @State private var showingRestartAlert = false
 
     var body: some View {
         NavigationStack {
@@ -186,6 +197,26 @@ struct SettingsView: View {
                     Text("Add family members so everyone can log activities with their name.")
                 }
 
+                // -- Language --
+                Section {
+                    Picker(selection: $selectedLanguage) {
+                        Text("English").tag("en")
+                        Text("Українська").tag("uk")
+                    } label: {
+                        Label(NSLocalizedString("Language", comment: ""), systemImage: "globe")
+                    }
+                    .onChange(of: selectedLanguage) {
+                        // Set the app's preferred language
+                        UserDefaults.standard.set([selectedLanguage], forKey: "AppleLanguages")
+                        UserDefaults.standard.synchronize()
+                        showingRestartAlert = true
+                    }
+                } header: {
+                    Text(NSLocalizedString("Language", comment: ""))
+                } footer: {
+                    Text(NSLocalizedString("Choose the app language. Restart required for full effect.", comment: ""))
+                }
+
                 // -- About --
                 Section {
                     HStack {
@@ -216,6 +247,11 @@ struct SettingsView: View {
             .task {
                 // Check notification permission on appear
                 notificationPermission = await NotificationManager.shared.isAuthorized()
+            }
+            .alert(NSLocalizedString("Restart Required", comment: ""), isPresented: $showingRestartAlert) {
+                Button("OK") { }
+            } message: {
+                Text(NSLocalizedString("Please close and reopen the app for the language change to take effect.", comment: ""))
             }
             .alert("Notifications Disabled", isPresented: $showingPermissionAlert) {
                 Button("Open Settings") {

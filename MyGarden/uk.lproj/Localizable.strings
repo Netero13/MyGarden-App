@@ -298,6 +298,12 @@
 "Fertilizing reminders" = "Нагадування про удобрення";
 "Harvest alerts" = "Сповіщення про збір врожаю";
 
+// MARK: - Language
+"Language" = "Мова";
+"Choose the app language. Restart required for full effect." = "Оберіть мову додатку. Потрібен перезапуск.";
+"Restart Required" = "Потрібен перезапуск";
+"Please close and reopen the app for the language change to take effect." = "Будь ласка, закрийте та відкрийте додаток для зміни мови.";
+
 // MARK: - Photo
 "Take Photo" = "Зробити фото";
 "Choose from Library" = "Обрати з бібліотеки";
