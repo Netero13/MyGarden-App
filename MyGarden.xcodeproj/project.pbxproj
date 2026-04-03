@@ -26,6 +26,7 @@
 		AA1B1FBC2B0A00110012345A /* PhotoSourcePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */; };
 		AA1B1FBE2B0A00120012345A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBD2B0A00120012345A /* NotificationManager.swift */; };
 		AA1B1FC02B0A00130012345A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBF2B0A00130012345A /* SettingsView.swift */; };
+		AA1B1FC22B0A00140012345A /* ActivityFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSourcePicker.swift; sourceTree = "<group>"; };
 		AA1B1FBD2B0A00120012345A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		AA1B1FBF2B0A00130012345A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */,
 				AA1B1FBD2B0A00120012345A /* NotificationManager.swift */,
 				AA1B1FBF2B0A00130012345A /* SettingsView.swift */,
+				AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -207,6 +210,7 @@
 				AA1B1FBC2B0A00110012345A /* PhotoSourcePicker.swift in Sources */,
 				AA1B1FBE2B0A00120012345A /* NotificationManager.swift in Sources */,
 				AA1B1FC02B0A00130012345A /* SettingsView.swift in Sources */,
+				AA1B1FC22B0A00140012345A /* ActivityFeedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

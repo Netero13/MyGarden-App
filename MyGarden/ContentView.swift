@@ -18,7 +18,13 @@ struct ContentView: View {
                     Label("My Garden", systemImage: "leaf.fill")
                 }
 
-            // Tab 2: Settings
+            // Tab 2: Activity Feed (all activities across all plants)
+            ActivityFeedView()
+                .tabItem {
+                    Label("Activity", systemImage: "clock.arrow.circlepath")
+                }
+
+            // Tab 3: Settings
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
