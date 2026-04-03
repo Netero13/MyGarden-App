@@ -24,6 +24,9 @@ struct PlantDetailView: View {
     // Controls the delete confirmation alert
     @State private var showingDeleteAlert = false
 
+    // Controls the "Log Activity" form
+    @State private var showingAddActivity = false
+
     // Used to format dates nicely (e.g. "April 3, 2026" instead of raw date)
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -45,8 +48,11 @@ struct PlantDetailView: View {
                 // -- Plant Info Card --
                 infoCard
 
-                // -- Water Now Button --
-                waterButton
+                // -- Quick Actions (Water + Log Activity) --
+                quickActionsSection
+
+                // -- Activity Journal --
+                activityJournalSection
 
                 // -- Delete Button --
                 deleteButton
@@ -56,6 +62,17 @@ struct PlantDetailView: View {
         .navigationTitle(plant.name)
         .navigationBarTitleDisplayMode(.inline)
         // Confirmation alert before deleting — prevents accidental deletion
+        // Sheet for logging a new activity
+        .sheet(isPresented: $showingAddActivity) {
+            AddActivityView { activity in
+                plant.activities.append(activity)
+                // If it's a watering activity, also update lastWatered
+                if activity.type == .watered {
+                    plant.lastWatered = activity.date
+                }
+                store.save()
+            }
+        }
         .alert("Delete Plant", isPresented: $showingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 store.delete(id: plant.id)
@@ -208,26 +225,69 @@ struct PlantDetailView: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
-    // MARK: - Water Button
-    // A big, tappable button that records "I just watered this plant".
-    // It sets lastWatered to right now, which recalculates nextWateringDate.
+    // MARK: - Quick Actions Section
+    // Two buttons side by side: "Water Now" and "Log Activity"
 
-    private var waterButton: some View {
-        Button {
-            // Set the last watered date to RIGHT NOW
-            plant.lastWatered = Date()
-            // Save to disk so it persists after closing the app
-            store.save()
-        } label: {
-            Label("Water Now", systemImage: "drop.fill")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(plant.needsWatering ? .blue : .blue.opacity(0.3))
-                .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+    private var quickActionsSection: some View {
+        HStack(spacing: 12) {
+            // Water Now button
+            Button {
+                plant.lastWatered = Date()
+                // Also log it as an activity in the journal
+                let activity = CareActivity(type: .watered, date: Date(), note: nil)
+                plant.activities.append(activity)
+                store.save()
+            } label: {
+                Label("Water Now", systemImage: "drop.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(plant.needsWatering ? .blue : .blue.opacity(0.3))
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+            }
+
+            // Log Activity button — opens the activity form
+            Button {
+                showingAddActivity = true
+            } label: {
+                Label("Log Activity", systemImage: "plus.circle.fill")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(.green)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+            }
         }
-        .padding(.top, 8)
+    }
+
+    // MARK: - Activity Journal Section
+    // Shows the timeline of all activities done to this plant.
+
+    private var activityJournalSection: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Image(systemName: "clock.arrow.circlepath")
+                    .foregroundStyle(.secondary)
+                Text("Activity Journal")
+                    .font(.headline)
+                Spacer()
+
+                if !plant.activities.isEmpty {
+                    Text("\(plant.activities.count) entries")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Divider()
+
+            ActivityTimelineView(activities: plant.activities)
+        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     // MARK: - Delete Button

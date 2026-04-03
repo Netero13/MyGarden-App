@@ -22,6 +22,10 @@ struct Plant: Identifiable, Codable {
     // Tracking
     var dateAdded: Date            // when you added this plant to your garden
 
+    // Activity Journal — a log of everything you've done to this plant.
+    // Newest entries first. Includes watering, pruning, fertilizing, etc.
+    var activities: [CareActivity] = []
+
     // MARK: - Computed Property
     // This figures out the NEXT watering date automatically.
     // You don't set this — the app calculates it from lastWatered + frequency.
