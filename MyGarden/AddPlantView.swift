@@ -119,7 +119,7 @@ struct AddPlantView: View {
         Section {
             Picker("Type", selection: $selectedType) {
                 ForEach(PlantType.allCases, id: \.self) { type in
-                    Label(type.rawValue, systemImage: type.icon)
+                    Label(type.localizedName, systemImage: type.icon)
                         .tag(type)
                 }
             }
@@ -252,7 +252,7 @@ struct AddPlantView: View {
                 // Preset picker with friendly labels
                 Picker("Frequency", selection: $selectedFrequency) {
                     ForEach(WateringFrequency.allCases) { frequency in
-                        Text(frequency.rawValue).tag(frequency)
+                        Text(frequency.localizedName).tag(frequency)
                     }
                 }
                 .pickerStyle(.navigationLink)

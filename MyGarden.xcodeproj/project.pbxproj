@@ -38,6 +38,7 @@
 		AA1B1FD42B0A001D0012345A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FD32B0A001D0012345A /* OnboardingView.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
+		AA1B1FD62B0A001E0012345A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1FD52B0A001E0012345A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		AA1B1FCF2B0A001B0012345A /* FamilySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySettingsView.swift; sourceTree = "<group>"; };
 		AA1B1FD12B0A001C0012345A /* WeatherLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLocationPicker.swift; sourceTree = "<group>"; };
 		AA1B1FD32B0A001D0012345A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AA1B1FD72B0A001F0012345A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA1B1FD82B0A00200012345A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 				AA1B1FCF2B0A001B0012345A /* FamilySettingsView.swift */,
 				AA1B1FD12B0A001C0012345A /* WeatherLocationPicker.swift */,
 				AA1B1FD32B0A001D0012345A /* OnboardingView.swift */,
+				AA1B1FD52B0A001E0012345A /* Localizable.strings */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -149,6 +153,18 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXVariantGroup section */
+		AA1B1FD52B0A001E0012345A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA1B1FD72B0A001F0012345A /* en */,
+				AA1B1FD82B0A00200012345A /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin PBXNativeTarget section */
 		AA1B1F852B0A00010012345A /* MyGarden */ = {
@@ -189,6 +205,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				uk,
 				Base,
 			);
 			mainGroup = AA1B1F7D2B0A00010012345A;
@@ -208,6 +225,7 @@
 			files = (
 				AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */,
 				AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */,
+				AA1B1FD62B0A001E0012345A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ struct FamilySettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(active.name)
                                 .font(.headline)
-                            Text("Currently active · \(active.role.rawValue)")
+                            Text("Currently active · \(active.role.localizedName)")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -117,7 +117,7 @@ struct FamilySettingsView: View {
                         .fontWeight(.medium)
                         .foregroundStyle(.primary)
 
-                    Text(member.role.rawValue)
+                    Text(member.role.localizedName)
                         .font(.caption)
                         .foregroundStyle(member.role.color)
                 }
@@ -166,7 +166,7 @@ struct AddFamilyMemberView: View {
 
                     Picker("Role", selection: $role) {
                         ForEach(FamilyRole.allCases) { r in
-                            Text(r.rawValue).tag(r)
+                            Text(r.localizedName).tag(r)
                         }
                     }
                     .onChange(of: role) {
@@ -214,7 +214,7 @@ struct AddFamilyMemberView: View {
                             Text(name.isEmpty ? "Name" : name)
                                 .font(.headline)
                                 .foregroundStyle(name.isEmpty ? .secondary : .primary)
-                            Text(role.rawValue)
+                            Text(role.localizedName)
                                 .font(.caption)
                                 .foregroundStyle(role.color)
                         }
@@ -275,7 +275,7 @@ struct EditFamilyMemberView: View {
 
                     Picker("Role", selection: $role) {
                         ForEach(FamilyRole.allCases) { r in
-                            Text(r.rawValue).tag(r)
+                            Text(r.localizedName).tag(r)
                         }
                     }
                 }

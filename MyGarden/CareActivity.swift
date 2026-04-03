@@ -34,6 +34,12 @@ enum CareType: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    // Localized display name — looks up the rawValue in Localizable.strings
+    // This is what the user sees. rawValue stays in English for code/data.
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "")
+    }
+
     // SF Symbol icon for each activity
     var icon: String {
         switch self {

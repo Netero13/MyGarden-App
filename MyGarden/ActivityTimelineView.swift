@@ -63,7 +63,7 @@ struct ActivityTimelineView: View {
             // Right: activity details
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
-                    Text(activity.type.rawValue)
+                    Text(activity.type.localizedName)
                         .font(.subheadline)
                         .fontWeight(.medium)
 

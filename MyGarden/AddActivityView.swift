@@ -35,7 +35,7 @@ struct AddActivityView: View {
                             Text("Logging as **\(member.name)**")
                                 .font(.subheadline)
                             Spacer()
-                            Text(member.role.rawValue)
+                            Text(member.role.localizedName)
                                 .font(.caption)
                                 .foregroundStyle(member.role.color)
                                 .padding(.horizontal, 8)
@@ -164,7 +164,7 @@ struct AddActivityView: View {
                     .font(.title3)
                     .foregroundStyle(isSelected ? .white : type.color)
 
-                Text(type.rawValue)
+                Text(type.localizedName)
                     .font(.caption2)
                     .fontWeight(.medium)
                     .foregroundStyle(isSelected ? .white : .primary)

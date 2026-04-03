@@ -161,7 +161,7 @@ struct OnboardingView: View {
             // Role picker
             Picker("Role", selection: $userRole) {
                 ForEach(FamilyRole.allCases) { role in
-                    Text("\(role.defaultEmoji) \(role.rawValue)").tag(role)
+                    Text("\(role.defaultEmoji) \(role.localizedName)").tag(role)
                 }
             }
             .pickerStyle(.segmented)

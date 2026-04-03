@@ -1,0 +1,243 @@
+/* Ukrainian Localizations for MyGarden / Українська локалізація */
+
+// MARK: - Tab Bar
+"Plants" = "Рослини";
+"Garden" = "Сад";
+"Activity" = "Активність";
+"Settings" = "Налаштування";
+
+// MARK: - Onboarding
+"Welcome to MyGarden" = "Ласкаво просимо до MyGarden";
+"Your personal gardening companion" = "Ваш особистий помічник у садівництві";
+"Swipe to continue" = "Проведіть, щоб продовжити";
+"What you can do" = "Що ви можете робити";
+"Track your plants" = "Відстежуйте свої рослини";
+"Add plants, set watering schedules" = "Додавайте рослини, встановлюйте графік поливу";
+"Watering reminders" = "Нагадування про полив";
+"Never forget to water again" = "Більше не забудете полити";
+"Garden map" = "Карта саду";
+"Visual layout of your garden" = "Візуальне розташування вашого саду";
+"Family sharing" = "Сімейний доступ";
+"Track who does what" = "Відстежуйте, хто що робить";
+"Photo journal" = "Фотожурнал";
+"Document your garden's growth" = "Документуйте ріст вашого саду";
+"Live weather" = "Погода наживо";
+"Gardening tips based on weather" = "Поради щодо садівництва залежно від погоди";
+"Who are you?" = "Хто ви?";
+"Set up your profile so the family knows who did what" = "Налаштуйте профіль, щоб родина знала, хто що зробив";
+"Your name" = "Ваше ім'я";
+"Role" = "Роль";
+"Start Gardening!" = "Почати садівництво!";
+"Skip for now" = "Пропустити";
+
+// MARK: - Plant List / Dashboard
+"My Garden 🌱" = "Мій сад 🌱";
+"Search plants..." = "Пошук рослин...";
+"No Plants Yet" = "Ще немає рослин";
+"Tap + to add your first plant!" = "Натисніть +, щоб додати першу рослину!";
+"All plants are happy!" = "Усі рослини в порядку!";
+"%lld plants in your garden" = "%lld рослин у вашому саду";
+"%lld plant needs watering" = "%lld рослина потребує поливу";
+"%lld plants need watering" = "%lld рослин потребують поливу";
+"Total Plants" = "Усього рослин";
+"Need Water" = "Потрібен полив";
+"All Good" = "Все добре";
+"Activities" = "Активності";
+"Water Today" = "Полити сьогодні";
+"Due today" = "Потрібно сьогодні";
+"Never watered" = "Ніколи не поливали";
+"Overdue by 1 day" = "Прострочено на 1 день";
+"Overdue by %lld days" = "Прострочено на %lld днів";
+"Loading weather..." = "Завантаження погоди...";
+"Weather unavailable" = "Погода недоступна";
+"Retry" = "Повторити";
+
+// MARK: - Add Plant
+"Add Plant" = "Додати рослину";
+"What type of plant?" = "Який тип рослини?";
+"Choose the category that best fits your plant." = "Оберіть категорію, яка найкраще підходить.";
+"Which plant?" = "Яка рослина?";
+"Select a plant..." = "Оберіть рослину...";
+"No plants in this category yet" = "У цій категорії ще немає рослин";
+"Which variety?" = "Який сорт?";
+"Custom variety" = "Інший сорт";
+"Enter variety name" = "Введіть назву сорту";
+"Turn on 'Custom variety' if yours isn't in the list." = "Увімкніть 'Інший сорт', якщо вашого немає у списку.";
+"Photo (optional)" = "Фото (необов'язково)";
+"Take a photo or pick one from your library. You can always change it later." = "Зробіть фото або оберіть з бібліотеки. Завжди можна змінити пізніше.";
+"How often to water?" = "Як часто поливати?";
+"Custom schedule" = "Власний графік";
+"Frequency" = "Частота";
+"Based on Ukrainian climate (spring-summer). Adjust for your soil and conditions." = "На основі українського клімату (весна-літо). Налаштуйте під свій ґрунт.";
+"Cancel" = "Скасувати";
+"Add" = "Додати";
+"Remove" = "Видалити";
+
+// MARK: - Edit Plant
+"Edit Plant" = "Редагувати рослину";
+"Save" = "Зберегти";
+"Name & Variety" = "Назва та сорт";
+"Plant name" = "Назва рослини";
+"Variety (optional)" = "Сорт (необов'язково)";
+"The name is what you see in the plant list. Variety is shown below it." = "Назва відображається у списку рослин. Сорт показується нижче.";
+"Photo" = "Фото";
+"Your plant already has a photo. You can change it or remove it." = "Ваша рослина вже має фото. Ви можете змінити або видалити його.";
+"Photo will be updated when you save." = "Фото оновиться після збереження.";
+"Add a photo to recognize your plant easily." = "Додайте фото, щоб легко впізнавати рослину.";
+"Watering Frequency" = "Частота поливу";
+"Adjust based on the season and your soil conditions." = "Налаштуйте залежно від сезону та ґрунту.";
+"Plant Info" = "Інформація про рослину";
+"Type and date added can't be changed." = "Тип та дату додавання змінити не можна.";
+
+// MARK: - Plant Detail
+"Edit" = "Змінити";
+"Watering" = "Полив";
+"Needs Water!" = "Потрібен полив!";
+"Last Watered" = "Останній полив";
+"Next Watering" = "Наступний полив";
+"Today" = "Сьогодні";
+"Yesterday" = "Вчора";
+"Tomorrow" = "Завтра";
+"Never" = "Ніколи";
+"Water now!" = "Полийте зараз!";
+"Water Now" = "Полити зараз";
+"Log Activity" = "Записати активність";
+"Activity Journal" = "Журнал активностей";
+"%lld entries" = "%lld записів";
+"Remove from Garden" = "Видалити із саду";
+"Delete Plant" = "Видалити рослину";
+"Delete" = "Видалити";
+"Type" = "Тип";
+"Added to Garden" = "Додано до саду";
+"Variety" = "Сорт";
+
+// MARK: - Add Activity
+"What did you do?" = "Що ви зробили?";
+"When?" = "Коли?";
+"Take a photo of what you did — great for tracking progress!" = "Зробіть фото — чудово для відстеження прогресу!";
+"Notes" = "Нотатки";
+"Optional details..." = "Додаткові деталі...";
+
+// MARK: - Activity Types
+"Watered" = "Полив";
+"Pruned" = "Обрізка";
+"Fertilized" = "Удобрення";
+"Pest Control" = "Захист від шкідників";
+"Planted" = "Посадка";
+"Transplanted" = "Пересадка";
+"Weeded" = "Прополка";
+"Harvested" = "Збір врожаю";
+"Winterized" = "Підготовка до зими";
+"Note" = "Нотатка";
+
+// MARK: - Plant Types
+"Herb" = "Трави";
+"Vegetable" = "Овочі";
+"Flower" = "Квіти";
+"Succulent" = "Сукуленти";
+"Forest Tree" = "Лісове дерево";
+"Fruit Tree" = "Плодове дерево";
+"Bush" = "Кущ";
+
+// MARK: - Activity Feed
+"Activity Feed" = "Стрічка активностей";
+"No Activities Yet" = "Ще немає активностей";
+"Start logging activities on your plants and they'll appear here." = "Почніть записувати активності і вони з'являться тут.";
+"All Activities" = "Усі активності";
+"This Week" = "Цього тижня";
+"This Month" = "Цього місяця";
+
+// MARK: - Activity Timeline
+"No activity yet" = "Ще немає активностей";
+"Tap \"Log Activity\" to start tracking" = "Натисніть \"Записати активність\", щоб почати";
+
+// MARK: - Garden Map
+"Garden Map" = "Карта саду";
+"Your garden is empty" = "Ваш сад порожній";
+"Long press & drag to move plants" = "Натисніть і утримуйте, щоб перемістити рослину";
+
+// MARK: - Settings
+"Notifications" = "Сповіщення";
+"Watering Reminders" = "Нагадування про полив";
+"Remind me at" = "Нагадати о";
+"Enable to get notified when your plants need watering." = "Увімкніть, щоб отримувати сповіщення про полив.";
+"Garden Stats" = "Статистика саду";
+"Total Activities" = "Усього активностей";
+"Need Watering" = "Потрібен полив";
+"Weather" = "Погода";
+"Location" = "Місцезнаходження";
+"Choose your city for accurate weather and gardening tips." = "Оберіть місто для точної погоди та порад із садівництва.";
+"About" = "Про додаток";
+"Version" = "Версія";
+"Made in" = "Зроблено в";
+"Ukraine 🇺🇦" = "Україна 🇺🇦";
+
+// MARK: - Family
+"Family" = "Родина";
+"Family Members" = "Члени родини";
+"Active Member" = "Активний учасник";
+"Currently active" = "Зараз активний";
+"No family members yet" = "Ще немає членів родини";
+"Add Family Member" = "Додати члена родини";
+"Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member." = "Усі мають рівні права — кожен може поливати, додавати або редагувати рослини. Проведіть вліво, щоб видалити.";
+"Add family members so everyone can log activities with their name." = "Додайте членів родини, щоб кожен записував активності зі своїм ім'ям.";
+"Add Member" = "Додати учасника";
+"Edit Member" = "Редагувати учасника";
+"Who are you adding?" = "Кого ви додаєте?";
+"Name" = "Ім'я";
+"Choose Avatar" = "Оберіть аватар";
+"Avatar" = "Аватар";
+"Preview" = "Перегляд";
+
+// MARK: - Family Roles
+"Dad" = "Тато";
+"Mom" = "Мама";
+"Son" = "Син";
+"Daughter" = "Донька";
+"Grandpa" = "Дідусь";
+"Grandma" = "Бабуся";
+"Other" = "Інше";
+
+// MARK: - Weather Location
+"Weather Location" = "Місце для погоди";
+"Search city..." = "Пошук міста...";
+"Current" = "Поточне";
+
+// MARK: - Photo
+"Take Photo" = "Зробити фото";
+"Choose from Library" = "Обрати з бібліотеки";
+"Change Photo" = "Змінити фото";
+
+// MARK: - Watering Frequencies
+"Every day" = "Щодня";
+"Every other day" = "Через день";
+"Twice a week" = "Двічі на тиждень";
+"Every 3 days" = "Кожні 3 дні";
+"Every 4 days" = "Кожні 4 дні";
+"Every 5 days" = "Кожні 5 днів";
+"Once a week" = "Раз на тиждень";
+"Every 10 days" = "Кожні 10 днів";
+"Every 2 weeks" = "Раз на 2 тижні";
+"Once a month" = "Раз на місяць";
+
+// MARK: - Weather Conditions
+"Clear" = "Ясно";
+"Partly Cloudy" = "Мінлива хмарність";
+"Cloudy" = "Хмарно";
+"Fog" = "Туман";
+"Drizzle" = "Мряка";
+"Rain" = "Дощ";
+"Heavy Rain" = "Сильний дощ";
+"Snow" = "Сніг";
+"Thunderstorm" = "Гроза";
+
+// MARK: - Weather Tips
+"Great day for gardening! Check soil moisture." = "Чудовий день для саду! Перевірте вологість ґрунту.";
+"Nice weather for outdoor plants." = "Гарна погода для вуличних рослин.";
+"Good day to transplant — less sun stress." = "Вдалий день для пересадки — менше сонячного стресу.";
+"High humidity — watch for fungal diseases." = "Висока вологість — стежте за грибковими хворобами.";
+"Light rain — may not be enough for deep roots." = "Легкий дощ — може бути недостатньо для глибоких коренів.";
+"Nature is watering for you! Skip watering today." = "Природа поливає за вас! Пропустіть полив сьогодні.";
+"Check drainage — avoid waterlogged roots." = "Перевірте дренаж — уникайте застою води біля коренів.";
+"Protect tender plants from frost." = "Захистіть ніжні рослини від морозу.";
+"Keep indoors! Move potted plants to shelter." = "Залишайтесь у приміщенні! Перенесіть вазони в укриття.";

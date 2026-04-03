@@ -189,7 +189,7 @@ struct EditPlantView: View {
                 // Dropdown with friendly labels like "Once a week", "Every other day"
                 Picker("Frequency", selection: $selectedFrequency) {
                     ForEach(WateringFrequency.allCases) { frequency in
-                        Text(frequency.rawValue).tag(frequency)
+                        Text(frequency.localizedName).tag(frequency)
                     }
                 }
                 .pickerStyle(.navigationLink)
@@ -221,7 +221,7 @@ struct EditPlantView: View {
                 Label("Type", systemImage: plant.type.icon)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(plant.type.rawValue)
+                Text(plant.type.localizedName)
                     .foregroundStyle(plant.type.color)
                     .fontWeight(.medium)
             }

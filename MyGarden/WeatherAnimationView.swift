@@ -408,7 +408,7 @@ struct WeatherHeaderView: View {
                 // Condition + details + tip
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        Text(weather.condition.rawValue)
+                        Text(weather.condition.localizedName)
                             .font(.headline)
                             .foregroundStyle(.white)
                             .shadow(color: .black.opacity(0.3), radius: 1)
@@ -430,7 +430,7 @@ struct WeatherHeaderView: View {
                     }
 
                     // Gardening tip
-                    Text(weather.condition.gardeningTip)
+                    Text(weather.condition.localizedTip)
                         .font(.caption2)
                         .foregroundStyle(.white.opacity(0.75))
                         .lineLimit(2)

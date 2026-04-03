@@ -1,0 +1,248 @@
+/* English Localizations for MyGarden */
+
+// MARK: - Tab Bar
+"Plants" = "Plants";
+"Garden" = "Garden";
+"Activity" = "Activity";
+"Settings" = "Settings";
+
+// MARK: - Onboarding
+"Welcome to MyGarden" = "Welcome to MyGarden";
+"Your personal gardening companion" = "Your personal gardening companion";
+"Swipe to continue" = "Swipe to continue";
+"What you can do" = "What you can do";
+"Track your plants" = "Track your plants";
+"Add plants, set watering schedules" = "Add plants, set watering schedules";
+"Watering reminders" = "Watering reminders";
+"Never forget to water again" = "Never forget to water again";
+"Garden map" = "Garden map";
+"Visual layout of your garden" = "Visual layout of your garden";
+"Family sharing" = "Family sharing";
+"Track who does what" = "Track who does what";
+"Photo journal" = "Photo journal";
+"Document your garden's growth" = "Document your garden's growth";
+"Live weather" = "Live weather";
+"Gardening tips based on weather" = "Gardening tips based on weather";
+"Who are you?" = "Who are you?";
+"Set up your profile so the family knows who did what" = "Set up your profile so the family knows who did what";
+"Your name" = "Your name";
+"Role" = "Role";
+"Start Gardening!" = "Start Gardening!";
+"Skip for now" = "Skip for now";
+
+// MARK: - Plant List / Dashboard
+"My Garden 🌱" = "My Garden 🌱";
+"Search plants..." = "Search plants...";
+"No Plants Yet" = "No Plants Yet";
+"Tap + to add your first plant!" = "Tap + to add your first plant!";
+"All plants are happy!" = "All plants are happy!";
+"%lld plants in your garden" = "%lld plants in your garden";
+"%lld plant needs watering" = "%lld plant needs watering";
+"%lld plants need watering" = "%lld plants need watering";
+"Total Plants" = "Total Plants";
+"Need Water" = "Need Water";
+"All Good" = "All Good";
+"Activities" = "Activities";
+"Water Today" = "Water Today";
+"Due today" = "Due today";
+"Never watered" = "Never watered";
+"Overdue by 1 day" = "Overdue by 1 day";
+"Overdue by %lld days" = "Overdue by %lld days";
+"Loading weather..." = "Loading weather...";
+"Weather unavailable" = "Weather unavailable";
+"Retry" = "Retry";
+
+// MARK: - Add Plant
+"Add Plant" = "Add Plant";
+"What type of plant?" = "What type of plant?";
+"Choose the category that best fits your plant." = "Choose the category that best fits your plant.";
+"Which plant?" = "Which plant?";
+"Select a plant..." = "Select a plant...";
+"No plants in this category yet" = "No plants in this category yet";
+"Which variety?" = "Which variety?";
+"Custom variety" = "Custom variety";
+"Enter variety name" = "Enter variety name";
+"Turn on 'Custom variety' if yours isn't in the list." = "Turn on 'Custom variety' if yours isn't in the list.";
+"Photo (optional)" = "Photo (optional)";
+"Take a photo or pick one from your library. You can always change it later." = "Take a photo or pick one from your library. You can always change it later.";
+"How often to water?" = "How often to water?";
+"Custom schedule" = "Custom schedule";
+"Frequency" = "Frequency";
+"Based on Ukrainian climate (spring-summer). Adjust for your soil and conditions." = "Based on Ukrainian climate (spring-summer). Adjust for your soil and conditions.";
+"Cancel" = "Cancel";
+"Add" = "Add";
+"Remove" = "Remove";
+
+// MARK: - Edit Plant
+"Edit Plant" = "Edit Plant";
+"Save" = "Save";
+"Name & Variety" = "Name & Variety";
+"Plant name" = "Plant name";
+"Variety (optional)" = "Variety (optional)";
+"The name is what you see in the plant list. Variety is shown below it." = "The name is what you see in the plant list. Variety is shown below it.";
+"Photo" = "Photo";
+"Your plant already has a photo. You can change it or remove it." = "Your plant already has a photo. You can change it or remove it.";
+"Photo will be updated when you save." = "Photo will be updated when you save.";
+"Add a photo to recognize your plant easily." = "Add a photo to recognize your plant easily.";
+"Watering Frequency" = "Watering Frequency";
+"Adjust based on the season and your soil conditions." = "Adjust based on the season and your soil conditions.";
+"Plant Info" = "Plant Info";
+"Type and date added can't be changed." = "Type and date added can't be changed.";
+
+// MARK: - Plant Detail
+"Edit" = "Edit";
+"Watering" = "Watering";
+"Needs Water!" = "Needs Water!";
+"All Good" = "All Good";
+"Last Watered" = "Last Watered";
+"Next Watering" = "Next Watering";
+"Today" = "Today";
+"Yesterday" = "Yesterday";
+"Tomorrow" = "Tomorrow";
+"Never" = "Never";
+"Water now!" = "Water now!";
+"Water Now" = "Water Now";
+"Log Activity" = "Log Activity";
+"Activity Journal" = "Activity Journal";
+"%lld entries" = "%lld entries";
+"Remove from Garden" = "Remove from Garden";
+"Delete Plant" = "Delete Plant";
+"Delete" = "Delete";
+"Type" = "Type";
+"Added to Garden" = "Added to Garden";
+"Variety" = "Variety";
+
+// MARK: - Add Activity
+"Log Activity" = "Log Activity";
+"What did you do?" = "What did you do?";
+"When?" = "When?";
+"Photo (optional)" = "Photo (optional)";
+"Take a photo of what you did — great for tracking progress!" = "Take a photo of what you did — great for tracking progress!";
+"Notes" = "Notes";
+"Optional details..." = "Optional details...";
+
+// MARK: - Activity Types
+"Watered" = "Watered";
+"Pruned" = "Pruned";
+"Fertilized" = "Fertilized";
+"Pest Control" = "Pest Control";
+"Planted" = "Planted";
+"Transplanted" = "Transplanted";
+"Weeded" = "Weeded";
+"Harvested" = "Harvested";
+"Winterized" = "Winterized";
+"Note" = "Note";
+
+// MARK: - Plant Types
+"Herb" = "Herb";
+"Vegetable" = "Vegetable";
+"Flower" = "Flower";
+"Succulent" = "Succulent";
+"Forest Tree" = "Forest Tree";
+"Fruit Tree" = "Fruit Tree";
+"Bush" = "Bush";
+
+// MARK: - Activity Feed
+"Activity Feed" = "Activity Feed";
+"No Activities Yet" = "No Activities Yet";
+"Start logging activities on your plants and they'll appear here." = "Start logging activities on your plants and they'll appear here.";
+"All Activities" = "All Activities";
+"This Week" = "This Week";
+"This Month" = "This Month";
+
+// MARK: - Activity Timeline
+"No activity yet" = "No activity yet";
+"Tap \"Log Activity\" to start tracking" = "Tap \"Log Activity\" to start tracking";
+
+// MARK: - Garden Map
+"Garden Map" = "Garden Map";
+"Your garden is empty" = "Your garden is empty";
+"Long press & drag to move plants" = "Long press & drag to move plants";
+
+// MARK: - Settings
+"Notifications" = "Notifications";
+"Watering Reminders" = "Watering Reminders";
+"Remind me at" = "Remind me at";
+"Enable to get notified when your plants need watering." = "Enable to get notified when your plants need watering.";
+"Garden Stats" = "Garden Stats";
+"Total Plants" = "Total Plants";
+"Need Watering" = "Need Watering";
+"Total Activities" = "Total Activities";
+"Weather" = "Weather";
+"Location" = "Location";
+"Choose your city for accurate weather and gardening tips." = "Choose your city for accurate weather and gardening tips.";
+"About" = "About";
+"Version" = "Version";
+"Made in" = "Made in";
+"Ukraine 🇺🇦" = "Ukraine 🇺🇦";
+
+// MARK: - Family
+"Family" = "Family";
+"Family Members" = "Family Members";
+"Active Member" = "Active Member";
+"Currently active" = "Currently active";
+"No family members yet" = "No family members yet";
+"Add Family Member" = "Add Family Member";
+"Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member." = "Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member.";
+"Add family members so everyone can log activities with their name." = "Add family members so everyone can log activities with their name.";
+"Add Member" = "Add Member";
+"Edit Member" = "Edit Member";
+"Who are you adding?" = "Who are you adding?";
+"Name" = "Name";
+"Choose Avatar" = "Choose Avatar";
+"Avatar" = "Avatar";
+"Preview" = "Preview";
+
+// MARK: - Family Roles
+"Dad" = "Dad";
+"Mom" = "Mom";
+"Son" = "Son";
+"Daughter" = "Daughter";
+"Grandpa" = "Grandpa";
+"Grandma" = "Grandma";
+"Other" = "Other";
+
+// MARK: - Weather Location
+"Weather Location" = "Weather Location";
+"Search city..." = "Search city...";
+"Current" = "Current";
+"Ukraine" = "Ukraine";
+
+// MARK: - Photo
+"Take Photo" = "Take Photo";
+"Choose from Library" = "Choose from Library";
+"Change Photo" = "Change Photo";
+
+// MARK: - Watering Frequencies
+"Every day" = "Every day";
+"Every other day" = "Every other day";
+"Twice a week" = "Twice a week";
+"Every 3 days" = "Every 3 days";
+"Every 4 days" = "Every 4 days";
+"Every 5 days" = "Every 5 days";
+"Once a week" = "Once a week";
+"Every 10 days" = "Every 10 days";
+"Every 2 weeks" = "Every 2 weeks";
+"Once a month" = "Once a month";
+
+// MARK: - Weather Conditions
+"Clear" = "Clear";
+"Partly Cloudy" = "Partly Cloudy";
+"Cloudy" = "Cloudy";
+"Fog" = "Fog";
+"Drizzle" = "Drizzle";
+"Rain" = "Rain";
+"Heavy Rain" = "Heavy Rain";
+"Snow" = "Snow";
+"Thunderstorm" = "Thunderstorm";
+
+// MARK: - Weather Tips
+"Great day for gardening! Check soil moisture." = "Great day for gardening! Check soil moisture.";
+"Nice weather for outdoor plants." = "Nice weather for outdoor plants.";
+"Good day to transplant — less sun stress." = "Good day to transplant — less sun stress.";
+"High humidity — watch for fungal diseases." = "High humidity — watch for fungal diseases.";
+"Light rain — may not be enough for deep roots." = "Light rain — may not be enough for deep roots.";
+"Nature is watering for you! Skip watering today." = "Nature is watering for you! Skip watering today.";
+"Check drainage — avoid waterlogged roots." = "Check drainage — avoid waterlogged roots.";
+"Protect tender plants from frost." = "Protect tender plants from frost.";
+"Keep indoors! Move potted plants to shelter." = "Keep indoors! Move potted plants to shelter.";

@@ -33,7 +33,7 @@ struct ActivityFeedView: View {
                 } else if filteredActivities.isEmpty {
                     // Activities exist but none match the filter
                     ContentUnavailableView(
-                        "No \(selectedFilter?.rawValue ?? "") Activities",
+                        "No \(selectedFilter?.localizedName ?? "") Activities",
                         systemImage: selectedFilter?.icon ?? "magnifyingglass",
                         description: Text("No activities match this filter. Try a different one.")
                     )
@@ -78,9 +78,9 @@ struct ActivityFeedView: View {
                                 selectedFilter = type
                             } label: {
                                 if selectedFilter == type {
-                                    Label(type.rawValue, systemImage: "checkmark")
+                                    Label(type.localizedName, systemImage: "checkmark")
                                 } else {
-                                    Label(type.rawValue, systemImage: type.icon)
+                                    Label(type.localizedName, systemImage: type.icon)
                                 }
                             }
                         }
@@ -122,7 +122,7 @@ struct ActivityFeedView: View {
                         .font(.caption)
                         .foregroundStyle(entry.activity.type.color)
 
-                    Text(entry.activity.type.rawValue)
+                    Text(entry.activity.type.localizedName)
                         .font(.caption)
                         .foregroundStyle(entry.activity.type.color)
 

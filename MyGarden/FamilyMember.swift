@@ -35,6 +35,11 @@ enum FamilyRole: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    // Localized display name
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "")
+    }
+
     // Default emoji for each role
     var defaultEmoji: String {
         switch self {

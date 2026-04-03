@@ -71,6 +71,11 @@ enum PlantType: String, Codable, CaseIterable {
     case fruitTree = "Fruit Tree"
     case bush = "Bush"
 
+    // Localized display name
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "")
+    }
+
     // Each type gets its own icon (using Apple's built-in SF Symbols)
     var icon: String {
         switch self {

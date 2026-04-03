@@ -29,6 +29,16 @@ enum WeatherCondition: String {
     case snow = "Snow"
     case thunderstorm = "Thunderstorm"
 
+    // Localized display name
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "")
+    }
+
+    // Localized gardening tip
+    var localizedTip: String {
+        NSLocalizedString(gardeningTip, comment: "")
+    }
+
     // SF Symbol icon for each condition
     var icon: String {
         switch self {

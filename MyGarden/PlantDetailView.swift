@@ -139,7 +139,7 @@ struct PlantDetailView: View {
             }
 
             // Type badge — a small colored pill showing "Fruit Tree", "Bush", etc.
-            Text(plant.type.rawValue)
+            Text(plant.type.localizedName)
                 .font(.caption)
                 .fontWeight(.medium)
                 .padding(.horizontal, 12)
@@ -231,7 +231,7 @@ struct PlantDetailView: View {
             detailRow(
                 icon: "leaf.fill",
                 label: "Type",
-                value: plant.type.rawValue
+                value: plant.type.localizedName
             )
 
             detailRow(

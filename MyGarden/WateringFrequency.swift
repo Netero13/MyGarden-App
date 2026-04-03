@@ -23,6 +23,11 @@ enum WateringFrequency: String, CaseIterable, Identifiable {
     // Identifiable requires an 'id' — we just use the rawValue (the label text)
     var id: String { rawValue }
 
+    // Localized display name
+    var localizedName: String {
+        NSLocalizedString(rawValue, comment: "")
+    }
+
     // Convert the friendly label to actual number of days
     var days: Int {
         switch self {

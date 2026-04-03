@@ -58,7 +58,7 @@ struct PlantListView: View {
                         }
                     } header: {
                         Label(
-                            "\(type.rawValue) (\(groupedPlants[type]?.count ?? 0))",
+                            "\(type.localizedName) (\(groupedPlants[type]?.count ?? 0))",
                             systemImage: type.icon
                         )
                         .foregroundStyle(type.color)
@@ -312,7 +312,7 @@ struct PlantListView: View {
                             .font(.caption)
                             .fontWeight(.bold)
 
-                        Text(type.rawValue)
+                        Text(type.localizedName)
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -398,7 +398,7 @@ struct PlantListView: View {
                 .frame(width: 24)
 
             VStack(alignment: .leading, spacing: 1) {
-                Text("Last: \(entry.activity.type.rawValue) — \(entry.plant.name)")
+                Text("Last: \(entry.activity.type.localizedName) — \(entry.plant.name)")
                     .font(.caption)
                     .fontWeight(.medium)
                 Text(entry.activity.date, style: .relative)
