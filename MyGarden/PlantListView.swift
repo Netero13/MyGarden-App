@@ -20,6 +20,10 @@ struct PlantListView: View {
     // Search text — filters the list as you type
     @State private var searchText: String = ""
 
+    // Controls whether the "Add Plant" form is shown
+    // .sheet = a screen that slides up from the bottom (like a card)
+    @State private var showingAddPlant: Bool = false
+
     var body: some View {
         NavigationStack {
             List {
@@ -58,6 +62,25 @@ struct PlantListView: View {
             }
             .navigationTitle("My Garden 🌱")
             .searchable(text: $searchText, prompt: "Search plants...")
+            // + button in the top right corner to add a new plant
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        showingAddPlant = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            // .sheet = a screen that slides up from the bottom
+            // It shows the AddPlantView form
+            .sheet(isPresented: $showingAddPlant) {
+                AddPlantView { newPlant in
+                    // When the user taps "Add" in the form, this code runs.
+                    // It adds the new plant to our list.
+                    plants.append(newPlant)
+                }
+            }
             .overlay {
                 // Show a friendly message if the list is empty
                 if plants.isEmpty {

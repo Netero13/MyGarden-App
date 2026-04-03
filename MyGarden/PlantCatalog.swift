@@ -4,13 +4,18 @@ import Foundation
 // This is like a built-in encyclopedia of plants and their varieties.
 // When a user adds a new plant, they pick from this catalog.
 // Each plant has a list of known varieties (sorted by Ukrainian region popularity).
+//
+// 🇺🇦 Watering data is based on Ukrainian continental climate:
+// - Active growing season (spring-summer, 25-35°C)
+// - Typical chernozem (black earth) soil
+// - In-ground planting (except succulents which are potted)
 
 struct PlantSpecies: Identifiable, Codable {
     var id = UUID()
     var name: String              // e.g. "Cherry"
     var ukrainianName: String     // e.g. "Вишня"
     var type: PlantType           // e.g. .fruitTree
-    var defaultWateringDays: Int  // suggested watering frequency
+    var defaultWateringDays: Int  // researched watering frequency for Ukrainian climate
     var varieties: [String]       // list of varieties to choose from
 }
 
@@ -54,7 +59,7 @@ struct PlantCatalog {
         ),
         PlantSpecies(
             name: "Cilantro", ukrainianName: "Коріандр", type: .herb,
-            defaultWateringDays: 3,
+            defaultWateringDays: 2,
             varieties: ["Янтар", "Дебют", "Стимул"]
         ),
     ]
@@ -83,7 +88,7 @@ struct PlantCatalog {
         ),
         PlantSpecies(
             name: "Cabbage", ukrainianName: "Капуста", type: .vegetable,
-            defaultWateringDays: 4,
+            defaultWateringDays: 3,
             varieties: ["Білоголова", "Червоноголова", "Цвітна", "Броколі", "Пекінська"]
         ),
         PlantSpecies(
@@ -108,7 +113,7 @@ struct PlantCatalog {
         ),
         PlantSpecies(
             name: "Zucchini", ukrainianName: "Кабачок", type: .vegetable,
-            defaultWateringDays: 4,
+            defaultWateringDays: 3,
             varieties: ["Цукеша", "Грибовський", "Золотинка", "Скворушка"]
         ),
         PlantSpecies(
@@ -177,55 +182,57 @@ struct PlantCatalog {
     ]
 
     // MARK: - Forest Trees (Лісові дерева)
+    // ⚠️ Watering data is for YOUNG/newly planted trees (first 2-3 years).
+    // Established trees need much less frequent watering.
     static let forestTrees: [PlantSpecies] = [
         PlantSpecies(
             name: "Oak", ukrainianName: "Дуб", type: .forestTree,
-            defaultWateringDays: 14,
+            defaultWateringDays: 7,
             varieties: ["Звичайний", "Червоний", "Скельний", "Болотний"]
         ),
         PlantSpecies(
             name: "Birch", ukrainianName: "Береза", type: .forestTree,
-            defaultWateringDays: 10,
+            defaultWateringDays: 5,
             varieties: ["Повисла", "Пухнаста", "Карликова"]
         ),
         PlantSpecies(
             name: "Pine", ukrainianName: "Сосна", type: .forestTree,
-            defaultWateringDays: 14,
+            defaultWateringDays: 7,
             varieties: ["Звичайна", "Кримська", "Гірська", "Веймутова"]
         ),
         PlantSpecies(
             name: "Linden", ukrainianName: "Липа", type: .forestTree,
-            defaultWateringDays: 12,
+            defaultWateringDays: 7,
             varieties: ["Серцелиста", "Дрібнолиста", "Європейська"]
         ),
         PlantSpecies(
             name: "Beech", ukrainianName: "Бук", type: .forestTree,
-            defaultWateringDays: 14,
+            defaultWateringDays: 5,
             varieties: ["Лісовий", "Східний", "Пурпурний"]
         ),
         PlantSpecies(
             name: "Maple", ukrainianName: "Клен", type: .forestTree,
-            defaultWateringDays: 12,
+            defaultWateringDays: 7,
             varieties: ["Гостролистий", "Явір", "Татарський", "Цукровий"]
         ),
         PlantSpecies(
             name: "Spruce", ukrainianName: "Ялина", type: .forestTree,
-            defaultWateringDays: 14,
+            defaultWateringDays: 7,
             varieties: ["Європейська", "Блакитна", "Сербська", "Коніка"]
         ),
         PlantSpecies(
             name: "Ash", ukrainianName: "Ясен", type: .forestTree,
-            defaultWateringDays: 12,
+            defaultWateringDays: 7,
             varieties: ["Звичайний", "Вузьколистий", "Пенсильванський"]
         ),
         PlantSpecies(
             name: "Hornbeam", ukrainianName: "Граб", type: .forestTree,
-            defaultWateringDays: 12,
+            defaultWateringDays: 7,
             varieties: ["Звичайний", "Східний"]
         ),
         PlantSpecies(
             name: "Alder", ukrainianName: "Вільха", type: .forestTree,
-            defaultWateringDays: 10,
+            defaultWateringDays: 5,
             varieties: ["Чорна", "Сіра"]
         ),
     ]
@@ -269,7 +276,7 @@ struct PlantCatalog {
         ),
         PlantSpecies(
             name: "Walnut", ukrainianName: "Горіх", type: .fruitTree,
-            defaultWateringDays: 14,
+            defaultWateringDays: 10,
             varieties: ["Волоський", "Ідеал", "Буковинський", "Великоплідний"]
         ),
         PlantSpecies(
@@ -303,7 +310,7 @@ struct PlantCatalog {
         ),
         PlantSpecies(
             name: "Blueberry", ukrainianName: "Лохина", type: .bush,
-            defaultWateringDays: 4,
+            defaultWateringDays: 3,
             varieties: ["Блюкроп", "Патріот", "Дюк", "Спартан", "Нортланд"]
         ),
         PlantSpecies(

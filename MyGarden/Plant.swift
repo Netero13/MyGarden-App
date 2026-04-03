@@ -125,7 +125,7 @@ extension Plant {
             name: "Oak",
             type: .forestTree,
             variety: "Дуб звичайний",
-            wateringFrequencyDays: 14,
+            wateringFrequencyDays: 7,
             lastWatered: Calendar.current.date(byAdding: .day, value: -10, to: Date()),
             dateAdded: Date()
         ),
@@ -133,7 +133,7 @@ extension Plant {
             name: "Birch",
             type: .forestTree,
             variety: "Береза повисла",
-            wateringFrequencyDays: 10,
+            wateringFrequencyDays: 5,
             lastWatered: Date(),
             dateAdded: Date()
         ),
@@ -141,7 +141,7 @@ extension Plant {
             name: "Pine",
             type: .forestTree,
             variety: "Сосна звичайна",
-            wateringFrequencyDays: 14,
+            wateringFrequencyDays: 7,
             lastWatered: nil,
             dateAdded: Date()
         ),
@@ -149,7 +149,7 @@ extension Plant {
             name: "Linden",
             type: .forestTree,
             variety: "Липа серцелиста",
-            wateringFrequencyDays: 12,
+            wateringFrequencyDays: 7,
             lastWatered: Calendar.current.date(byAdding: .day, value: -5, to: Date()),
             dateAdded: Date()
         ),
@@ -157,7 +157,7 @@ extension Plant {
             name: "Beech",
             type: .forestTree,
             variety: "Бук лісовий",
-            wateringFrequencyDays: 14,
+            wateringFrequencyDays: 5,
             lastWatered: Date(),
             dateAdded: Date()
         ),
@@ -165,7 +165,7 @@ extension Plant {
             name: "Maple",
             type: .forestTree,
             variety: "Клен гостролистий",
-            wateringFrequencyDays: 12,
+            wateringFrequencyDays: 7,
             lastWatered: Calendar.current.date(byAdding: .day, value: -3, to: Date()),
             dateAdded: Date()
         ),
@@ -173,7 +173,7 @@ extension Plant {
             name: "Spruce",
             type: .forestTree,
             variety: "Ялина європейська",
-            wateringFrequencyDays: 14,
+            wateringFrequencyDays: 7,
             lastWatered: nil,
             dateAdded: Date()
         ),
@@ -224,7 +224,7 @@ extension Plant {
             name: "Walnut",
             type: .fruitTree,
             variety: "Горіх волоський",
-            wateringFrequencyDays: 14,
+            wateringFrequencyDays: 10,
             lastWatered: Calendar.current.date(byAdding: .day, value: -7, to: Date()),
             dateAdded: Date()
         ),
@@ -275,7 +275,7 @@ extension Plant {
             name: "Blueberry",
             type: .bush,
             variety: "Лохина високоросла",
-            wateringFrequencyDays: 4,
+            wateringFrequencyDays: 3,
             lastWatered: nil,
             dateAdded: Date()
         ),
