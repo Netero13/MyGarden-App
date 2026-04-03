@@ -40,15 +40,18 @@ class PlantStore {
         plants.append(plant)
         save()
         scheduleReminderIfEnabled(for: plant)
+        scheduleCareAlertsIfEnabled(for: plant)
     }
 
     // MARK: - Delete a Plant
     // 'IndexSet' is what SwiftUI gives us when the user swipes to delete.
     // It tells us WHICH items (by position) to remove.
     func delete(at offsets: IndexSet) {
-        // Cancel reminders for deleted plants
+        // Cancel ALL notifications (watering + care alerts) for deleted plants
         for offset in offsets {
-            NotificationManager.shared.cancelReminder(for: plants[offset].id)
+            let id = plants[offset].id
+            NotificationManager.shared.cancelReminder(for: id)
+            NotificationManager.shared.cancelCareAlerts(for: id)
         }
         plants.remove(atOffsets: offsets)
         save()
@@ -58,6 +61,7 @@ class PlantStore {
     // Sometimes we know the plant's ID but not its position.
     func delete(id: UUID) {
         NotificationManager.shared.cancelReminder(for: id)
+        NotificationManager.shared.cancelCareAlerts(for: id)
         plants.removeAll { $0.id == id }
         save()
     }
@@ -69,6 +73,7 @@ class PlantStore {
             plants[index] = plant
             save()
             scheduleReminderIfEnabled(for: plant)
+            scheduleCareAlertsIfEnabled(for: plant)
         }
     }
 
@@ -81,13 +86,37 @@ class PlantStore {
         }
     }
 
-    // MARK: - Reminder Helper
-    // Only schedules a reminder if the user has turned on reminders in settings.
+    // MARK: - Reminder Helpers
+    // Only schedules notifications if the user has turned them on in Settings.
     // @AppStorage values are in UserDefaults, so we check directly.
+
     private func scheduleReminderIfEnabled(for plant: Plant) {
         let remindersEnabled = UserDefaults.standard.bool(forKey: "remindersEnabled")
         if remindersEnabled {
             NotificationManager.shared.scheduleReminder(for: plant)
+        }
+    }
+
+    // Schedule seasonal care alerts (prune/fertilize/harvest) if enabled
+    private func scheduleCareAlertsIfEnabled(for plant: Plant) {
+        let careAlertsEnabled = UserDefaults.standard.bool(forKey: "careAlertsEnabled")
+        if careAlertsEnabled {
+            NotificationManager.shared.scheduleCareAlerts(for: plant)
+        }
+    }
+
+    // MARK: - Reschedule Everything
+    // Called at app launch to make sure all notifications are up to date.
+    // This catches cases where the app was closed and dates have changed.
+    func rescheduleAllNotifications() {
+        let remindersEnabled = UserDefaults.standard.bool(forKey: "remindersEnabled")
+        let careAlertsEnabled = UserDefaults.standard.bool(forKey: "careAlertsEnabled")
+
+        if remindersEnabled {
+            NotificationManager.shared.scheduleAllReminders(for: plants)
+        }
+        if careAlertsEnabled {
+            NotificationManager.shared.scheduleAllCareAlerts(for: plants)
         }
     }
 

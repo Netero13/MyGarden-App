@@ -226,6 +226,26 @@
 "Current" = "Current";
 "Ukraine" = "Ukraine";
 
+// MARK: - Notifications
+"Time to water! 💧" = "Time to water! 💧";
+"Don't forget! 💧" = "Don't forget! 💧";
+"%@ hasn't been watered yet. Give it some water today!" = "%@ hasn't been watered yet. Give it some water today!";
+"Your %@ is thirsty! Time to water." = "Your %@ is thirsty! Time to water.";
+"%@ needs watering today." = "%@ needs watering today.";
+"Watering day for %@! 🌿" = "Watering day for %@! 🌿";
+"Hey! Your %@ could use some water today." = "Hey! Your %@ could use some water today.";
+"Time to prune! ✂️" = "Time to prune! ✂️";
+"Your %@ should be pruned this month. %@" = "Your %@ should be pruned this month. %@";
+"Fertilizing time! 🧪" = "Fertilizing time! 🧪";
+"Feed your %@ this month. Recommended: %@" = "Feed your %@ this month. Recommended: %@";
+"Harvest time! 🍎" = "Harvest time! 🍎";
+"Your %@ is ready to harvest this month. Enjoy!" = "Your %@ is ready to harvest this month. Enjoy!";
+"Seasonal Care Alerts" = "Seasonal Care Alerts";
+"Smart Care" = "Smart Care";
+"Pruning reminders" = "Pruning reminders";
+"Fertilizing reminders" = "Fertilizing reminders";
+"Harvest alerts" = "Harvest alerts";
+
 // MARK: - Photo
 "Take Photo" = "Take Photo";
 "Choose from Library" = "Choose from Library";

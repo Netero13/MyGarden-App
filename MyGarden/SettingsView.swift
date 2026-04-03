@@ -18,6 +18,7 @@ struct SettingsView: View {
 
     // Settings saved to UserDefaults (persist across app launches)
     @AppStorage("remindersEnabled") private var remindersEnabled = false
+    @AppStorage("careAlertsEnabled") private var careAlertsEnabled = false
     @AppStorage("reminderHour") private var reminderHour = 9
     @AppStorage("reminderMinute") private var reminderMinute = 0
 
@@ -60,6 +61,34 @@ struct SettingsView: View {
                         Text("You'll get a reminder at \(formattedTime) on the day each plant needs watering.")
                     } else {
                         Text("Enable to get notified when your plants need watering.")
+                    }
+                }
+
+                // -- Seasonal Care Alerts --
+                Section {
+                    Toggle(isOn: $careAlertsEnabled) {
+                        Label("Seasonal Care Alerts", systemImage: "leaf.arrow.triangle.circlepath")
+                    }
+                    .onChange(of: careAlertsEnabled) {
+                        handleCareAlertsToggle()
+                    }
+
+                    if careAlertsEnabled {
+                        // Show what types of alerts they'll get
+                        VStack(alignment: .leading, spacing: 8) {
+                            careAlertRow(icon: "scissors", text: NSLocalizedString("Pruning reminders", comment: ""), color: .orange)
+                            careAlertRow(icon: "leaf.fill", text: NSLocalizedString("Fertilizing reminders", comment: ""), color: .green)
+                            careAlertRow(icon: "basket.fill", text: NSLocalizedString("Harvest alerts", comment: ""), color: .red)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                } header: {
+                    Text("Smart Care")
+                } footer: {
+                    if careAlertsEnabled {
+                        Text("You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants.")
+                    } else {
+                        Text("Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar.")
                     }
                 }
 
@@ -233,6 +262,47 @@ struct SettingsView: View {
     private func rescheduleAllReminders() {
         if remindersEnabled {
             NotificationManager.shared.scheduleAllReminders(for: store.plants)
+        }
+        // Care alerts also use reminderHour, so reschedule those too
+        if careAlertsEnabled {
+            NotificationManager.shared.scheduleAllCareAlerts(for: store.plants)
+        }
+    }
+
+    // MARK: - Handle Care Alerts Toggle
+
+    private func handleCareAlertsToggle() {
+        if careAlertsEnabled {
+            // Request permission (same as watering reminders)
+            Task {
+                let granted = await NotificationManager.shared.requestPermission()
+                if granted {
+                    NotificationManager.shared.scheduleAllCareAlerts(for: store.plants)
+                } else {
+                    await MainActor.run {
+                        showingPermissionAlert = true
+                        careAlertsEnabled = false
+                    }
+                }
+            }
+        } else {
+            // Cancel all care alerts
+            NotificationManager.shared.cancelAllCareAlerts(for: store.plants)
+        }
+    }
+
+    // MARK: - Care Alert Row
+    // A small row showing one type of care alert with an icon.
+
+    private func careAlertRow(icon: String, text: String, color: Color) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.caption)
+                .foregroundStyle(color)
+                .frame(width: 20)
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
     }
 

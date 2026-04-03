@@ -25,6 +25,13 @@ struct ArboristApp: App {
                 // Returning user — show the main app
                 ContentView()
                     .environment(store)
+                    .onAppear {
+                        // Reschedule all notifications on app launch.
+                        // This catches cases where dates changed while the app was closed.
+                        // For example: if a watering notification fired yesterday but the
+                        // user didn't open the app, we need to update the schedule.
+                        store.rescheduleAllNotifications()
+                    }
             } else {
                 // First launch — show the welcome screen
                 OnboardingView {

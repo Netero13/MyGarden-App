@@ -221,6 +221,26 @@
 "Search city..." = "Пошук міста...";
 "Current" = "Поточне";
 
+// MARK: - Notifications
+"Time to water! 💧" = "Час поливати! 💧";
+"Don't forget! 💧" = "Не забудьте! 💧";
+"%@ hasn't been watered yet. Give it some water today!" = "%@ ще не поливали. Полийте сьогодні!";
+"Your %@ is thirsty! Time to water." = "Ваш(а) %@ хоче пити! Час поливати.";
+"%@ needs watering today." = "%@ потребує поливу сьогодні.";
+"Watering day for %@! 🌿" = "День поливу для %@! 🌿";
+"Hey! Your %@ could use some water today." = "Гей! Ваш(а) %@ потребує води сьогодні.";
+"Time to prune! ✂️" = "Час обрізки! ✂️";
+"Your %@ should be pruned this month. %@" = "Ваш(а) %@ потребує обрізки цього місяця. %@";
+"Fertilizing time! 🧪" = "Час удобрення! 🧪";
+"Feed your %@ this month. Recommended: %@" = "Підживіть %@ цього місяця. Рекомендовано: %@";
+"Harvest time! 🍎" = "Час збору врожаю! 🍎";
+"Your %@ is ready to harvest this month. Enjoy!" = "Ваш(а) %@ готовий(а) до збору цього місяця. Смачного!";
+"Seasonal Care Alerts" = "Сезонні нагадування";
+"Smart Care" = "Розумний догляд";
+"Pruning reminders" = "Нагадування про обрізку";
+"Fertilizing reminders" = "Нагадування про удобрення";
+"Harvest alerts" = "Сповіщення про збір врожаю";
+
 // MARK: - Photo
 "Take Photo" = "Зробити фото";
 "Choose from Library" = "Обрати з бібліотеки";

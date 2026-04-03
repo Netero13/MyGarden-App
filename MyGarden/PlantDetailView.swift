@@ -290,7 +290,9 @@ struct PlantDetailView: View {
                     memberID: FamilyManager.shared.activeMember?.id
                 )
                 plant.activities.append(activity)
-                store.save()
+                // Use store.water() instead of store.save() so the
+                // watering notification gets rescheduled automatically!
+                store.water(id: plant.id)
             } label: {
                 Label("Water Now", systemImage: "drop.fill")
                     .font(.subheadline.weight(.semibold))

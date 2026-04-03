@@ -2,20 +2,26 @@ import Foundation
 import UserNotifications
 
 // MARK: - Notification Manager
-// Handles scheduling and managing watering reminder notifications.
+// Handles TWO types of notifications:
+//
+// 1. WATERING REMINDERS — "Your Cherry needs watering today!"
+//    Fires on the day each plant's next watering is due.
+//
+// 2. SEASONAL CARE ALERTS — "Time to prune your Cherry!"
+//    Fires on the 1st of the month when it's time to prune,
+//    fertilize, or harvest a specific plant.
 //
 // How iOS notifications work:
 // 1. You ask the user: "Can I send you notifications?" (they can say no)
 // 2. If they say yes, you SCHEDULE notifications in advance
 // 3. iOS delivers them at the right time, even if the app is closed
 //
-// Each notification has a unique ID (we use the plant's ID).
-// This way we can update or cancel a specific plant's reminder
-// without affecting other plants.
+// Each notification has a unique ID (we use the plant's UUID).
+// For care alerts, we add a suffix like "-prune-3" (prune in March).
 
 class NotificationManager {
 
-    // Singleton — one shared instance
+    // Singleton — one shared instance used everywhere
     static let shared = NotificationManager()
 
     // Reference to iOS notification system
@@ -25,7 +31,7 @@ class NotificationManager {
 
     // MARK: - Request Permission
     // Must be called before any notifications can be sent.
-    // Shows the iOS popup: "MyGarden would like to send you notifications"
+    // Shows the iOS popup: "Arborist would like to send you notifications"
     // Returns true if the user said yes.
 
     func requestPermission() async -> Bool {
@@ -46,6 +52,25 @@ class NotificationManager {
         return settings.authorizationStatus == .authorized
     }
 
+    // MARK: - Get User's Reminder Hour
+    // Reads the hour the user picked in Settings.
+    // Defaults to 9:00 AM if not set.
+    //
+    // Why read from UserDefaults?
+    // Because SettingsView stores the value with @AppStorage("reminderHour"),
+    // which is just a wrapper around UserDefaults. We read it directly here
+    // so we don't need to pass the hour around everywhere.
+
+    private var reminderHour: Int {
+        let hour = UserDefaults.standard.integer(forKey: "reminderHour")
+        // UserDefaults returns 0 for unset keys, so default to 9
+        return hour == 0 ? 9 : hour
+    }
+
+    // ════════════════════════════════════════════════════════════════
+    // MARK: - WATERING REMINDERS
+    // ════════════════════════════════════════════════════════════════
+
     // MARK: - Schedule Reminder for a Plant
     // Creates a notification that fires at the plant's next watering date.
     // If a reminder already exists for this plant, it's replaced.
@@ -59,7 +84,7 @@ class NotificationManager {
 
         // Figure out when the next watering is
         guard let nextDate = plant.nextWateringDate else {
-            // Plant was never watered — remind them NOW (well, in 1 minute)
+            // Plant was never watered — remind them soon
             scheduleImmediateReminder(for: plant)
             return
         }
@@ -71,17 +96,16 @@ class NotificationManager {
 
         // Create the notification content (what the user sees)
         let content = UNMutableNotificationContent()
-        content.title = "Time to water! 💧"
+        content.title = NSLocalizedString("Time to water! 💧", comment: "")
         content.body = plantReminderMessage(for: plant)
         content.sound = .default
 
-        // Create the trigger (WHEN to show the notification)
-        // We set it for 9:00 AM on the next watering day
+        // Create the trigger — fire at the user's chosen hour on the watering day
         var dateComponents = Calendar.current.dateComponents(
             [.year, .month, .day],
             from: nextDate
         )
-        dateComponents.hour = 9
+        dateComponents.hour = reminderHour
         dateComponents.minute = 0
 
         let trigger = UNCalendarNotificationTrigger(
@@ -109,8 +133,11 @@ class NotificationManager {
 
     private func scheduleImmediateReminder(for plant: Plant) {
         let content = UNMutableNotificationContent()
-        content.title = "Don't forget! 💧"
-        content.body = "\(plant.displayName) hasn't been watered yet. Give it some water today!"
+        content.title = NSLocalizedString("Don't forget! 💧", comment: "")
+        content.body = String(
+            format: NSLocalizedString("%@ hasn't been watered yet. Give it some water today!", comment: ""),
+            plant.displayName
+        )
         content.sound = .default
 
         // Trigger after 1 hour (3600 seconds)
@@ -129,7 +156,6 @@ class NotificationManager {
     }
 
     // MARK: - Cancel Reminder for a Plant
-    // Called when deleting a plant or turning off reminders.
 
     func cancelReminder(for plantID: UUID) {
         center.removePendingNotificationRequests(
@@ -137,39 +163,197 @@ class NotificationManager {
         )
     }
 
-    // MARK: - Cancel All Reminders
-    // Called when the user turns off all reminders in settings.
+    // MARK: - Cancel All Watering Reminders
+    // Note: this also cancels care alerts. Use with care.
 
     func cancelAllReminders() {
         center.removeAllPendingNotificationRequests()
     }
 
-    // MARK: - Schedule All Reminders
+    // MARK: - Schedule All Watering Reminders
     // Loops through all plants and schedules reminders for each.
-    // Called when the user turns on reminders, or at app startup.
+    // Called when the user turns on reminders, changes time, or at app startup.
 
     func scheduleAllReminders(for plants: [Plant]) {
-        cancelAllReminders()
+        // Only cancel watering reminders (keep care alerts)
+        let wateringIDs = plants.map { $0.id.uuidString }
+        center.removePendingNotificationRequests(withIdentifiers: wateringIDs)
+
         for plant in plants {
             scheduleReminder(for: plant)
         }
     }
 
     // MARK: - Friendly Reminder Message
-    // Creates a personalized message for each plant.
 
     private func plantReminderMessage(for plant: Plant) -> String {
         let name = plant.displayName
-        let type = plant.type.rawValue.lowercased()
 
         let messages = [
-            "Your \(type) \(name) is thirsty! Time to water.",
-            "\(name) needs watering today. Don't let it go dry!",
-            "Watering day for \(name)! 🌿",
-            "Hey! Your \(name) could use some water today.",
+            String(format: NSLocalizedString("Your %@ is thirsty! Time to water.", comment: ""), name),
+            String(format: NSLocalizedString("%@ needs watering today.", comment: ""), name),
+            String(format: NSLocalizedString("Watering day for %@! 🌿", comment: ""), name),
+            String(format: NSLocalizedString("Hey! Your %@ could use some water today.", comment: ""), name),
         ]
 
-        // Pick a random message for variety
         return messages.randomElement() ?? messages[0]
+    }
+
+    // ════════════════════════════════════════════════════════════════
+    // MARK: - SEASONAL CARE ALERTS
+    // ════════════════════════════════════════════════════════════════
+    //
+    // These are the "smart" notifications that make Arborist special.
+    // On the 1st of each relevant month, the user gets alerts like:
+    //   "🌿 Time to prune your Cherry! Cut dead branches..."
+    //   "🧪 Fertilize your Apple this month with nitrogen fertilizer"
+    //   "🍎 Harvest time for Raspberry! Enjoy your berries!"
+    //
+    // We schedule alerts for the NEXT 12 months so they're set up in advance.
+    // Each alert ID looks like: "plantUUID-prune-3" (prune in March)
+
+    // MARK: - Schedule Care Alerts for One Plant
+    // Looks up the plant's CareIntelligence and schedules alerts
+    // for pruning, fertilizing, and harvesting months.
+
+    func scheduleCareAlerts(for plant: Plant) {
+        // Look up this plant's intelligence data from the catalog
+        guard let species = PlantCatalog.find(name: plant.name) else { return }
+        let intel = species.intelligence
+
+        // Cancel any existing care alerts for this plant
+        cancelCareAlerts(for: plant.id)
+
+        let now = Date()
+        let currentMonth = Calendar.current.component(.month, from: now)
+        let currentYear = Calendar.current.component(.year, from: now)
+
+        // -- Pruning alerts --
+        for month in intel.pruningMonths {
+            let id = "\(plant.id.uuidString)-prune-\(month)"
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("Time to prune! ✂️", comment: "")
+            content.body = String(
+                format: NSLocalizedString("Your %@ should be pruned this month. %@", comment: ""),
+                plant.displayName,
+                intel.pruningTips
+            )
+            content.sound = .default
+
+            scheduleMonthlyAlert(id: id, month: month, content: content,
+                                 currentMonth: currentMonth, currentYear: currentYear)
+        }
+
+        // -- Fertilizing alerts --
+        for month in intel.fertilizerMonths {
+            let id = "\(plant.id.uuidString)-fert-\(month)"
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("Fertilizing time! 🧪", comment: "")
+            content.body = String(
+                format: NSLocalizedString("Feed your %@ this month. Recommended: %@", comment: ""),
+                plant.displayName,
+                intel.fertilizerType
+            )
+            content.sound = .default
+
+            scheduleMonthlyAlert(id: id, month: month, content: content,
+                                 currentMonth: currentMonth, currentYear: currentYear)
+        }
+
+        // -- Harvest alerts (only for fruit trees & berry bushes) --
+        if let harvestMonths = intel.harvestMonths {
+            for month in harvestMonths {
+                let id = "\(plant.id.uuidString)-harvest-\(month)"
+                let content = UNMutableNotificationContent()
+                content.title = NSLocalizedString("Harvest time! 🍎", comment: "")
+                content.body = String(
+                    format: NSLocalizedString("Your %@ is ready to harvest this month. Enjoy!", comment: ""),
+                    plant.displayName
+                )
+                content.sound = .default
+
+                scheduleMonthlyAlert(id: id, month: month, content: content,
+                                     currentMonth: currentMonth, currentYear: currentYear)
+            }
+        }
+    }
+
+    // MARK: - Schedule a Single Monthly Alert
+    // Fires on the 1st of the given month at the user's reminder hour.
+    // If the month is in the past this year, schedules for next year.
+    //
+    // Example: It's April. Pruning month is March.
+    //          → schedules for March 1st NEXT year.
+    //          Pruning month is June → schedules for June 1st THIS year.
+
+    private func scheduleMonthlyAlert(
+        id: String,
+        month: Int,
+        content: UNMutableNotificationContent,
+        currentMonth: Int,
+        currentYear: Int
+    ) {
+        // Decide year: if the month already passed, schedule for next year
+        let year = month <= currentMonth ? currentYear + 1 : currentYear
+
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = 1
+        dateComponents.hour = reminderHour
+        dateComponents.minute = 0
+
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents,
+            repeats: false
+        )
+
+        let request = UNNotificationRequest(
+            identifier: id,
+            content: content,
+            trigger: trigger
+        )
+
+        center.add(request) { error in
+            if let error = error {
+                print("❌ Failed to schedule care alert \(id): \(error)")
+            }
+        }
+    }
+
+    // MARK: - Cancel Care Alerts for a Plant
+    // Removes all prune/fertilize/harvest alerts for a specific plant.
+    // We generate all possible IDs and remove them in bulk.
+
+    func cancelCareAlerts(for plantID: UUID) {
+        var ids: [String] = []
+        let base = plantID.uuidString
+
+        // Generate all possible IDs for months 1-12
+        for month in 1...12 {
+            ids.append("\(base)-prune-\(month)")
+            ids.append("\(base)-fert-\(month)")
+            ids.append("\(base)-harvest-\(month)")
+        }
+
+        center.removePendingNotificationRequests(withIdentifiers: ids)
+    }
+
+    // MARK: - Schedule All Care Alerts
+    // Loops through all plants and schedules care alerts for each.
+
+    func scheduleAllCareAlerts(for plants: [Plant]) {
+        for plant in plants {
+            scheduleCareAlerts(for: plant)
+        }
+    }
+
+    // MARK: - Cancel All Care Alerts
+    // Removes all care alerts for all plants.
+
+    func cancelAllCareAlerts(for plants: [Plant]) {
+        for plant in plants {
+            cancelCareAlerts(for: plant.id)
+        }
     }
 }
