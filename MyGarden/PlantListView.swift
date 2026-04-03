@@ -28,6 +28,9 @@ struct PlantListView: View {
 
         NavigationStack {
             List {
+                // -- Weather Widget --
+                weatherSection
+
                 // -- Dashboard Section --
                 if !store.plants.isEmpty {
                     dashboardSection
@@ -87,6 +90,43 @@ struct PlantListView: View {
                         description: Text("Tap + to add your first plant!")
                     )
                 }
+            }
+            // Fetch weather when view appears (async = non-blocking)
+            .task {
+                await WeatherManager.shared.fetchWeather()
+            }
+        }
+    }
+
+    // MARK: - Weather Section
+    // Shows live weather with animated background at the very top.
+    // Fetches from Open-Meteo API (free, no key needed).
+    // Includes a gardening tip based on the current weather.
+
+    private var weatherSection: some View {
+        Section {
+            if let weather = WeatherManager.shared.currentWeather {
+                WeatherHeaderView(weather: weather)
+                    .listRowInsets(EdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4))
+            } else if WeatherManager.shared.isLoading {
+                WeatherLoadingView()
+            } else if WeatherManager.shared.errorMessage != nil {
+                // Weather failed to load — show a subtle fallback, not an error
+                HStack(spacing: 8) {
+                    Image(systemName: "cloud.sun.fill")
+                        .foregroundStyle(.secondary)
+                    Text("Weather unavailable")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Button("Retry") {
+                        Task {
+                            await WeatherManager.shared.fetchWeather()
+                        }
+                    }
+                    .font(.caption)
+                }
+                .padding(.vertical, 4)
             }
         }
     }
