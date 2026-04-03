@@ -71,7 +71,7 @@ struct ActivityTimelineView: View {
                     if let member = FamilyManager.shared.member(for: activity.memberID) {
                         Text("· \(member.emoji) \(member.name)")
                             .font(.caption)
-                            .foregroundStyle(member.role.color)
+                            .foregroundStyle(.secondary)
                     }
 
                     Spacer()

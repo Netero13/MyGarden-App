@@ -35,13 +35,6 @@ struct AddActivityView: View {
                             Text("Logging as **\(member.name)**")
                                 .font(.subheadline)
                             Spacer()
-                            Text(member.role.localizedName)
-                                .font(.caption)
-                                .foregroundStyle(member.role.color)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
-                                .background(member.role.color.opacity(0.12))
-                                .clipShape(Capsule())
                         }
                     }
                 }
