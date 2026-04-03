@@ -49,15 +49,15 @@ struct OnboardingView: View {
             Spacer()
 
             // App icon
-            Image(systemName: "leaf.circle.fill")
+            Image(systemName: "tree.circle.fill")
                 .font(.system(size: 80))
                 .foregroundStyle(.green)
 
-            Text("Welcome to MyGarden")
+            Text("Welcome to Arborist")
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("Your personal gardening companion")
+            Text("Smart care for your trees & bushes")
                 .font(.title3)
                 .foregroundStyle(.secondary)
 
@@ -82,29 +82,29 @@ struct OnboardingView: View {
                 .fontWeight(.bold)
 
             VStack(alignment: .leading, spacing: 16) {
-                featureRow(icon: "leaf.fill", color: .green,
-                          title: "Track your plants",
-                          subtitle: "Add plants, set watering schedules")
+                featureRow(icon: "brain.head.profile.fill", color: .orange,
+                          title: "Smart care intelligence",
+                          subtitle: "Know when to prune, fertilize & harvest")
+
+                featureRow(icon: "tree.fill", color: .green,
+                          title: "Track your trees & bushes",
+                          subtitle: "Age-based watering recommendations")
 
                 featureRow(icon: "drop.fill", color: .blue,
                           title: "Watering reminders",
-                          subtitle: "Never forget to water again")
+                          subtitle: "Adjusted for age and season")
 
-                featureRow(icon: "map.fill", color: .brown,
-                          title: "Garden map",
-                          subtitle: "Visual layout of your garden")
+                featureRow(icon: "scissors", color: .brown,
+                          title: "Pruning & fertilizer guides",
+                          subtitle: "Species-specific, month-by-month")
 
-                featureRow(icon: "person.3.fill", color: .purple,
-                          title: "Family sharing",
-                          subtitle: "Track who does what")
-
-                featureRow(icon: "camera.fill", color: .orange,
-                          title: "Photo journal",
-                          subtitle: "Document your garden's growth")
+                featureRow(icon: "exclamationmark.triangle.fill", color: .red,
+                          title: "Pest & disease alerts",
+                          subtitle: "Know what to watch for")
 
                 featureRow(icon: "cloud.sun.fill", color: .cyan,
                           title: "Live weather",
-                          subtitle: "Gardening tips based on weather")
+                          subtitle: "Seasonal tips for your climate")
             }
             .padding(.horizontal, 24)
 

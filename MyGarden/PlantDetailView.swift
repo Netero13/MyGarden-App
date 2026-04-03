@@ -51,6 +51,14 @@ struct PlantDetailView: View {
                 // -- Plant Info Card --
                 infoCard
 
+                // -- Care Intelligence (the smart part!) --
+                if let species = PlantCatalog.find(name: plant.name) {
+                    TreeIntelligenceView(
+                        species: species,
+                        plantAge: plant.age
+                    )
+                }
+
                 // -- Quick Actions (Water + Log Activity) --
                 quickActionsSection
 
@@ -138,15 +146,28 @@ struct PlantDetailView: View {
                     .foregroundStyle(.secondary)
             }
 
-            // Type badge — a small colored pill showing "Fruit Tree", "Bush", etc.
-            Text(plant.type.localizedName)
-                .font(.caption)
-                .fontWeight(.medium)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 4)
-                .background(plant.type.color.opacity(0.15))
-                .foregroundStyle(plant.type.color)
-                .clipShape(Capsule())
+            // Type + age badges
+            HStack(spacing: 8) {
+                Text(plant.type.localizedName)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(plant.type.color.opacity(0.15))
+                    .foregroundStyle(plant.type.color)
+                    .clipShape(Capsule())
+
+                if let ageLabel = plant.ageLabel {
+                    Text(ageLabel)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 4)
+                        .background(.orange.opacity(0.15))
+                        .foregroundStyle(.orange)
+                        .clipShape(Capsule())
+                }
+            }
         }
         .padding(.top, 8)
     }

@@ -1,6 +1,7 @@
-/* Ukrainian Localizations for MyGarden / Українська локалізація */
+/* Ukrainian Localizations for Arborist / Українська локалізація */
 
 // MARK: - Tab Bar
+"Trees" = "Дерева";
 "Plants" = "Рослини";
 "Garden" = "Сад";
 "Activity" = "Активність";
@@ -131,10 +132,6 @@
 "Note" = "Нотатка";
 
 // MARK: - Plant Types
-"Herb" = "Трави";
-"Vegetable" = "Овочі";
-"Flower" = "Квіти";
-"Succulent" = "Сукуленти";
 "Forest Tree" = "Лісове дерево";
 "Fruit Tree" = "Плодове дерево";
 "Bush" = "Кущ";
@@ -244,7 +241,7 @@
 
 // MARK: - Location
 "Use Your Location for Weather?" = "Використати вашу геолокацію для погоди?";
-"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "MyGarden може використовувати вашу геолокацію для точної погоди та порад щодо садівництва. Ви завжди можете змінити це в Налаштуваннях.";
+"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "Arborist може використовувати вашу геолокацію для точної погоди та порад щодо догляду. Ви завжди можете змінити це в Налаштуваннях.";
 "Allow" = "Дозволити";
 "Pick City Instead" = "Обрати місто";
 "Use My Location" = "Моя геолокація";

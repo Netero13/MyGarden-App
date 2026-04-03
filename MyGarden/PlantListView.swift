@@ -69,7 +69,7 @@ struct PlantListView: View {
                     }
                 }
             }
-            .navigationTitle("My Garden 🌱")
+            .navigationTitle("Arborist 🌳")
             .searchable(text: $searchText, prompt: "Search plants...")
             .toolbar {
                 // Left: active member switcher (quick switch between family members)
@@ -117,9 +117,9 @@ struct PlantListView: View {
             .overlay {
                 if store.plants.isEmpty {
                     ContentUnavailableView(
-                        "No Plants Yet",
-                        systemImage: "leaf.fill",
-                        description: Text("Tap + to add your first plant!")
+                        "No Trees Yet",
+                        systemImage: "tree.fill",
+                        description: Text("Tap + to add your first tree or bush!")
                     )
                 }
             }

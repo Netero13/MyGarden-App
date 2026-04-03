@@ -160,6 +160,13 @@ struct SettingsView: View {
                 // -- About --
                 Section {
                     HStack {
+                        Label("App", systemImage: "tree.fill")
+                        Spacer()
+                        Text("Arborist")
+                            .foregroundStyle(.secondary)
+                    }
+
+                    HStack {
                         Label("Version", systemImage: "info.circle")
                         Spacer()
                         Text("1.0")

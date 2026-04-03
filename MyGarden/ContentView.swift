@@ -12,10 +12,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            // Tab 1: Plant List (the main screen)
+            // Tab 1: Trees & Bushes list (the main screen)
             PlantListView()
                 .tabItem {
-                    Label("Plants", systemImage: "leaf.fill")
+                    Label("Trees", systemImage: "tree.fill")
                 }
 
             // Tab 2: Garden Map (visual bird's-eye view)

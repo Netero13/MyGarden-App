@@ -1,6 +1,7 @@
-/* English Localizations for MyGarden */
+/* English Localizations for Arborist */
 
 // MARK: - Tab Bar
+"Trees" = "Trees";
 "Plants" = "Plants";
 "Garden" = "Garden";
 "Activity" = "Activity";
@@ -134,10 +135,6 @@
 "Note" = "Note";
 
 // MARK: - Plant Types
-"Herb" = "Herb";
-"Vegetable" = "Vegetable";
-"Flower" = "Flower";
-"Succulent" = "Succulent";
 "Forest Tree" = "Forest Tree";
 "Fruit Tree" = "Fruit Tree";
 "Bush" = "Bush";
@@ -249,7 +246,7 @@
 
 // MARK: - Location
 "Use Your Location for Weather?" = "Use Your Location for Weather?";
-"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings.";
+"MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings." = "Arborist can use your location to show accurate weather and care tips for your area. You can always change this in Settings.";
 "Allow" = "Allow";
 "Pick City Instead" = "Pick City Instead";
 "Use My Location" = "Use My Location";

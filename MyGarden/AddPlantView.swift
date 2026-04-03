@@ -33,6 +33,10 @@ struct AddPlantView: View {
     @State private var customVariety: String = ""
     @State private var useCustomVariety: Bool = false
 
+    // Age
+    @State private var plantingYear: Int = Calendar.current.component(.year, from: Date())
+    @State private var knowsPlantingYear: Bool = true
+
     // Watering
     @State private var selectedFrequency: WateringFrequency = .onceAWeek
     @State private var useCustomDays: Bool = false
@@ -55,6 +59,11 @@ struct AddPlantView: View {
                 // -- Step 3: Pick Variety --
                 if selectedSpecies != nil {
                     varietySection
+                }
+
+                // -- Step 3.5: Planting Year --
+                if selectedSpecies != nil {
+                    plantingYearSection
                 }
 
                 // -- Step 4: Photo --
@@ -190,6 +199,34 @@ struct AddPlantView: View {
         }
     }
 
+    // MARK: - Planting Year Section
+    // Knowing when the tree was planted is crucial for age-based care.
+    // Young trees need more water, different pruning, etc.
+
+    private var plantingYearSection: some View {
+        Section {
+            Toggle("I know when it was planted", isOn: $knowsPlantingYear)
+
+            if knowsPlantingYear {
+                Stepper("Year: **\(plantingYear)**", value: $plantingYear, in: 1950...Calendar.current.component(.year, from: Date()))
+
+                // Show calculated age
+                let age = Calendar.current.component(.year, from: Date()) - plantingYear
+                HStack {
+                    Image(systemName: "info.circle")
+                        .foregroundStyle(.orange)
+                    Text(age == 0 ? "Newly planted this year" : "About \(age) year\(age == 1 ? "" : "s") old")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        } header: {
+            Text("When was it planted?")
+        } footer: {
+            Text("Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.")
+        }
+    }
+
     // MARK: - Photo Section
     // Optional photo for the plant's "profile picture"
     // Offers both camera and library options.
@@ -295,6 +332,7 @@ struct AddPlantView: View {
             type: species.type,
             variety: variety,
             photoID: savedPhotoID,
+            plantingYear: knowsPlantingYear ? plantingYear : nil,
             wateringFrequencyDays: wateringDays,
             lastWatered: nil,       // hasn't been watered yet
             dateAdded: Date()       // added right now

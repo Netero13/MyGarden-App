@@ -1,7 +1,7 @@
 import SwiftUI
 
 // MARK: - App Entry Point
-// This is where the app starts. It decides what to show:
+// This is where Arborist starts. It decides what to show:
 // - First launch → Onboarding screen (welcome + profile setup)
 // - Returning user → Main app (ContentView with tabs)
 //
@@ -11,14 +11,12 @@ import SwiftUI
 // because it's stored in UserDefaults (like a tiny database for settings).
 
 @main
-struct MyGardenApp: App {
+struct ArboristApp: App {
 
     // Create ONE PlantStore for the entire app
     @State private var store = PlantStore()
 
     // Track whether onboarding has been completed
-    // false = first launch, show onboarding
-    // true = returning user, go straight to the app
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some Scene {
@@ -30,7 +28,6 @@ struct MyGardenApp: App {
             } else {
                 // First launch — show the welcome screen
                 OnboardingView {
-                    // When onboarding is done, switch to the main app
                     withAnimation {
                         hasCompletedOnboarding = true
                     }

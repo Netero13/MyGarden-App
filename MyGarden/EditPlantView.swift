@@ -40,6 +40,8 @@ struct EditPlantView: View {
     @State private var selectedFrequency: WateringFrequency = .onceAWeek
     @State private var useCustomDays: Bool = false
     @State private var customDays: Int = 7
+    @State private var plantingYear: Int = Calendar.current.component(.year, from: Date())
+    @State private var knowsPlantingYear: Bool = false
     @State private var currentPhoto: UIImage?
     @State private var newPhotoID: String?
     @State private var photoChanged: Bool = false
@@ -51,7 +53,20 @@ struct EditPlantView: View {
                 // -- Section 1: Name & Variety --
                 nameSection
 
-                // -- Section 2: Photo --
+                // -- Section 2: Planting Year --
+                Section {
+                    Toggle("I know when it was planted", isOn: $knowsPlantingYear)
+
+                    if knowsPlantingYear {
+                        Stepper("Year: **\(plantingYear)**", value: $plantingYear, in: 1950...Calendar.current.component(.year, from: Date()))
+                    }
+                } header: {
+                    Text("Planting Year")
+                } footer: {
+                    Text("Helps Arborist adjust care recommendations based on age.")
+                }
+
+                // -- Section 3: Photo --
                 photoSection
 
                 // -- Section 3: Watering Frequency --
@@ -272,6 +287,14 @@ struct EditPlantView: View {
         }
         customDays = plant.wateringFrequencyDays
 
+        // Load planting year
+        if let year = plant.plantingYear {
+            plantingYear = year
+            knowsPlantingYear = true
+        } else {
+            knowsPlantingYear = false
+        }
+
         // Load the current photo from disk
         if let photoID = plant.photoID {
             currentPhoto = PhotoManager.shared.load(id: photoID)
@@ -290,6 +313,7 @@ struct EditPlantView: View {
         updated.name = name.trimmingCharacters(in: .whitespaces)
         updated.variety = variety.trimmingCharacters(in: .whitespaces).isEmpty ? nil : variety.trimmingCharacters(in: .whitespaces)
         updated.wateringFrequencyDays = useCustomDays ? customDays : selectedFrequency.days
+        updated.plantingYear = knowsPlantingYear ? plantingYear : nil
 
         // Handle photo changes
         if photoChanged {
