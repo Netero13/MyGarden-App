@@ -361,10 +361,18 @@ struct GardenMapView: View {
                             let clampedCol = max(0, min(CGFloat(GridConfig.columns - 1), snappedCol))
                             let clampedRow = max(0, min(CGFloat(GridConfig.rows - 1), snappedRow))
 
+                            // COLLISION CHECK: if another plant is already in that cell,
+                            // find the nearest free cell instead.
+                            let finalPos = nearestFreeCell(
+                                col: Int(clampedCol),
+                                row: Int(clampedRow),
+                                excludingPlantID: plant.id
+                            )
+
                             // Save as grid coordinates (stored in gardenX/gardenY)
                             var updated = plant
-                            updated.gardenX = Double(clampedCol)
-                            updated.gardenY = Double(clampedRow)
+                            updated.gardenX = Double(finalPos.col)
+                            updated.gardenY = Double(finalPos.row)
                             store.update(updated)
                         }
                     default:
@@ -399,6 +407,82 @@ struct GardenMapView: View {
             x: (col + 0.5) * cellSize,  // +0.5 = center of the cell
             y: (row + 0.5) * cellSize
         )
+    }
+
+    // MARK: - Collision Detection
+    // Checks which grid cells are already occupied by other plants.
+    // If you try to drop a plant on an occupied cell, it finds the
+    // nearest free cell instead — like musical chairs!
+    //
+    // How "nearest free cell" works:
+    // We search in expanding rings around the target cell:
+    //   Ring 0: the cell itself
+    //   Ring 1: the 8 cells around it
+    //   Ring 2: the 16 cells around ring 1
+    //   ...and so on until we find an empty spot.
+
+    // Get all occupied grid positions (excluding one plant — the one being dragged)
+    private func occupiedCells(excludingPlantID: UUID) -> Set<String> {
+        var occupied = Set<String>()
+        for (i, p) in store.plants.enumerated() {
+            guard p.id != excludingPlantID else { continue }
+            let pos = plantGridPosition(plant: p, index: i)
+            let key = "\(Int(pos.col)),\(Int(pos.row))"
+            occupied.insert(key)
+        }
+        return occupied
+    }
+
+    // Find the nearest free cell to the target position
+    private func nearestFreeCell(col: Int, row: Int, excludingPlantID: UUID) -> (col: Int, row: Int) {
+        let occupied = occupiedCells(excludingPlantID: excludingPlantID)
+
+        // Check if the target cell itself is free
+        if !occupied.contains("\(col),\(row)") {
+            return (col, row)
+        }
+
+        // Search in expanding rings (distance 1, 2, 3, ...)
+        // maxRing limits how far we search — the grid is finite
+        let maxRing = max(GridConfig.columns, GridConfig.rows)
+
+        for ring in 1...maxRing {
+            // Check all cells at this ring distance
+            // A "ring" is all cells where max(|dx|, |dy|) == ring
+            var bestCell: (col: Int, row: Int)?
+            var bestDistance: Double = .infinity
+
+            for dx in -ring...ring {
+                for dy in -ring...ring {
+                    // Only check cells ON the ring edge (not inside it — already checked)
+                    guard abs(dx) == ring || abs(dy) == ring else { continue }
+
+                    let newCol = col + dx
+                    let newRow = row + dy
+
+                    // Stay within grid bounds
+                    guard newCol >= 0, newCol < GridConfig.columns,
+                          newRow >= 0, newRow < GridConfig.rows else { continue }
+
+                    // Check if this cell is free
+                    guard !occupied.contains("\(newCol),\(newRow)") else { continue }
+
+                    // Calculate actual distance (prefer closer cells)
+                    let dist = sqrt(Double(dx * dx + dy * dy))
+                    if dist < bestDistance {
+                        bestDistance = dist
+                        bestCell = (newCol, newRow)
+                    }
+                }
+            }
+
+            if let cell = bestCell {
+                return cell
+            }
+        }
+
+        // Fallback (should never happen unless grid is 100% full)
+        return (col, row)
     }
 
     // MARK: - Zoom Controls Overlay
