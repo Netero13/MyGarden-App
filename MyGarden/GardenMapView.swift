@@ -1,71 +1,93 @@
 import SwiftUI
 
 // MARK: - Garden Map View
-// A visual bird's-eye view of your garden!
-// Plants appear as circular icons on a green canvas.
+// A zoomable, scrollable bird's-eye view of your garden with a snap-to-grid system.
 //
 // How it works:
-// - Each plant has gardenX/gardenY coordinates (0.0 to 1.0 = percentages)
-// - We multiply those by the canvas size to get pixel positions
-// - LONG PRESS + DRAG to move a plant to a new spot
+// - The garden is a LARGE canvas (bigger than the screen) divided into a grid
+// - Each grid cell is one "slot" where a plant can sit
+// - When you drag a plant and drop it, it SNAPS to the nearest grid cell
+// - You can PINCH TO ZOOM in/out, or use +/- buttons
+// - You can SCROLL around the canvas to see all areas
 // - TAP a plant to open its detail card
 //
-// Key SwiftUI concepts:
-// - GeometryReader: tells us the exact size of the screen area so we can
-//   position plants correctly on any device (iPhone SE, iPhone 15 Pro, iPad)
-// - DragGesture: detects finger movement and updates position in real-time
-// - ZStack: layers views on top of each other (garden background → plants on top)
-// - NavigationLink: makes tapping a plant navigate to its detail screen
+// Key concepts:
+// - ScrollView: lets you pan around a canvas bigger than the screen
+// - MagnificationGesture: detects pinch-to-zoom finger movements
+// - "Snap to grid": round the drop position to the nearest grid cell
+//   This keeps the garden looking neat and organized.
+// - Canvas vs Screen: the garden canvas might be 1500x1500 points,
+//   but your screen is only ~390x844. ScrollView handles the difference.
+
+// MARK: - Grid Configuration
+// These constants define how the grid looks and behaves.
+// Changing these changes the entire garden layout.
+
+private enum GridConfig {
+    static let columns: Int = 16          // number of grid cells horizontally
+    static let rows: Int = 20             // number of grid cells vertically
+    static let baseCellSize: CGFloat = 70 // size of each grid cell in points
+    static let minZoom: CGFloat = 0.5     // how far out you can zoom (50%)
+    static let maxZoom: CGFloat = 2.5     // how close you can zoom (250%)
+    static let zoomStep: CGFloat = 0.25   // how much +/- buttons change zoom
+}
 
 struct GardenMapView: View {
 
     // Access the shared plant store
     @Environment(PlantStore.self) private var store
 
-    // Which plant is currently being dragged (nil = nothing being dragged)
+    // MARK: - State
+
+    // Zoom level: 1.0 = normal, 0.5 = zoomed out, 2.0 = zoomed in
+    @State private var zoomScale: CGFloat = 0.8
+
+    // Pinch gesture tracking
+    @State private var lastZoomScale: CGFloat = 0.8
+
+    // Which plant is currently being dragged
     @State private var draggingPlantID: UUID?
 
-    // Temporary offset while dragging (in pixels, not percentages)
+    // Current drag offset in pixels
     @State private var dragOffset: CGSize = .zero
+
+    // Navigation: which plant to open in detail
+    @State private var selectedPlant: Plant?
 
     // Controls the "Add Plant" sheet
     @State private var showingAddPlant: Bool = false
 
-    // The selected plant for navigation
-    @State private var selectedPlant: Plant?
+    // Show/hide grid lines (toggle in toolbar)
+    @State private var showGrid: Bool = true
 
     var body: some View {
         @Bindable var store = store
 
         NavigationStack {
-            GeometryReader { geometry in
-                let gardenSize = geometry.size
+            ZStack {
+                // Main scrollable + zoomable garden
+                gardenScrollView
 
-                ZStack {
-                    // -- Background: green garden canvas --
-                    gardenBackground(size: gardenSize)
-
-                    // -- Plants: scattered on the canvas --
-                    ForEach(store.plants) { plant in
-                        if let index = store.plants.firstIndex(where: { $0.id == plant.id }) {
-                            plantMarker(
-                                plant: plant,
-                                gardenSize: gardenSize,
-                                index: index
-                            )
-                        }
-                    }
-
-                    // -- Empty state overlay --
-                    if store.plants.isEmpty {
-                        emptyGardenOverlay
-                    }
-                }
+                // Zoom controls overlay (bottom right)
+                zoomControlsOverlay
             }
+            .background(Color(red: 0.15, green: 0.35, blue: 0.15))
             .navigationTitle("Garden Map")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                // Add plant button
+                // Left: grid toggle
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            showGrid.toggle()
+                        }
+                    } label: {
+                        Image(systemName: showGrid ? "grid" : "grid.circle")
+                            .foregroundStyle(showGrid ? .blue : .secondary)
+                    }
+                }
+
+                // Right: add plant
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddPlant = true
@@ -79,7 +101,6 @@ struct GardenMapView: View {
                     store.add(newPlant)
                 }
             }
-            // Navigation to plant detail when tapped
             .navigationDestination(item: $selectedPlant) { selected in
                 if let index = store.plants.firstIndex(where: { $0.id == selected.id }) {
                     PlantDetailView(plant: $store.plants[index])
@@ -88,156 +109,234 @@ struct GardenMapView: View {
         }
     }
 
-    // MARK: - Garden Background
-    // A nice green gradient with grid lines to look like a garden plot.
+    // MARK: - Canvas Size
+    // The total size of the garden canvas (in points).
+    // This is usually BIGGER than the screen — that's why we need ScrollView.
 
-    private func gardenBackground(size: CGSize) -> some View {
-        ZStack {
-            // Base gradient — dark green to lighter green (like grass)
-            LinearGradient(
-                colors: [
-                    Color(red: 0.2, green: 0.5, blue: 0.2),
-                    Color(red: 0.3, green: 0.65, blue: 0.3),
-                    Color(red: 0.25, green: 0.55, blue: 0.25)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+    private var canvasWidth: CGFloat {
+        CGFloat(GridConfig.columns) * GridConfig.baseCellSize * zoomScale
+    }
+
+    private var canvasHeight: CGFloat {
+        CGFloat(GridConfig.rows) * GridConfig.baseCellSize * zoomScale
+    }
+
+    // Actual cell size at current zoom level
+    private var cellSize: CGFloat {
+        GridConfig.baseCellSize * zoomScale
+    }
+
+    // MARK: - Garden ScrollView
+    // The main scrollable area containing the grid and all plants.
+
+    private var gardenScrollView: some View {
+        ScrollView([.horizontal, .vertical], showsIndicators: true) {
+            ZStack(alignment: .topLeading) {
+                // Layer 1: Garden background with grid
+                gardenCanvas
+
+                // Layer 2: Plants on top
+                ForEach(store.plants) { plant in
+                    if let index = store.plants.firstIndex(where: { $0.id == plant.id }) {
+                        plantMarker(plant: plant, index: index)
+                    }
+                }
+
+                // Empty state
+                if store.plants.isEmpty {
+                    emptyGardenOverlay
+                        .frame(width: canvasWidth, height: canvasHeight)
+                }
+            }
+            .frame(width: canvasWidth, height: canvasHeight)
+            // Pinch to zoom gesture on the whole canvas
+            .gesture(
+                MagnificationGesture()
+                    .onChanged { value in
+                        let newScale = lastZoomScale * value
+                        zoomScale = min(GridConfig.maxZoom, max(GridConfig.minZoom, newScale))
+                    }
+                    .onEnded { _ in
+                        lastZoomScale = zoomScale
+                    }
+            )
+        }
+    }
+
+    // MARK: - Garden Canvas
+    // The green background with grid lines drawn using Canvas (very efficient).
+
+    private var gardenCanvas: some View {
+        Canvas { context, size in
+            // 1. Fill background with grass green
+            let bgRect = CGRect(origin: .zero, size: size)
+            context.fill(
+                Path(bgRect),
+                with: .linearGradient(
+                    Gradient(colors: [
+                        Color(red: 0.22, green: 0.52, blue: 0.22),
+                        Color(red: 0.28, green: 0.60, blue: 0.28),
+                        Color(red: 0.20, green: 0.48, blue: 0.20)
+                    ]),
+                    startPoint: .zero,
+                    endPoint: CGPoint(x: size.width, y: size.height)
+                )
             )
 
-            // Subtle grid pattern — like garden bed rows
-            // Horizontal lines
-            VStack(spacing: 40) {
-                ForEach(0..<20, id: \.self) { _ in
-                    Rectangle()
-                        .fill(.white.opacity(0.04))
-                        .frame(height: 1)
+            guard showGrid else { return }
+
+            let cell = cellSize
+
+            // 2. Draw minor grid lines (thin, subtle)
+            for col in 0...GridConfig.columns {
+                let x = CGFloat(col) * cell
+                var path = Path()
+                path.move(to: CGPoint(x: x, y: 0))
+                path.addLine(to: CGPoint(x: x, y: size.height))
+                context.stroke(path, with: .color(.white.opacity(0.08)), lineWidth: 0.5)
+            }
+
+            for row in 0...GridConfig.rows {
+                let y = CGFloat(row) * cell
+                var path = Path()
+                path.move(to: CGPoint(x: 0, y: y))
+                path.addLine(to: CGPoint(x: size.width, y: y))
+                context.stroke(path, with: .color(.white.opacity(0.08)), lineWidth: 0.5)
+            }
+
+            // 3. Draw major grid lines every 4 cells (thicker, more visible)
+            for col in stride(from: 0, through: GridConfig.columns, by: 4) {
+                let x = CGFloat(col) * cell
+                var path = Path()
+                path.move(to: CGPoint(x: x, y: 0))
+                path.addLine(to: CGPoint(x: x, y: size.height))
+                context.stroke(path, with: .color(.white.opacity(0.15)), lineWidth: 1)
+            }
+
+            for row in stride(from: 0, through: GridConfig.rows, by: 4) {
+                let y = CGFloat(row) * cell
+                var path = Path()
+                path.move(to: CGPoint(x: 0, y: y))
+                path.addLine(to: CGPoint(x: size.width, y: y))
+                context.stroke(path, with: .color(.white.opacity(0.15)), lineWidth: 1)
+            }
+
+            // 4. Draw dots at every grid intersection
+            for col in 0...GridConfig.columns {
+                for row in 0...GridConfig.rows {
+                    let x = CGFloat(col) * cell
+                    let y = CGFloat(row) * cell
+
+                    // Bigger dots at major intersections (every 4 cells)
+                    let isMajor = col % 4 == 0 && row % 4 == 0
+                    let dotSize: CGFloat = isMajor ? 4 : 2
+                    let dotOpacity: Double = isMajor ? 0.25 : 0.12
+
+                    let dotRect = CGRect(
+                        x: x - dotSize / 2,
+                        y: y - dotSize / 2,
+                        width: dotSize,
+                        height: dotSize
+                    )
+                    context.fill(
+                        Path(ellipseIn: dotRect),
+                        with: .color(.white.opacity(dotOpacity))
+                    )
                 }
             }
 
-            // Vertical lines
-            HStack(spacing: 40) {
-                ForEach(0..<15, id: \.self) { _ in
-                    Rectangle()
-                        .fill(.white.opacity(0.04))
-                        .frame(width: 1)
-                }
-            }
-
-            // Garden border — a nice earthy border around the edges
-            RoundedRectangle(cornerRadius: 0)
-                .strokeBorder(
-                    Color.brown.opacity(0.4),
-                    lineWidth: 6
-                )
-
-            // Hint text at the bottom
-            VStack {
-                Spacer()
-                Text("Long press & drag to move plants")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
-                    .padding(.bottom, 12)
-            }
+            // 5. Border around the garden
+            context.stroke(
+                Path(bgRect),
+                with: .color(Color.brown.opacity(0.5)),
+                lineWidth: 4
+            )
         }
-        .ignoresSafeArea(edges: .bottom)
+        .frame(width: canvasWidth, height: canvasHeight)
     }
 
     // MARK: - Plant Marker
-    // Each plant appears as a circular marker on the map.
-    // Shows the plant's photo (or type icon if no photo).
-    // Tap → open detail. Long press + drag → move it.
+    // A single plant icon on the map. Supports tap and long-press-drag.
 
-    private func plantMarker(plant: Plant, gardenSize: CGSize, index: Int) -> some View {
+    private func plantMarker(plant: Plant, index: Int) -> some View {
+        let gridPos = plantGridPosition(plant: plant, index: index)
+        let pixelPos = gridToPixel(col: gridPos.col, row: gridPos.row)
 
-        // Calculate the pixel position from percentage coordinates
-        // If plant has no position yet, auto-place it in a grid
-        let pos = plantPosition(plant: plant, index: index, gardenSize: gardenSize)
-
-        // Is this the plant currently being dragged?
         let isDragging = draggingPlantID == plant.id
+        let displayX = isDragging ? pixelPos.x + dragOffset.width : pixelPos.x
+        let displayY = isDragging ? pixelPos.y + dragOffset.height : pixelPos.y
 
-        // Calculate display position (base + drag offset if dragging)
-        let displayX = isDragging ? pos.x + dragOffset.width : pos.x
-        let displayY = isDragging ? pos.y + dragOffset.height : pos.y
+        // Marker size scales with zoom
+        let markerSize: CGFloat = min(cellSize * 0.75, 56)
+        let fontSize: CGFloat = min(cellSize * 0.15, 11)
 
-        return VStack(spacing: 2) {
-            // Plant circle — photo or icon
+        return VStack(spacing: 1) {
             ZStack {
-                // Shadow/glow behind the circle
+                // Glow behind
                 Circle()
-                    .fill(plant.needsWatering ? .red.opacity(0.3) : .blue.opacity(0.2))
-                    .frame(width: 58, height: 58)
+                    .fill(plant.needsWatering ? .red.opacity(0.35) : .black.opacity(0.2))
+                    .frame(width: markerSize + 6, height: markerSize + 6)
 
-                // The actual plant circle
+                // Plant circle
                 if let photoID = plant.photoID,
                    let image = PhotoManager.shared.load(id: photoID) {
-                    // Has a photo — show it in a circle
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 52, height: 52)
+                        .frame(width: markerSize, height: markerSize)
                         .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .strokeBorder(.white, lineWidth: 2)
-                        )
+                        .overlay(Circle().strokeBorder(.white, lineWidth: 2))
                 } else {
-                    // No photo — show type icon with colored background
                     Image(systemName: plant.type.icon)
-                        .font(.title3)
+                        .font(.system(size: markerSize * 0.4))
                         .foregroundStyle(.white)
-                        .frame(width: 52, height: 52)
+                        .frame(width: markerSize, height: markerSize)
                         .background(plant.type.color.gradient)
                         .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .strokeBorder(.white, lineWidth: 2)
-                        )
+                        .overlay(Circle().strokeBorder(.white, lineWidth: 2))
                 }
 
-                // Watering indicator dot (red = needs water)
+                // Watering indicator
                 if plant.needsWatering {
                     Circle()
                         .fill(.red)
-                        .frame(width: 14, height: 14)
+                        .frame(width: markerSize * 0.28, height: markerSize * 0.28)
                         .overlay(
                             Image(systemName: "drop.fill")
-                                .font(.system(size: 8))
+                                .font(.system(size: markerSize * 0.14))
                                 .foregroundStyle(.white)
                         )
-                        .offset(x: 20, y: -20)
+                        .offset(x: markerSize * 0.38, y: -markerSize * 0.38)
                 }
             }
 
-            // Plant name label below the circle
-            Text(plant.name)
-                .font(.caption2)
-                .fontWeight(.semibold)
-                .foregroundStyle(.white)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(.black.opacity(0.5))
-                .clipShape(Capsule())
+            // Name label (hide when very zoomed out to reduce clutter)
+            if zoomScale >= 0.6 {
+                Text(plant.name)
+                    .font(.system(size: fontSize, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 1)
+                    .background(.black.opacity(0.55))
+                    .clipShape(Capsule())
+            }
         }
-        // Position the marker on the canvas
         .position(x: displayX, y: displayY)
-        // Scale up slightly when being dragged (visual feedback)
-        .scaleEffect(isDragging ? 1.2 : 1.0)
-        // Bring dragged plant to front
+        .scaleEffect(isDragging ? 1.15 : 1.0)
+        .shadow(color: isDragging ? .white.opacity(0.4) : .clear, radius: 8)
         .zIndex(isDragging ? 100 : 0)
         .animation(.easeInOut(duration: 0.15), value: isDragging)
-        // TAP: navigate to plant detail
+        // Tap → open detail
         .onTapGesture {
             selectedPlant = plant
         }
-        // LONG PRESS + DRAG: move the plant on the map
+        // Long press + drag → move plant, snaps to grid on release
         .gesture(
             LongPressGesture(minimumDuration: 0.3)
                 .sequenced(before: DragGesture())
                 .onChanged { value in
                     switch value {
                     case .second(true, let drag):
-                        // Long press succeeded, now dragging
                         draggingPlantID = plant.id
                         if let drag = drag {
                             dragOffset = drag.translation
@@ -249,63 +348,129 @@ struct GardenMapView: View {
                 .onEnded { value in
                     switch value {
                     case .second(true, let drag):
-                        // Drag ended — calculate new position as percentage
                         if let drag = drag {
-                            let newX = pos.x + drag.translation.width
-                            let newY = pos.y + drag.translation.height
+                            // Calculate the new pixel position
+                            let newX = pixelPos.x + drag.translation.width
+                            let newY = pixelPos.y + drag.translation.height
 
-                            // Clamp to garden bounds (keep inside the canvas)
-                            // We leave 30pt margin so the marker doesn't go off-screen
-                            let clampedX = max(30, min(gardenSize.width - 30, newX))
-                            let clampedY = max(30, min(gardenSize.height - 30, newY))
+                            // SNAP TO GRID: convert pixel → nearest grid cell
+                            let snappedCol = round(newX / cellSize)
+                            let snappedRow = round(newY / cellSize)
 
-                            // Convert pixels back to percentage (0.0 to 1.0)
-                            var updatedPlant = plant
-                            updatedPlant.gardenX = clampedX / gardenSize.width
-                            updatedPlant.gardenY = clampedY / gardenSize.height
-                            store.update(updatedPlant)
+                            // Clamp to grid bounds (0 to columns/rows)
+                            let clampedCol = max(0, min(CGFloat(GridConfig.columns - 1), snappedCol))
+                            let clampedRow = max(0, min(CGFloat(GridConfig.rows - 1), snappedRow))
+
+                            // Save as grid coordinates (stored in gardenX/gardenY)
+                            var updated = plant
+                            updated.gardenX = Double(clampedCol)
+                            updated.gardenY = Double(clampedRow)
+                            store.update(updated)
                         }
                     default:
                         break
                     }
-
-                    // Reset drag state
                     draggingPlantID = nil
                     dragOffset = .zero
                 }
         )
     }
 
-    // MARK: - Calculate Plant Position
-    // Converts percentage coordinates to pixel positions.
-    // If a plant has never been placed (nil coordinates), we auto-arrange
-    // plants in a neat grid so they don't all stack on top of each other.
+    // MARK: - Grid Position Helpers
+    // Convert between grid coordinates (col, row) and pixel positions.
 
-    private func plantPosition(plant: Plant, index: Int, gardenSize: CGSize) -> CGPoint {
+    // Get the grid position for a plant (from saved data or auto-layout)
+    private func plantGridPosition(plant: Plant, index: Int) -> (col: CGFloat, row: CGFloat) {
         if let x = plant.gardenX, let y = plant.gardenY {
-            // Plant has saved coordinates — convert percentage to pixels
-            return CGPoint(
-                x: x * gardenSize.width,
-                y: y * gardenSize.height
-            )
+            return (col: CGFloat(x), row: CGFloat(y))
         }
 
-        // No saved position — auto-place in a grid
-        // We use the plant's index to calculate a grid position
-        let columns = max(3, Int(gardenSize.width / 90))  // ~90pt per column
-        let row = index / columns
-        let col = index % columns
+        // Auto-place: arrange in rows with some spacing
+        let cols = GridConfig.columns - 2  // leave 1-cell margin on each side
+        let col = (index % cols) + 1       // start at column 1
+        let row = (index / cols) + 1       // start at row 1
 
-        // Calculate position with margins
-        let marginX: CGFloat = 50
-        let marginY: CGFloat = 50
-        let spacingX = (gardenSize.width - marginX * 2) / CGFloat(max(columns - 1, 1))
-        let spacingY: CGFloat = 90
+        return (col: CGFloat(col), row: CGFloat(row))
+    }
 
-        return CGPoint(
-            x: marginX + CGFloat(col) * spacingX,
-            y: marginY + CGFloat(row) * spacingY
+    // Convert grid cell (col, row) to pixel position on canvas
+    private func gridToPixel(col: CGFloat, row: CGFloat) -> CGPoint {
+        CGPoint(
+            x: (col + 0.5) * cellSize,  // +0.5 = center of the cell
+            y: (row + 0.5) * cellSize
         )
+    }
+
+    // MARK: - Zoom Controls Overlay
+    // +/- buttons floating in the bottom right corner.
+    // These are always visible on top of the scrollview.
+
+    private var zoomControlsOverlay: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                VStack(spacing: 0) {
+                    // Zoom in button
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            zoomScale = min(GridConfig.maxZoom, zoomScale + GridConfig.zoomStep)
+                            lastZoomScale = zoomScale
+                        }
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.title3.weight(.semibold))
+                            .frame(width: 44, height: 44)
+                    }
+                    .disabled(zoomScale >= GridConfig.maxZoom)
+
+                    Divider()
+                        .frame(width: 30)
+
+                    // Zoom percentage label
+                    Text("\(Int(zoomScale * 100))%")
+                        .font(.caption2.weight(.medium))
+                        .frame(width: 44, height: 28)
+                        .foregroundStyle(.secondary)
+
+                    Divider()
+                        .frame(width: 30)
+
+                    // Zoom out button
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            zoomScale = max(GridConfig.minZoom, zoomScale - GridConfig.zoomStep)
+                            lastZoomScale = zoomScale
+                        }
+                    } label: {
+                        Image(systemName: "minus")
+                            .font(.title3.weight(.semibold))
+                            .frame(width: 44, height: 44)
+                    }
+                    .disabled(zoomScale <= GridConfig.minZoom)
+
+                    Divider()
+                        .frame(width: 30)
+
+                    // Fit-all button (resets zoom to fit everything)
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            zoomScale = 0.8
+                            lastZoomScale = 0.8
+                        }
+                    } label: {
+                        Image(systemName: "arrow.down.right.and.arrow.up.left")
+                            .font(.caption.weight(.semibold))
+                            .frame(width: 44, height: 40)
+                    }
+                }
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .shadow(color: .black.opacity(0.2), radius: 4, y: 2)
+                .padding(.trailing, 12)
+                .padding(.bottom, 16)
+            }
+        }
     }
 
     // MARK: - Empty Garden Overlay
