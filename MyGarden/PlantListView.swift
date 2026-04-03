@@ -187,6 +187,9 @@ struct PlantListView: View {
                 }
                 .padding(.vertical, 4)
 
+                // Type breakdown — scrollable row of type chips
+                typeBreakdownRow
+
                 // Recent activity
                 if let lastActivity = mostRecentActivity {
                     recentActivityRow(lastActivity)
@@ -260,6 +263,38 @@ struct PlantListView: View {
         .padding(10)
         .background(color.opacity(0.08))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+
+    // MARK: - Type Breakdown Row
+    // A horizontal scrollable row of "chips" — one per plant type.
+    // Each chip shows the type icon, name, and count.
+    // Much cleaner than the bar + tiny legend approach.
+
+    private var typeBreakdownRow: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(typeCounts.sorted(by: { $0.value > $1.value }), id: \.key) { type, count in
+                    HStack(spacing: 6) {
+                        Image(systemName: type.icon)
+                            .font(.caption2)
+                            .foregroundStyle(type.color)
+
+                        Text("\(count)")
+                            .font(.caption)
+                            .fontWeight(.bold)
+
+                        Text(type.rawValue)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(type.color.opacity(0.1))
+                    .clipShape(Capsule())
+                }
+            }
+        }
+        .padding(.vertical, 2)
     }
 
     // MARK: - Water Today Section
@@ -397,6 +432,11 @@ struct PlantListView: View {
 
     private var totalActivities: Int {
         store.plants.reduce(0) { $0 + $1.activities.count }
+    }
+
+    private var typeCounts: [PlantType: Int] {
+        Dictionary(grouping: store.plants, by: { $0.type })
+            .mapValues { $0.count }
     }
 
     // Find the most recent activity across ALL plants
