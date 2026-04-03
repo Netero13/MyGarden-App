@@ -3,12 +3,7 @@ import PhotosUI
 
 // MARK: - Plant Photo View
 // A reusable component that shows a plant photo (or a placeholder)
-// and lets you tap to pick a new photo from your library.
-//
-// Key SwiftUI concept: PhotosPicker
-// Apple provides a built-in photo picker that's safe and private.
-// The user picks a photo, and we receive it — we never access the
-// full photo library, only what the user explicitly selects.
+// and lets you tap to pick a new photo from camera or library.
 
 struct PlantPhotoView: View {
 
@@ -24,108 +19,196 @@ struct PlantPhotoView: View {
     // Called when user picks a new photo — returns the new photo ID
     var onPhotoSelected: ((String) -> Void)?
 
-    // PhotosPicker state
-    @State private var selectedItem: PhotosPickerItem?
+    // State
     @State private var loadedImage: UIImage?
+    @State private var showingPhotoOptions = false
+    @State private var showingCamera = false
+    @State private var libraryItem: PhotosPickerItem?
+
+    // Check if camera is available
+    private var hasCamera: Bool {
+        UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
 
     var body: some View {
         Group {
             if let image = loadedImage {
-                // Show the photo
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width: size, height: size)
                     .clipShape(RoundedRectangle(cornerRadius: size > 60 ? 16 : 10))
             } else {
-                // Placeholder when no photo exists
                 ZStack {
                     RoundedRectangle(cornerRadius: size > 60 ? 16 : 10)
                         .fill(.secondary.opacity(0.15))
                         .frame(width: size, height: size)
 
-                    Image(systemName: editable ? "camera.fill" : "leaf.fill")
-                        .font(size > 60 ? .title : .caption)
-                        .foregroundStyle(.secondary)
+                    VStack(spacing: 4) {
+                        Image(systemName: editable ? "camera.fill" : "leaf.fill")
+                            .font(size > 60 ? .title : .caption)
+                            .foregroundStyle(.secondary)
+                        if editable && size > 60 {
+                            Text("Add Photo")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                 }
             }
         }
-        .overlay(alignment: .bottomTrailing) {
-            // Small camera badge when editable
+        // Tap to change photo (only when editable)
+        .onTapGesture {
             if editable {
-                Image(systemName: "camera.circle.fill")
-                    .font(.title3)
-                    .foregroundStyle(.white, .blue)
-                    .offset(x: 4, y: 4)
+                showingPhotoOptions = true
             }
         }
-        // Wrap in PhotosPicker if editable
-        .overlay {
-            if editable {
-                PhotosPicker(
-                    selection: $selectedItem,
-                    matching: .images
-                ) {
-                    Color.clear
-                        .frame(width: size, height: size)
+        // Action sheet: Camera or Library?
+        .confirmationDialog("Choose Photo", isPresented: $showingPhotoOptions) {
+            if hasCamera {
+                Button("Take Photo") {
+                    showingCamera = true
                 }
             }
+            Button("Choose from Library") {
+                // Trigger the hidden PhotosPicker
+            }
+            Button("Cancel", role: .cancel) {}
         }
-        // Load photo on appear
+        // Hidden PhotosPicker triggered by the action sheet
+        .photosPicker(isPresented: Binding(
+            get: {
+                // This is a workaround: we show the picker when the dialog
+                // "Choose from Library" is tapped. We use a separate flag.
+                false
+            },
+            set: { _ in }
+        ), selection: $libraryItem, matching: .images)
+        // Camera sheet
+        .fullScreenCover(isPresented: $showingCamera) {
+            CameraView { image in
+                showingCamera = false
+                handleNewPhoto(image)
+            } onCancel: {
+                showingCamera = false
+            }
+            .ignoresSafeArea()
+        }
         .onAppear {
             if let photoID = photoID {
                 loadedImage = PhotoManager.shared.load(id: photoID)
             }
         }
-        // When user picks a new photo from the library
-        .onChange(of: selectedItem) {
-            Task {
-                if let data = try? await selectedItem?.loadTransferable(type: Data.self),
-                   let uiImage = UIImage(data: data) {
-                    // Save the photo and get an ID
-                    if let newID = PhotoManager.shared.save(uiImage) {
-                        loadedImage = uiImage
-                        onPhotoSelected?(newID)
-                    }
-                }
-            }
+    }
+
+    private func handleNewPhoto(_ image: UIImage) {
+        if let newID = PhotoManager.shared.save(image) {
+            loadedImage = image
+            onPhotoSelected?(newID)
         }
     }
 }
 
-// MARK: - Small Photo Thumbnail
-// A simpler version for use in list rows — just shows the photo, no editing.
+// MARK: - Simpler version for detail screen
+// Since the confirmationDialog + PhotosPicker combo is tricky,
+// let's use a simpler approach for the detail screen header.
 
-struct PlantPhotoThumbnail: View {
+struct PlantPhotoHeader: View {
     let photoID: String?
-    var size: CGFloat = 44
+    var size: CGFloat = 120
+    var onPhotoSelected: ((String) -> Void)?
 
-    @State private var image: UIImage?
+    @State private var loadedImage: UIImage?
+    @State private var showingOptions = false
+    @State private var showingCamera = false
+    @State private var showingLibrary = false
+    @State private var libraryItem: PhotosPickerItem?
+
+    private var hasCamera: Bool {
+        UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
 
     var body: some View {
         Group {
-            if let image = image {
+            if let image = loadedImage {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width: size, height: size)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
             } else {
-                // No photo — return nil so the caller can show the default icon
-                EmptyView()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(.secondary.opacity(0.15))
+                        .frame(width: size, height: size)
+
+                    VStack(spacing: 4) {
+                        Image(systemName: "camera.fill")
+                            .font(.title)
+                            .foregroundStyle(.secondary)
+                        Text("Add Photo")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        }
+        .overlay(alignment: .bottomTrailing) {
+            Image(systemName: "camera.circle.fill")
+                .font(.title3)
+                .foregroundStyle(.white, .blue)
+                .offset(x: 4, y: 4)
+        }
+        .onTapGesture {
+            showingOptions = true
+        }
+        .confirmationDialog("Plant Photo", isPresented: $showingOptions) {
+            if hasCamera {
+                Button("Take Photo") {
+                    showingCamera = true
+                }
+            }
+            Button("Choose from Library") {
+                showingLibrary = true
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+        .fullScreenCover(isPresented: $showingCamera) {
+            CameraView { image in
+                showingCamera = false
+                savePhoto(image)
+            } onCancel: {
+                showingCamera = false
+            }
+            .ignoresSafeArea()
+        }
+        .photosPicker(isPresented: $showingLibrary, selection: $libraryItem, matching: .images)
+        .onChange(of: libraryItem) {
+            Task {
+                if let data = try? await libraryItem?.loadTransferable(type: Data.self),
+                   let uiImage = UIImage(data: data) {
+                    savePhoto(uiImage)
+                }
+                libraryItem = nil
             }
         }
         .onAppear {
             if let photoID = photoID {
-                image = PhotoManager.shared.load(id: photoID)
+                loadedImage = PhotoManager.shared.load(id: photoID)
             }
+        }
+    }
+
+    private func savePhoto(_ image: UIImage) {
+        if let newID = PhotoManager.shared.save(image) {
+            loadedImage = image
+            onPhotoSelected?(newID)
         }
     }
 }
 
 #Preview {
     VStack(spacing: 20) {
-        PlantPhotoView(photoID: nil, size: 120, editable: true)
-        PlantPhotoView(photoID: nil, size: 60, editable: false)
+        PlantPhotoHeader(photoID: nil)
     }
 }

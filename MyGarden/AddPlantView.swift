@@ -39,7 +39,6 @@ struct AddPlantView: View {
     @State private var customDays: Int = 7
 
     // Photo
-    @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var selectedPhoto: UIImage?
     @State private var savedPhotoID: String?
 
@@ -193,6 +192,7 @@ struct AddPlantView: View {
 
     // MARK: - Photo Section
     // Optional photo for the plant's "profile picture"
+    // Offers both camera and library options.
 
     private var photoSection: some View {
         Section {
@@ -212,7 +212,6 @@ struct AddPlantView: View {
                         }
                         self.selectedPhoto = nil
                         self.savedPhotoID = nil
-                        self.selectedPhotoItem = nil
                     } label: {
                         Label("Remove", systemImage: "xmark.circle.fill")
                             .font(.caption)
@@ -220,31 +219,19 @@ struct AddPlantView: View {
                 }
             }
 
-            PhotosPicker(
-                selection: $selectedPhotoItem,
-                matching: .images
-            ) {
-                Label(
-                    selectedPhoto == nil ? "Add Photo" : "Change Photo",
-                    systemImage: "camera.fill"
-                )
+            // Camera + Library options
+            PhotoSourcePicker { image in
+                // Delete old photo if replacing
+                if let oldID = savedPhotoID {
+                    PhotoManager.shared.delete(id: oldID)
+                }
+                selectedPhoto = image
+                savedPhotoID = PhotoManager.shared.save(image)
             }
         } header: {
             Text("Photo (optional)")
         } footer: {
-            Text("Add a photo of your plant. You can always change it later.")
-        }
-        .onChange(of: selectedPhotoItem) {
-            Task {
-                if let data = try? await selectedPhotoItem?.loadTransferable(type: Data.self),
-                   let uiImage = UIImage(data: data) {
-                    if let oldID = savedPhotoID {
-                        PhotoManager.shared.delete(id: oldID)
-                    }
-                    selectedPhoto = uiImage
-                    savedPhotoID = PhotoManager.shared.save(uiImage)
-                }
-            }
+            Text("Take a photo or pick one from your library. You can always change it later.")
         }
     }
 

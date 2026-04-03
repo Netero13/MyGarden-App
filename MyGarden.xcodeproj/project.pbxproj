@@ -22,6 +22,8 @@
 		AA1B1FB42B0A000D0012345A /* ActivityTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FB32B0A000D0012345A /* ActivityTimelineView.swift */; };
 		AA1B1FB62B0A000E0012345A /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FB52B0A000E0012345A /* PhotoManager.swift */; };
 		AA1B1FB82B0A000F0012345A /* PlantPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FB72B0A000F0012345A /* PlantPhotoView.swift */; };
+		AA1B1FBA2B0A00100012345A /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FB92B0A00100012345A /* CameraView.swift */; };
+		AA1B1FBC2B0A00110012345A /* PhotoSourcePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -45,6 +47,8 @@
 		AA1B1FB32B0A000D0012345A /* ActivityTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTimelineView.swift; sourceTree = "<group>"; };
 		AA1B1FB52B0A000E0012345A /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		AA1B1FB72B0A000F0012345A /* PlantPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotoView.swift; sourceTree = "<group>"; };
+		AA1B1FB92B0A00100012345A /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSourcePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 				AA1B1FB32B0A000D0012345A /* ActivityTimelineView.swift */,
 				AA1B1FB52B0A000E0012345A /* PhotoManager.swift */,
 				AA1B1FB72B0A000F0012345A /* PlantPhotoView.swift */,
+				AA1B1FB92B0A00100012345A /* CameraView.swift */,
+				AA1B1FBB2B0A00110012345A /* PhotoSourcePicker.swift */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -191,6 +197,8 @@
 				AA1B1FB42B0A000D0012345A /* ActivityTimelineView.swift in Sources */,
 				AA1B1FB62B0A000E0012345A /* PhotoManager.swift in Sources */,
 				AA1B1FB82B0A000F0012345A /* PlantPhotoView.swift in Sources */,
+				AA1B1FBA2B0A00100012345A /* CameraView.swift in Sources */,
+				AA1B1FBC2B0A00110012345A /* PhotoSourcePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +334,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyGarden/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "MyGarden needs camera access to take photos of your plants and gardening activities.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -354,6 +363,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyGarden/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "MyGarden needs camera access to take photos of your plants and gardening activities.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

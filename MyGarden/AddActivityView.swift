@@ -19,7 +19,6 @@ struct AddActivityView: View {
     @State private var note: String = ""
 
     // Photo state
-    @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var selectedPhoto: UIImage?
     @State private var savedPhotoID: String?
 
@@ -56,7 +55,6 @@ struct AddActivityView: View {
                 // -- Photo --
                 Section {
                     if let selectedPhoto = selectedPhoto {
-                        // Show the picked photo with a remove button
                         HStack {
                             Image(uiImage: selectedPhoto)
                                 .resizable()
@@ -67,13 +65,11 @@ struct AddActivityView: View {
                             Spacer()
 
                             Button(role: .destructive) {
-                                // Remove the photo
                                 if let id = savedPhotoID {
                                     PhotoManager.shared.delete(id: id)
                                 }
                                 self.selectedPhoto = nil
                                 self.savedPhotoID = nil
-                                self.selectedPhotoItem = nil
                             } label: {
                                 Label("Remove", systemImage: "xmark.circle.fill")
                                     .font(.caption)
@@ -81,15 +77,13 @@ struct AddActivityView: View {
                         }
                     }
 
-                    // Photo picker button
-                    PhotosPicker(
-                        selection: $selectedPhotoItem,
-                        matching: .images
-                    ) {
-                        Label(
-                            selectedPhoto == nil ? "Add Photo" : "Change Photo",
-                            systemImage: "camera.fill"
-                        )
+                    // Camera + Library options
+                    PhotoSourcePicker { image in
+                        if let oldID = savedPhotoID {
+                            PhotoManager.shared.delete(id: oldID)
+                        }
+                        selectedPhoto = image
+                        savedPhotoID = PhotoManager.shared.save(image)
                     }
                 } header: {
                     Text("Photo (optional)")
@@ -131,21 +125,6 @@ struct AddActivityView: View {
                         dismiss()
                     }
                     .fontWeight(.bold)
-                }
-            }
-            // When user picks a photo from the library
-            .onChange(of: selectedPhotoItem) {
-                Task {
-                    if let data = try? await selectedPhotoItem?.loadTransferable(type: Data.self),
-                       let uiImage = UIImage(data: data) {
-                        // Delete old photo if replacing
-                        if let oldID = savedPhotoID {
-                            PhotoManager.shared.delete(id: oldID)
-                        }
-                        // Save the new photo
-                        selectedPhoto = uiImage
-                        savedPhotoID = PhotoManager.shared.save(uiImage)
-                    }
                 }
             }
         }

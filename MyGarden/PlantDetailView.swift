@@ -89,12 +89,11 @@ struct PlantDetailView: View {
 
     private var headerSection: some View {
         VStack(spacing: 12) {
-            // Plant photo — tappable to pick/change a photo
-            // If no photo exists, shows the type icon as before
-            PlantPhotoView(
+            // Plant photo — tappable to take a new photo or pick from library
+            // If no photo exists, shows a camera placeholder
+            PlantPhotoHeader(
                 photoID: plant.photoID,
-                size: 120,
-                editable: true
+                size: 120
             ) { newPhotoID in
                 // Delete the old photo file if there was one
                 if let oldID = plant.photoID {
