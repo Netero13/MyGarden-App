@@ -20,6 +20,12 @@ struct Plant: Identifiable, Codable {
     var wateringFrequencyDays: Int // how often to water (in days)
     var lastWatered: Date?         // when you last watered it (nil = never watered yet)
 
+    // Garden Map position — where this plant sits on the visual garden map.
+    // Stored as percentages (0.0 to 1.0) so positions scale to any screen size.
+    // nil means the plant hasn't been placed on the map yet.
+    var gardenX: Double?
+    var gardenY: Double?
+
     // Tracking
     var dateAdded: Date            // when you added this plant to your garden
 

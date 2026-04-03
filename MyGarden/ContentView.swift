@@ -15,16 +15,22 @@ struct ContentView: View {
             // Tab 1: Plant List (the main screen)
             PlantListView()
                 .tabItem {
-                    Label("My Garden", systemImage: "leaf.fill")
+                    Label("Plants", systemImage: "leaf.fill")
                 }
 
-            // Tab 2: Activity Feed (all activities across all plants)
+            // Tab 2: Garden Map (visual bird's-eye view)
+            GardenMapView()
+                .tabItem {
+                    Label("Garden", systemImage: "map.fill")
+                }
+
+            // Tab 3: Activity Feed (all activities across all plants)
             ActivityFeedView()
                 .tabItem {
                     Label("Activity", systemImage: "clock.arrow.circlepath")
                 }
 
-            // Tab 3: Settings
+            // Tab 4: Settings
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
