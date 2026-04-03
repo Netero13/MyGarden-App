@@ -74,6 +74,66 @@
 "Add" = "Додати";
 "Remove" = "Видалити";
 
+// MARK: - Tree Intelligence
+"Care Intelligence" = "Розумний догляд";
+"Newly planted" = "Щойно посаджено";
+"%lld y old" = "%lld р.";
+"%@ Advice" = "Порада: %@";
+"NOW" = "ЗАРАЗ";
+"Recommended" = "Рекомендовано";
+"Every %lld days" = "Кожні %lld днів";
+"Young (0-%lld y)" = "Молоде (0-%lld р.)";
+"Mature (%lld-7 y)" = "Доросле (%lld-7 р.)";
+"Established (7y+)" = "Зріле (7р.+)";
+"every %lld days" = "кожні %lld днів";
+"Pruning" = "Обрізка";
+"This month!" = "Цього місяця!";
+"Best months" = "Найкращі місяці";
+"Fertilizing" = "Удобрення";
+"This species rarely needs fertilizer!" = "Цей вид рідко потребує добрив!";
+"Harvest" = "Збір врожаю";
+"Harvest time!" = "Час збору!";
+"Harvest months" = "Місяці збору";
+"Years to first harvest" = "Років до першого врожаю";
+"Should be bearing!" = "Має вже плодоносити!";
+"%lld more year(s)" = "Ще %lld рік(ів)";
+"~%lld years" = "~%lld років";
+"Environment" = "Середовище";
+"Frost hardiness" = "Морозостійкість";
+"Ideal soil pH" = "Ідеальний pH ґрунту";
+"Mature height" = "Висота дорослого";
+"Watch Out For" = "Зверніть увагу";
+"Pests" = "Шкідники";
+"Diseases" = "Хвороби";
+"Time to prune!" = "Час обрізки!";
+"This month is ideal for pruning %@" = "Цей місяць ідеальний для обрізки %@";
+"Time to fertilize!" = "Час удобрювати!";
+"%@ is ready to harvest" = "%@ готовий(а) до збору";
+"Spring" = "Весна";
+"Summer" = "Літо";
+"Autumn" = "Осінь";
+"Winter" = "Зима";
+"Harvest: %@" = "Збір: %@";
+"Recommended: every %lld days" = "Рекомендовано: кожні %lld днів";
+
+// MARK: - Dashboard
+"No Trees Yet" = "Ще немає дерев";
+"Tap + to add your first tree or bush!" = "Натисніть +, щоб додати перше дерево або кущ!";
+"Last: %@ — %@" = "Останнє: %@ — %@";
+"About %lld year(s) old" = "Приблизно %lld рік(ів)";
+"Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Arborist налаштовує рекомендації з поливу, обрізки та удобрення залежно від віку дерева.";
+"To receive watering reminders, please enable notifications in your iPhone Settings." = "Щоб отримувати нагадування про полив, увімкніть сповіщення в налаштуваннях iPhone.";
+"You'll get a reminder at %@ on the day each plant needs watering." = "Ви отримаєте нагадування о %@ у день, коли рослина потребує поливу.";
+"You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants." = "Ви отримаєте нагадування 1-го числа кожного місяця, коли час обрізки, удобрення або збору врожаю.";
+"Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar." = "Отримуйте сповіщення, коли час обрізки, удобрення або збору — на основі календаря догляду.";
+"Weather is based on your device's current location. Turn off to pick a city manually." = "Погода базується на вашій геолокації. Вимкніть, щоб обрати місто вручну.";
+"Pick your city for accurate weather and gardening tips, or turn on location for automatic detection." = "Оберіть місто для точної погоди, або увімкніть геолокацію для автоматичного визначення.";
+"Activities you log will be tagged with this person's name." = "Активності будуть позначені ім'ям цієї людини.";
+"Notifications Disabled" = "Сповіщення вимкнено";
+"Open Settings" = "Відкрити налаштування";
+"App" = "Додаток";
+"Arborist" = "Arborist";
+
 // MARK: - Catalog
 "Catalog" = "Каталог";
 "Search trees & bushes..." = "Пошук дерев і кущів...";
@@ -95,7 +155,13 @@
 "When was it planted?" = "Коли його було посаджено?";
 "Watering frequency" = "Частота поливу";
 
+// MARK: - Add Activity
+"Logging as %@" = "Записуємо як %@";
+"No activities match this filter. Try a different one." = "Немає активностей за цим фільтром. Спробуйте інший.";
+
 // MARK: - Edit Plant
+"Planting Year" = "Рік посадки";
+"Helps Arborist adjust care recommendations based on age." = "Допомагає Arborist налаштувати рекомендації з догляду залежно від віку.";
 "Edit Plant" = "Редагувати рослину";
 "Save" = "Зберегти";
 "Name & Variety" = "Назва та сорт";

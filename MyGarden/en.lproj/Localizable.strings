@@ -74,6 +74,67 @@
 "Add" = "Add";
 "Remove" = "Remove";
 
+// MARK: - Tree Intelligence
+"Care Intelligence" = "Care Intelligence";
+"Newly planted" = "Newly planted";
+"%lld y old" = "%lld y old";
+"%@ Advice" = "%@ Advice";
+"NOW" = "NOW";
+"Recommended" = "Recommended";
+"Every %lld days" = "Every %lld days";
+"Young (0-%lld y)" = "Young (0-%lld y)";
+"Mature (%lld-7 y)" = "Mature (%lld-7 y)";
+"Established (7y+)" = "Established (7y+)";
+"every %lld days" = "every %lld days";
+"Pruning" = "Pruning";
+"This month!" = "This month!";
+"Best months" = "Best months";
+"Fertilizing" = "Fertilizing";
+"This species rarely needs fertilizer!" = "This species rarely needs fertilizer!";
+"Harvest" = "Harvest";
+"Harvest time!" = "Harvest time!";
+"Harvest months" = "Harvest months";
+"Years to first harvest" = "Years to first harvest";
+"Should be bearing!" = "Should be bearing!";
+"%lld more year(s)" = "%lld more year(s)";
+"~%lld years" = "~%lld years";
+"Environment" = "Environment";
+"Frost hardiness" = "Frost hardiness";
+"Ideal soil pH" = "Ideal soil pH";
+"Mature height" = "Mature height";
+"Watch Out For" = "Watch Out For";
+"Pests" = "Pests";
+"Diseases" = "Diseases";
+"Time to prune!" = "Time to prune!";
+"This month is ideal for pruning %@" = "This month is ideal for pruning %@";
+"Time to fertilize!" = "Time to fertilize!";
+"Harvest time!" = "Harvest time!";
+"%@ is ready to harvest" = "%@ is ready to harvest";
+"Spring" = "Spring";
+"Summer" = "Summer";
+"Autumn" = "Autumn";
+"Winter" = "Winter";
+"Harvest: %@" = "Harvest: %@";
+"Recommended: every %lld days" = "Recommended: every %lld days";
+
+// MARK: - Dashboard
+"No Trees Yet" = "No Trees Yet";
+"Tap + to add your first tree or bush!" = "Tap + to add your first tree or bush!";
+"Last: %@ — %@" = "Last: %@ — %@";
+"About %lld year(s) old" = "About %lld year(s) old";
+"Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.";
+"To receive watering reminders, please enable notifications in your iPhone Settings." = "To receive watering reminders, please enable notifications in your iPhone Settings.";
+"You'll get a reminder at %@ on the day each plant needs watering." = "You'll get a reminder at %@ on the day each plant needs watering.";
+"You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants." = "You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants.";
+"Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar." = "Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar.";
+"Weather is based on your device's current location. Turn off to pick a city manually." = "Weather is based on your device's current location. Turn off to pick a city manually.";
+"Pick your city for accurate weather and gardening tips, or turn on location for automatic detection." = "Pick your city for accurate weather and gardening tips, or turn on location for automatic detection.";
+"Activities you log will be tagged with this person's name." = "Activities you log will be tagged with this person's name.";
+"Notifications Disabled" = "Notifications Disabled";
+"Open Settings" = "Open Settings";
+"App" = "App";
+"Arborist" = "Arborist";
+
 // MARK: - Catalog
 "Catalog" = "Catalog";
 "Search trees & bushes..." = "Search trees & bushes...";
@@ -95,7 +156,13 @@
 "When was it planted?" = "When was it planted?";
 "Watering frequency" = "Watering frequency";
 
+// MARK: - Add Activity
+"Logging as %@" = "Logging as %@";
+"No activities match this filter. Try a different one." = "No activities match this filter. Try a different one.";
+
 // MARK: - Edit Plant
+"Planting Year" = "Planting Year";
+"Helps Arborist adjust care recommendations based on age." = "Helps Arborist adjust care recommendations based on age.";
 "Edit Plant" = "Edit Plant";
 "Save" = "Save";
 "Name & Variety" = "Name & Variety";

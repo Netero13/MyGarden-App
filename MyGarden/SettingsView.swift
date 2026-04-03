@@ -228,7 +228,7 @@ struct SettingsView: View {
                     remindersEnabled = false
                 }
             } message: {
-                Text("To receive watering reminders, please enable notifications for MyGarden in your iPhone Settings.")
+                Text("To receive watering reminders, please enable notifications in your iPhone Settings.", comment: "")
             }
         }
     }

@@ -53,11 +53,11 @@ struct TreeIntelligenceView: View {
         HStack {
             Image(systemName: "brain.head.profile.fill")
                 .foregroundStyle(.orange)
-            Text("Care Intelligence")
+            Text(NSLocalizedString("Care Intelligence", comment: ""))
                 .font(.headline)
             Spacer()
             if let age = plantAge {
-                Text(age == 0 ? "Newly planted" : "\(age)y old")
+                Text(age == 0 ? NSLocalizedString("Newly planted", comment: "") : String(format: NSLocalizedString("%lld y old", comment: ""), age))
                     .font(.caption)
                     .fontWeight(.medium)
                     .padding(.horizontal, 10)
@@ -76,7 +76,7 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: seasonIcon)
                     .foregroundStyle(seasonColor)
-                Text("\(currentSeasonName) Advice")
+                Text(String(format: NSLocalizedString("%@ Advice", comment: ""), currentSeasonName))
                     .font(.subheadline)
                     .fontWeight(.semibold)
             }
@@ -93,7 +93,6 @@ struct TreeIntelligenceView: View {
     }
 
     // MARK: - Action Alerts
-    // Shows urgent actions: "Prune this month!", "Time to fertilize!", "Harvest!"
 
     @ViewBuilder
     private var actionAlerts: some View {
@@ -120,7 +119,7 @@ struct TreeIntelligenceView: View {
 
                         Spacer()
 
-                        Text("NOW")
+                        Text(NSLocalizedString("NOW", comment: ""))
                             .font(.caption2)
                             .fontWeight(.bold)
                             .padding(.horizontal, 8)
@@ -144,7 +143,7 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "drop.fill")
                     .foregroundStyle(.blue)
-                Text("Watering")
+                Text(NSLocalizedString("Watering", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
@@ -152,29 +151,27 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            // Age-based recommendation
             let intel = species.intelligence
             let recommended = intel.wateringDays(forAge: plantAge)
 
             HStack {
-                Text("Recommended")
+                Text(NSLocalizedString("Recommended", comment: ""))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text("Every \(recommended) days")
+                Text(String(format: NSLocalizedString("Every %lld days", comment: ""), recommended))
                     .font(.caption)
                     .fontWeight(.medium)
                     .foregroundStyle(.blue)
             }
 
-            // Age breakdown
             VStack(alignment: .leading, spacing: 4) {
-                ageRow("Young (0-\(intel.yearsToMature)y)", days: intel.youngWateringDays, isActive: (plantAge ?? 0) < intel.yearsToMature)
-                ageRow("Mature (\(intel.yearsToMature)-7y)", days: intel.matureWateringDays, isActive: {
+                ageRow(String(format: NSLocalizedString("Young (0-%lld y)", comment: ""), intel.yearsToMature), days: intel.youngWateringDays, isActive: (plantAge ?? 0) < intel.yearsToMature)
+                ageRow(String(format: NSLocalizedString("Mature (%lld-7 y)", comment: ""), intel.yearsToMature), days: intel.matureWateringDays, isActive: {
                     guard let age = plantAge else { return false }
                     return age >= intel.yearsToMature && age < 7
                 }())
-                ageRow("Established (7y+)", days: intel.establishedWateringDays, isActive: (plantAge ?? 0) >= 7)
+                ageRow(NSLocalizedString("Established (7y+)", comment: ""), days: intel.establishedWateringDays, isActive: (plantAge ?? 0) >= 7)
             }
         }
         .padding()
@@ -197,7 +194,7 @@ struct TreeIntelligenceView: View {
                 .font(.caption)
                 .foregroundStyle(isActive ? .primary : .secondary)
             Spacer()
-            Text("every \(days) days")
+            Text(String(format: NSLocalizedString("every %lld days", comment: ""), days))
                 .font(.caption)
                 .foregroundStyle(isActive ? .blue : .secondary)
                 .fontWeight(isActive ? .medium : .regular)
@@ -211,12 +208,12 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "scissors")
                     .foregroundStyle(.green)
-                Text("Pruning")
+                Text(NSLocalizedString("Pruning", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
                 if species.intelligence.shouldPruneThisMonth() {
-                    Text("This month!")
+                    Text(NSLocalizedString("This month!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
                         .padding(.horizontal, 8)
@@ -230,7 +227,7 @@ struct TreeIntelligenceView: View {
             Divider()
 
             HStack {
-                Text("Best months")
+                Text(NSLocalizedString("Best months", comment: ""))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -256,12 +253,12 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "leaf.arrow.circlepath")
                     .foregroundStyle(.brown)
-                Text("Fertilizing")
+                Text(NSLocalizedString("Fertilizing", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
                 if species.intelligence.shouldFertilizeThisMonth() {
-                    Text("This month!")
+                    Text(NSLocalizedString("This month!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
                         .padding(.horizontal, 8)
@@ -275,12 +272,12 @@ struct TreeIntelligenceView: View {
             Divider()
 
             if species.intelligence.fertilizerMonths.isEmpty {
-                Text("This species rarely needs fertilizer!")
+                Text(NSLocalizedString("This species rarely needs fertilizer!", comment: ""))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {
                 HStack {
-                    Text("Best months")
+                    Text(NSLocalizedString("Best months", comment: ""))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -307,12 +304,12 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "basket.fill")
                     .foregroundStyle(.orange)
-                Text("Harvest")
+                Text(NSLocalizedString("Harvest", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
                 if species.intelligence.isHarvestTime() {
-                    Text("Harvest time!")
+                    Text(NSLocalizedString("Harvest time!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
                         .padding(.horizontal, 8)
@@ -327,7 +324,7 @@ struct TreeIntelligenceView: View {
 
             if let months = species.intelligence.harvestMonths {
                 HStack {
-                    Text("Harvest months")
+                    Text(NSLocalizedString("Harvest months", comment: ""))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -340,25 +337,26 @@ struct TreeIntelligenceView: View {
 
             if let years = species.intelligence.yearsToBearing {
                 HStack {
-                    Text("Years to first harvest")
+                    Text(NSLocalizedString("Years to first harvest", comment: ""))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
 
                     if let age = plantAge {
                         if age >= years {
-                            Text("Should be bearing! 🎉")
+                            Text(NSLocalizedString("Should be bearing!", comment: ""))
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundStyle(.green)
                         } else {
-                            Text("\(years - age) more year\(years - age == 1 ? "" : "s")")
+                            let remaining = years - age
+                            Text(String(format: NSLocalizedString("%lld more year(s)", comment: ""), remaining))
                                 .font(.caption)
                                 .fontWeight(.medium)
                                 .foregroundStyle(.orange)
                         }
                     } else {
-                        Text("~\(years) years")
+                        Text(String(format: NSLocalizedString("~%lld years", comment: ""), years))
                             .font(.caption)
                             .fontWeight(.medium)
                     }
@@ -377,7 +375,7 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "globe.europe.africa.fill")
                     .foregroundStyle(.teal)
-                Text("Environment")
+                Text(NSLocalizedString("Environment", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
@@ -385,10 +383,10 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            envRow(icon: "sun.max.fill", label: "Sun", value: species.intelligence.sunExposure)
-            envRow(icon: "thermometer.snowflake", label: "Frost hardiness", value: "\(species.intelligence.frostHardiness)°C")
-            envRow(icon: "drop.halffull", label: "Ideal soil pH", value: species.intelligence.idealSoilPH)
-            envRow(icon: "arrow.up.to.line", label: "Mature height", value: species.intelligence.matureHeight)
+            envRow(icon: "sun.max.fill", label: NSLocalizedString("Sun", comment: ""), value: species.intelligence.sunExposure)
+            envRow(icon: "thermometer.snowflake", label: NSLocalizedString("Frost hardiness", comment: ""), value: "\(species.intelligence.frostHardiness)°C")
+            envRow(icon: "drop.halffull", label: NSLocalizedString("Ideal soil pH", comment: ""), value: species.intelligence.idealSoilPH)
+            envRow(icon: "arrow.up.to.line", label: NSLocalizedString("Mature height", comment: ""), value: species.intelligence.matureHeight)
         }
         .padding()
         .background(.ultraThinMaterial)
@@ -418,7 +416,7 @@ struct TreeIntelligenceView: View {
             HStack {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.red)
-                Text("Watch Out For")
+                Text(NSLocalizedString("Watch Out For", comment: ""))
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
@@ -428,7 +426,7 @@ struct TreeIntelligenceView: View {
 
             if !species.intelligence.commonPests.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Pests")
+                    Text(NSLocalizedString("Pests", comment: ""))
                         .font(.caption)
                         .fontWeight(.medium)
                     Text(species.intelligence.commonPests.joined(separator: " · "))
@@ -439,7 +437,7 @@ struct TreeIntelligenceView: View {
 
             if !species.intelligence.commonDiseases.isEmpty {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Diseases")
+                    Text(NSLocalizedString("Diseases", comment: ""))
                         .font(.caption)
                         .fontWeight(.medium)
                     Text(species.intelligence.commonDiseases.joined(separator: " · "))
@@ -469,22 +467,22 @@ struct TreeIntelligenceView: View {
         if intel.shouldPruneThisMonth() {
             alerts.append(AlertItem(
                 icon: "scissors", color: .green,
-                title: "Time to prune!",
-                subtitle: "This month is ideal for pruning \(species.name)"
+                title: NSLocalizedString("Time to prune!", comment: ""),
+                subtitle: String(format: NSLocalizedString("This month is ideal for pruning %@", comment: ""), species.name)
             ))
         }
         if intel.shouldFertilizeThisMonth() {
             alerts.append(AlertItem(
                 icon: "leaf.arrow.circlepath", color: .brown,
-                title: "Time to fertilize!",
-                subtitle: intel.fertilizerType.prefix(60) + "..."
+                title: NSLocalizedString("Time to fertilize!", comment: ""),
+                subtitle: String(describing: intel.fertilizerType.prefix(60)) + "..."
             ))
         }
         if intel.isHarvestTime() {
             alerts.append(AlertItem(
                 icon: "basket.fill", color: .orange,
-                title: "Harvest time! 🎉",
-                subtitle: "\(species.name) is ready to harvest"
+                title: NSLocalizedString("Harvest time!", comment: ""),
+                subtitle: String(format: NSLocalizedString("%@ is ready to harvest", comment: ""), species.name)
             ))
         }
         return alerts
@@ -493,10 +491,10 @@ struct TreeIntelligenceView: View {
     private var currentSeasonName: String {
         let month = Calendar.current.component(.month, from: Date())
         switch month {
-        case 3...5:  return "Spring"
-        case 6...8:  return "Summer"
-        case 9...11: return "Autumn"
-        default:     return "Winter"
+        case 3...5:  return NSLocalizedString("Spring", comment: "")
+        case 6...8:  return NSLocalizedString("Summer", comment: "")
+        case 9...11: return NSLocalizedString("Autumn", comment: "")
+        default:     return NSLocalizedString("Winter", comment: "")
         }
     }
 

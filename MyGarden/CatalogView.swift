@@ -149,7 +149,7 @@ struct CatalogView: View {
                         .clipShape(Capsule())
 
                     if alreadyInGarden(species) {
-                        Text("In garden ✓")
+                        Text(NSLocalizedString("In garden ✓", comment: ""))
                             .font(.caption2)
                             .foregroundStyle(.green)
                     }
@@ -337,7 +337,7 @@ struct SpeciesDetailView: View {
                     .clipShape(Capsule())
 
                 if let years = species.intelligence.yearsToBearing {
-                    Text("First fruit in ~\(years) years")
+                    Text(String(format: NSLocalizedString("First fruit in ~%lld years", comment: ""), years))
                         .font(.caption)
                         .fontWeight(.medium)
                         .padding(.horizontal, 12)
@@ -358,7 +358,7 @@ struct SpeciesDetailView: View {
             HStack {
                 Image(systemName: "list.bullet.clipboard.fill")
                     .foregroundStyle(.blue)
-                Text("Key Facts")
+                Text(NSLocalizedString("Key Facts", comment: ""))
                     .font(.headline)
                 Spacer()
             }
@@ -385,7 +385,7 @@ struct SpeciesDetailView: View {
                         .font(.caption)
                         .foregroundStyle(.orange)
                         .frame(width: 20)
-                    Text("Harvest: \(CareIntelligence.monthNames(from: months))")
+                    Text(String(format: NSLocalizedString("Harvest: %@", comment: ""), CareIntelligence.monthNames(from: months)))
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -428,7 +428,7 @@ struct SpeciesDetailView: View {
             HStack {
                 Image(systemName: "tag.fill")
                     .foregroundStyle(.purple)
-                Text("Varieties")
+                Text(NSLocalizedString("Varieties", comment: ""))
                     .font(.headline)
                 Spacer()
                 Text("\(species.varieties.count)")
@@ -462,7 +462,7 @@ struct SpeciesDetailView: View {
         Button {
             onAddToGarden()
         } label: {
-            Label("Add to My Garden", systemImage: "plus.circle.fill")
+            Label(NSLocalizedString("Add to My Garden", comment: ""), systemImage: "plus.circle.fill")
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()
@@ -477,7 +477,7 @@ struct SpeciesDetailView: View {
         HStack {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(.green)
-            Text("Already in your garden")
+            Text(NSLocalizedString("Already in your garden", comment: ""))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -653,7 +653,7 @@ struct AddPlantFromCatalog: View {
                     HStack {
                         Image(systemName: "lightbulb.fill")
                             .foregroundStyle(.yellow)
-                        Text("Recommended: every \(species.defaultWateringDays) days")
+                        Text(String(format: NSLocalizedString("Recommended: every %lld days", comment: ""), species.defaultWateringDays))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

@@ -215,7 +215,7 @@ struct AddPlantView: View {
                 HStack {
                     Image(systemName: "info.circle")
                         .foregroundStyle(.orange)
-                    Text(age == 0 ? "Newly planted this year" : "About \(age) year\(age == 1 ? "" : "s") old")
+                    Text(age == 0 ? NSLocalizedString("Newly planted this year", comment: "") : String(format: NSLocalizedString("About %lld year(s) old", comment: ""), age))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -223,7 +223,7 @@ struct AddPlantView: View {
         } header: {
             Text("When was it planted?")
         } footer: {
-            Text("Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.")
+            Text("Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.", comment: "")
         }
     }
 
@@ -300,7 +300,7 @@ struct AddPlantView: View {
                 HStack {
                     Image(systemName: "lightbulb.fill")
                         .foregroundStyle(.yellow)
-                    Text("Recommended: every \(species.defaultWateringDays) days")
+                    Text(String(format: NSLocalizedString("Recommended: every %lld days", comment: ""), species.defaultWateringDays))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

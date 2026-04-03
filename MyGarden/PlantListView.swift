@@ -117,9 +117,9 @@ struct PlantListView: View {
             .overlay {
                 if store.plants.isEmpty {
                     ContentUnavailableView(
-                        "No Trees Yet",
+                        NSLocalizedString("No Trees Yet", comment: ""),
                         systemImage: "tree.fill",
-                        description: Text("Tap + to add your first tree or bush!")
+                        description: Text(NSLocalizedString("Tap + to add your first tree or bush!", comment: ""))
                     )
                 }
             }
@@ -152,7 +152,7 @@ struct PlantListView: View {
                     LocationManager.shared.useGPSForWeather = false
                 }
             } message: {
-                Text("MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings.")
+                Text("MyGarden can use your location to show accurate weather and gardening tips for your area. You can always change this in Settings.", comment: "")
             }
         }
     }
@@ -275,14 +275,14 @@ struct PlantListView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 if plantsNeedingWaterCount > 0 {
-                    Text("\(plantsNeedingWaterCount) plant\(plantsNeedingWaterCount == 1 ? " needs" : "s need") watering")
+                    Text(String(format: NSLocalizedString("%lld plants need watering", comment: ""), plantsNeedingWaterCount))
                         .font(.headline)
                 } else {
-                    Text("All plants are happy!")
+                    Text(NSLocalizedString("All plants are happy!", comment: ""))
                         .font(.headline)
                 }
 
-                Text("\(store.plants.count) plants in your garden")
+                Text(String(format: NSLocalizedString("%lld plants in your garden", comment: ""), store.plants.count))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -428,7 +428,7 @@ struct PlantListView: View {
                 .frame(width: 24)
 
             VStack(alignment: .leading, spacing: 1) {
-                Text("Last: \(entry.activity.type.localizedName) — \(entry.plant.name)")
+                Text(String(format: NSLocalizedString("Last: %@ — %@", comment: ""), entry.activity.type.localizedName, entry.plant.name))
                     .font(.caption)
                     .fontWeight(.medium)
                 Text(entry.activity.date, style: .relative)
@@ -453,15 +453,15 @@ struct PlantListView: View {
 
     private func overdueText(for plant: Plant) -> String {
         guard let nextDate = plant.nextWateringDate else {
-            return "Never watered"
+            return NSLocalizedString("Never watered", comment: "")
         }
         let days = Calendar.current.dateComponents([.day], from: nextDate, to: Date()).day ?? 0
         if days <= 0 {
-            return "Due today"
+            return NSLocalizedString("Due today", comment: "")
         } else if days == 1 {
-            return "Overdue by 1 day"
+            return NSLocalizedString("Overdue by 1 day", comment: "")
         } else {
-            return "Overdue by \(days) days"
+            return String(format: NSLocalizedString("Overdue by %lld days", comment: ""), days)
         }
     }
 

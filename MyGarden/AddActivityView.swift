@@ -32,7 +32,7 @@ struct AddActivityView: View {
                         HStack(spacing: 10) {
                             Text(member.emoji)
                                 .font(.title3)
-                            Text("Logging as **\(member.name)**")
+                            Text(String(format: NSLocalizedString("Logging as %@", comment: ""), member.name))
                                 .font(.subheadline)
                             Spacer()
                         }
