@@ -13,6 +13,7 @@
 		AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA12B0A00040012345A /* PlantCatalog.swift */; };
 		AA1B1FA42B0A00050012345A /* PlantRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA32B0A00050012345A /* PlantRowView.swift */; };
 		AA1B1FA62B0A00060012345A /* PlantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA52B0A00060012345A /* PlantListView.swift */; };
+		AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA72B0A00070012345A /* PlantDetailView.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		AA1B1FA12B0A00040012345A /* PlantCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCatalog.swift; sourceTree = "<group>"; };
 		AA1B1FA32B0A00050012345A /* PlantRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRowView.swift; sourceTree = "<group>"; };
 		AA1B1FA52B0A00060012345A /* PlantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListView.swift; sourceTree = "<group>"; };
+		AA1B1FA72B0A00070012345A /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				AA1B1FA12B0A00040012345A /* PlantCatalog.swift */,
 				AA1B1FA32B0A00050012345A /* PlantRowView.swift */,
 				AA1B1FA52B0A00060012345A /* PlantListView.swift */,
+				AA1B1FA72B0A00070012345A /* PlantDetailView.swift */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -155,6 +158,7 @@
 				AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */,
 				AA1B1FA42B0A00050012345A /* PlantRowView.swift in Sources */,
 				AA1B1FA62B0A00060012345A /* PlantListView.swift in Sources */,
+				AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

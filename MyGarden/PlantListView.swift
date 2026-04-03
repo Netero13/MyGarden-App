@@ -33,7 +33,17 @@ struct PlantListView: View {
                 ForEach(groupedPlants.keys.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
                     Section {
                         ForEach(groupedPlants[type] ?? []) { plant in
-                            PlantRowView(plant: plant)
+                            // NavigationLink = "when tapped, go to this screen"
+                            // We find the plant's index in the main array so we can
+                            // pass a @Binding — meaning the detail view can EDIT the plant
+                            // and changes flow back to this list automatically.
+                            if let index = plants.firstIndex(where: { $0.id == plant.id }) {
+                                NavigationLink {
+                                    PlantDetailView(plant: $plants[index])
+                                } label: {
+                                    PlantRowView(plant: plant)
+                                }
+                            }
                         }
                     } header: {
                         // Section header: icon + type name + count
