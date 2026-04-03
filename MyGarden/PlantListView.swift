@@ -1,56 +1,54 @@
 import SwiftUI
 
 // MARK: - Plant List View
-// This is the MAIN screen of the app — a scrollable list of all your plants.
-// Plants are grouped by type (herbs, trees, bushes, etc.) with section headers.
+// The main screen — a scrollable list of all your plants.
+// Now powered by PlantStore — plants are saved to disk automatically!
 //
-// Key SwiftUI concepts used here:
-// - List: a scrollable, tappable list (like a table in other frameworks)
-// - Section: groups items under a header
-// - ForEach: loops through items to create views for each one
-// - @State: a variable that SwiftUI watches — when it changes, the screen updates
+// Key change: instead of @State (local data that disappears),
+// we now use @Environment to access the shared PlantStore.
+// This means: add a plant here → it's saved. Delete → saved. Water → saved.
 
 struct PlantListView: View {
 
-    // @State means SwiftUI "watches" this variable.
-    // When plants change (add/remove), the list automatically refreshes.
-    // For now we use sample data — later we'll load real saved plants.
-    @State private var plants: [Plant] = Plant.samples
+    // Access the shared PlantStore from the environment.
+    // This was set up in MyGardenApp.swift with .environment(store)
+    @Environment(PlantStore.self) private var store
 
     // Search text — filters the list as you type
     @State private var searchText: String = ""
 
     // Controls whether the "Add Plant" form is shown
-    // .sheet = a screen that slides up from the bottom (like a card)
     @State private var showingAddPlant: Bool = false
 
     var body: some View {
+        // @Bindable lets us create bindings ($store.plants) from @Observable objects
+        @Bindable var store = store
+
         NavigationStack {
             List {
                 // -- Watering Summary --
-                // A quick glance at how many plants need attention
                 wateringSummarySection
 
                 // -- Plant Sections --
-                // Loop through each plant type that has plants,
-                // and create a section with a header for each type
                 ForEach(groupedPlants.keys.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
                     Section {
                         ForEach(groupedPlants[type] ?? []) { plant in
-                            // NavigationLink = "when tapped, go to this screen"
-                            // We find the plant's index in the main array so we can
-                            // pass a @Binding — meaning the detail view can EDIT the plant
-                            // and changes flow back to this list automatically.
-                            if let index = plants.firstIndex(where: { $0.id == plant.id }) {
+                            if let index = store.plants.firstIndex(where: { $0.id == plant.id }) {
                                 NavigationLink {
-                                    PlantDetailView(plant: $plants[index])
+                                    PlantDetailView(plant: $store.plants[index])
                                 } label: {
                                     PlantRowView(plant: plant)
                                 }
                             }
                         }
+                        // SWIPE TO DELETE
+                        // .onDelete tells SwiftUI: "when the user swipes left on a row,
+                        // show a red Delete button". The closure receives the positions
+                        // to delete. We need to convert filtered positions to real positions.
+                        .onDelete { offsets in
+                            deleteFilteredPlants(type: type, at: offsets)
+                        }
                     } header: {
-                        // Section header: icon + type name + count
                         Label(
                             "\(type.rawValue) (\(groupedPlants[type]?.count ?? 0))",
                             systemImage: type.icon
@@ -62,8 +60,8 @@ struct PlantListView: View {
             }
             .navigationTitle("My Garden 🌱")
             .searchable(text: $searchText, prompt: "Search plants...")
-            // + button in the top right corner to add a new plant
             .toolbar {
+                // + button to add a new plant
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddPlant = true
@@ -72,18 +70,13 @@ struct PlantListView: View {
                     }
                 }
             }
-            // .sheet = a screen that slides up from the bottom
-            // It shows the AddPlantView form
             .sheet(isPresented: $showingAddPlant) {
                 AddPlantView { newPlant in
-                    // When the user taps "Add" in the form, this code runs.
-                    // It adds the new plant to our list.
-                    plants.append(newPlant)
+                    store.add(newPlant)
                 }
             }
             .overlay {
-                // Show a friendly message if the list is empty
-                if plants.isEmpty {
+                if store.plants.isEmpty {
                     ContentUnavailableView(
                         "No Plants Yet",
                         systemImage: "leaf.fill",
@@ -95,8 +88,6 @@ struct PlantListView: View {
     }
 
     // MARK: - Watering Summary Section
-    // Shows a card at the top: "X plants need watering"
-    // This gives users instant awareness without scrolling through everything.
 
     private var wateringSummarySection: some View {
         Section {
@@ -109,7 +100,7 @@ struct PlantListView: View {
                     Text("\(plantsNeedingWater) plants need watering")
                         .font(.headline)
 
-                    Text("\(plants.count) plants total in your garden")
+                    Text("\(store.plants.count) plants total in your garden")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -120,39 +111,41 @@ struct PlantListView: View {
         }
     }
 
-    // MARK: - Computed Properties
-    // These calculate values on-the-fly from the current data.
-    // They update automatically whenever 'plants' or 'searchText' changes.
+    // MARK: - Delete Helper
+    // When the list is filtered/grouped, the swipe position doesn't match
+    // the real position in store.plants. So we find the actual plant IDs
+    // from the filtered list and delete by ID.
 
-    // Filters plants based on search text, then groups them by type.
-    // Dictionary(grouping:by:) is a Swift function that sorts items into buckets.
-    // Example: all herbs go into one bucket, all trees into another.
-    private var groupedPlants: [PlantType: [Plant]] {
-        let filtered = filteredPlants
-        return Dictionary(grouping: filtered, by: { $0.type })
+    private func deleteFilteredPlants(type: PlantType, at offsets: IndexSet) {
+        let plantsInSection = groupedPlants[type] ?? []
+        for offset in offsets {
+            let plantToDelete = plantsInSection[offset]
+            store.delete(id: plantToDelete.id)
+        }
     }
 
-    // Filters the plant list based on what the user typed in the search bar.
-    // It checks both the plant name AND variety.
+    // MARK: - Computed Properties
+
+    private var groupedPlants: [PlantType: [Plant]] {
+        Dictionary(grouping: filteredPlants, by: { $0.type })
+    }
+
     private var filteredPlants: [Plant] {
         if searchText.isEmpty {
-            return plants
+            return store.plants
         }
-        return plants.filter { plant in
+        return store.plants.filter { plant in
             plant.name.localizedCaseInsensitiveContains(searchText) ||
             (plant.variety?.localizedCaseInsensitiveContains(searchText) ?? false)
         }
     }
 
-    // Counts how many plants need watering right now
     private var plantsNeedingWater: Int {
-        plants.filter { $0.needsWatering }.count
+        store.plants.filter { $0.needsWatering }.count
     }
 }
 
-// MARK: - Preview
-// Shows the full list screen with sample data in Xcode's preview canvas.
-
 #Preview {
     PlantListView()
+        .environment(PlantStore())
 }

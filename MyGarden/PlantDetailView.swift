@@ -15,6 +15,15 @@ struct PlantDetailView: View {
     // Changes here automatically update the plant list too.
     @Binding var plant: Plant
 
+    // Access the store so we can save changes to disk
+    @Environment(PlantStore.self) private var store
+
+    // Lets us go back to the list after deleting
+    @Environment(\.dismiss) private var dismiss
+
+    // Controls the delete confirmation alert
+    @State private var showingDeleteAlert = false
+
     // Used to format dates nicely (e.g. "April 3, 2026" instead of raw date)
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -38,11 +47,24 @@ struct PlantDetailView: View {
 
                 // -- Water Now Button --
                 waterButton
+
+                // -- Delete Button --
+                deleteButton
             }
             .padding()
         }
         .navigationTitle(plant.name)
         .navigationBarTitleDisplayMode(.inline)
+        // Confirmation alert before deleting — prevents accidental deletion
+        .alert("Delete Plant", isPresented: $showingDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                store.delete(id: plant.id)
+                dismiss() // Go back to the list
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Are you sure you want to remove \(plant.name) from your garden? This can't be undone.")
+        }
     }
 
     // MARK: - Header Section
@@ -194,6 +216,8 @@ struct PlantDetailView: View {
         Button {
             // Set the last watered date to RIGHT NOW
             plant.lastWatered = Date()
+            // Save to disk so it persists after closing the app
+            store.save()
         } label: {
             Label("Water Now", systemImage: "drop.fill")
                 .font(.headline)
@@ -204,6 +228,25 @@ struct PlantDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .padding(.top, 8)
+    }
+
+    // MARK: - Delete Button
+    // A red button at the bottom to remove this plant from your garden.
+    // Shows a confirmation alert first so you don't delete by accident.
+
+    private var deleteButton: some View {
+        Button(role: .destructive) {
+            showingDeleteAlert = true
+        } label: {
+            Label("Remove from Garden", systemImage: "trash")
+                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(.red.opacity(0.1))
+                .foregroundStyle(.red)
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+        }
+        .padding(.top, 4)
     }
 
     // MARK: - Helper: Detail Row

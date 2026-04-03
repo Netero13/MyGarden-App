@@ -16,6 +16,7 @@
 		AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA72B0A00070012345A /* PlantDetailView.swift */; };
 		AA1B1FAA2B0A00080012345A /* WateringFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA92B0A00080012345A /* WateringFrequency.swift */; };
 		AA1B1FAC2B0A00090012345A /* AddPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FAB2B0A00090012345A /* AddPlantView.swift */; };
+		AA1B1FAE2B0A000A0012345A /* PlantStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FAD2B0A000A0012345A /* PlantStore.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,7 @@
 		AA1B1FA72B0A00070012345A /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
 		AA1B1FA92B0A00080012345A /* WateringFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringFrequency.swift; sourceTree = "<group>"; };
 		AA1B1FAB2B0A00090012345A /* AddPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantView.swift; sourceTree = "<group>"; };
+		AA1B1FAD2B0A000A0012345A /* PlantStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				AA1B1FA72B0A00070012345A /* PlantDetailView.swift */,
 				AA1B1FA92B0A00080012345A /* WateringFrequency.swift */,
 				AA1B1FAB2B0A00090012345A /* AddPlantView.swift */,
+				AA1B1FAD2B0A000A0012345A /* PlantStore.swift */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -167,6 +170,7 @@
 				AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */,
 				AA1B1FAA2B0A00080012345A /* WateringFrequency.swift in Sources */,
 				AA1B1FAC2B0A00090012345A /* AddPlantView.swift in Sources */,
+				AA1B1FAE2B0A000A0012345A /* PlantStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
