@@ -27,6 +27,9 @@ struct PlantDetailView: View {
     // Controls the "Log Activity" form
     @State private var showingAddActivity = false
 
+    // Controls the "Edit Plant" form
+    @State private var showingEditPlant = false
+
     // Used to format dates nicely (e.g. "April 3, 2026" instead of raw date)
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -61,6 +64,26 @@ struct PlantDetailView: View {
         }
         .navigationTitle(plant.name)
         .navigationBarTitleDisplayMode(.inline)
+        // Edit button in the top-right corner of the navigation bar
+        // This is a standard iOS pattern — most detail screens have an Edit button
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showingEditPlant = true
+                } label: {
+                    Text("Edit")
+                }
+            }
+        }
+        // Sheet for editing plant details
+        .sheet(isPresented: $showingEditPlant) {
+            EditPlantView(plant: plant) { updatedPlant in
+                // Apply the changes to our @Binding plant
+                // This automatically updates the plant list too!
+                plant = updatedPlant
+                store.update(updatedPlant)
+            }
+        }
         // Confirmation alert before deleting — prevents accidental deletion
         // Sheet for logging a new activity
         .sheet(isPresented: $showingAddActivity) {
