@@ -60,6 +60,9 @@ struct GardenMapView: View {
     // Show/hide grid lines (toggle in toolbar)
     @State private var showGrid: Bool = true
 
+    // The grid cell currently highlighted during drag (where the plant will land)
+    @State private var highlightedCell: (col: Int, row: Int)?
+
     var body: some View {
         @Bindable var store = store
 
@@ -135,7 +138,12 @@ struct GardenMapView: View {
                 // Layer 1: Garden background with grid
                 gardenCanvas
 
-                // Layer 2: Plants on top
+                // Layer 2: Cell highlight while dragging
+                if let cell = highlightedCell, draggingPlantID != nil {
+                    cellHighlight(col: cell.col, row: cell.row)
+                }
+
+                // Layer 3: Plants on top
                 ForEach(store.plants) { plant in
                     if let index = store.plants.firstIndex(where: { $0.id == plant.id }) {
                         plantMarker(plant: plant, index: index)
@@ -340,6 +348,22 @@ struct GardenMapView: View {
                         draggingPlantID = plant.id
                         if let drag = drag {
                             dragOffset = drag.translation
+
+                            // Calculate which cell the plant would land on RIGHT NOW
+                            // so we can highlight it as visual feedback
+                            let newX = pixelPos.x + drag.translation.width
+                            let newY = pixelPos.y + drag.translation.height
+                            let snapCol = Int(round(newX / cellSize))
+                            let snapRow = Int(round(newY / cellSize))
+                            let clampedCol = max(0, min(GridConfig.columns - 1, snapCol))
+                            let clampedRow = max(0, min(GridConfig.rows - 1, snapRow))
+
+                            // Find the actual landing cell (accounting for collisions)
+                            highlightedCell = nearestFreeCell(
+                                col: clampedCol,
+                                row: clampedRow,
+                                excludingPlantID: plant.id
+                            )
                         }
                     default:
                         break
@@ -380,6 +404,7 @@ struct GardenMapView: View {
                     }
                     draggingPlantID = nil
                     dragOffset = .zero
+                    highlightedCell = nil
                 }
         )
     }
@@ -399,6 +424,39 @@ struct GardenMapView: View {
         let row = (index / cols) + 1       // start at row 1
 
         return (col: CGFloat(col), row: CGFloat(row))
+    }
+
+    // MARK: - Cell Highlight
+    // Shows a glowing rectangle on the cell where the plant will land.
+    // Green = free cell, the plant will snap right here.
+    // This gives you clear visual feedback so you know exactly where
+    // the plant is going BEFORE you release your finger.
+
+    private func cellHighlight(col: Int, row: Int) -> some View {
+        let x = CGFloat(col) * cellSize
+        let y = CGFloat(row) * cellSize
+
+        return ZStack {
+            // Filled highlight
+            RoundedRectangle(cornerRadius: cellSize * 0.12)
+                .fill(.green.opacity(0.25))
+                .frame(width: cellSize - 2, height: cellSize - 2)
+
+            // Border glow
+            RoundedRectangle(cornerRadius: cellSize * 0.12)
+                .strokeBorder(.green, lineWidth: 2)
+                .frame(width: cellSize - 2, height: cellSize - 2)
+
+            // Crosshair dot in the center
+            Circle()
+                .fill(.green.opacity(0.6))
+                .frame(width: 8, height: 8)
+        }
+        // Position at the cell's top-left + offset to center
+        .position(x: x + cellSize / 2, y: y + cellSize / 2)
+        .transition(.opacity)
+        .animation(.easeInOut(duration: 0.15), value: col)
+        .animation(.easeInOut(duration: 0.15), value: row)
     }
 
     // Convert grid cell (col, row) to pixel position on canvas
