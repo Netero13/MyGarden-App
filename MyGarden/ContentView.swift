@@ -1,24 +1,14 @@
 import SwiftUI
 
+// MARK: - Content View
+// This is the "root" view — the first thing the app shows.
+// Before, it showed a welcome screen. Now it shows the plant list!
+// As we add more screens (detail view, add plant form), they'll
+// be navigated TO from here.
+
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) {
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 80))
-                    .foregroundStyle(.green)
-
-                Text("Welcome to MyGarden")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-
-                Text("Your personal garden companion")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-            .padding()
-            .navigationTitle("MyGarden")
-        }
+        PlantListView()
     }
 }
 
