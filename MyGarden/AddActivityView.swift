@@ -1,8 +1,9 @@
 import SwiftUI
+import PhotosUI
 
 // MARK: - Add Activity View
 // A form that lets you log an activity for a plant.
-// Pick what you did → optionally add a note → save.
+// Pick what you did → optionally add a photo → optionally add a note → save.
 // The date defaults to "now" but you can change it.
 
 struct AddActivityView: View {
@@ -17,12 +18,16 @@ struct AddActivityView: View {
     @State private var date: Date = Date()
     @State private var note: String = ""
 
+    // Photo state
+    @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var selectedPhoto: UIImage?
+    @State private var savedPhotoID: String?
+
     var body: some View {
         NavigationStack {
             Form {
 
                 // -- Activity Type Picker --
-                // Shows a grid of activity types as tappable buttons
                 Section {
                     LazyVGrid(columns: [
                         GridItem(.adaptive(minimum: 90))
@@ -41,11 +46,55 @@ struct AddActivityView: View {
                     DatePicker(
                         "Date",
                         selection: $date,
-                        in: ...Date(),  // can't pick future dates
+                        in: ...Date(),
                         displayedComponents: .date
                     )
                 } header: {
                     Text("When?")
+                }
+
+                // -- Photo --
+                Section {
+                    if let selectedPhoto = selectedPhoto {
+                        // Show the picked photo with a remove button
+                        HStack {
+                            Image(uiImage: selectedPhoto)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                            Spacer()
+
+                            Button(role: .destructive) {
+                                // Remove the photo
+                                if let id = savedPhotoID {
+                                    PhotoManager.shared.delete(id: id)
+                                }
+                                self.selectedPhoto = nil
+                                self.savedPhotoID = nil
+                                self.selectedPhotoItem = nil
+                            } label: {
+                                Label("Remove", systemImage: "xmark.circle.fill")
+                                    .font(.caption)
+                            }
+                        }
+                    }
+
+                    // Photo picker button
+                    PhotosPicker(
+                        selection: $selectedPhotoItem,
+                        matching: .images
+                    ) {
+                        Label(
+                            selectedPhoto == nil ? "Add Photo" : "Change Photo",
+                            systemImage: "camera.fill"
+                        )
+                    }
+                } header: {
+                    Text("Photo (optional)")
+                } footer: {
+                    Text("Take a photo of what you did — great for tracking progress!")
                 }
 
                 // -- Notes --
@@ -62,14 +111,21 @@ struct AddActivityView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("Cancel") {
+                        // Clean up photo if user cancels
+                        if let id = savedPhotoID {
+                            PhotoManager.shared.delete(id: id)
+                        }
+                        dismiss()
+                    }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         let activity = CareActivity(
                             type: selectedType,
                             date: date,
-                            note: note.isEmpty ? nil : note
+                            note: note.isEmpty ? nil : note,
+                            photoID: savedPhotoID
                         )
                         onAdd(activity)
                         dismiss()
@@ -77,12 +133,25 @@ struct AddActivityView: View {
                     .fontWeight(.bold)
                 }
             }
+            // When user picks a photo from the library
+            .onChange(of: selectedPhotoItem) {
+                Task {
+                    if let data = try? await selectedPhotoItem?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        // Delete old photo if replacing
+                        if let oldID = savedPhotoID {
+                            PhotoManager.shared.delete(id: oldID)
+                        }
+                        // Save the new photo
+                        selectedPhoto = uiImage
+                        savedPhotoID = PhotoManager.shared.save(uiImage)
+                    }
+                }
+            }
         }
     }
 
     // MARK: - Activity Button
-    // A tappable card for each activity type.
-    // Selected one gets a highlighted border.
 
     private func activityButton(_ type: CareType) -> some View {
         let isSelected = selectedType == type

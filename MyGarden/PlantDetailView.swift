@@ -89,14 +89,20 @@ struct PlantDetailView: View {
 
     private var headerSection: some View {
         VStack(spacing: 12) {
-            // Big colored circle with icon
-            Image(systemName: plant.type.icon)
-                .font(.system(size: 50))
-                .foregroundStyle(.white)
-                .frame(width: 100, height: 100)
-                .background(plant.type.color.gradient)
-                .clipShape(Circle())
-                .shadow(color: plant.type.color.opacity(0.4), radius: 10, y: 5)
+            // Plant photo — tappable to pick/change a photo
+            // If no photo exists, shows the type icon as before
+            PlantPhotoView(
+                photoID: plant.photoID,
+                size: 120,
+                editable: true
+            ) { newPhotoID in
+                // Delete the old photo file if there was one
+                if let oldID = plant.photoID {
+                    PhotoManager.shared.delete(id: oldID)
+                }
+                plant.photoID = newPhotoID
+                store.save()
+            }
 
             // Plant name
             Text(plant.name)

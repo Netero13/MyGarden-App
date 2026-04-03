@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 // MARK: - Add Plant View
 // This is the form where users add a new plant to their garden.
@@ -37,6 +38,11 @@ struct AddPlantView: View {
     @State private var useCustomDays: Bool = false
     @State private var customDays: Int = 7
 
+    // Photo
+    @State private var selectedPhotoItem: PhotosPickerItem?
+    @State private var selectedPhoto: UIImage?
+    @State private var savedPhotoID: String?
+
     var body: some View {
         NavigationStack {
             Form {
@@ -52,7 +58,12 @@ struct AddPlantView: View {
                     varietySection
                 }
 
-                // -- Step 4: Watering Frequency --
+                // -- Step 4: Photo --
+                if selectedSpecies != nil {
+                    photoSection
+                }
+
+                // -- Step 5: Watering Frequency --
                 if selectedSpecies != nil {
                     wateringSection
                 }
@@ -63,6 +74,10 @@ struct AddPlantView: View {
                 // Cancel button (top left)
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
+                        // Clean up photo if user cancels
+                        if let id = savedPhotoID {
+                            PhotoManager.shared.delete(id: id)
+                        }
                         dismiss()
                     }
                 }
@@ -176,6 +191,63 @@ struct AddPlantView: View {
         }
     }
 
+    // MARK: - Photo Section
+    // Optional photo for the plant's "profile picture"
+
+    private var photoSection: some View {
+        Section {
+            if let selectedPhoto = selectedPhoto {
+                HStack {
+                    Image(uiImage: selectedPhoto)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                    Spacer()
+
+                    Button(role: .destructive) {
+                        if let id = savedPhotoID {
+                            PhotoManager.shared.delete(id: id)
+                        }
+                        self.selectedPhoto = nil
+                        self.savedPhotoID = nil
+                        self.selectedPhotoItem = nil
+                    } label: {
+                        Label("Remove", systemImage: "xmark.circle.fill")
+                            .font(.caption)
+                    }
+                }
+            }
+
+            PhotosPicker(
+                selection: $selectedPhotoItem,
+                matching: .images
+            ) {
+                Label(
+                    selectedPhoto == nil ? "Add Photo" : "Change Photo",
+                    systemImage: "camera.fill"
+                )
+            }
+        } header: {
+            Text("Photo (optional)")
+        } footer: {
+            Text("Add a photo of your plant. You can always change it later.")
+        }
+        .onChange(of: selectedPhotoItem) {
+            Task {
+                if let data = try? await selectedPhotoItem?.loadTransferable(type: Data.self),
+                   let uiImage = UIImage(data: data) {
+                    if let oldID = savedPhotoID {
+                        PhotoManager.shared.delete(id: oldID)
+                    }
+                    selectedPhoto = uiImage
+                    savedPhotoID = PhotoManager.shared.save(uiImage)
+                }
+            }
+        }
+    }
+
     // MARK: - Watering Section
     // Shows the frequency picker with friendly labels.
     // The catalog's default is pre-selected, but user can adjust.
@@ -235,6 +307,7 @@ struct AddPlantView: View {
             name: species.name,
             type: species.type,
             variety: variety,
+            photoID: savedPhotoID,
             wateringFrequencyDays: wateringDays,
             lastWatered: nil,       // hasn't been watered yet
             dateAdded: Date()       // added right now

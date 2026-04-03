@@ -61,7 +61,7 @@ struct ActivityTimelineView: View {
                 .clipShape(Circle())
 
             // Right: activity details
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 6) {
                 HStack {
                     Text(activity.type.rawValue)
                         .font(.subheadline)
@@ -80,6 +80,11 @@ struct ActivityTimelineView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(3)
+                }
+
+                // Optional photo thumbnail
+                if let photoID = activity.photoID {
+                    ActivityPhotoThumbnail(photoID: photoID)
                 }
             }
         }
@@ -100,6 +105,29 @@ struct ActivityTimelineView: View {
             let formatter = DateFormatter()
             formatter.dateFormat = "MMM d"
             return formatter.string(from: date)
+        }
+    }
+}
+
+// MARK: - Activity Photo Thumbnail
+// Loads and displays a small photo from disk for a timeline entry.
+
+struct ActivityPhotoThumbnail: View {
+    let photoID: String
+    @State private var image: UIImage?
+
+    var body: some View {
+        Group {
+            if let image = image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 120, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+        }
+        .onAppear {
+            image = PhotoManager.shared.load(id: photoID)
         }
     }
 }

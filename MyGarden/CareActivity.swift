@@ -12,6 +12,7 @@ struct CareActivity: Identifiable, Codable {
     var type: CareType       // what you did (watered, pruned, etc.)
     var date: Date           // when you did it
     var note: String?        // optional details
+    var photoID: String?     // optional photo of the activity (stored as a file)
 }
 
 // MARK: - Care Type

@@ -10,18 +10,28 @@ struct PlantRowView: View {
     // The plant to display. 'let' means it can't be changed — this view only SHOWS data.
     let plant: Plant
 
+    // Cache the loaded photo so we don't reload it every time the row redraws
+    @State private var photo: UIImage?
+
     var body: some View {
         HStack(spacing: 12) {
 
-            // -- Left: Type Icon --
-            // A colored circle with the plant type's icon inside.
-            // This makes it easy to visually scan what type each plant is.
-            Image(systemName: plant.type.icon)
-                .font(.title2)
-                .foregroundStyle(.white)
-                .frame(width: 44, height: 44)
-                .background(plant.type.color.gradient)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+            // -- Left: Photo or Type Icon --
+            // If the plant has a photo, show it. Otherwise show the colored type icon.
+            if let photo = photo {
+                Image(uiImage: photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 44, height: 44)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            } else {
+                Image(systemName: plant.type.icon)
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 44)
+                    .background(plant.type.color.gradient)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
 
             // -- Middle: Name & Variety --
             // VStack = Vertical Stack — puts things on top of each other.
@@ -57,6 +67,12 @@ struct PlantRowView: View {
             }
         }
         .padding(.vertical, 4)
+        .onAppear {
+            // Load photo from disk when the row appears on screen
+            if let photoID = plant.photoID {
+                photo = PhotoManager.shared.load(id: photoID)
+            }
+        }
     }
 }
 

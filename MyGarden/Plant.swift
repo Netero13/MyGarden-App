@@ -14,6 +14,7 @@ struct Plant: Identifiable, Codable {
     var name: String              // e.g. "Basil", "Oak", "Cherry"
     var type: PlantType           // herb, vegetable, flower, succulent, forestTree, fruitTree
     var variety: String?          // optional extra detail, e.g. "Red Oak", "Antonivka Apple"
+    var photoID: String?          // ID of the plant's profile photo (stored as a file)
 
     // Watering
     var wateringFrequencyDays: Int // how often to water (in days)
