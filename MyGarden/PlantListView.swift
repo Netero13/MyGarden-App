@@ -69,6 +69,35 @@ struct PlantListView: View {
             .navigationTitle("My Garden 🌱")
             .searchable(text: $searchText, prompt: "Search plants...")
             .toolbar {
+                // Left: active member switcher (quick switch between family members)
+                ToolbarItem(placement: .topBarLeading) {
+                    if FamilyManager.shared.members.count > 1 {
+                        Menu {
+                            ForEach(FamilyManager.shared.members) { member in
+                                Button {
+                                    FamilyManager.shared.setActive(member)
+                                } label: {
+                                    HStack {
+                                        Text("\(member.emoji) \(member.name)")
+                                        if member.id == FamilyManager.shared.activeMemberID {
+                                            Image(systemName: "checkmark")
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            if let member = FamilyManager.shared.activeMember {
+                                Text(member.emoji)
+                                    .font(.title2)
+                            }
+                        }
+                    } else if let member = FamilyManager.shared.activeMember {
+                        Text(member.emoji)
+                            .font(.title2)
+                    }
+                }
+
+                // Right: add plant
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         showingAddPlant = true

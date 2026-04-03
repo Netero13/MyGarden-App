@@ -126,6 +126,13 @@ struct ActivityFeedView: View {
                         .font(.caption)
                         .foregroundStyle(entry.activity.type.color)
 
+                    // Show who did it
+                    if let member = FamilyManager.shared.member(for: entry.activity.memberID) {
+                        Text("· \(member.emoji) \(member.name)")
+                            .font(.caption)
+                            .foregroundStyle(member.role.color)
+                    }
+
                     if let variety = entry.plant.variety {
                         Text("· \(variety)")
                             .font(.caption)

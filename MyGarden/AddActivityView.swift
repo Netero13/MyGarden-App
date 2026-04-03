@@ -26,6 +26,26 @@ struct AddActivityView: View {
         NavigationStack {
             Form {
 
+                // -- Logged by (if family members exist) --
+                if let member = FamilyManager.shared.activeMember {
+                    Section {
+                        HStack(spacing: 10) {
+                            Text(member.emoji)
+                                .font(.title3)
+                            Text("Logging as **\(member.name)**")
+                                .font(.subheadline)
+                            Spacer()
+                            Text(member.role.rawValue)
+                                .font(.caption)
+                                .foregroundStyle(member.role.color)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 3)
+                                .background(member.role.color.opacity(0.12))
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
+
                 // -- Activity Type Picker --
                 Section {
                     LazyVGrid(columns: [
@@ -119,7 +139,8 @@ struct AddActivityView: View {
                             type: selectedType,
                             date: date,
                             note: note.isEmpty ? nil : note,
-                            photoID: savedPhotoID
+                            photoID: savedPhotoID,
+                            memberID: FamilyManager.shared.activeMember?.id
                         )
                         onAdd(activity)
                         dismiss()

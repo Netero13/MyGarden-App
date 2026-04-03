@@ -89,6 +89,27 @@ struct SettingsView: View {
                     Text("Garden Stats")
                 }
 
+                // -- Family --
+                Section {
+                    NavigationLink {
+                        FamilySettingsView()
+                    } label: {
+                        HStack {
+                            Label("Family Members", systemImage: "person.3.fill")
+                            Spacer()
+                            if let member = FamilyManager.shared.activeMember {
+                                Text("\(member.emoji) \(member.name)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Family")
+                } footer: {
+                    Text("Add family members so everyone can log activities with their name.")
+                }
+
                 // -- About --
                 Section {
                     HStack {

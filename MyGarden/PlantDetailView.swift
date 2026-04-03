@@ -261,8 +261,13 @@ struct PlantDetailView: View {
             // Water Now button
             Button {
                 plant.lastWatered = Date()
-                // Also log it as an activity in the journal
-                let activity = CareActivity(type: .watered, date: Date(), note: nil)
+                // Also log it as an activity in the journal, tagged with active family member
+                let activity = CareActivity(
+                    type: .watered,
+                    date: Date(),
+                    note: nil,
+                    memberID: FamilyManager.shared.activeMember?.id
+                )
                 plant.activities.append(activity)
                 store.save()
             } label: {

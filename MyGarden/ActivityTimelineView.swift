@@ -67,6 +67,13 @@ struct ActivityTimelineView: View {
                         .font(.subheadline)
                         .fontWeight(.medium)
 
+                    // Show who did it (if family member is known)
+                    if let member = FamilyManager.shared.member(for: activity.memberID) {
+                        Text("· \(member.emoji) \(member.name)")
+                            .font(.caption)
+                            .foregroundStyle(member.role.color)
+                    }
+
                     Spacer()
 
                     Text(formatDate(activity.date))
