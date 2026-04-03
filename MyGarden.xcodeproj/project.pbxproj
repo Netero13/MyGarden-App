@@ -412,8 +412,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyGarden/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "MyGarden needs camera access to take photos of your plants and gardening activities.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MyGarden uses your location to show accurate weather and gardening tips for your area.";
+				INFOPLIST_KEY_CFBundleDisplayName = Arborist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Arborist needs camera access to take photos of your plants and gardening activities.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Arborist uses your location to show accurate weather and gardening tips for your area.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -442,8 +443,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyGarden/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "MyGarden needs camera access to take photos of your plants and gardening activities.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MyGarden uses your location to show accurate weather and gardening tips for your area.";
+				INFOPLIST_KEY_CFBundleDisplayName = Arborist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Arborist needs camera access to take photos of your plants and gardening activities.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Arborist uses your location to show accurate weather and gardening tips for your area.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

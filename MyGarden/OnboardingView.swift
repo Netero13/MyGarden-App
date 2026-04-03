@@ -21,7 +21,7 @@ struct OnboardingView: View {
 
     // User input
     @State private var userName: String = ""
-    @State private var userRole: FamilyRole = .dad
+    @State private var userEmoji: String = "🧑‍🌾"
 
     var body: some View {
         TabView(selection: $currentPage) {
@@ -139,7 +139,7 @@ struct OnboardingView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Text(userRole.defaultEmoji)
+            Text(userEmoji)
                 .font(.system(size: 70))
 
             Text("Who are you?")
@@ -158,13 +158,25 @@ struct OnboardingView: View {
                 .textInputAutocapitalization(.words)
                 .padding(.horizontal, 40)
 
-            // Role picker
-            Picker("Role", selection: $userRole) {
-                ForEach(FamilyRole.allCases) { role in
-                    Text("\(role.defaultEmoji) \(role.localizedName)").tag(role)
+            // Emoji picker — pick your avatar
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))], spacing: 8) {
+                ForEach(emojiOptions, id: \.self) { e in
+                    Button {
+                        userEmoji = e
+                    } label: {
+                        Text(e)
+                            .font(.title2)
+                            .frame(width: 44, height: 44)
+                            .background(userEmoji == e ? .green.opacity(0.2) : .clear)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(userEmoji == e ? .green : .clear, lineWidth: 2)
+                            )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
-            .pickerStyle(.segmented)
             .padding(.horizontal, 24)
 
             Spacer()
@@ -203,13 +215,18 @@ struct OnboardingView: View {
         if !name.isEmpty {
             let member = FamilyMember(
                 name: name,
-                role: userRole,
-                emoji: userRole.defaultEmoji
+                emoji: userEmoji
             )
             FamilyManager.shared.add(member)
         }
 
         onComplete()
+    }
+
+    // Emoji options for avatar selection
+    private var emojiOptions: [String] {
+        ["🧑‍🌾", "👨‍🌾", "👩‍🌾", "👨", "👩", "👦", "👧", "👴", "👵", "🧑",
+         "👱", "🌻"]
     }
 }
 

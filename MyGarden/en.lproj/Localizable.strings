@@ -211,15 +211,6 @@
 "Avatar" = "Avatar";
 "Preview" = "Preview";
 
-// MARK: - Family Roles
-"Dad" = "Dad";
-"Mom" = "Mom";
-"Son" = "Son";
-"Daughter" = "Daughter";
-"Grandpa" = "Grandpa";
-"Grandma" = "Grandma";
-"Other" = "Other";
-
 // MARK: - Weather Location
 "Weather Location" = "Weather Location";
 "Search city..." = "Search city...";

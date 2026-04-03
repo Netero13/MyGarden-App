@@ -4,7 +4,7 @@ import SwiftUI
 // Manage family members: add, remove, edit, and switch the active member.
 // Accessible from the Settings tab.
 //
-// Each member shows their emoji avatar, name, and role.
+// Each member shows their emoji avatar and name.
 // The active member (currently "logged in") has a checkmark.
 
 struct FamilySettingsView: View {
@@ -30,7 +30,7 @@ struct FamilySettingsView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(active.name)
                                 .font(.headline)
-                            Text("Currently active · \(active.role.localizedName)")
+                            Text("Currently active")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -107,20 +107,14 @@ struct FamilySettingsView: View {
                 Text(member.emoji)
                     .font(.title2)
                     .frame(width: 40, height: 40)
-                    .background(member.role.color.opacity(0.15))
+                    .background(.green.opacity(0.15))
                     .clipShape(Circle())
 
-                // Name and role
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(member.name)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .foregroundStyle(.primary)
-
-                    Text(member.role.localizedName)
-                        .font(.caption)
-                        .foregroundStyle(member.role.color)
-                }
+                // Name
+                Text(member.name)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+                    .foregroundStyle(.primary)
 
                 Spacer()
 
@@ -145,7 +139,7 @@ struct FamilySettingsView: View {
 }
 
 // MARK: - Add Family Member View
-// A simple form to add a new family member.
+// A simple form to add a new family member: just name + emoji avatar.
 
 struct AddFamilyMemberView: View {
 
@@ -154,8 +148,7 @@ struct AddFamilyMemberView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var name: String = ""
-    @State private var role: FamilyRole = .dad
-    @State private var emoji: String = "👨"
+    @State private var emoji: String = "🧑‍🌾"
 
     var body: some View {
         NavigationStack {
@@ -163,15 +156,6 @@ struct AddFamilyMemberView: View {
                 Section {
                     TextField("Name", text: $name)
                         .textInputAutocapitalization(.words)
-
-                    Picker("Role", selection: $role) {
-                        ForEach(FamilyRole.allCases) { r in
-                            Text(r.localizedName).tag(r)
-                        }
-                    }
-                    .onChange(of: role) {
-                        emoji = role.defaultEmoji
-                    }
                 } header: {
                     Text("Who are you adding?")
                 }
@@ -186,11 +170,11 @@ struct AddFamilyMemberView: View {
                                 Text(e)
                                     .font(.title)
                                     .frame(width: 46, height: 46)
-                                    .background(emoji == e ? role.color.opacity(0.2) : .clear)
+                                    .background(emoji == e ? .green.opacity(0.2) : .clear)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(emoji == e ? role.color : .clear, lineWidth: 2)
+                                            .stroke(emoji == e ? .green : .clear, lineWidth: 2)
                                     )
                             }
                             .buttonStyle(.plain)
@@ -207,17 +191,12 @@ struct AddFamilyMemberView: View {
                         Text(emoji)
                             .font(.system(size: 36))
                             .frame(width: 50, height: 50)
-                            .background(role.color.opacity(0.15))
+                            .background(.green.opacity(0.15))
                             .clipShape(Circle())
 
-                        VStack(alignment: .leading) {
-                            Text(name.isEmpty ? "Name" : name)
-                                .font(.headline)
-                                .foregroundStyle(name.isEmpty ? .secondary : .primary)
-                            Text(role.localizedName)
-                                .font(.caption)
-                                .foregroundStyle(role.color)
-                        }
+                        Text(name.isEmpty ? "Name" : name)
+                            .font(.headline)
+                            .foregroundStyle(name.isEmpty ? .secondary : .primary)
                     }
                 } header: {
                     Text("Preview")
@@ -233,7 +212,6 @@ struct AddFamilyMemberView: View {
                     Button("Add") {
                         let member = FamilyMember(
                             name: name.trimmingCharacters(in: .whitespaces),
-                            role: role,
                             emoji: emoji
                         )
                         onAdd(member)
@@ -248,8 +226,8 @@ struct AddFamilyMemberView: View {
 
     // Common emoji options for avatars
     private var emojiOptions: [String] {
-        ["👨", "👩", "👦", "👧", "👴", "👵", "🧑", "👱", "👨‍🌾", "👩‍🌾",
-         "🧑‍🌾", "🌻", "🌿", "🌱", "🪴", "🍀"]
+        ["🧑‍🌾", "👨‍🌾", "👩‍🌾", "👨", "👩", "👦", "👧", "👴", "👵", "🧑",
+         "👱", "🌻", "🌿", "🌱", "🪴", "🍀"]
     }
 }
 
@@ -263,8 +241,7 @@ struct EditFamilyMemberView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var name: String = ""
-    @State private var role: FamilyRole = .dad
-    @State private var emoji: String = "👨"
+    @State private var emoji: String = "🧑‍🌾"
 
     var body: some View {
         NavigationStack {
@@ -272,12 +249,6 @@ struct EditFamilyMemberView: View {
                 Section {
                     TextField("Name", text: $name)
                         .textInputAutocapitalization(.words)
-
-                    Picker("Role", selection: $role) {
-                        ForEach(FamilyRole.allCases) { r in
-                            Text(r.localizedName).tag(r)
-                        }
-                    }
                 }
 
                 Section {
@@ -289,11 +260,11 @@ struct EditFamilyMemberView: View {
                                 Text(e)
                                     .font(.title)
                                     .frame(width: 46, height: 46)
-                                    .background(emoji == e ? role.color.opacity(0.2) : .clear)
+                                    .background(emoji == e ? .green.opacity(0.2) : .clear)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(emoji == e ? role.color : .clear, lineWidth: 2)
+                                            .stroke(emoji == e ? .green : .clear, lineWidth: 2)
                                     )
                             }
                             .buttonStyle(.plain)
@@ -314,7 +285,6 @@ struct EditFamilyMemberView: View {
                     Button("Save") {
                         var updated = member
                         updated.name = name.trimmingCharacters(in: .whitespaces)
-                        updated.role = role
                         updated.emoji = emoji
                         onSave(updated)
                         dismiss()
@@ -325,15 +295,14 @@ struct EditFamilyMemberView: View {
             }
             .onAppear {
                 name = member.name
-                role = member.role
                 emoji = member.emoji
             }
         }
     }
 
     private var emojiOptions: [String] {
-        ["👨", "👩", "👦", "👧", "👴", "👵", "🧑", "👱", "👨‍🌾", "👩‍🌾",
-         "🧑‍🌾", "🌻", "🌿", "🌱", "🪴", "🍀"]
+        ["🧑‍🌾", "👨‍🌾", "👩‍🌾", "👨", "👩", "👦", "👧", "👴", "👵", "🧑",
+         "👱", "🌻", "🌿", "🌱", "🪴", "🍀"]
     }
 }
 

@@ -207,15 +207,6 @@
 "Avatar" = "Аватар";
 "Preview" = "Перегляд";
 
-// MARK: - Family Roles
-"Dad" = "Тато";
-"Mom" = "Мама";
-"Son" = "Син";
-"Daughter" = "Донька";
-"Grandpa" = "Дідусь";
-"Grandma" = "Бабуся";
-"Other" = "Інше";
-
 // MARK: - Weather Location
 "Weather Location" = "Місце для погоди";
 "Search city..." = "Пошук міста...";
