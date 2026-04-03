@@ -89,6 +89,24 @@ struct SettingsView: View {
                     Text("Garden Stats")
                 }
 
+                // -- Weather Location --
+                Section {
+                    NavigationLink {
+                        WeatherLocationPicker()
+                    } label: {
+                        HStack {
+                            Label("Location", systemImage: "location.fill")
+                            Spacer()
+                            Text(WeatherManager.shared.locationName)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                } header: {
+                    Text("Weather")
+                } footer: {
+                    Text("Choose your city for accurate weather and gardening tips.")
+                }
+
                 // -- Family --
                 Section {
                     NavigationLink {

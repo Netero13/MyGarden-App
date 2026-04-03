@@ -28,9 +28,10 @@ class PlantStore {
         if let savedPlants = Self.load() {
             plants = savedPlants
         } else {
-            // First launch — use sample data
-            plants = Plant.samples
-            save() // Save the samples so they persist
+            // First launch — start with an empty garden.
+            // The user will add their own plants via the + button.
+            // (Sample data was removed for App Store — reviewers expect a clean start.)
+            plants = []
         }
     }
 

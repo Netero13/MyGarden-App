@@ -122,17 +122,41 @@ class WeatherManager {
     // Error message (nil = no error)
     var errorMessage: String?
 
-    // Default location: Kyiv, Ukraine 🇺🇦
-    // You can change these to any city's coordinates
-    private let latitude: Double = 50.4501
-    private let longitude: Double = 30.5234
-    private let locationName: String = "Kyiv"
+    // Location for weather — saved in UserDefaults so user can change it.
+    // Defaults to Kyiv, Ukraine 🇺🇦
+    var latitude: Double {
+        get { UserDefaults.standard.object(forKey: "weatherLatitude") as? Double ?? 50.4501 }
+        set { UserDefaults.standard.set(newValue, forKey: "weatherLatitude") }
+    }
+
+    var longitude: Double {
+        get { UserDefaults.standard.object(forKey: "weatherLongitude") as? Double ?? 30.5234 }
+        set { UserDefaults.standard.set(newValue, forKey: "weatherLongitude") }
+    }
+
+    var locationName: String {
+        get { UserDefaults.standard.string(forKey: "weatherLocationName") ?? "Kyiv" }
+        set { UserDefaults.standard.set(newValue, forKey: "weatherLocationName") }
+    }
 
     // Cache: don't fetch more often than every 15 minutes
     private var lastFetchTime: Date?
     private let cacheMinutes: Double = 15
 
     private init() {}
+
+    // MARK: - Change Location
+    // Called when the user picks a different city in Settings.
+    // Clears the cache so weather refreshes immediately.
+
+    func setLocation(name: String, lat: Double, lon: Double) {
+        locationName = name
+        latitude = lat
+        longitude = lon
+        // Clear cache to force a fresh fetch
+        lastFetchTime = nil
+        currentWeather = nil
+    }
 
     // MARK: - Fetch Weather
     // Calls the Open-Meteo API and parses the response.

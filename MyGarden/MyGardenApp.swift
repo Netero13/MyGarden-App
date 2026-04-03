@@ -1,19 +1,41 @@
 import SwiftUI
 
+// MARK: - App Entry Point
+// This is where the app starts. It decides what to show:
+// - First launch → Onboarding screen (welcome + profile setup)
+// - Returning user → Main app (ContentView with tabs)
+//
+// Key concept: @AppStorage
+// We use @AppStorage("hasCompletedOnboarding") to remember whether
+// the user has seen the welcome screen. This value survives app restarts
+// because it's stored in UserDefaults (like a tiny database for settings).
+
 @main
 struct MyGardenApp: App {
 
-    // Create ONE PlantStore for the entire app.
-    // @State keeps it alive for the app's lifetime.
-    // All screens will share this same store.
+    // Create ONE PlantStore for the entire app
     @State private var store = PlantStore()
+
+    // Track whether onboarding has been completed
+    // false = first launch, show onboarding
+    // true = returning user, go straight to the app
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                // Pass the store to ALL child views via the environment.
-                // Any screen can now access it with @Environment(PlantStore.self)
-                .environment(store)
+            if hasCompletedOnboarding {
+                // Returning user — show the main app
+                ContentView()
+                    .environment(store)
+            } else {
+                // First launch — show the welcome screen
+                OnboardingView {
+                    // When onboarding is done, switch to the main app
+                    withAnimation {
+                        hasCompletedOnboarding = true
+                    }
+                }
+            }
         }
     }
 }
