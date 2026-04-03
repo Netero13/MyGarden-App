@@ -41,6 +41,7 @@
 		AA1B1FD62B0A001E0012345A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1FD52B0A001E0012345A /* Localizable.strings */; };
 		AA1B1FDA2B0A00210012345A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FD92B0A00210012345A /* LocationManager.swift */; };
 		AA1B1FDC2B0A00220012345A /* TreeIntelligenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */; };
+		AA1B1FDE2B0A00230012345A /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FDD2B0A00230012345A /* CatalogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		AA1B1FD82B0A00200012345A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA1B1FD92B0A00210012345A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeIntelligenceView.swift; sourceTree = "<group>"; };
+		AA1B1FDD2B0A00230012345A /* CatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				AA1B1FD32B0A001D0012345A /* OnboardingView.swift */,
 				AA1B1FD92B0A00210012345A /* LocationManager.swift */,
 				AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */,
+				AA1B1FDD2B0A00230012345A /* CatalogView.swift */,
 				AA1B1FD52B0A001E0012345A /* Localizable.strings */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
@@ -273,6 +276,7 @@
 				AA1B1FD42B0A001D0012345A /* OnboardingView.swift in Sources */,
 				AA1B1FDA2B0A00210012345A /* LocationManager.swift in Sources */,
 				AA1B1FDC2B0A00220012345A /* TreeIntelligenceView.swift in Sources */,
+				AA1B1FDE2B0A00230012345A /* CatalogView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

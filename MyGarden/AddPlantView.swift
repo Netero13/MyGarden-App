@@ -27,7 +27,7 @@ struct AddPlantView: View {
     // These @State variables track what the user picks in the form.
     // Each one updates the UI automatically when changed.
 
-    @State private var selectedType: PlantType = .herb
+    @State private var selectedType: PlantType = .fruitTree
     @State private var selectedSpecies: PlantSpecies?
     @State private var selectedVariety: String = ""
     @State private var customVariety: String = ""

@@ -74,6 +74,27 @@
 "Add" = "Add";
 "Remove" = "Remove";
 
+// MARK: - Catalog
+"Catalog" = "Catalog";
+"Search trees & bushes..." = "Search trees & bushes...";
+"All" = "All";
+"In garden ✓" = "In garden ✓";
+"Key Facts" = "Key Facts";
+"Height" = "Height";
+"Hardiness" = "Hardiness";
+"Sun" = "Sun";
+"Soil pH" = "Soil pH";
+"Water (young)" = "Water (young)";
+"Water (mature)" = "Water (mature)";
+"Varieties" = "Varieties";
+"Add to My Garden" = "Add to My Garden";
+"Already in your garden" = "Already in your garden";
+"First fruit in ~%lld years" = "First fruit in ~%lld years";
+"Newly planted this year" = "Newly planted this year";
+"I know when it was planted" = "I know when it was planted";
+"When was it planted?" = "When was it planted?";
+"Watering frequency" = "Watering frequency";
+
 // MARK: - Edit Plant
 "Edit Plant" = "Edit Plant";
 "Save" = "Save";

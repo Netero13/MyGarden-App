@@ -74,6 +74,27 @@
 "Add" = "Додати";
 "Remove" = "Видалити";
 
+// MARK: - Catalog
+"Catalog" = "Каталог";
+"Search trees & bushes..." = "Пошук дерев і кущів...";
+"All" = "Усі";
+"In garden ✓" = "У саду ✓";
+"Key Facts" = "Основні факти";
+"Height" = "Висота";
+"Hardiness" = "Морозостійкість";
+"Sun" = "Сонце";
+"Soil pH" = "pH ґрунту";
+"Water (young)" = "Полив (молоде)";
+"Water (mature)" = "Полив (доросле)";
+"Varieties" = "Сорти";
+"Add to My Garden" = "Додати до мого саду";
+"Already in your garden" = "Вже у вашому саду";
+"First fruit in ~%lld years" = "Перші плоди через ~%lld років";
+"Newly planted this year" = "Посаджено цього року";
+"I know when it was planted" = "Я знаю, коли його посаджено";
+"When was it planted?" = "Коли його було посаджено?";
+"Watering frequency" = "Частота поливу";
+
 // MARK: - Edit Plant
 "Edit Plant" = "Редагувати рослину";
 "Save" = "Зберегти";

@@ -18,19 +18,27 @@ struct ContentView: View {
                     Label("Trees", systemImage: "tree.fill")
                 }
 
-            // Tab 2: Garden Map (visual bird's-eye view)
+            // Tab 2: Tree Encyclopedia (browsable catalog)
+            // Users come here to DISCOVER species before planting.
+            // Think of it as a "shopping catalog" for trees & bushes.
+            CatalogView()
+                .tabItem {
+                    Label("Catalog", systemImage: "books.vertical.fill")
+                }
+
+            // Tab 3: Garden Map (visual bird's-eye view)
             GardenMapView()
                 .tabItem {
                     Label("Garden", systemImage: "map.fill")
                 }
 
-            // Tab 3: Activity Feed (all activities across all plants)
+            // Tab 4: Activity Feed (all activities across all plants)
             ActivityFeedView()
                 .tabItem {
                     Label("Activity", systemImage: "clock.arrow.circlepath")
                 }
 
-            // Tab 4: Settings
+            // Tab 5: Settings
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
