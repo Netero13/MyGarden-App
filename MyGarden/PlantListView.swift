@@ -187,9 +187,6 @@ struct PlantListView: View {
                 }
                 .padding(.vertical, 4)
 
-                // Type breakdown bar
-                typeBreakdownBar
-
                 // Recent activity
                 if let lastActivity = mostRecentActivity {
                     recentActivityRow(lastActivity)
@@ -263,50 +260,6 @@ struct PlantListView: View {
         .padding(10)
         .background(color.opacity(0.08))
         .clipShape(RoundedRectangle(cornerRadius: 10))
-    }
-
-    // MARK: - Type Breakdown Bar
-    // A horizontal bar showing how many plants of each type you have.
-    // Each type gets a proportional colored segment — like a mini chart.
-    //
-    // Key concept: GeometryReader
-    // We need to know the exact width of the bar to calculate
-    // how wide each segment should be (proportional to plant count).
-
-    private var typeBreakdownBar: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("By Type")
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-
-            GeometryReader { geo in
-                HStack(spacing: 2) {
-                    ForEach(typeCounts.sorted(by: { $0.key.rawValue < $1.key.rawValue }), id: \.key) { type, count in
-                        let fraction = CGFloat(count) / CGFloat(max(store.plants.count, 1))
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(type.color.gradient)
-                            .frame(width: max(fraction * geo.size.width - 2, 4))
-                    }
-                }
-            }
-            .frame(height: 8)
-
-            // Legend: small colored dots with type names
-            HStack(spacing: 8) {
-                ForEach(typeCounts.sorted(by: { $0.key.rawValue < $1.key.rawValue }), id: \.key) { type, count in
-                    HStack(spacing: 3) {
-                        Circle()
-                            .fill(type.color)
-                            .frame(width: 6, height: 6)
-                        Text("\(type.rawValue) \(count)")
-                            .font(.system(size: 9))
-                            .foregroundStyle(.secondary)
-                    }
-                }
-            }
-        }
-        .padding(.vertical, 4)
     }
 
     // MARK: - Water Today Section
@@ -444,11 +397,6 @@ struct PlantListView: View {
 
     private var totalActivities: Int {
         store.plants.reduce(0) { $0 + $1.activities.count }
-    }
-
-    private var typeCounts: [PlantType: Int] {
-        Dictionary(grouping: store.plants, by: { $0.type })
-            .mapValues { $0.count }
     }
 
     // Find the most recent activity across ALL plants
