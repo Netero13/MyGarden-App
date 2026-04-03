@@ -58,6 +58,7 @@ enum PlantType: String, Codable, CaseIterable {
     case succulent = "Succulent"
     case forestTree = "Forest Tree"
     case fruitTree = "Fruit Tree"
+    case bush = "Bush"
 
     // Each type gets its own icon (using Apple's built-in SF Symbols)
     var icon: String {
@@ -68,6 +69,7 @@ enum PlantType: String, Codable, CaseIterable {
         case .succulent:  return "drop.fill"
         case .forestTree: return "tree.fill"
         case .fruitTree:  return "tree.circle.fill"
+        case .bush:       return "laurel.leading"
         }
     }
 
@@ -80,14 +82,16 @@ enum PlantType: String, Codable, CaseIterable {
         case .succulent:  return .mint
         case .forestTree: return .brown
         case .fruitTree:  return .red
+        case .bush:       return .purple
         }
     }
 }
 
 // MARK: - Sample Data
-// Fake plants for testing. Includes Ukrainian trees!
+// Fake plants for testing. Includes Ukrainian trees and bushes!
 // 🇺🇦 Forest trees: Дуб, Береза, Сосна, Бук, Липа, Клен, Ялина
-// 🇺🇦 Fruit trees: Вишня, Яблуня, Груша, Слива, Абрикос, Горіх
+// 🇺🇦 Fruit trees: Вишня, Яблуня, Груша, Слива, Абрикос, Горіх, Персик, Черешня
+// 🇺🇦 Bushes: Смородина, Малина, Полуниця, Лохина
 
 extension Plant {
     static let samples: [Plant] = [
@@ -222,6 +226,57 @@ extension Plant {
             variety: "Горіх волоський",
             wateringFrequencyDays: 14,
             lastWatered: Calendar.current.date(byAdding: .day, value: -7, to: Date()),
+            dateAdded: Date()
+        ),
+        Plant(
+            name: "Peach",
+            type: .fruitTree,
+            variety: "Персик київський",
+            wateringFrequencyDays: 7,
+            lastWatered: Calendar.current.date(byAdding: .day, value: -3, to: Date()),
+            dateAdded: Date()
+        ),
+        Plant(
+            name: "Merry Cherry",
+            type: .fruitTree,
+            variety: "Черешня великоплідна",
+            wateringFrequencyDays: 7,
+            lastWatered: Calendar.current.date(byAdding: .day, value: -5, to: Date()),
+            dateAdded: Date()
+        ),
+
+        // -- Ukrainian Berry Bushes --
+        // Common bushes grown in Ukrainian gardens (кущі)
+        Plant(
+            name: "Currant",
+            type: .bush,
+            variety: "Смородина чорна",
+            wateringFrequencyDays: 5,
+            lastWatered: Calendar.current.date(byAdding: .day, value: -2, to: Date()),
+            dateAdded: Date()
+        ),
+        Plant(
+            name: "Raspberry",
+            type: .bush,
+            variety: "Малина ремонтантна",
+            wateringFrequencyDays: 4,
+            lastWatered: Calendar.current.date(byAdding: .day, value: -5, to: Date()),
+            dateAdded: Date()
+        ),
+        Plant(
+            name: "Strawberry",
+            type: .bush,
+            variety: "Полуниця Вікторія",
+            wateringFrequencyDays: 3,
+            lastWatered: Date(),
+            dateAdded: Date()
+        ),
+        Plant(
+            name: "Blueberry",
+            type: .bush,
+            variety: "Лохина високоросла",
+            wateringFrequencyDays: 4,
+            lastWatered: nil,
             dateAdded: Date()
         ),
     ]
