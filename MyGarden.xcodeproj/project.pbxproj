@@ -10,6 +10,7 @@
 		AA1B1F8A2B0A00010012345A /* MyGardenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F892B0A00010012345A /* MyGardenApp.swift */; };
 		AA1B1F8C2B0A00010012345A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F8B2B0A00010012345A /* ContentView.swift */; };
 		AA1B1FA02B0A00030012345A /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F9F2B0A00030012345A /* Plant.swift */; };
+		AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA12B0A00040012345A /* PlantCatalog.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
 		AA1B1F912B0A00020012345A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F902B0A00020012345A /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -21,6 +22,7 @@
 		AA1B1F8D2B0A00020012345A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA1B1F902B0A00020012345A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA1B1F9F2B0A00030012345A /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		AA1B1FA12B0A00040012345A /* PlantCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCatalog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				AA1B1F892B0A00010012345A /* MyGardenApp.swift */,
 				AA1B1F8B2B0A00010012345A /* ContentView.swift */,
 				AA1B1F9F2B0A00030012345A /* Plant.swift */,
+				AA1B1FA12B0A00040012345A /* PlantCatalog.swift */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 				AA1B1F8C2B0A00010012345A /* ContentView.swift in Sources */,
 				AA1B1F8A2B0A00010012345A /* MyGardenApp.swift in Sources */,
 				AA1B1FA02B0A00030012345A /* Plant.swift in Sources */,
+				AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
