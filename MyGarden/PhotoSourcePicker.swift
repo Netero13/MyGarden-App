@@ -31,7 +31,7 @@ struct PhotoSourcePicker: View {
                 Button {
                     showingCamera = true
                 } label: {
-                    Label("Take Photo", systemImage: "camera.fill")
+                    Label(NSLocalizedString("Take Photo", comment: ""), systemImage: "camera.fill")
                 }
             }
 
@@ -40,7 +40,7 @@ struct PhotoSourcePicker: View {
                 selection: $selectedItem,
                 matching: .images
             ) {
-                Label("Choose from Library", systemImage: "photo.on.rectangle")
+                Label(NSLocalizedString("Choose from Library", comment: ""), systemImage: "photo.on.rectangle")
             }
         }
         // Camera sheet

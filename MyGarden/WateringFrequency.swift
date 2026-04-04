@@ -45,7 +45,7 @@ enum WateringFrequency: String, CaseIterable, Identifiable {
     }
 
     // Reverse: given a number of days, find the closest matching frequency.
-    // This is used when loading a plant from the catalog — we convert its
+    // This is used when loading a plant from the encyclopedia — we convert its
     // defaultWateringDays into the nearest friendly label.
     static func closest(to days: Int) -> WateringFrequency {
         // Find the frequency whose .days is closest to the input

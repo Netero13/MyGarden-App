@@ -10,7 +10,7 @@
 		AA1B1F8A2B0A00010012345A /* MyGardenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F892B0A00010012345A /* MyGardenApp.swift */; };
 		AA1B1F8C2B0A00010012345A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F8B2B0A00010012345A /* ContentView.swift */; };
 		AA1B1FA02B0A00030012345A /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1F9F2B0A00030012345A /* Plant.swift */; };
-		AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA12B0A00040012345A /* PlantCatalog.swift */; };
+		AA1B1FA22B0A00040012345A /* TreeEncyclopedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA12B0A00040012345A /* TreeEncyclopedia.swift */; };
 		AA1B1FA42B0A00050012345A /* PlantRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA32B0A00050012345A /* PlantRowView.swift */; };
 		AA1B1FA62B0A00060012345A /* PlantListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA52B0A00060012345A /* PlantListView.swift */; };
 		AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FA72B0A00070012345A /* PlantDetailView.swift */; };
@@ -27,13 +27,12 @@
 		AA1B1FBE2B0A00120012345A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBD2B0A00120012345A /* NotificationManager.swift */; };
 		AA1B1FC02B0A00130012345A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FBF2B0A00130012345A /* SettingsView.swift */; };
 		AA1B1FC22B0A00140012345A /* ActivityFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */; };
+		AA1B1FE72B0A00300012345A /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FE62B0A00300012345A /* ActivityDetailView.swift */; };
+		AA1B1FE92B0A00310012345A /* CareActionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FE82B0A00310012345A /* CareActionDetailView.swift */; };
 		AA1B1FC42B0A00150012345A /* EditPlantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC32B0A00150012345A /* EditPlantView.swift */; };
 		AA1B1FC62B0A00160012345A /* GardenMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC52B0A00160012345A /* GardenMapView.swift */; };
 		AA1B1FC82B0A00170012345A /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC72B0A00170012345A /* WeatherManager.swift */; };
 		AA1B1FCA2B0A00180012345A /* WeatherAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FC92B0A00180012345A /* WeatherAnimationView.swift */; };
-		AA1B1FCC2B0A00190012345A /* FamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FCB2B0A00190012345A /* FamilyMember.swift */; };
-		AA1B1FCE2B0A001A0012345A /* FamilyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FCD2B0A001A0012345A /* FamilyManager.swift */; };
-		AA1B1FD02B0A001B0012345A /* FamilySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FCF2B0A001B0012345A /* FamilySettingsView.swift */; };
 		AA1B1FD22B0A001C0012345A /* WeatherLocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FD12B0A001C0012345A /* WeatherLocationPicker.swift */; };
 		AA1B1FD42B0A001D0012345A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FD32B0A001D0012345A /* OnboardingView.swift */; };
 		AA1B1F8E2B0A00020012345A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1F8D2B0A00020012345A /* Assets.xcassets */; };
@@ -41,7 +40,7 @@
 		AA1B1FD62B0A001E0012345A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1B1FD52B0A001E0012345A /* Localizable.strings */; };
 		AA1B1FDA2B0A00210012345A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FD92B0A00210012345A /* LocationManager.swift */; };
 		AA1B1FDC2B0A00220012345A /* TreeIntelligenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */; };
-		AA1B1FDE2B0A00230012345A /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FDD2B0A00230012345A /* CatalogView.swift */; };
+		AA1B1FDE2B0A00230012345A /* EncyclopediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B1FDD2B0A00230012345A /* EncyclopediaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +50,7 @@
 		AA1B1F8D2B0A00020012345A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA1B1F902B0A00020012345A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA1B1F9F2B0A00030012345A /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
-		AA1B1FA12B0A00040012345A /* PlantCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCatalog.swift; sourceTree = "<group>"; };
+		AA1B1FA12B0A00040012345A /* TreeEncyclopedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEncyclopedia.swift; sourceTree = "<group>"; };
 		AA1B1FA32B0A00050012345A /* PlantRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantRowView.swift; sourceTree = "<group>"; };
 		AA1B1FA52B0A00060012345A /* PlantListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantListView.swift; sourceTree = "<group>"; };
 		AA1B1FA72B0A00070012345A /* PlantDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantDetailView.swift; sourceTree = "<group>"; };
@@ -68,20 +67,19 @@
 		AA1B1FBD2B0A00120012345A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		AA1B1FBF2B0A00130012345A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFeedView.swift; sourceTree = "<group>"; };
+		AA1B1FE62B0A00300012345A /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
+		AA1B1FE82B0A00310012345A /* CareActionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareActionDetailView.swift; sourceTree = "<group>"; };
 		AA1B1FC32B0A00150012345A /* EditPlantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlantView.swift; sourceTree = "<group>"; };
 		AA1B1FC52B0A00160012345A /* GardenMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenMapView.swift; sourceTree = "<group>"; };
 		AA1B1FC72B0A00170012345A /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		AA1B1FC92B0A00180012345A /* WeatherAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAnimationView.swift; sourceTree = "<group>"; };
-		AA1B1FCB2B0A00190012345A /* FamilyMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMember.swift; sourceTree = "<group>"; };
-		AA1B1FCD2B0A001A0012345A /* FamilyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyManager.swift; sourceTree = "<group>"; };
-		AA1B1FCF2B0A001B0012345A /* FamilySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilySettingsView.swift; sourceTree = "<group>"; };
 		AA1B1FD12B0A001C0012345A /* WeatherLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLocationPicker.swift; sourceTree = "<group>"; };
 		AA1B1FD32B0A001D0012345A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		AA1B1FD72B0A001F0012345A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA1B1FD82B0A00200012345A /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA1B1FD92B0A00210012345A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeIntelligenceView.swift; sourceTree = "<group>"; };
-		AA1B1FDD2B0A00230012345A /* CatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogView.swift; sourceTree = "<group>"; };
+		AA1B1FDD2B0A00230012345A /* EncyclopediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncyclopediaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +115,7 @@
 				AA1B1F892B0A00010012345A /* MyGardenApp.swift */,
 				AA1B1F8B2B0A00010012345A /* ContentView.swift */,
 				AA1B1F9F2B0A00030012345A /* Plant.swift */,
-				AA1B1FA12B0A00040012345A /* PlantCatalog.swift */,
+				AA1B1FA12B0A00040012345A /* TreeEncyclopedia.swift */,
 				AA1B1FA32B0A00050012345A /* PlantRowView.swift */,
 				AA1B1FA52B0A00060012345A /* PlantListView.swift */,
 				AA1B1FA72B0A00070012345A /* PlantDetailView.swift */,
@@ -134,18 +132,17 @@
 				AA1B1FBD2B0A00120012345A /* NotificationManager.swift */,
 				AA1B1FBF2B0A00130012345A /* SettingsView.swift */,
 				AA1B1FC12B0A00140012345A /* ActivityFeedView.swift */,
+				AA1B1FE62B0A00300012345A /* ActivityDetailView.swift */,
+				AA1B1FE82B0A00310012345A /* CareActionDetailView.swift */,
 				AA1B1FC32B0A00150012345A /* EditPlantView.swift */,
 				AA1B1FC52B0A00160012345A /* GardenMapView.swift */,
 				AA1B1FC72B0A00170012345A /* WeatherManager.swift */,
 				AA1B1FC92B0A00180012345A /* WeatherAnimationView.swift */,
-				AA1B1FCB2B0A00190012345A /* FamilyMember.swift */,
-				AA1B1FCD2B0A001A0012345A /* FamilyManager.swift */,
-				AA1B1FCF2B0A001B0012345A /* FamilySettingsView.swift */,
 				AA1B1FD12B0A001C0012345A /* WeatherLocationPicker.swift */,
 				AA1B1FD32B0A001D0012345A /* OnboardingView.swift */,
 				AA1B1FD92B0A00210012345A /* LocationManager.swift */,
 				AA1B1FDB2B0A00220012345A /* TreeIntelligenceView.swift */,
-				AA1B1FDD2B0A00230012345A /* CatalogView.swift */,
+				AA1B1FDD2B0A00230012345A /* EncyclopediaView.swift */,
 				AA1B1FD52B0A001E0012345A /* Localizable.strings */,
 				AA1B1F8D2B0A00020012345A /* Assets.xcassets */,
 				AA1B1F8F2B0A00020012345A /* Preview Content */,
@@ -248,7 +245,7 @@
 				AA1B1F8C2B0A00010012345A /* ContentView.swift in Sources */,
 				AA1B1F8A2B0A00010012345A /* MyGardenApp.swift in Sources */,
 				AA1B1FA02B0A00030012345A /* Plant.swift in Sources */,
-				AA1B1FA22B0A00040012345A /* PlantCatalog.swift in Sources */,
+				AA1B1FA22B0A00040012345A /* TreeEncyclopedia.swift in Sources */,
 				AA1B1FA42B0A00050012345A /* PlantRowView.swift in Sources */,
 				AA1B1FA62B0A00060012345A /* PlantListView.swift in Sources */,
 				AA1B1FA82B0A00070012345A /* PlantDetailView.swift in Sources */,
@@ -265,18 +262,17 @@
 				AA1B1FBE2B0A00120012345A /* NotificationManager.swift in Sources */,
 				AA1B1FC02B0A00130012345A /* SettingsView.swift in Sources */,
 				AA1B1FC22B0A00140012345A /* ActivityFeedView.swift in Sources */,
+				AA1B1FE72B0A00300012345A /* ActivityDetailView.swift in Sources */,
+				AA1B1FE92B0A00310012345A /* CareActionDetailView.swift in Sources */,
 				AA1B1FC42B0A00150012345A /* EditPlantView.swift in Sources */,
 				AA1B1FC62B0A00160012345A /* GardenMapView.swift in Sources */,
 				AA1B1FC82B0A00170012345A /* WeatherManager.swift in Sources */,
 				AA1B1FCA2B0A00180012345A /* WeatherAnimationView.swift in Sources */,
-				AA1B1FCC2B0A00190012345A /* FamilyMember.swift in Sources */,
-				AA1B1FCE2B0A001A0012345A /* FamilyManager.swift in Sources */,
-				AA1B1FD02B0A001B0012345A /* FamilySettingsView.swift in Sources */,
 				AA1B1FD22B0A001C0012345A /* WeatherLocationPicker.swift in Sources */,
 				AA1B1FD42B0A001D0012345A /* OnboardingView.swift in Sources */,
 				AA1B1FDA2B0A00210012345A /* LocationManager.swift in Sources */,
 				AA1B1FDC2B0A00220012345A /* TreeIntelligenceView.swift in Sources */,
-				AA1B1FDE2B0A00230012345A /* CatalogView.swift in Sources */,
+				AA1B1FDE2B0A00230012345A /* EncyclopediaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

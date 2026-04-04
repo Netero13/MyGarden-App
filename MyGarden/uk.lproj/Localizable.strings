@@ -8,42 +8,22 @@
 "Settings" = "Налаштування";
 
 // MARK: - Onboarding
-"Welcome to MyGarden" = "Ласкаво просимо до MyGarden";
-"Your personal gardening companion" = "Ваш особистий помічник у садівництві";
-"Swipe to continue" = "Проведіть, щоб продовжити";
 "What you can do" = "Що ви можете робити";
-"Track your plants" = "Відстежуйте свої рослини";
-"Add plants, set watering schedules" = "Додавайте рослини, встановлюйте графік поливу";
 "Watering reminders" = "Нагадування про полив";
-"Never forget to water again" = "Більше не забудете полити";
-"Garden map" = "Карта саду";
-"Visual layout of your garden" = "Візуальне розташування вашого саду";
-"Family sharing" = "Сімейний доступ";
-"Track who does what" = "Відстежуйте, хто що робить";
-"Photo journal" = "Фотожурнал";
-"Document your garden's growth" = "Документуйте ріст вашого саду";
 "Live weather" = "Погода наживо";
-"Gardening tips based on weather" = "Поради щодо садівництва залежно від погоди";
-"Who are you?" = "Хто ви?";
-"Set up your profile so the family knows who did what" = "Налаштуйте профіль, щоб родина знала, хто що зробив";
+"Swipe to continue" = "Проведіть, щоб продовжити";
+"What's your name?" = "Як вас звати?";
+"Your name will appear in the activity log" = "Ваше ім'я з'являтиметься в журналі активностей";
 "Your name" = "Ваше ім'я";
-"Role" = "Роль";
 "Start Gardening!" = "Почати садівництво!";
 "Skip for now" = "Пропустити";
 
 // MARK: - Plant List / Dashboard
-"My Garden 🌱" = "Мій сад 🌱";
 "Search plants..." = "Пошук рослин...";
-"No Plants Yet" = "Ще немає рослин";
-"Tap + to add your first plant!" = "Натисніть +, щоб додати першу рослину!";
-"All plants are happy!" = "Усі рослини в порядку!";
-"%lld plants in your garden" = "%lld рослин у вашому саду";
-"%lld plant needs watering" = "%lld рослина потребує поливу";
-"%lld plants need watering" = "%lld рослин потребують поливу";
 "Total Plants" = "Усього рослин";
-"Need Water" = "Потрібен полив";
-"All Good" = "Все добре";
 "Activities" = "Активності";
+"Tap + to add your first plant!" = "Натисніть +, щоб додати першу рослину!";
+"All Good" = "Все добре";
 "Water Today" = "Полити сьогодні";
 "Due today" = "Потрібно сьогодні";
 "Never watered" = "Ніколи не поливали";
@@ -75,7 +55,7 @@
 "Remove" = "Видалити";
 
 // MARK: - Tree Intelligence
-"Care Intelligence" = "Розумний догляд";
+"Tree Intelligence" = "Енциклопедія дерев";
 "Newly planted" = "Щойно посаджено";
 "%lld y old" = "%lld р.";
 "%@ Advice" = "Порада: %@";
@@ -102,7 +82,6 @@
 "Frost hardiness" = "Морозостійкість";
 "Ideal soil pH" = "Ідеальний pH ґрунту";
 "Mature height" = "Висота дорослого";
-"Watch Out For" = "Зверніть увагу";
 "Pests" = "Шкідники";
 "Diseases" = "Хвороби";
 "Time to prune!" = "Час обрізки!";
@@ -119,7 +98,6 @@
 // MARK: - Dashboard
 "No Trees Yet" = "Ще немає дерев";
 "Tap + to add your first tree or bush!" = "Натисніть +, щоб додати перше дерево або кущ!";
-"Last: %@ — %@" = "Останнє: %@ — %@";
 "About %lld year(s) old" = "Приблизно %lld рік(ів)";
 "Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Arborist налаштовує рекомендації з поливу, обрізки та удобрення залежно від віку дерева.";
 "To receive watering reminders, please enable notifications in your iPhone Settings." = "Щоб отримувати нагадування про полив, увімкніть сповіщення в налаштуваннях iPhone.";
@@ -128,14 +106,13 @@
 "Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar." = "Отримуйте сповіщення, коли час обрізки, удобрення або збору — на основі календаря догляду.";
 "Weather is based on your device's current location. Turn off to pick a city manually." = "Погода базується на вашій геолокації. Вимкніть, щоб обрати місто вручну.";
 "Pick your city for accurate weather and gardening tips, or turn on location for automatic detection." = "Оберіть місто для точної погоди, або увімкніть геолокацію для автоматичного визначення.";
-"Activities you log will be tagged with this person's name." = "Активності будуть позначені ім'ям цієї людини.";
 "Notifications Disabled" = "Сповіщення вимкнено";
 "Open Settings" = "Відкрити налаштування";
 "App" = "Додаток";
 "Arborist" = "Arborist";
 
-// MARK: - Catalog
-"Catalog" = "Каталог";
+// MARK: - Encyclopedia
+"Encyclopedia" = "Енциклопедія";
 "Search trees & bushes..." = "Пошук дерев і кущів...";
 "All" = "Усі";
 "In garden ✓" = "У саду ✓";
@@ -161,7 +138,6 @@
 
 // MARK: - Edit Plant
 "Planting Year" = "Рік посадки";
-"Helps Arborist adjust care recommendations based on age." = "Допомагає Arborist налаштувати рекомендації з догляду залежно від віку.";
 "Edit Plant" = "Редагувати рослину";
 "Save" = "Зберегти";
 "Name & Variety" = "Назва та сорт";
@@ -227,7 +203,6 @@
 "Activity Feed" = "Стрічка активностей";
 "No Activities Yet" = "Ще немає активностей";
 "Start logging activities on your plants and they'll appear here." = "Почніть записувати активності і вони з'являться тут.";
-"All Activities" = "Усі активності";
 "This Week" = "Цього тижня";
 "This Month" = "Цього місяця";
 
@@ -238,12 +213,13 @@
 // MARK: - Garden Map
 "Garden Map" = "Карта саду";
 "Your garden is empty" = "Ваш сад порожній";
-"Long press & drag to move plants" = "Натисніть і утримуйте, щоб перемістити рослину";
 
 // MARK: - Settings
 "Notifications" = "Сповіщення";
 "Watering Reminders" = "Нагадування про полив";
 "Remind me at" = "Нагадати о";
+"Hour: %d:00" = "Година: %d:00";
+"OK" = "OK";
 "Enable to get notified when your plants need watering." = "Увімкніть, щоб отримувати сповіщення про полив.";
 "Garden Stats" = "Статистика саду";
 "Total Activities" = "Усього активностей";
@@ -256,27 +232,16 @@
 "Made in" = "Зроблено в";
 "Ukraine 🇺🇦" = "Україна 🇺🇦";
 
-// MARK: - Family
-"Family" = "Родина";
-"Family Members" = "Члени родини";
-"Active Member" = "Активний учасник";
-"Currently active" = "Зараз активний";
-"No family members yet" = "Ще немає членів родини";
-"Add Family Member" = "Додати члена родини";
-"Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member." = "Усі мають рівні права — кожен може поливати, додавати або редагувати рослини. Проведіть вліво, щоб видалити.";
-"Add family members so everyone can log activities with their name." = "Додайте членів родини, щоб кожен записував активності зі своїм ім'ям.";
-"Add Member" = "Додати учасника";
-"Edit Member" = "Редагувати учасника";
-"Who are you adding?" = "Кого ви додаєте?";
+// MARK: - Profile
+"Profile" = "Профіль";
 "Name" = "Ім'я";
-"Choose Avatar" = "Оберіть аватар";
-"Avatar" = "Аватар";
-"Preview" = "Перегляд";
+"Your name appears in the activity log." = "Ваше ім'я відображається в журналі активностей.";
 
 // MARK: - Weather Location
 "Weather Location" = "Місце для погоди";
 "Search city..." = "Пошук міста...";
 "Current" = "Поточне";
+"Ukraine" = "Україна";
 
 // MARK: - Notifications
 "Time to water! 💧" = "Час поливати! 💧";
@@ -292,11 +257,23 @@
 "Feed your %@ this month. Recommended: %@" = "Підживіть %@ цього місяця. Рекомендовано: %@";
 "Harvest time! 🍎" = "Час збору врожаю! 🍎";
 "Your %@ is ready to harvest this month. Enjoy!" = "Ваш(а) %@ готовий(а) до збору цього місяця. Смачного!";
-"Seasonal Care Alerts" = "Сезонні нагадування";
+"CareAction Engine" = "Двигун догляду";
 "Smart Care" = "Розумний догляд";
 "Pruning reminders" = "Нагадування про обрізку";
 "Fertilizing reminders" = "Нагадування про удобрення";
 "Harvest alerts" = "Сповіщення про збір врожаю";
+"Pest treatment reminders" = "Нагадування про обробку від шкідників";
+"Disease treatment reminders" = "Нагадування про обробку від хвороб";
+
+// MARK: - Arborist Engine (AI/ML)
+"Arborist Insights" = "Поради Arborist";
+"Arborist Engine" = "Двигун Arborist";
+"AI Intelligence" = "AI інтелект";
+"Weather-based insights" = "Поради на основі погоди";
+"Patterns from your activity log" = "Закономірності з вашого журналу";
+"Personalized recommendations" = "Персоналізовані рекомендації";
+"Arborist Engine analyzes weather, your activity history, and tree data to give you personalized, actionable insights for your garden." = "Двигун Arborist аналізує погоду, історію вашого догляду та дані про дерева, щоб давати персоналізовані поради для вашого саду.";
+"Enable smart insights that combine weather, your care history, and species data — tailored specifically to your garden." = "Увімкніть розумні поради, що поєднують погоду, історію догляду та дані про види — спеціально для вашого саду.";
 
 // MARK: - Language
 "Language" = "Мова";
@@ -307,7 +284,6 @@
 // MARK: - Photo
 "Take Photo" = "Зробити фото";
 "Choose from Library" = "Обрати з бібліотеки";
-"Change Photo" = "Змінити фото";
 
 // MARK: - Watering Frequencies
 "Every day" = "Щодня";
@@ -351,3 +327,168 @@
 "Use My Location" = "Моя геолокація";
 "Choose City" = "Обрати місто";
 "My Location" = "Моя локація";
+
+// MARK: - Weather Intelligence (Phase 2)
+"Weather Intelligence" = "Погодний інтелект";
+"Weather Alerts" = "Погодні сповіщення";
+"URGENT" = "ТЕРМІНОВО";
+
+// Weather Tips - Rain
+"Skip watering today" = "Пропустіть полив сьогодні";
+"It rained %.0f mm today — your %@ has enough water." = "Сьогодні випало %.0f мм дощу — вашому(ій) %@ вистачає вологи.";
+"Light rain today" = "Легкий дощ сьогодні";
+"%.0f mm of rain — may not be enough for deep roots. Check soil before watering." = "%.0f мм дощу — може бути недостатньо для глибоких коренів. Перевірте ґрунт.";
+"Rain expected tomorrow" = "Завтра очікується дощ";
+"%.0f mm expected — you can delay watering." = "Очікується %.0f мм — можна відкласти полив.";
+
+// Weather Tips - Frost
+"Dangerous frost!" = "Небезпечний мороз!";
+"Tonight drops to %.0f°C — below %@'s tolerance of %lld°C. Protect immediately!" = "Сьогодні вночі до %.0f°C — нижче межі витривалості %@ (%lld°C). Терміново захистіть!";
+"Frost tonight" = "Мороз сьогодні вночі";
+"%.0f°C expected. Your %@ can handle it, but young branches may be at risk." = "Очікується %.0f°C. Ваш(а) %@ витримає, але молоді гілки під загрозою.";
+"Frost on %@" = "Мороз у %@";
+"%.0f°C expected. Prepare protection for %@." = "Очікується %.0f°C. Підготуйте захист для %@.";
+
+// Weather Tips - Heat
+"Extreme heat!" = "Екстремальна спека!";
+"%.0f°C today — water %@ in the evening, not midday. Mulch to keep roots cool." = "%.0f°C сьогодні — поливайте %@ ввечері, не вдень. Мульчуйте для прохолоди коренів.";
+"Hot day" = "Спекотний день";
+"%.0f°C — consider extra watering for %@, especially if young." = "%.0f°C — поливайте %@ частіше, особливо якщо молоде.";
+
+// Weather Tips - Humidity & Wind
+"Fungal risk" = "Ризик грибка";
+"High humidity (%lld%%) + warmth — watch %@ for %@." = "Висока вологість (%lld%%) + тепло — стежте за %@ на предмет %@.";
+"Strong wind!" = "Сильний вітер!";
+"Wind at %.0f km/h — stake young %@ and check supports." = "Вітер %.0f км/год — підв'яжіть молоде %@ та перевірте опори.";
+
+// Watering Adjustments
+"Skip watering" = "Пропустити полив";
+"Can delay" = "Можна відкласти";
+"Water less" = "Поливати менше";
+"Water normally" = "Поливати як зазвичай";
+"Water a bit more" = "Поливати трохи більше";
+"Water extra!" = "Поливати посилено!";
+
+// Dashboard Weather Alerts
+"Frost risk — %lld plants" = "Ризик морозу — %lld рослин";
+"Tonight drops to %.0f°C. Check plant details for specifics." = "Вночі до %.0f°C. Перевірте деталі рослин.";
+"%lld plants: skip watering" = "%lld рослин: пропустіть полив";
+"%.0f mm rain today — nature is doing the work!" = "%.0f мм дощу сьогодні — природа працює за вас!";
+"%lld plants: can delay watering" = "%lld рослин: можна відкласти полив";
+"Rain expected tomorrow — you can wait." = "Завтра очікується дощ — можна почекати.";
+"%lld plants need extra water" = "%lld рослин потребують додаткового поливу";
+"%.0f°C today — water in the evening for best results." = "%.0f°C сьогодні — поливайте ввечері для найкращого результату.";
+"Fungal risk — %lld plants" = "Ризик грибка — %lld рослин";
+"Humidity %lld%% + warm — watch for disease." = "Вологість %lld%% + тепло — стежте за хворобами.";
+
+// MARK: - Birth Year & Age
+"Planted: %lld" = "Посаджено: %lld";
+"Born: %lld" = "Народжено: %lld";
+"Birth year = actual tree age. Planting year = when planted in your garden. Both help Arborist give better recommendations." = "Рік народження = фактичний вік дерева. Рік посадки = коли посаджено у вашому саду. Обидва допомагають Arborist давати кращі рекомендації.";
+
+// MARK: - Onboarding (new strings)
+"Welcome to Arborist" = "Ласкаво просимо до Arborist";
+"Smart care for your trees & bushes" = "Розумний догляд за деревами та кущами";
+"Smart care intelligence" = "Розумний догляд";
+"Know when to prune, fertilize & harvest" = "Знайте, коли обрізати, удобрювати та збирати врожай";
+"Track your trees & bushes" = "Відстежуйте свої дерева та кущі";
+"Age-based watering recommendations" = "Рекомендації поливу залежно від віку";
+"Adjusted for age and season" = "Налаштовано під вік та сезон";
+"Pruning & fertilizer guides" = "Гіди з обрізки та удобрення";
+"Species-specific, month-by-month" = "Для кожного виду, помісячно";
+"Pest & disease alerts" = "Сповіщення про шкідників і хвороби";
+"Know what to watch for" = "Знайте, на що звертати увагу";
+"Seasonal tips for your climate" = "Сезонні поради для вашого клімату";
+
+// MARK: - Additional missing strings
+"Needs water" = "Потрібен полив";
+"Add Photo" = "Додати фото";
+"Other" = "Інші";
+"Date" = "Дата";
+"e.g. \"applied organic fertilizer\" or \"picked 2kg of cherries\"" = "напр. \"внесли органічне добриво\" або \"зібрали 2кг вишень\"";
+"%lld days ago" = "%lld днів тому";
+"Overdue by %lld days!" = "Прострочено на %lld днів!";
+"In %lld days" = "Через %lld днів";
+"Are you sure you want to remove %@ from your garden? This can't be undone." = "Ви впевнені, що хочете видалити %@ із саду? Це неможливо скасувати.";
+"Currently: every %lld days" = "Зараз: кожні %lld днів";
+
+// MARK: - Smart Care (Dashboard)
+"How old is the tree?" = "Скільки років дереву?";
+"Birth year is used for age-based care. Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Рік народження використовується для догляду за віком. Arborist налаштовує рекомендації з поливу, обрізки та удобрення залежно від віку дерева.";
+"%.0f°C — your young %@ needs extra water in this heat!" = "%.0f°C — ваше молоде %@ потребує додаткового поливу в таку спеку!";
+"Prune" = "Обрізати";
+"Fertilize" = "Удобрити";
+"Pest Treatment" = "Обробка від шкідників";
+"Disease Treatment" = "Обробка від хвороб";
+
+// MARK: - Pest & Disease Treatment Notifications
+"Pest treatment time! 🐛" = "Час обробки від шкідників! 🐛";
+"Treat your %@ for pests this month. %@" = "Обробіть %@ від шкідників цього місяця. %@";
+"Disease prevention time! 🛡️" = "Час профілактики хвороб! 🛡️";
+"Treat your %@ for diseases this month. %@" = "Обробіть %@ від хвороб цього місяця. %@";
+
+// MARK: - Activity Detail & Care Status
+"Disease Control" = "Обробка від хвороб";
+"Date" = "Дата";
+"Done by" = "Виконав";
+"Notes" = "Нотатки";
+"No notes" = "Без нотаток";
+"Photo" = "Фото";
+"All" = "Усі";
+"Done" = "Готово";
+"Care Due This Month" = "Догляд цього місяця";
+"Care Status" = "Стан догляду";
+"Pest Treated" = "Оброблено від шкідників";
+"Disease Treated" = "Оброблено від хвороб";
+"Not yet" = "Ще ні";
+
+// MARK: - Care Action Detail (Intelligence Page)
+"Recommendation" = "Рекомендація";
+"Schedule" = "Графік";
+"No specific schedule — apply as needed." = "Без конкретного графіку — застосовуйте за потреби.";
+"Details" = "Деталі";
+"Common Pests" = "Поширені шкідники";
+"Common Diseases" = "Поширені хвороби";
+"Young Tree Note" = "Примітка для молодого дерева";
+"Young trees need formative pruning to shape the crown. Focus on structure, not heavy cutting." = "Молоді дерева потребують формуючої обрізки крони. Зосередьтеся на структурі, а не сильній обрізці.";
+"Established Tree Note" = "Примітка для дорослого дерева";
+"Established trees need maintenance pruning. Remove dead, crossing, and diseased branches." = "Дорослі дерева потребують підтримуючої обрізки. Видаляйте сухі, перехрещені та хворі гілки.";
+"Young trees need more nitrogen for growth. Apply at half the mature rate to avoid burning roots." = "Молоді дерева потребують більше азоту. Застосовуйте половину дорослої дози, щоб не спалити коріння.";
+"Soil" = "Ґрунт";
+"Ideal pH: %@ · %@" = "Ідеальний pH: %@ · %@";
+"Not Ready Yet" = "Ще не готове";
+"This species typically starts bearing fruit at %lld years. Your tree is %lld years old." = "Цей вид зазвичай починає плодоносити з %lld років. Вашому дереву %lld років.";
+"Seasonal Tip" = "Сезонна порада";
+"Mark as Done" = "Позначити як виконано";
+"Add Details (optional)" = "Додати деталі (необовʼязково)";
+"Optional notes..." = "Необовʼязкові нотатки...";
+"e.g. \"applied copper fungicide\" or \"spotted aphids on lower branches\"" = "напр. \"обприскав мідним купоросом\" або \"помітив попелиць на нижніх гілках\"";
+"Done this month!" = "Виконано цього місяця!";
+"Your %@ is %lld years old and should be producing fruit. Check branches for ripe fruit and pick when ready." = "Вашому %@ вже %lld років — має плодоносити. Перевіряйте гілки та збирайте стиглі плоди.";
+"Your %@ is still young (%lld years old). Typically starts bearing fruit at %lld years — about %lld more year(s) to go." = "Ваше %@ ще молоде (%lld років). Зазвичай починає плодоносити з %lld років — ще приблизно %lld рік(ів).";
+"Your %@ is ready to harvest this month. Pick fruit when ripe." = "Ваше %@ готове до збору цього місяця. Збирайте стиглі плоди.";
+
+// MARK: - Activity Status (Planned / Done System)
+"Planned" = "Заплановано";
+"Missed" = "Пропущено";
+"Status" = "Статус";
+"Completed" = "Виконано";
+"Done or Planned?" = "Виконано чи заплановано?";
+"Choose 'Planned' to schedule this for later." = "Оберіть «Заплановано», щоб запланувати на пізніше.";
+"Logging an activity you already completed." = "Запис дії, яку ви вже виконали.";
+"When to do it?" = "Коли виконати?";
+// MARK: - Dashboard Redesign
+"1 task for your garden" = "1 завдання для вашого саду";
+"%lld tasks for your garden" = "%lld завдань для вашого саду";
+"All caught up!" = "Все зроблено!";
+"Your garden is happy!" = "Ваш сад задоволений!";
+"%lld done today" = "%lld зроблено сьогодні";
+"%lld plants" = "%lld рослин";
+
+"New Plant" = "Нова рослина";
+"Plan / Log Activity" = "Запланувати / записати дію";
+"Choose Plant" = "Оберіть рослину";
+"No Plants Yet" = "Ще немає рослин";
+"Add a plant first, then you can log activities." = "Спочатку додайте рослину, потім зможете записувати дії.";
+
+"Add %@" = "Додати %@";

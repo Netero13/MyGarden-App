@@ -45,6 +45,9 @@ struct PlantDetailView: View {
                 // -- Header: Big icon + name --
                 headerSection
 
+                // -- Weather Intelligence Alerts --
+                weatherAlertsCard
+
                 // -- Watering Status Card --
                 wateringCard
 
@@ -52,15 +55,21 @@ struct PlantDetailView: View {
                 infoCard
 
                 // -- Care Intelligence (the smart part!) --
-                if let species = PlantCatalog.find(name: plant.name) {
+                if let species = TreeEncyclopedia.find(name: plant.name) {
                     TreeIntelligenceView(
                         species: species,
                         plantAge: plant.age
                     )
                 }
 
+                // -- Care This Month (contextual quick actions) --
+                careThisMonthActions
+
                 // -- Quick Actions (Water + Log Activity) --
                 quickActionsSection
+
+                // -- Care Status Card (last-done dates) --
+                careStatusCard
 
                 // -- Activity Journal --
                 activityJournalSection
@@ -79,7 +88,7 @@ struct PlantDetailView: View {
                 Button {
                     showingEditPlant = true
                 } label: {
-                    Text("Edit")
+                    Text(NSLocalizedString("Edit", comment: ""))
                 }
             }
         }
@@ -104,14 +113,14 @@ struct PlantDetailView: View {
                 store.save()
             }
         }
-        .alert("Delete Plant", isPresented: $showingDeleteAlert) {
-            Button("Delete", role: .destructive) {
+        .alert(NSLocalizedString("Delete Plant", comment: ""), isPresented: $showingDeleteAlert) {
+            Button(NSLocalizedString("Delete", comment: ""), role: .destructive) {
                 store.delete(id: plant.id)
                 dismiss() // Go back to the list
             }
-            Button("Cancel", role: .cancel) { }
+            Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) { }
         } message: {
-            Text("Are you sure you want to remove \(plant.name) from your garden? This can't be undone.")
+            Text(String(format: NSLocalizedString("Are you sure you want to remove %@ from your garden? This can't be undone.", comment: ""), plant.name))
         }
     }
 
@@ -157,16 +166,14 @@ struct PlantDetailView: View {
                     .foregroundStyle(plant.type.color)
                     .clipShape(Capsule())
 
-                if let ageLabel = plant.ageLabel {
-                    Text(ageLabel)
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 4)
-                        .background(.orange.opacity(0.15))
-                        .foregroundStyle(.orange)
-                        .clipShape(Capsule())
-                }
+                Text(plant.ageLabel)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(.orange.opacity(0.15))
+                    .foregroundStyle(.orange)
+                    .clipShape(Capsule())
             }
         }
         .padding(.top, 8)
@@ -182,13 +189,32 @@ struct PlantDetailView: View {
             HStack {
                 Image(systemName: "drop.fill")
                     .foregroundStyle(.blue)
-                Text("Watering")
+                Text(NSLocalizedString("Watering", comment: ""))
                     .font(.headline)
                 Spacer()
 
+                // Weather-smart watering badge (Phase 2)
+                if let weather = WeatherManager.shared.currentWeather {
+                    let adjustment = WeatherIntelligence.wateringAdjustment(for: plant, weather: weather)
+                    if adjustment != .normal {
+                        HStack(spacing: 4) {
+                            Image(systemName: adjustment.icon)
+                                .font(.caption2)
+                            Text(adjustment.localizedLabel)
+                                .font(.caption2)
+                                .fontWeight(.medium)
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(adjustment.color.opacity(0.15))
+                        .foregroundStyle(adjustment.color)
+                        .clipShape(Capsule())
+                    }
+                }
+
                 // Status badge
                 if plant.needsWatering {
-                    Text("Needs Water!")
+                    Text(NSLocalizedString("Needs Water!", comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 10)
@@ -197,7 +223,7 @@ struct PlantDetailView: View {
                         .foregroundStyle(.red)
                         .clipShape(Capsule())
                 } else {
-                    Text("All Good")
+                    Text(NSLocalizedString("All Good", comment: ""))
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.horizontal, 10)
@@ -213,19 +239,19 @@ struct PlantDetailView: View {
             // Watering details rows
             detailRow(
                 icon: "clock.arrow.circlepath",
-                label: "Frequency",
-                value: "Every \(plant.wateringFrequencyDays) days"
+                label: NSLocalizedString("Frequency", comment: ""),
+                value: String(format: NSLocalizedString("Every %lld days", comment: ""), plant.wateringFrequencyDays)
             )
 
             detailRow(
                 icon: "calendar.badge.clock",
-                label: "Last Watered",
+                label: NSLocalizedString("Last Watered", comment: ""),
                 value: lastWateredText
             )
 
             detailRow(
                 icon: "calendar",
-                label: "Next Watering",
+                label: NSLocalizedString("Next Watering", comment: ""),
                 value: nextWateringText
             )
         }
@@ -242,7 +268,7 @@ struct PlantDetailView: View {
             HStack {
                 Image(systemName: "info.circle.fill")
                     .foregroundStyle(.secondary)
-                Text("Plant Info")
+                Text(NSLocalizedString("Plant Info", comment: ""))
                     .font(.headline)
                 Spacer()
             }
@@ -251,20 +277,20 @@ struct PlantDetailView: View {
 
             detailRow(
                 icon: "leaf.fill",
-                label: "Type",
+                label: NSLocalizedString("Type", comment: ""),
                 value: plant.type.localizedName
             )
 
             detailRow(
                 icon: "calendar.badge.plus",
-                label: "Added to Garden",
+                label: NSLocalizedString("Added to Garden", comment: ""),
                 value: dateFormatter.string(from: plant.dateAdded)
             )
 
             if let variety = plant.variety {
                 detailRow(
                     icon: "tag.fill",
-                    label: "Variety",
+                    label: NSLocalizedString("Variety", comment: ""),
                     value: variety
                 )
             }
@@ -274,6 +300,204 @@ struct PlantDetailView: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
+    // MARK: - Care This Month Actions
+    // Shows contextual quick-action buttons for care tasks due THIS month.
+    // Only appears when TreeIntelligence says something needs doing AND it
+    // hasn't been done yet. Tap a button → task logged + button disappears.
+
+    @ViewBuilder
+    private var careThisMonthActions: some View {
+        let actions = pendingCareActions
+        if !actions.isEmpty {
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: "checkmark.circle")
+                        .foregroundStyle(.orange)
+                    Text(NSLocalizedString("Care Due This Month", comment: ""))
+                        .font(.headline)
+                    Spacer()
+                }
+
+                // Each action is tappable — opens the intelligence detail page
+                ForEach(actions, id: \.self) { action in
+                    if let species = TreeEncyclopedia.find(name: plant.name) {
+                        NavigationLink {
+                            CareActionDetailView(
+                                plant: plant,
+                                action: action,
+                                species: species
+                            )
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: action.icon)
+                                    .font(.caption)
+                                    .foregroundStyle(.white)
+                                    .frame(width: 32, height: 32)
+                                    .background(action.color.gradient)
+                                    .clipShape(Circle())
+
+                                Text(action.localizedLabel)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(action.color)
+
+                                Spacer()
+
+                                // Done button (stops navigation propagation)
+                                Button {
+                                    performCareAction(action)
+                                } label: {
+                                    Image(systemName: "checkmark")
+                                        .font(.caption2)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                        .padding(6)
+                                        .background(action.color)
+                                        .clipShape(Circle())
+                                }
+                                .buttonStyle(.plain)
+
+                                Image(systemName: "chevron.right")
+                                    .font(.caption2)
+                                    .foregroundStyle(.tertiary)
+                            }
+                            .padding(10)
+                            .background(action.color.opacity(0.08))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+    }
+
+    // Which care actions are due this month and NOT yet done
+    private var pendingCareActions: [CareAction] {
+        guard let species = TreeEncyclopedia.find(name: plant.name) else { return [] }
+        let intel = species.intelligence
+        var actions: [CareAction] = []
+
+        if intel.shouldPruneThisMonth() && !plant.wasDoneThisMonth(.pruned) {
+            actions.append(.prune)
+        }
+        if intel.shouldFertilizeThisMonth() && !plant.wasDoneThisMonth(.fertilized) {
+            actions.append(.fertilize)
+        }
+        if intel.isHarvestTime() && !plant.wasDoneThisMonth(.harvested) {
+            actions.append(.harvest)
+        }
+        if intel.shouldTreatPestsThisMonth() && !plant.wasDoneThisMonth(.pestControl) {
+            actions.append(.pestTreatment)
+        }
+        if intel.shouldTreatDiseasesThisMonth() && !plant.wasDoneThisMonth(.diseaseControl) {
+            actions.append(.diseaseTreatment)
+        }
+
+        return actions
+    }
+
+    // Call the matching store method for each action
+    private func performCareAction(_ action: CareAction) {
+        switch action {
+        case .prune:            store.prune(id: plant.id)
+        case .fertilize:        store.fertilize(id: plant.id)
+        case .harvest:          store.harvest(id: plant.id)
+        case .pestTreatment:    store.treatPests(id: plant.id)
+        case .diseaseTreatment: store.treatDiseases(id: plant.id)
+        }
+    }
+
+    // MARK: - Care Status Card
+    // Shows when each care type was last performed — a quick at-a-glance view.
+    // Only shows care types relevant to this plant species.
+
+    @ViewBuilder
+    private var careStatusCard: some View {
+        let rows = careStatusRows
+        if !rows.isEmpty {
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: "list.clipboard")
+                        .foregroundStyle(.secondary)
+                    Text(NSLocalizedString("Care Status", comment: ""))
+                        .font(.headline)
+                    Spacer()
+                }
+
+                Divider()
+
+                ForEach(rows, id: \.label) { row in
+                    HStack {
+                        Image(systemName: row.icon)
+                            .font(.caption)
+                            .foregroundStyle(row.color)
+                            .frame(width: 20)
+
+                        Text(row.label)
+                            .font(.subheadline)
+
+                        Spacer()
+
+                        if let date = row.date {
+                            Text(formatCareDate(date))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        } else {
+                            Text(NSLocalizedString("Not yet", comment: ""))
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
+                }
+            }
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+    }
+
+    private struct CareStatusRow: Hashable {
+        let icon: String
+        let label: String
+        let color: Color
+        let date: Date?
+    }
+
+    // Only include care types that this species actually uses
+    private var careStatusRows: [CareStatusRow] {
+        guard let species = TreeEncyclopedia.find(name: plant.name) else { return [] }
+        let intel = species.intelligence
+        var rows: [CareStatusRow] = []
+
+        if !intel.pruningMonths.isEmpty {
+            rows.append(CareStatusRow(icon: "scissors", label: NSLocalizedString("Pruned", comment: ""), color: .orange, date: plant.lastPruned))
+        }
+        if !intel.fertilizerMonths.isEmpty {
+            rows.append(CareStatusRow(icon: "leaf.arrow.circlepath", label: NSLocalizedString("Fertilized", comment: ""), color: .green, date: plant.lastFertilized))
+        }
+        if intel.harvestMonths != nil {
+            rows.append(CareStatusRow(icon: "basket.fill", label: NSLocalizedString("Harvested", comment: ""), color: .yellow, date: plant.lastHarvested))
+        }
+        if !intel.pestTreatmentMonths.isEmpty {
+            rows.append(CareStatusRow(icon: "ant.fill", label: NSLocalizedString("Pest Treated", comment: ""), color: .red, date: plant.lastTreatedPests))
+        }
+        if !intel.diseaseTreatmentMonths.isEmpty {
+            rows.append(CareStatusRow(icon: "allergens", label: NSLocalizedString("Disease Treated", comment: ""), color: .purple, date: plant.lastTreatedDiseases))
+        }
+
+        return rows
+    }
+
+    private func formatCareDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        return formatter.string(from: date)
+    }
+
     // MARK: - Quick Actions Section
     // Two buttons side by side: "Water Now" and "Log Activity"
 
@@ -281,20 +505,11 @@ struct PlantDetailView: View {
         HStack(spacing: 12) {
             // Water Now button
             Button {
-                plant.lastWatered = Date()
-                // Also log it as an activity in the journal, tagged with active family member
-                let activity = CareActivity(
-                    type: .watered,
-                    date: Date(),
-                    note: nil,
-                    memberID: FamilyManager.shared.activeMember?.id
-                )
-                plant.activities.append(activity)
-                // Use store.water() instead of store.save() so the
-                // watering notification gets rescheduled automatically!
+                // store.water() handles everything:
+                // sets lastWatered, logs the activity, saves, reschedules notification
                 store.water(id: plant.id)
             } label: {
-                Label("Water Now", systemImage: "drop.fill")
+                Label(NSLocalizedString("Water Now", comment: ""), systemImage: "drop.fill")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -307,7 +522,7 @@ struct PlantDetailView: View {
             Button {
                 showingAddActivity = true
             } label: {
-                Label("Log Activity", systemImage: "plus.circle.fill")
+                Label(NSLocalizedString("Log Activity", comment: ""), systemImage: "plus.circle.fill")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -326,12 +541,12 @@ struct PlantDetailView: View {
             HStack {
                 Image(systemName: "clock.arrow.circlepath")
                     .foregroundStyle(.secondary)
-                Text("Activity Journal")
+                Text(NSLocalizedString("Activity Journal", comment: ""))
                     .font(.headline)
                 Spacer()
 
                 if !plant.activities.isEmpty {
-                    Text("\(plant.activities.count) entries")
+                    Text(String(format: NSLocalizedString("%lld entries", comment: ""), plant.activities.count))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -339,7 +554,7 @@ struct PlantDetailView: View {
 
             Divider()
 
-            ActivityTimelineView(activities: plant.activities)
+            ActivityTimelineView(activities: plant.activities, plant: plant)
         }
         .padding()
         .background(.ultraThinMaterial)
@@ -354,7 +569,7 @@ struct PlantDetailView: View {
         Button(role: .destructive) {
             showingDeleteAlert = true
         } label: {
-            Label("Remove from Garden", systemImage: "trash")
+            Label(NSLocalizedString("Remove from Garden", comment: ""), systemImage: "trash")
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()
@@ -363,6 +578,92 @@ struct PlantDetailView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .padding(.top, 4)
+    }
+
+    // MARK: - Weather Alerts Card (Phase 2)
+    // Shows smart, plant-specific weather recommendations.
+    // Example: "Skip watering — it rained 8mm" or "Frost tonight — protect your cherry!"
+    // Only appears when weather data is available AND there are tips to show.
+
+    @ViewBuilder
+    private var weatherAlertsCard: some View {
+        if let weather = WeatherManager.shared.currentWeather {
+            let tips = WeatherIntelligence.tips(for: plant, weather: weather)
+            if !tips.isEmpty {
+                VStack(spacing: 12) {
+                    // Card header
+                    HStack {
+                        Image(systemName: "brain.head.profile.fill")
+                            .foregroundStyle(.purple)
+                        Text(NSLocalizedString("Weather Intelligence", comment: ""))
+                            .font(.headline)
+                        Spacer()
+
+                        // Show count badge
+                        Text("\(tips.count)")
+                            .font(.caption2)
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(.purple.opacity(0.15))
+                            .foregroundStyle(.purple)
+                            .clipShape(Capsule())
+                    }
+
+                    Divider()
+
+                    // Each tip as a row
+                    ForEach(tips) { tip in
+                        HStack(alignment: .top, spacing: 12) {
+                            // Priority-colored icon
+                            ZStack {
+                                Circle()
+                                    .fill(tip.color.opacity(0.15))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: tip.icon)
+                                    .font(.callout)
+                                    .foregroundStyle(tip.color)
+                            }
+
+                            VStack(alignment: .leading, spacing: 3) {
+                                HStack {
+                                    Text(tip.title)
+                                        .font(.subheadline)
+                                        .fontWeight(.semibold)
+
+                                    if tip.priority == .urgent {
+                                        Text(NSLocalizedString("URGENT", comment: ""))
+                                            .font(.system(size: 9, weight: .bold))
+                                            .padding(.horizontal, 5)
+                                            .padding(.vertical, 1)
+                                            .background(.red)
+                                            .foregroundStyle(.white)
+                                            .clipShape(Capsule())
+                                    }
+                                }
+
+                                Text(tip.message)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+
+                            Spacer(minLength: 0)
+                        }
+                        .padding(.vertical, 2)
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(tips.first?.priority == .urgent ? .red.opacity(0.3) : .purple.opacity(0.2), lineWidth: 1)
+                        )
+                )
+            }
+        }
     }
 
     // MARK: - Helper: Detail Row
@@ -385,32 +686,31 @@ struct PlantDetailView: View {
 
     private var lastWateredText: String {
         guard let lastWatered = plant.lastWatered else {
-            return "Never"
+            return NSLocalizedString("Never", comment: "")
         }
-        // Show how many days ago it was watered
         let days = Calendar.current.dateComponents([.day], from: lastWatered, to: Date()).day ?? 0
         if days == 0 {
-            return "Today"
+            return NSLocalizedString("Today", comment: "")
         } else if days == 1 {
-            return "Yesterday"
+            return NSLocalizedString("Yesterday", comment: "")
         } else {
-            return "\(days) days ago"
+            return String(format: NSLocalizedString("%lld days ago", comment: ""), days)
         }
     }
 
     private var nextWateringText: String {
         guard let nextDate = plant.nextWateringDate else {
-            return "Water now!"
+            return NSLocalizedString("Water now!", comment: "")
         }
         let days = Calendar.current.dateComponents([.day], from: Date(), to: nextDate).day ?? 0
         if days < 0 {
-            return "Overdue by \(abs(days)) days!"
+            return String(format: NSLocalizedString("Overdue by %lld days!", comment: ""), abs(days))
         } else if days == 0 {
-            return "Today"
+            return NSLocalizedString("Today", comment: "")
         } else if days == 1 {
-            return "Tomorrow"
+            return NSLocalizedString("Tomorrow", comment: "")
         } else {
-            return "In \(days) days"
+            return String(format: NSLocalizedString("In %lld days", comment: ""), days)
         }
     }
 }

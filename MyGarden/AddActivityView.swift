@@ -15,6 +15,7 @@ struct AddActivityView: View {
 
     // Form state
     @State private var selectedType: CareType = .watered
+    @State private var selectedStatus: ActivityStatus = .done
     @State private var date: Date = Date()
     @State private var note: String = ""
 
@@ -26,13 +27,14 @@ struct AddActivityView: View {
         NavigationStack {
             Form {
 
-                // -- Logged by (if family members exist) --
-                if let member = FamilyManager.shared.activeMember {
+                // -- Logged by --
+                if let name = UserDefaults.standard.string(forKey: "userName"),
+                   !name.isEmpty {
                     Section {
                         HStack(spacing: 10) {
-                            Text(member.emoji)
-                                .font(.title3)
-                            Text(String(format: NSLocalizedString("Logging as %@", comment: ""), member.name))
+                            Image(systemName: "person.fill")
+                                .foregroundStyle(.secondary)
+                            Text(String(format: NSLocalizedString("Logging as %@", comment: ""), name))
                                 .font(.subheadline)
                             Spacer()
                         }
@@ -50,19 +52,48 @@ struct AddActivityView: View {
                     }
                     .padding(.vertical, 8)
                 } header: {
-                    Text("What did you do?")
+                    Text(NSLocalizedString("What did you do?", comment: ""))
                 }
 
-                // -- Date Picker --
+                // -- Done or Planned? --
+                // "Done" = log something you already did (default)
+                // "Planned" = schedule something for later
                 Section {
-                    DatePicker(
-                        "Date",
-                        selection: $date,
-                        in: ...Date(),
-                        displayedComponents: .date
-                    )
+                    Picker(NSLocalizedString("Status", comment: ""), selection: $selectedStatus) {
+                        Text(NSLocalizedString("Done", comment: "")).tag(ActivityStatus.done)
+                        Text(NSLocalizedString("Planned", comment: "")).tag(ActivityStatus.planned)
+                    }
+                    .pickerStyle(.segmented)
                 } header: {
-                    Text("When?")
+                    Text(NSLocalizedString("Done or Planned?", comment: ""))
+                } footer: {
+                    Text(selectedStatus == .planned
+                         ? NSLocalizedString("Choose 'Planned' to schedule this for later.", comment: "")
+                         : NSLocalizedString("Logging an activity you already completed.", comment: ""))
+                }
+
+                Section {
+                    if selectedStatus == .planned {
+                        // Planned = future dates
+                        DatePicker(
+                            NSLocalizedString("Date", comment: ""),
+                            selection: $date,
+                            in: Date()...,
+                            displayedComponents: .date
+                        )
+                    } else {
+                        // Done = past dates only
+                        DatePicker(
+                            NSLocalizedString("Date", comment: ""),
+                            selection: $date,
+                            in: ...Date(),
+                            displayedComponents: .date
+                        )
+                    }
+                } header: {
+                    Text(selectedStatus == .planned
+                         ? NSLocalizedString("When to do it?", comment: "")
+                         : NSLocalizedString("When?", comment: ""))
                 }
 
                 // -- Photo --
@@ -84,7 +115,7 @@ struct AddActivityView: View {
                                 self.selectedPhoto = nil
                                 self.savedPhotoID = nil
                             } label: {
-                                Label("Remove", systemImage: "xmark.circle.fill")
+                                Label(NSLocalizedString("Remove", comment: ""), systemImage: "xmark.circle.fill")
                                     .font(.caption)
                             }
                         }
@@ -99,26 +130,26 @@ struct AddActivityView: View {
                         savedPhotoID = PhotoManager.shared.save(image)
                     }
                 } header: {
-                    Text("Photo (optional)")
+                    Text(NSLocalizedString("Photo (optional)", comment: ""))
                 } footer: {
-                    Text("Take a photo of what you did — great for tracking progress!")
+                    Text(NSLocalizedString("Take a photo of what you did — great for tracking progress!", comment: ""))
                 }
 
                 // -- Notes --
                 Section {
-                    TextField("Optional details...", text: $note, axis: .vertical)
+                    TextField(NSLocalizedString("Optional details...", comment: ""), text: $note, axis: .vertical)
                         .lineLimit(3...6)
                 } header: {
-                    Text("Notes")
+                    Text(NSLocalizedString("Notes", comment: ""))
                 } footer: {
-                    Text("e.g. \"applied organic fertilizer\" or \"picked 2kg of cherries\"")
+                    Text(NSLocalizedString("e.g. \"applied organic fertilizer\" or \"picked 2kg of cherries\"", comment: ""))
                 }
             }
-            .navigationTitle("Log Activity")
+            .navigationTitle(NSLocalizedString("Log Activity", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("Cancel", comment: "")) {
                         // Clean up photo if user cancels
                         if let id = savedPhotoID {
                             PhotoManager.shared.delete(id: id)
@@ -127,13 +158,14 @@ struct AddActivityView: View {
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(NSLocalizedString("Save", comment: "")) {
                         let activity = CareActivity(
                             type: selectedType,
                             date: date,
                             note: note.isEmpty ? nil : note,
                             photoID: savedPhotoID,
-                            memberID: FamilyManager.shared.activeMember?.id
+                            memberName: UserDefaults.standard.string(forKey: "userName"),
+                            status: selectedStatus
                         )
                         onAdd(activity)
                         dismiss()

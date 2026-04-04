@@ -40,7 +40,11 @@ class PlantStore {
         plants.append(plant)
         save()
         scheduleReminderIfEnabled(for: plant)
-        scheduleCareAlertsIfEnabled(for: plant)
+        scheduleCareActionsIfEnabled(for: plant)
+        // CareAction Engine: generate planned activities for this new plant (mid-month addition)
+        if UserDefaults.standard.bool(forKey: "careActionEngineEnabled") {
+            generatePlannedActivitiesForNewPlant(plant)
+        }
     }
 
     // MARK: - Delete a Plant
@@ -73,17 +77,208 @@ class PlantStore {
             plants[index] = plant
             save()
             scheduleReminderIfEnabled(for: plant)
-            scheduleCareAlertsIfEnabled(for: plant)
+            scheduleCareActionsIfEnabled(for: plant)
         }
     }
 
     // MARK: - Water a Plant
+    // Updates lastWatered AND logs a watering activity in one step.
+    // This ensures both changes happen on the SAME copy of the plant
+    // (the store's copy) and get saved to disk together.
     func water(id: UUID) {
         if let index = plants.firstIndex(where: { $0.id == id }) {
             plants[index].lastWatered = Date()
+
+            // Log the watering as an activity (so it shows in Activity Feed)
+            let activity = CareActivity(
+                type: .watered,
+                date: Date(),
+                note: nil,
+                memberName: UserDefaults.standard.string(forKey: "userName")
+            )
+            plants[index].activities.append(activity)
+
             save()
             scheduleReminderIfEnabled(for: plants[index])
         }
+    }
+
+    // MARK: - Prune a Plant
+    // Same pattern as water() — updates state + logs activity in one step.
+    // NEW: If a "planned" pruning activity exists this month, transitions it to "done"
+    // instead of creating a duplicate. This is the planned→done flow.
+    func prune(id: UUID, note: String? = nil, photoID: String? = nil) {
+        if let index = plants.firstIndex(where: { $0.id == id }) {
+            plants[index].lastPruned = Date()
+            completePlannedOrCreateNew(plantIndex: index, type: .pruned, note: note, photoID: photoID)
+            save()
+        }
+    }
+
+    // MARK: - Fertilize a Plant
+    func fertilize(id: UUID, note: String? = nil, photoID: String? = nil) {
+        if let index = plants.firstIndex(where: { $0.id == id }) {
+            plants[index].lastFertilized = Date()
+            completePlannedOrCreateNew(plantIndex: index, type: .fertilized, note: note, photoID: photoID)
+            save()
+        }
+    }
+
+    // MARK: - Harvest a Plant
+    func harvest(id: UUID, note: String? = nil, photoID: String? = nil) {
+        if let index = plants.firstIndex(where: { $0.id == id }) {
+            plants[index].lastHarvested = Date()
+            completePlannedOrCreateNew(plantIndex: index, type: .harvested, note: note, photoID: photoID)
+            save()
+        }
+    }
+
+    // MARK: - Treat Pests
+    func treatPests(id: UUID, note: String? = nil, photoID: String? = nil) {
+        if let index = plants.firstIndex(where: { $0.id == id }) {
+            plants[index].lastTreatedPests = Date()
+            completePlannedOrCreateNew(plantIndex: index, type: .pestControl, note: note, photoID: photoID)
+            save()
+        }
+    }
+
+    // MARK: - Treat Diseases
+    func treatDiseases(id: UUID, note: String? = nil, photoID: String? = nil) {
+        if let index = plants.firstIndex(where: { $0.id == id }) {
+            plants[index].lastTreatedDiseases = Date()
+            completePlannedOrCreateNew(plantIndex: index, type: .diseaseControl, note: note, photoID: photoID)
+            save()
+        }
+    }
+
+    // MARK: - Planned → Done Transition
+    // Checks if a "planned" activity of this type exists for the current month.
+    // If yes: transitions it to "done" (fills in note, photo, who did it, completion date).
+    // If no: creates a brand-new "done" activity (same as before for manual logging).
+    //
+    // This is the KEY method that makes the planned/done system work.
+    // When Arborist auto-creates planned tasks at the start of the month,
+    // and the user later marks them done, this method connects the two.
+    private func completePlannedOrCreateNew(plantIndex: Int, type: CareType, note: String?, photoID: String?) {
+        let calendar = Calendar.current
+        let now = Date()
+
+        // Look for an existing planned activity of this type in the current month
+        if let actIdx = plants[plantIndex].activities.firstIndex(where: {
+            $0.type == type && $0.status == .planned &&
+            calendar.isDate($0.date, equalTo: now, toGranularity: .month)
+        }) {
+            // Found a planned activity — transition it to done
+            plants[plantIndex].activities[actIdx].status = .done
+            plants[plantIndex].activities[actIdx].completionDate = now
+            plants[plantIndex].activities[actIdx].note = note
+            plants[plantIndex].activities[actIdx].photoID = photoID
+            plants[plantIndex].activities[actIdx].memberName = UserDefaults.standard.string(forKey: "userName")
+        } else {
+            // No planned activity found — create a new "done" activity
+            let activity = CareActivity(
+                type: type,
+                date: now,
+                note: note,
+                photoID: photoID,
+                memberName: UserDefaults.standard.string(forKey: "userName"),
+                status: .done
+            )
+            plants[plantIndex].activities.append(activity)
+        }
+    }
+
+    // MARK: - CareAction Engine: Auto-Plan Activities
+    // Called on app launch. Reads TreeIntelligence for each plant and creates
+    // "planned" activities for everything that's due this month.
+    //
+    // This is the core of the CareAction Engine — it turns static species
+    // knowledge (TreeIntelligence) into actionable tasks for the user.
+    //
+    // Uses a UserDefaults key to avoid duplicate generation — only runs once per month.
+    // If a planned or done activity already exists for a care type this month, skips it.
+    func generatePlannedActivities() {
+        let calendar = Calendar.current
+        let now = Date()
+        let yearMonth = "\(calendar.component(.year, from: now))-\(calendar.component(.month, from: now))"
+
+        // Check if we already generated plans this month
+        let lastPlanned = UserDefaults.standard.string(forKey: "lastAutoPlannedMonth") ?? ""
+        if lastPlanned == yearMonth { return }
+
+        var changed = false
+
+        for index in plants.indices {
+            guard let species = TreeEncyclopedia.find(name: plants[index].name) else { continue }
+            let intel = species.intelligence
+
+            // Each care type that TreeIntelligence says is due this month
+            let careChecks: [(check: Bool, type: CareType)] = [
+                (intel.shouldPruneThisMonth(), .pruned),
+                (intel.shouldFertilizeThisMonth(), .fertilized),
+                (intel.isHarvestTime(), .harvested),
+                (intel.shouldTreatPestsThisMonth(), .pestControl),
+                (intel.shouldTreatDiseasesThisMonth(), .diseaseControl),
+            ]
+
+            for (shouldDo, careType) in careChecks {
+                guard shouldDo else { continue }
+
+                // Don't create if a planned or done activity already exists this month
+                let alreadyExists = plants[index].activities.contains { activity in
+                    activity.type == careType &&
+                    calendar.isDate(activity.date, equalTo: now, toGranularity: .month)
+                }
+                if !alreadyExists {
+                    let planned = CareActivity(
+                        type: careType,
+                        date: now,
+                        status: .planned
+                    )
+                    plants[index].activities.append(planned)
+                    changed = true
+                }
+            }
+        }
+
+        UserDefaults.standard.set(yearMonth, forKey: "lastAutoPlannedMonth")
+        if changed { save() }
+    }
+
+    // MARK: - Generate Plans for a Single Plant
+    // Called when a new plant is added mid-month — generates planned activities
+    // for just that plant, not all plants (since the others were already planned).
+    func generatePlannedActivitiesForNewPlant(_ plant: Plant) {
+        guard let index = plants.firstIndex(where: { $0.id == plant.id }),
+              let species = TreeEncyclopedia.find(name: plant.name) else { return }
+
+        let calendar = Calendar.current
+        let now = Date()
+        let intel = species.intelligence
+        var changed = false
+
+        let careChecks: [(check: Bool, type: CareType)] = [
+            (intel.shouldPruneThisMonth(), .pruned),
+            (intel.shouldFertilizeThisMonth(), .fertilized),
+            (intel.isHarvestTime(), .harvested),
+            (intel.shouldTreatPestsThisMonth(), .pestControl),
+            (intel.shouldTreatDiseasesThisMonth(), .diseaseControl),
+        ]
+
+        for (shouldDo, careType) in careChecks {
+            guard shouldDo else { continue }
+            let alreadyExists = plants[index].activities.contains { activity in
+                activity.type == careType &&
+                calendar.isDate(activity.date, equalTo: now, toGranularity: .month)
+            }
+            if !alreadyExists {
+                let planned = CareActivity(type: careType, date: now, status: .planned)
+                plants[index].activities.append(planned)
+                changed = true
+            }
+        }
+
+        if changed { save() }
     }
 
     // MARK: - Reminder Helpers
@@ -97,10 +292,10 @@ class PlantStore {
         }
     }
 
-    // Schedule seasonal care alerts (prune/fertilize/harvest) if enabled
-    private func scheduleCareAlertsIfEnabled(for plant: Plant) {
-        let careAlertsEnabled = UserDefaults.standard.bool(forKey: "careAlertsEnabled")
-        if careAlertsEnabled {
+    // Schedule CareAction Engine notifications (prune/fertilize/harvest) if enabled
+    private func scheduleCareActionsIfEnabled(for plant: Plant) {
+        let careActionEngineEnabled = UserDefaults.standard.bool(forKey: "careActionEngineEnabled")
+        if careActionEngineEnabled {
             NotificationManager.shared.scheduleCareAlerts(for: plant)
         }
     }
@@ -110,12 +305,12 @@ class PlantStore {
     // This catches cases where the app was closed and dates have changed.
     func rescheduleAllNotifications() {
         let remindersEnabled = UserDefaults.standard.bool(forKey: "remindersEnabled")
-        let careAlertsEnabled = UserDefaults.standard.bool(forKey: "careAlertsEnabled")
+        let careActionEngineEnabled = UserDefaults.standard.bool(forKey: "careActionEngineEnabled")
 
         if remindersEnabled {
             NotificationManager.shared.scheduleAllReminders(for: plants)
         }
-        if careAlertsEnabled {
+        if careActionEngineEnabled {
             NotificationManager.shared.scheduleAllCareAlerts(for: plants)
         }
     }

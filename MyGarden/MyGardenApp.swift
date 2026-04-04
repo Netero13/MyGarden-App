@@ -19,21 +19,54 @@ struct ArboristApp: App {
     // Track whether onboarding has been completed
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
+    // Track if language was auto-set (only do this ONCE on first ever launch)
+    @AppStorage("hasAutoSetLanguage") private var hasAutoSetLanguage = false
+
+    init() {
+        // MARK: - Smart Language Default
+        // On FIRST launch only, detect the user's region.
+        // If they're in Ukraine (or their device language is Ukrainian),
+        // set the app language to Ukrainian. Otherwise → English.
+        //
+        // This only runs ONCE. After that, the user can change
+        // the language manually in Settings.
+        if !UserDefaults.standard.bool(forKey: "hasAutoSetLanguage") {
+            let regionCode = Locale.current.region?.identifier ?? ""
+            let languageCode = Locale.current.language.languageCode?.identifier ?? ""
+
+            if regionCode == "UA" || languageCode == "uk" {
+                // User is in Ukraine or device is set to Ukrainian
+                UserDefaults.standard.set(["uk"], forKey: "AppleLanguages")
+            } else {
+                // Everyone else gets English
+                UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+            }
+            UserDefaults.standard.set(true, forKey: "hasAutoSetLanguage")
+            UserDefaults.standard.synchronize()
+        }
+
+        // MARK: - Migrate old UserDefaults key
+        // "careAlertsEnabled" was renamed to "careActionEngineEnabled".
+        // Carry over the old value so users don't lose their setting.
+        if UserDefaults.standard.bool(forKey: "careAlertsEnabled") {
+            UserDefaults.standard.set(true, forKey: "careActionEngineEnabled")
+            UserDefaults.standard.removeObject(forKey: "careAlertsEnabled")
+        }
+    }
+
     var body: some Scene {
         WindowGroup {
             if hasCompletedOnboarding {
-                // Returning user — show the main app
                 ContentView()
                     .environment(store)
                     .onAppear {
-                        // Reschedule all notifications on app launch.
-                        // This catches cases where dates changed while the app was closed.
-                        // For example: if a watering notification fired yesterday but the
-                        // user didn't open the app, we need to update the schedule.
                         store.rescheduleAllNotifications()
+                        // CareAction Engine: auto-plan monthly tasks (only if engine is ON)
+                        if UserDefaults.standard.bool(forKey: "careActionEngineEnabled") {
+                            store.generatePlannedActivities()
+                        }
                     }
             } else {
-                // First launch — show the welcome screen
                 OnboardingView {
                     withAnimation {
                         hasCompletedOnboarding = true

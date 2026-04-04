@@ -5,7 +5,7 @@ import PhotosUI
 // This is the form where users add a new plant to their garden.
 // It works in 3 steps:
 //   1. Pick a plant TYPE (herb, tree, bush, etc.)
-//   2. Pick a SPECIES from our catalog (Cherry, Basil, Oak, etc.)
+//   2. Pick a SPECIES from our encyclopedia (Cherry, Basil, Oak, etc.)
 //   3. Pick a VARIETY and set WATERING FREQUENCY
 //
 // Key SwiftUI concepts:
@@ -33,9 +33,10 @@ struct AddPlantView: View {
     @State private var customVariety: String = ""
     @State private var useCustomVariety: Bool = false
 
-    // Age
+    // Age — birth year is REQUIRED for accurate care recommendations
+    @State private var birthYear: Int = Calendar.current.component(.year, from: Date())
     @State private var plantingYear: Int = Calendar.current.component(.year, from: Date())
-    @State private var knowsPlantingYear: Bool = true
+    @State private var knowsPlantingYear: Bool = false
 
     // Watering
     @State private var selectedFrequency: WateringFrequency = .onceAWeek
@@ -76,12 +77,11 @@ struct AddPlantView: View {
                     wateringSection
                 }
             }
-            .navigationTitle("Add Plant")
+            .navigationTitle(NSLocalizedString("Add Plant", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                // Cancel button (top left)
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("Cancel", comment: "")) {
                         // Clean up photo if user cancels
                         if let id = savedPhotoID {
                             PhotoManager.shared.delete(id: id)
@@ -92,7 +92,7 @@ struct AddPlantView: View {
 
                 // Add button (top right) — only enabled when a species is selected
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
+                    Button(NSLocalizedString("Add", comment: "")) {
                         addPlant()
                     }
                     .disabled(selectedSpecies == nil)
@@ -134,26 +134,26 @@ struct AddPlantView: View {
             }
             .pickerStyle(.navigationLink)
         } header: {
-            Text("What type of plant?")
+            Text(NSLocalizedString("What type of plant?", comment: ""))
         } footer: {
-            Text("Choose the category that best fits your plant.")
+            Text(NSLocalizedString("Choose the category that best fits your plant.", comment: ""))
         }
     }
 
     // MARK: - Species Section
-    // Shows all plants from the catalog that match the selected type.
+    // Shows all plants from the encyclopedia that match the selected type.
     // Each option shows the name + Ukrainian name.
 
     private var speciesSection: some View {
         Section {
-            let species = PlantCatalog.species(for: selectedType)
+            let species = TreeEncyclopedia.species(for: selectedType)
 
             if species.isEmpty {
-                Text("No plants in this category yet")
+                Text(NSLocalizedString("No plants in this category yet", comment: ""))
                     .foregroundStyle(.secondary)
             } else {
                 Picker("Plant", selection: $selectedSpecies) {
-                    Text("Select a plant...")
+                    Text(NSLocalizedString("Select a plant...", comment: ""))
                         .tag(nil as PlantSpecies?)
 
                     ForEach(species) { sp in
@@ -164,26 +164,25 @@ struct AddPlantView: View {
                 .pickerStyle(.navigationLink)
             }
         } header: {
-            Text("Which plant?")
+            Text(NSLocalizedString("Which plant?", comment: ""))
         }
     }
 
     // MARK: - Variety Section
-    // Shows varieties from the catalog + option to type a custom one.
+    // Shows varieties from the encyclopedia + option to type a custom one.
 
     private var varietySection: some View {
         Section {
             if let species = selectedSpecies {
 
-                // Toggle: use catalog variety or type your own
-                Toggle("Custom variety", isOn: $useCustomVariety)
+                // Toggle: use encyclopedia variety or type your own
+                Toggle(NSLocalizedString("Custom variety", comment: ""), isOn: $useCustomVariety)
 
                 if useCustomVariety {
-                    // Free text input for custom variety name
-                    TextField("Enter variety name", text: $customVariety)
+                    TextField(NSLocalizedString("Enter variety name", comment: ""), text: $customVariety)
                         .textInputAutocapitalization(.words)
                 } else {
-                    // Pick from catalog varieties
+                    // Pick from encyclopedia varieties
                     Picker("Variety", selection: $selectedVariety) {
                         ForEach(species.varieties, id: \.self) { variety in
                             Text(variety).tag(variety)
@@ -193,9 +192,9 @@ struct AddPlantView: View {
                 }
             }
         } header: {
-            Text("Which variety?")
+            Text(NSLocalizedString("Which variety?", comment: ""))
         } footer: {
-            Text("Turn on 'Custom variety' if yours isn't in the list.")
+            Text(NSLocalizedString("Turn on 'Custom variety' if yours isn't in the list.", comment: ""))
         }
     }
 
@@ -205,25 +204,39 @@ struct AddPlantView: View {
 
     private var plantingYearSection: some View {
         Section {
-            Toggle("I know when it was planted", isOn: $knowsPlantingYear)
+            // Birth year — REQUIRED, always shown
+            Stepper(
+                String(format: NSLocalizedString("Born: %lld", comment: ""), birthYear),
+                value: $birthYear,
+                in: 1900...Calendar.current.component(.year, from: Date())
+            )
+
+            // Show calculated age
+            let age = Calendar.current.component(.year, from: Date()) - birthYear
+            HStack {
+                Image(systemName: "info.circle")
+                    .foregroundStyle(.orange)
+                Text(age == 0
+                     ? NSLocalizedString("Newly planted this year", comment: "")
+                     : String(format: NSLocalizedString("About %lld year(s) old", comment: ""), age))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            // Planting year — optional
+            Toggle(NSLocalizedString("I know when it was planted", comment: ""), isOn: $knowsPlantingYear)
 
             if knowsPlantingYear {
-                Stepper("Year: **\(plantingYear)**", value: $plantingYear, in: 1950...Calendar.current.component(.year, from: Date()))
-
-                // Show calculated age
-                let age = Calendar.current.component(.year, from: Date()) - plantingYear
-                HStack {
-                    Image(systemName: "info.circle")
-                        .foregroundStyle(.orange)
-                    Text(age == 0 ? NSLocalizedString("Newly planted this year", comment: "") : String(format: NSLocalizedString("About %lld year(s) old", comment: ""), age))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+                Stepper(
+                    String(format: NSLocalizedString("Planted: %lld", comment: ""), plantingYear),
+                    value: $plantingYear,
+                    in: 1950...Calendar.current.component(.year, from: Date())
+                )
             }
         } header: {
-            Text("When was it planted?")
+            Text(NSLocalizedString("How old is the tree?", comment: ""))
         } footer: {
-            Text("Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.", comment: "")
+            Text(NSLocalizedString("Birth year is used for age-based care. Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.", comment: ""))
         }
     }
 
@@ -250,7 +263,7 @@ struct AddPlantView: View {
                         self.selectedPhoto = nil
                         self.savedPhotoID = nil
                     } label: {
-                        Label("Remove", systemImage: "xmark.circle.fill")
+                        Label(NSLocalizedString("Remove", comment: ""), systemImage: "xmark.circle.fill")
                             .font(.caption)
                     }
                 }
@@ -266,20 +279,20 @@ struct AddPlantView: View {
                 savedPhotoID = PhotoManager.shared.save(image)
             }
         } header: {
-            Text("Photo (optional)")
+            Text(NSLocalizedString("Photo (optional)", comment: ""))
         } footer: {
-            Text("Take a photo or pick one from your library. You can always change it later.")
+            Text(NSLocalizedString("Take a photo or pick one from your library. You can always change it later.", comment: ""))
         }
     }
 
     // MARK: - Watering Section
     // Shows the frequency picker with friendly labels.
-    // The catalog's default is pre-selected, but user can adjust.
+    // The encyclopedia's default is pre-selected, but user can adjust.
 
     private var wateringSection: some View {
         Section {
             // Toggle between preset frequencies and custom days
-            Toggle("Custom schedule", isOn: $useCustomDays)
+            Toggle(NSLocalizedString("Custom schedule", comment: ""), isOn: $useCustomDays)
 
             if useCustomDays {
                 // Custom: user picks exact number of days with a stepper
@@ -295,7 +308,7 @@ struct AddPlantView: View {
                 .pickerStyle(.navigationLink)
             }
 
-            // Show what the catalog recommends
+            // Show what the encyclopedia recommends
             if let species = selectedSpecies {
                 HStack {
                     Image(systemName: "lightbulb.fill")
@@ -306,9 +319,9 @@ struct AddPlantView: View {
                 }
             }
         } header: {
-            Text("How often to water?")
+            Text(NSLocalizedString("How often to water?", comment: ""))
         } footer: {
-            Text("Based on Ukrainian climate (spring-summer). Adjust for your soil and conditions.")
+            Text(NSLocalizedString("Based on Ukrainian climate (spring-summer). Adjust for your soil and conditions.", comment: ""))
         }
     }
 
@@ -332,6 +345,7 @@ struct AddPlantView: View {
             type: species.type,
             variety: variety,
             photoID: savedPhotoID,
+            birthYear: birthYear,
             plantingYear: knowsPlantingYear ? plantingYear : nil,
             wateringFrequencyDays: wateringDays,
             lastWatered: nil,       // hasn't been watered yet

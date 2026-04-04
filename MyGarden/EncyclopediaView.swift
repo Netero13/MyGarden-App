@@ -1,19 +1,19 @@
 import SwiftUI
 
-// MARK: - Catalog View
-// The "Tree Encyclopedia" — a browsable catalog of all trees and bushes.
-// Users come here BEFORE planting to discover what's best for their garden.
+// MARK: - Encyclopedia View
+// The Tree Encyclopedia — a browsable knowledge base of all trees and bushes.
+// Users come here to discover species, learn about care, and add plants to their garden.
 //
 // Features:
 // - Filter by type (fruit tree / forest tree / bush)
 // - Search by name (English or Ukrainian)
 // - Quick-glance stat cards (height, hardiness, sun, harvest)
-// - Tap any species → full detail page with CareIntelligence
+// - Tap any species → full detail page with TreeIntelligence
 // - "Add to my garden" button on each species
 //
 // This makes Arborist useful for PLANNING, not just tracking.
 
-struct CatalogView: View {
+struct EncyclopediaView: View {
 
     @Environment(PlantStore.self) private var store
 
@@ -23,7 +23,7 @@ struct CatalogView: View {
     // Search
     @State private var searchText: String = ""
 
-    // Sheet: add plant from catalog
+    // Sheet: add plant from encyclopedia
     @State private var speciesForAdding: PlantSpecies?
 
     var body: some View {
@@ -56,11 +56,11 @@ struct CatalogView: View {
                     }
                 }
             }
-            .navigationTitle("Catalog")
+            .navigationTitle(NSLocalizedString("Encyclopedia", comment: ""))
             .navigationBarTitleDisplayMode(.large)
-            .searchable(text: $searchText, prompt: "Search trees & bushes...")
+            .searchable(text: $searchText, prompt: NSLocalizedString("Search trees & bushes...", comment: ""))
             .sheet(item: $speciesForAdding) { species in
-                AddPlantFromCatalog(species: species) { plant in
+                AddPlantFromEncyclopedia(species: species) { plant in
                     store.add(plant)
                 }
             }
@@ -74,7 +74,7 @@ struct CatalogView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 // "All" chip
-                filterChip(label: "All", icon: "tree.fill", isSelected: selectedFilter == nil) {
+                filterChip(label: NSLocalizedString("All", comment: ""), icon: "tree.fill", isSelected: selectedFilter == nil) {
                     selectedFilter = nil
                 }
 
@@ -225,11 +225,11 @@ struct CatalogView: View {
     // MARK: - Data
 
     private var filteredSpecies: [PlantSpecies] {
-        var result = PlantCatalog.all
+        var result = TreeEncyclopedia.all
 
         // Apply type filter
         if let filter = selectedFilter {
-            result = PlantCatalog.species(for: filter)
+            result = TreeEncyclopedia.species(for: filter)
         }
 
         // Apply search
@@ -290,7 +290,7 @@ struct SpeciesDetailView: View {
                 // -- Full Care Intelligence --
                 TreeIntelligenceView(
                     species: species,
-                    plantAge: nil  // browsing mode — no specific age
+                    plantAge: 0  // browsing mode — shows young tree info
                 )
 
                 // -- Add to Garden Button --
@@ -385,7 +385,7 @@ struct SpeciesDetailView: View {
                         .font(.caption)
                         .foregroundStyle(.orange)
                         .frame(width: 20)
-                    Text(String(format: NSLocalizedString("Harvest: %@", comment: ""), CareIntelligence.monthNames(from: months)))
+                    Text(String(format: NSLocalizedString("Harvest: %@", comment: ""), TreeIntelligence.monthNames(from: months)))
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -543,11 +543,11 @@ struct FlowLayout: Layout {
     }
 }
 
-// MARK: - Add Plant From Catalog
-// A simplified form for adding a plant when coming from the catalog.
+// MARK: - Add Plant From Encyclopedia
+// A simplified form for adding a plant when coming from the encyclopedia.
 // The species is already chosen — just pick variety, planting year, photo.
 
-struct AddPlantFromCatalog: View {
+struct AddPlantFromEncyclopedia: View {
 
     let species: PlantSpecies
     var onAdd: (Plant) -> Void
@@ -557,8 +557,9 @@ struct AddPlantFromCatalog: View {
     @State private var selectedVariety: String = ""
     @State private var customVariety: String = ""
     @State private var useCustomVariety: Bool = false
+    @State private var birthYear: Int = Calendar.current.component(.year, from: Date())
     @State private var plantingYear: Int = Calendar.current.component(.year, from: Date())
-    @State private var knowsPlantingYear: Bool = true
+    @State private var knowsPlantingYear: Bool = false
     @State private var selectedFrequency: WateringFrequency = .onceAWeek
     @State private var useCustomDays: Bool = false
     @State private var customDays: Int = 7
@@ -598,10 +599,10 @@ struct AddPlantFromCatalog: View {
 
                 // Variety
                 Section {
-                    Toggle("Custom variety", isOn: $useCustomVariety)
+                    Toggle(NSLocalizedString("Custom variety", comment: ""), isOn: $useCustomVariety)
 
                     if useCustomVariety {
-                        TextField("Enter variety name", text: $customVariety)
+                        TextField(NSLocalizedString("Enter variety name", comment: ""), text: $customVariety)
                             .textInputAutocapitalization(.words)
                     } else {
                         Picker("Variety", selection: $selectedVariety) {
@@ -612,32 +613,46 @@ struct AddPlantFromCatalog: View {
                         .pickerStyle(.navigationLink)
                     }
                 } header: {
-                    Text("Which variety?")
+                    Text(NSLocalizedString("Which variety?", comment: ""))
                 }
 
-                // Planting Year
+                // Birth Year (required) & Planting Year (optional)
                 Section {
-                    Toggle("I know when it was planted", isOn: $knowsPlantingYear)
+                    // Birth year — REQUIRED
+                    Stepper(
+                        String(format: NSLocalizedString("Born: %lld", comment: ""), birthYear),
+                        value: $birthYear,
+                        in: 1900...Calendar.current.component(.year, from: Date())
+                    )
+
+                    let age = Calendar.current.component(.year, from: Date()) - birthYear
+                    HStack {
+                        Image(systemName: "info.circle")
+                            .foregroundStyle(.orange)
+                        Text(age == 0
+                             ? NSLocalizedString("Newly planted this year", comment: "")
+                             : String(format: NSLocalizedString("About %lld year(s) old", comment: ""), age))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    // Planting year — optional
+                    Toggle(NSLocalizedString("I know when it was planted", comment: ""), isOn: $knowsPlantingYear)
 
                     if knowsPlantingYear {
-                        Stepper("Year: **\(plantingYear)**", value: $plantingYear, in: 1950...Calendar.current.component(.year, from: Date()))
-
-                        let age = Calendar.current.component(.year, from: Date()) - plantingYear
-                        HStack {
-                            Image(systemName: "info.circle")
-                                .foregroundStyle(.orange)
-                            Text(age == 0 ? "Newly planted this year" : "About \(age) year\(age == 1 ? "" : "s") old")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                        Stepper(
+                            String(format: NSLocalizedString("Planted: %lld", comment: ""), plantingYear),
+                            value: $plantingYear,
+                            in: 1950...Calendar.current.component(.year, from: Date())
+                        )
                     }
                 } header: {
-                    Text("When was it planted?")
+                    Text(NSLocalizedString("How old is the tree?", comment: ""))
                 }
 
                 // Watering
                 Section {
-                    Toggle("Custom schedule", isOn: $useCustomDays)
+                    Toggle(NSLocalizedString("Custom schedule", comment: ""), isOn: $useCustomDays)
 
                     if useCustomDays {
                         Stepper("Every **\(customDays)** days", value: $customDays, in: 1...60)
@@ -658,24 +673,24 @@ struct AddPlantFromCatalog: View {
                             .foregroundStyle(.secondary)
                     }
                 } header: {
-                    Text("Watering frequency")
+                    Text(NSLocalizedString("Watering frequency", comment: ""))
                 }
             }
-            .navigationTitle("Add \(species.name)")
+            .navigationTitle(String(format: NSLocalizedString("Add %@", comment: ""), species.name))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button(NSLocalizedString("Cancel", comment: "")) { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
+                    Button(NSLocalizedString("Add", comment: "")) {
                         addPlant()
                     }
                     .fontWeight(.bold)
                 }
             }
             .onAppear {
-                // Pre-fill from catalog
+                // Pre-fill from encyclopedia
                 if let first = species.varieties.first {
                     selectedVariety = first
                 }
@@ -697,6 +712,7 @@ struct AddPlantFromCatalog: View {
             name: species.name,
             type: species.type,
             variety: variety,
+            birthYear: birthYear,
             plantingYear: knowsPlantingYear ? plantingYear : nil,
             wateringFrequencyDays: wateringDays,
             lastWatered: nil,
@@ -709,6 +725,6 @@ struct AddPlantFromCatalog: View {
 }
 
 #Preview {
-    CatalogView()
+    EncyclopediaView()
         .environment(PlantStore())
 }

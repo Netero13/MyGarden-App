@@ -49,7 +49,7 @@ struct PlantPhotoView: View {
                             .font(size > 60 ? .title : .caption)
                             .foregroundStyle(.secondary)
                         if editable && size > 60 {
-                            Text("Add Photo")
+                            Text(NSLocalizedString("Add Photo", comment: ""))
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
                         }
@@ -66,14 +66,14 @@ struct PlantPhotoView: View {
         // Action sheet: Camera or Library?
         .confirmationDialog("Choose Photo", isPresented: $showingPhotoOptions) {
             if hasCamera {
-                Button("Take Photo") {
+                Button(NSLocalizedString("Take Photo", comment: "")) {
                     showingCamera = true
                 }
             }
-            Button("Choose from Library") {
+            Button(NSLocalizedString("Choose from Library", comment: "")) {
                 // Trigger the hidden PhotosPicker
             }
-            Button("Cancel", role: .cancel) {}
+            Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) {}
         }
         // Hidden PhotosPicker triggered by the action sheet
         .photosPicker(isPresented: Binding(
@@ -146,7 +146,7 @@ struct PlantPhotoHeader: View {
                         Image(systemName: "camera.fill")
                             .font(.title)
                             .foregroundStyle(.secondary)
-                        Text("Add Photo")
+                        Text(NSLocalizedString("Add Photo", comment: ""))
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -164,14 +164,14 @@ struct PlantPhotoHeader: View {
         }
         .confirmationDialog("Plant Photo", isPresented: $showingOptions) {
             if hasCamera {
-                Button("Take Photo") {
+                Button(NSLocalizedString("Take Photo", comment: "")) {
                     showingCamera = true
                 }
             }
-            Button("Choose from Library") {
+            Button(NSLocalizedString("Choose from Library", comment: "")) {
                 showingLibrary = true
             }
-            Button("Cancel", role: .cancel) {}
+            Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) {}
         }
         .fullScreenCover(isPresented: $showingCamera) {
             CameraView { image in

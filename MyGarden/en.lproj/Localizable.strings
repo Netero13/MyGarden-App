@@ -8,42 +8,21 @@
 "Settings" = "Settings";
 
 // MARK: - Onboarding
-"Welcome to MyGarden" = "Welcome to MyGarden";
-"Your personal gardening companion" = "Your personal gardening companion";
-"Swipe to continue" = "Swipe to continue";
 "What you can do" = "What you can do";
-"Track your plants" = "Track your plants";
-"Add plants, set watering schedules" = "Add plants, set watering schedules";
 "Watering reminders" = "Watering reminders";
-"Never forget to water again" = "Never forget to water again";
-"Garden map" = "Garden map";
-"Visual layout of your garden" = "Visual layout of your garden";
-"Family sharing" = "Family sharing";
-"Track who does what" = "Track who does what";
-"Photo journal" = "Photo journal";
-"Document your garden's growth" = "Document your garden's growth";
 "Live weather" = "Live weather";
-"Gardening tips based on weather" = "Gardening tips based on weather";
-"Who are you?" = "Who are you?";
-"Set up your profile so the family knows who did what" = "Set up your profile so the family knows who did what";
+"Swipe to continue" = "Swipe to continue";
+"What's your name?" = "What's your name?";
+"Your name will appear in the activity log" = "Your name will appear in the activity log";
 "Your name" = "Your name";
-"Role" = "Role";
 "Start Gardening!" = "Start Gardening!";
 "Skip for now" = "Skip for now";
 
 // MARK: - Plant List / Dashboard
-"My Garden 🌱" = "My Garden 🌱";
 "Search plants..." = "Search plants...";
-"No Plants Yet" = "No Plants Yet";
-"Tap + to add your first plant!" = "Tap + to add your first plant!";
-"All plants are happy!" = "All plants are happy!";
-"%lld plants in your garden" = "%lld plants in your garden";
-"%lld plant needs watering" = "%lld plant needs watering";
-"%lld plants need watering" = "%lld plants need watering";
 "Total Plants" = "Total Plants";
-"Need Water" = "Need Water";
-"All Good" = "All Good";
 "Activities" = "Activities";
+"Tap + to add your first plant!" = "Tap + to add your first plant!";
 "Water Today" = "Water Today";
 "Due today" = "Due today";
 "Never watered" = "Never watered";
@@ -75,7 +54,7 @@
 "Remove" = "Remove";
 
 // MARK: - Tree Intelligence
-"Care Intelligence" = "Care Intelligence";
+"Tree Intelligence" = "Tree Intelligence";
 "Newly planted" = "Newly planted";
 "%lld y old" = "%lld y old";
 "%@ Advice" = "%@ Advice";
@@ -102,7 +81,6 @@
 "Frost hardiness" = "Frost hardiness";
 "Ideal soil pH" = "Ideal soil pH";
 "Mature height" = "Mature height";
-"Watch Out For" = "Watch Out For";
 "Pests" = "Pests";
 "Diseases" = "Diseases";
 "Time to prune!" = "Time to prune!";
@@ -120,7 +98,6 @@
 // MARK: - Dashboard
 "No Trees Yet" = "No Trees Yet";
 "Tap + to add your first tree or bush!" = "Tap + to add your first tree or bush!";
-"Last: %@ — %@" = "Last: %@ — %@";
 "About %lld year(s) old" = "About %lld year(s) old";
 "Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.";
 "To receive watering reminders, please enable notifications in your iPhone Settings." = "To receive watering reminders, please enable notifications in your iPhone Settings.";
@@ -129,14 +106,13 @@
 "Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar." = "Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar.";
 "Weather is based on your device's current location. Turn off to pick a city manually." = "Weather is based on your device's current location. Turn off to pick a city manually.";
 "Pick your city for accurate weather and gardening tips, or turn on location for automatic detection." = "Pick your city for accurate weather and gardening tips, or turn on location for automatic detection.";
-"Activities you log will be tagged with this person's name." = "Activities you log will be tagged with this person's name.";
 "Notifications Disabled" = "Notifications Disabled";
 "Open Settings" = "Open Settings";
 "App" = "App";
 "Arborist" = "Arborist";
 
-// MARK: - Catalog
-"Catalog" = "Catalog";
+// MARK: - Encyclopedia
+"Encyclopedia" = "Encyclopedia";
 "Search trees & bushes..." = "Search trees & bushes...";
 "All" = "All";
 "In garden ✓" = "In garden ✓";
@@ -162,7 +138,6 @@
 
 // MARK: - Edit Plant
 "Planting Year" = "Planting Year";
-"Helps Arborist adjust care recommendations based on age." = "Helps Arborist adjust care recommendations based on age.";
 "Edit Plant" = "Edit Plant";
 "Save" = "Save";
 "Name & Variety" = "Name & Variety";
@@ -231,7 +206,6 @@
 "Activity Feed" = "Activity Feed";
 "No Activities Yet" = "No Activities Yet";
 "Start logging activities on your plants and they'll appear here." = "Start logging activities on your plants and they'll appear here.";
-"All Activities" = "All Activities";
 "This Week" = "This Week";
 "This Month" = "This Month";
 
@@ -242,12 +216,13 @@
 // MARK: - Garden Map
 "Garden Map" = "Garden Map";
 "Your garden is empty" = "Your garden is empty";
-"Long press & drag to move plants" = "Long press & drag to move plants";
 
 // MARK: - Settings
 "Notifications" = "Notifications";
 "Watering Reminders" = "Watering Reminders";
 "Remind me at" = "Remind me at";
+"Hour: %d:00" = "Hour: %d:00";
+"OK" = "OK";
 "Enable to get notified when your plants need watering." = "Enable to get notified when your plants need watering.";
 "Garden Stats" = "Garden Stats";
 "Total Plants" = "Total Plants";
@@ -261,22 +236,10 @@
 "Made in" = "Made in";
 "Ukraine 🇺🇦" = "Ukraine 🇺🇦";
 
-// MARK: - Family
-"Family" = "Family";
-"Family Members" = "Family Members";
-"Active Member" = "Active Member";
-"Currently active" = "Currently active";
-"No family members yet" = "No family members yet";
-"Add Family Member" = "Add Family Member";
-"Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member." = "Everyone has equal rights — anyone can water, add, or edit plants. Swipe left to remove a member.";
-"Add family members so everyone can log activities with their name." = "Add family members so everyone can log activities with their name.";
-"Add Member" = "Add Member";
-"Edit Member" = "Edit Member";
-"Who are you adding?" = "Who are you adding?";
+// MARK: - Profile
+"Profile" = "Profile";
 "Name" = "Name";
-"Choose Avatar" = "Choose Avatar";
-"Avatar" = "Avatar";
-"Preview" = "Preview";
+"Your name appears in the activity log." = "Your name appears in the activity log.";
 
 // MARK: - Weather Location
 "Weather Location" = "Weather Location";
@@ -298,11 +261,23 @@
 "Feed your %@ this month. Recommended: %@" = "Feed your %@ this month. Recommended: %@";
 "Harvest time! 🍎" = "Harvest time! 🍎";
 "Your %@ is ready to harvest this month. Enjoy!" = "Your %@ is ready to harvest this month. Enjoy!";
-"Seasonal Care Alerts" = "Seasonal Care Alerts";
+"CareAction Engine" = "CareAction Engine";
 "Smart Care" = "Smart Care";
 "Pruning reminders" = "Pruning reminders";
 "Fertilizing reminders" = "Fertilizing reminders";
 "Harvest alerts" = "Harvest alerts";
+"Pest treatment reminders" = "Pest treatment reminders";
+"Disease treatment reminders" = "Disease treatment reminders";
+
+// MARK: - Arborist Engine (AI/ML)
+"Arborist Insights" = "Arborist Insights";
+"Arborist Engine" = "Arborist Engine";
+"AI Intelligence" = "AI Intelligence";
+"Weather-based insights" = "Weather-based insights";
+"Patterns from your activity log" = "Patterns from your activity log";
+"Personalized recommendations" = "Personalized recommendations";
+"Arborist Engine analyzes weather, your activity history, and tree data to give you personalized, actionable insights for your garden." = "Arborist Engine analyzes weather, your activity history, and tree data to give you personalized, actionable insights for your garden.";
+"Enable smart insights that combine weather, your care history, and species data — tailored specifically to your garden." = "Enable smart insights that combine weather, your care history, and species data — tailored specifically to your garden.";
 
 // MARK: - Language
 "Language" = "Language";
@@ -313,7 +288,6 @@
 // MARK: - Photo
 "Take Photo" = "Take Photo";
 "Choose from Library" = "Choose from Library";
-"Change Photo" = "Change Photo";
 
 // MARK: - Watering Frequencies
 "Every day" = "Every day";
@@ -357,3 +331,168 @@
 "Use My Location" = "Use My Location";
 "Choose City" = "Choose City";
 "My Location" = "My Location";
+
+// MARK: - Weather Intelligence (Phase 2)
+"Weather Intelligence" = "Weather Intelligence";
+"Weather Alerts" = "Weather Alerts";
+"URGENT" = "URGENT";
+
+// Weather Tips - Rain
+"Skip watering today" = "Skip watering today";
+"It rained %.0f mm today — your %@ has enough water." = "It rained %.0f mm today — your %@ has enough water.";
+"Light rain today" = "Light rain today";
+"%.0f mm of rain — may not be enough for deep roots. Check soil before watering." = "%.0f mm of rain — may not be enough for deep roots. Check soil before watering.";
+"Rain expected tomorrow" = "Rain expected tomorrow";
+"%.0f mm expected — you can delay watering." = "%.0f mm expected — you can delay watering.";
+
+// Weather Tips - Frost
+"Dangerous frost!" = "Dangerous frost!";
+"Tonight drops to %.0f°C — below %@'s tolerance of %lld°C. Protect immediately!" = "Tonight drops to %.0f°C — below %@'s tolerance of %lld°C. Protect immediately!";
+"Frost tonight" = "Frost tonight";
+"%.0f°C expected. Your %@ can handle it, but young branches may be at risk." = "%.0f°C expected. Your %@ can handle it, but young branches may be at risk.";
+"Frost on %@" = "Frost on %@";
+"%.0f°C expected. Prepare protection for %@." = "%.0f°C expected. Prepare protection for %@.";
+
+// Weather Tips - Heat
+"Extreme heat!" = "Extreme heat!";
+"%.0f°C today — water %@ in the evening, not midday. Mulch to keep roots cool." = "%.0f°C today — water %@ in the evening, not midday. Mulch to keep roots cool.";
+"Hot day" = "Hot day";
+"%.0f°C — consider extra watering for %@, especially if young." = "%.0f°C — consider extra watering for %@, especially if young.";
+
+// Weather Tips - Humidity & Wind
+"Fungal risk" = "Fungal risk";
+"High humidity (%lld%%) + warmth — watch %@ for %@." = "High humidity (%lld%%) + warmth — watch %@ for %@.";
+"Strong wind!" = "Strong wind!";
+"Wind at %.0f km/h — stake young %@ and check supports." = "Wind at %.0f km/h — stake young %@ and check supports.";
+
+// Watering Adjustments
+"Skip watering" = "Skip watering";
+"Can delay" = "Can delay";
+"Water less" = "Water less";
+"Water normally" = "Water normally";
+"Water a bit more" = "Water a bit more";
+"Water extra!" = "Water extra!";
+
+// Dashboard Weather Alerts
+"Frost risk — %lld plants" = "Frost risk — %lld plants";
+"Tonight drops to %.0f°C. Check plant details for specifics." = "Tonight drops to %.0f°C. Check plant details for specifics.";
+"%lld plants: skip watering" = "%lld plants: skip watering";
+"%.0f mm rain today — nature is doing the work!" = "%.0f mm rain today — nature is doing the work!";
+"%lld plants: can delay watering" = "%lld plants: can delay watering";
+"Rain expected tomorrow — you can wait." = "Rain expected tomorrow — you can wait.";
+"%lld plants need extra water" = "%lld plants need extra water";
+"%.0f°C today — water in the evening for best results." = "%.0f°C today — water in the evening for best results.";
+"Fungal risk — %lld plants" = "Fungal risk — %lld plants";
+"Humidity %lld%% + warm — watch for disease." = "Humidity %lld%% + warm — watch for disease.";
+
+// MARK: - Birth Year & Age
+"Planted: %lld" = "Planted: %lld";
+"Born: %lld" = "Born: %lld";
+"Birth year = actual tree age. Planting year = when planted in your garden. Both help Arborist give better recommendations." = "Birth year = actual tree age. Planting year = when planted in your garden. Both help Arborist give better recommendations.";
+
+// MARK: - Onboarding (new strings)
+"Welcome to Arborist" = "Welcome to Arborist";
+"Smart care for your trees & bushes" = "Smart care for your trees & bushes";
+"Smart care intelligence" = "Smart care intelligence";
+"Know when to prune, fertilize & harvest" = "Know when to prune, fertilize & harvest";
+"Track your trees & bushes" = "Track your trees & bushes";
+"Age-based watering recommendations" = "Age-based watering recommendations";
+"Adjusted for age and season" = "Adjusted for age and season";
+"Pruning & fertilizer guides" = "Pruning & fertilizer guides";
+"Species-specific, month-by-month" = "Species-specific, month-by-month";
+"Pest & disease alerts" = "Pest & disease alerts";
+"Know what to watch for" = "Know what to watch for";
+"Seasonal tips for your climate" = "Seasonal tips for your climate";
+
+// MARK: - Additional missing strings
+"Needs water" = "Needs water";
+"Add Photo" = "Add Photo";
+"Other" = "Other";
+"Date" = "Date";
+"e.g. \"applied organic fertilizer\" or \"picked 2kg of cherries\"" = "e.g. \"applied organic fertilizer\" or \"picked 2kg of cherries\"";
+"%lld days ago" = "%lld days ago";
+"Overdue by %lld days!" = "Overdue by %lld days!";
+"In %lld days" = "In %lld days";
+"Are you sure you want to remove %@ from your garden? This can't be undone." = "Are you sure you want to remove %@ from your garden? This can't be undone.";
+"Currently: every %lld days" = "Currently: every %lld days";
+
+// MARK: - Smart Care (Dashboard)
+"How old is the tree?" = "How old is the tree?";
+"Birth year is used for age-based care. Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age." = "Birth year is used for age-based care. Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.";
+"%.0f°C — your young %@ needs extra water in this heat!" = "%.0f°C — your young %@ needs extra water in this heat!";
+"Prune" = "Prune";
+"Fertilize" = "Fertilize";
+"Pest Treatment" = "Pest Treatment";
+"Disease Treatment" = "Disease Treatment";
+
+// MARK: - Pest & Disease Treatment Notifications
+"Pest treatment time! 🐛" = "Pest treatment time! 🐛";
+"Treat your %@ for pests this month. %@" = "Treat your %@ for pests this month. %@";
+"Disease prevention time! 🛡️" = "Disease prevention time! 🛡️";
+"Treat your %@ for diseases this month. %@" = "Treat your %@ for diseases this month. %@";
+
+// MARK: - Activity Detail & Care Status
+"Disease Control" = "Disease Control";
+"Date" = "Date";
+"Done by" = "Done by";
+"Notes" = "Notes";
+"No notes" = "No notes";
+"Photo" = "Photo";
+"All" = "All";
+"Done" = "Done";
+"Care Due This Month" = "Care Due This Month";
+"Care Status" = "Care Status";
+"Pest Treated" = "Pest Treated";
+"Disease Treated" = "Disease Treated";
+"Not yet" = "Not yet";
+
+// MARK: - Care Action Detail (Intelligence Page)
+"Recommendation" = "Recommendation";
+"Schedule" = "Schedule";
+"No specific schedule — apply as needed." = "No specific schedule — apply as needed.";
+"Details" = "Details";
+"Common Pests" = "Common Pests";
+"Common Diseases" = "Common Diseases";
+"Young Tree Note" = "Young Tree Note";
+"Young trees need formative pruning to shape the crown. Focus on structure, not heavy cutting." = "Young trees need formative pruning to shape the crown. Focus on structure, not heavy cutting.";
+"Established Tree Note" = "Established Tree Note";
+"Established trees need maintenance pruning. Remove dead, crossing, and diseased branches." = "Established trees need maintenance pruning. Remove dead, crossing, and diseased branches.";
+"Young trees need more nitrogen for growth. Apply at half the mature rate to avoid burning roots." = "Young trees need more nitrogen for growth. Apply at half the mature rate to avoid burning roots.";
+"Soil" = "Soil";
+"Ideal pH: %@ · %@" = "Ideal pH: %@ · %@";
+"Not Ready Yet" = "Not Ready Yet";
+"This species typically starts bearing fruit at %lld years. Your tree is %lld years old." = "This species typically starts bearing fruit at %lld years. Your tree is %lld years old.";
+"Seasonal Tip" = "Seasonal Tip";
+"Mark as Done" = "Mark as Done";
+"Add Details (optional)" = "Add Details (optional)";
+"Optional notes..." = "Optional notes...";
+"e.g. \"applied copper fungicide\" or \"spotted aphids on lower branches\"" = "e.g. \"applied copper fungicide\" or \"spotted aphids on lower branches\"";
+"Done this month!" = "Done this month!";
+"Your %@ is %lld years old and should be producing fruit. Check branches for ripe fruit and pick when ready." = "Your %@ is %lld years old and should be producing fruit. Check branches for ripe fruit and pick when ready.";
+"Your %@ is still young (%lld years old). Typically starts bearing fruit at %lld years — about %lld more year(s) to go." = "Your %@ is still young (%lld years old). Typically starts bearing fruit at %lld years — about %lld more year(s) to go.";
+"Your %@ is ready to harvest this month. Pick fruit when ripe." = "Your %@ is ready to harvest this month. Pick fruit when ripe.";
+
+// MARK: - Activity Status (Planned / Done System)
+"Planned" = "Planned";
+"Missed" = "Missed";
+"Status" = "Status";
+"Completed" = "Completed";
+"Done or Planned?" = "Done or Planned?";
+"Choose 'Planned' to schedule this for later." = "Choose 'Planned' to schedule this for later.";
+"Logging an activity you already completed." = "Logging an activity you already completed.";
+"When to do it?" = "When to do it?";
+// MARK: - Dashboard Redesign
+"1 task for your garden" = "1 task for your garden";
+"%lld tasks for your garden" = "%lld tasks for your garden";
+"All caught up!" = "All caught up!";
+"Your garden is happy!" = "Your garden is happy!";
+"%lld done today" = "%lld done today";
+"%lld plants" = "%lld plants";
+
+"New Plant" = "New Plant";
+"Plan / Log Activity" = "Plan / Log Activity";
+"Choose Plant" = "Choose Plant";
+"No Plants Yet" = "No Plants Yet";
+"Add a plant first, then you can log activities." = "Add a plant first, then you can log activities.";
+
+"Add %@" = "Add %@";

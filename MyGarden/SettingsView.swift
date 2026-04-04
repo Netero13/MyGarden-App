@@ -18,7 +18,8 @@ struct SettingsView: View {
 
     // Settings saved to UserDefaults (persist across app launches)
     @AppStorage("remindersEnabled") private var remindersEnabled = false
-    @AppStorage("careAlertsEnabled") private var careAlertsEnabled = false
+    @AppStorage("careActionEngineEnabled") private var careActionEngineEnabled = false
+    @AppStorage("arboristEngineEnabled") private var arboristEngineEnabled = false
     @AppStorage("reminderHour") private var reminderHour = 9
     @AppStorage("reminderMinute") private var reminderMinute = 0
 
@@ -44,7 +45,7 @@ struct SettingsView: View {
                 // -- Watering Reminders --
                 Section {
                     Toggle(isOn: $remindersEnabled) {
-                        Label("Watering Reminders", systemImage: "bell.fill")
+                        Label(NSLocalizedString("Watering Reminders", comment: ""), systemImage: "bell.fill")
                     }
                     .onChange(of: remindersEnabled) {
                         handleReminderToggle()
@@ -53,80 +54,106 @@ struct SettingsView: View {
                     if remindersEnabled {
                         // Show reminder time picker
                         HStack {
-                            Label("Remind me at", systemImage: "clock.fill")
+                            Label(NSLocalizedString("Remind me at", comment: ""), systemImage: "clock.fill")
                             Spacer()
                             Text(formattedTime)
                                 .foregroundStyle(.blue)
                         }
 
                         // Hour and minute steppers
-                        Stepper("Hour: \(reminderHour):00", value: $reminderHour, in: 6...22)
+                        Stepper(String(format: NSLocalizedString("Hour: %d:00", comment: ""), reminderHour), value: $reminderHour, in: 6...22)
                             .onChange(of: reminderHour) {
                                 rescheduleAllReminders()
                             }
                     }
                 } header: {
-                    Text("Notifications")
+                    Text(NSLocalizedString("Notifications", comment: ""))
                 } footer: {
                     if remindersEnabled {
-                        Text("You'll get a reminder at \(formattedTime) on the day each plant needs watering.")
+                        Text(String(format: NSLocalizedString("You'll get a reminder at %@ on the day each plant needs watering.", comment: ""), formattedTime))
                     } else {
-                        Text("Enable to get notified when your plants need watering.")
+                        Text(NSLocalizedString("Enable to get notified when your plants need watering.", comment: ""))
                     }
                 }
 
-                // -- Seasonal Care Alerts --
+                // -- Arborist Engine (AI/ML) --
                 Section {
-                    Toggle(isOn: $careAlertsEnabled) {
-                        Label("Seasonal Care Alerts", systemImage: "leaf.arrow.triangle.circlepath")
-                    }
-                    .onChange(of: careAlertsEnabled) {
-                        handleCareAlertsToggle()
+                    Toggle(isOn: $arboristEngineEnabled) {
+                        Label(NSLocalizedString("Arborist Engine", comment: ""), systemImage: "brain.head.profile.fill")
                     }
 
-                    if careAlertsEnabled {
-                        // Show what types of alerts they'll get
+                    if arboristEngineEnabled {
                         VStack(alignment: .leading, spacing: 8) {
-                            careAlertRow(icon: "scissors", text: NSLocalizedString("Pruning reminders", comment: ""), color: .orange)
-                            careAlertRow(icon: "leaf.fill", text: NSLocalizedString("Fertilizing reminders", comment: ""), color: .green)
-                            careAlertRow(icon: "basket.fill", text: NSLocalizedString("Harvest alerts", comment: ""), color: .red)
+                            arboristFeatureRow(icon: "cloud.sun.fill", text: NSLocalizedString("Weather-based insights", comment: ""), color: .blue)
+                            arboristFeatureRow(icon: "chart.line.uptrend.xyaxis", text: NSLocalizedString("Patterns from your activity log", comment: ""), color: .purple)
+                            arboristFeatureRow(icon: "sparkles", text: NSLocalizedString("Personalized recommendations", comment: ""), color: .orange)
                         }
                         .padding(.vertical, 4)
                     }
                 } header: {
-                    Text("Smart Care")
+                    Text(NSLocalizedString("AI Intelligence", comment: ""))
                 } footer: {
-                    if careAlertsEnabled {
-                        Text("You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants.")
+                    if arboristEngineEnabled {
+                        Text(NSLocalizedString("Arborist Engine analyzes weather, your activity history, and tree data to give you personalized, actionable insights for your garden.", comment: ""))
                     } else {
-                        Text("Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar.")
+                        Text(NSLocalizedString("Enable smart insights that combine weather, your care history, and species data — tailored specifically to your garden.", comment: ""))
+                    }
+                }
+
+                // -- CareAction Engine --
+                Section {
+                    Toggle(isOn: $careActionEngineEnabled) {
+                        Label(NSLocalizedString("CareAction Engine", comment: ""), systemImage: "leaf.arrow.triangle.circlepath")
+                    }
+                    .onChange(of: careActionEngineEnabled) {
+                        handleCareActionEngineToggle()
+                    }
+
+                    if careActionEngineEnabled {
+                        // Show what types of alerts they'll get
+                        VStack(alignment: .leading, spacing: 8) {
+                            careActionRow(icon: "scissors", text: NSLocalizedString("Pruning reminders", comment: ""), color: .orange)
+                            careActionRow(icon: "leaf.fill", text: NSLocalizedString("Fertilizing reminders", comment: ""), color: .green)
+                            careActionRow(icon: "basket.fill", text: NSLocalizedString("Harvest alerts", comment: ""), color: .red)
+                            careActionRow(icon: "ant.fill", text: NSLocalizedString("Pest treatment reminders", comment: ""), color: .red)
+                            careActionRow(icon: "allergens", text: NSLocalizedString("Disease treatment reminders", comment: ""), color: .purple)
+                        }
+                        .padding(.vertical, 4)
+                    }
+                } header: {
+                    Text(NSLocalizedString("Smart Care", comment: ""))
+                } footer: {
+                    if careActionEngineEnabled {
+                        Text(NSLocalizedString("You'll get a reminder on the 1st of each month when it's time to prune, fertilize, or harvest your plants.", comment: ""))
+                    } else {
+                        Text(NSLocalizedString("Get notified when it's time to prune, fertilize, or harvest — based on each plant's care calendar.", comment: ""))
                     }
                 }
 
                 // -- Stats --
                 Section {
                     HStack {
-                        Label("Total Plants", systemImage: "leaf.fill")
+                        Label(NSLocalizedString("Total Plants", comment: ""), systemImage: "leaf.fill")
                         Spacer()
                         Text("\(store.plants.count)")
                             .foregroundStyle(.secondary)
                     }
 
                     HStack {
-                        Label("Need Watering", systemImage: "drop.fill")
+                        Label(NSLocalizedString("Need Watering", comment: ""), systemImage: "drop.fill")
                         Spacer()
                         Text("\(store.plants.filter { $0.needsWatering }.count)")
                             .foregroundStyle(.red)
                     }
 
                     HStack {
-                        Label("Total Activities", systemImage: "clock.arrow.circlepath")
+                        Label(NSLocalizedString("Total Activities", comment: ""), systemImage: "clock.arrow.circlepath")
                         Spacer()
                         Text("\(store.plants.reduce(0) { $0 + $1.activities.count })")
                             .foregroundStyle(.secondary)
                     }
                 } header: {
-                    Text("Garden Stats")
+                    Text(NSLocalizedString("Garden Stats", comment: ""))
                 }
 
                 // -- Weather Location --
@@ -146,12 +173,12 @@ struct SettingsView: View {
                             }
                         }
                     )) {
-                        Label("Use My Location", systemImage: "location.fill")
+                        Label(NSLocalizedString("Use My Location", comment: ""), systemImage: "location.fill")
                     }
 
                     // Show current location name
                     HStack {
-                        Label("Current", systemImage: "mappin.circle.fill")
+                        Label(NSLocalizedString("Current", comment: ""), systemImage: "mappin.circle.fill")
                             .foregroundStyle(.secondary)
                         Spacer()
                         Text(WeatherManager.shared.locationName)
@@ -163,38 +190,35 @@ struct SettingsView: View {
                         NavigationLink {
                             WeatherLocationPicker()
                         } label: {
-                            Label("Choose City", systemImage: "globe")
+                            Label(NSLocalizedString("Choose City", comment: ""), systemImage: "globe")
                         }
                     }
                 } header: {
-                    Text("Weather")
+                    Text(NSLocalizedString("Weather", comment: ""))
                 } footer: {
                     if LocationManager.shared.useGPSForWeather {
-                        Text("Weather is based on your device's current location. Turn off to pick a city manually.")
+                        Text(NSLocalizedString("Weather is based on your device's current location. Turn off to pick a city manually.", comment: ""))
                     } else {
-                        Text("Pick your city for accurate weather and gardening tips, or turn on location for automatic detection.")
+                        Text(NSLocalizedString("Pick your city for accurate weather and gardening tips, or turn on location for automatic detection.", comment: ""))
                     }
                 }
 
-                // -- Family --
+                // -- Your Name --
                 Section {
-                    NavigationLink {
-                        FamilySettingsView()
-                    } label: {
-                        HStack {
-                            Label("Family Members", systemImage: "person.3.fill")
-                            Spacer()
-                            if let member = FamilyManager.shared.activeMember {
-                                Text("\(member.emoji) \(member.name)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
+                    HStack {
+                        Label(NSLocalizedString("Name", comment: ""), systemImage: "person.fill")
+                        Spacer()
+                        TextField(NSLocalizedString("Your name", comment: ""), text: Binding(
+                            get: { UserDefaults.standard.string(forKey: "userName") ?? "" },
+                            set: { UserDefaults.standard.set($0, forKey: "userName") }
+                        ))
+                        .multilineTextAlignment(.trailing)
+                        .foregroundStyle(.secondary)
                     }
                 } header: {
-                    Text("Family")
+                    Text(NSLocalizedString("Profile", comment: ""))
                 } footer: {
-                    Text("Add family members so everyone can log activities with their name.")
+                    Text(NSLocalizedString("Your name appears in the activity log.", comment: ""))
                 }
 
                 // -- Language --
@@ -220,51 +244,51 @@ struct SettingsView: View {
                 // -- About --
                 Section {
                     HStack {
-                        Label("App", systemImage: "tree.fill")
+                        Label(NSLocalizedString("App", comment: ""), systemImage: "tree.fill")
                         Spacer()
-                        Text("Arborist")
+                        Text(NSLocalizedString("Arborist", comment: ""))
                             .foregroundStyle(.secondary)
                     }
 
                     HStack {
-                        Label("Version", systemImage: "info.circle")
+                        Label(NSLocalizedString("Version", comment: ""), systemImage: "info.circle")
                         Spacer()
                         Text("1.0")
                             .foregroundStyle(.secondary)
                     }
 
                     HStack {
-                        Label("Made in", systemImage: "flag.fill")
+                        Label(NSLocalizedString("Made in", comment: ""), systemImage: "flag.fill")
                         Spacer()
-                        Text("Ukraine 🇺🇦")
+                        Text(NSLocalizedString("Ukraine 🇺🇦", comment: ""))
                             .foregroundStyle(.secondary)
                     }
                 } header: {
-                    Text("About")
+                    Text(NSLocalizedString("About", comment: ""))
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(NSLocalizedString("Settings", comment: ""))
             .task {
                 // Check notification permission on appear
                 notificationPermission = await NotificationManager.shared.isAuthorized()
             }
             .alert(NSLocalizedString("Restart Required", comment: ""), isPresented: $showingRestartAlert) {
-                Button("OK") { }
+                Button(NSLocalizedString("OK", comment: "")) { }
             } message: {
                 Text(NSLocalizedString("Please close and reopen the app for the language change to take effect.", comment: ""))
             }
-            .alert("Notifications Disabled", isPresented: $showingPermissionAlert) {
-                Button("Open Settings") {
+            .alert(NSLocalizedString("Notifications Disabled", comment: ""), isPresented: $showingPermissionAlert) {
+                Button(NSLocalizedString("Open Settings", comment: "")) {
                     // Open iOS Settings so user can enable notifications
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
                     }
                 }
-                Button("Cancel", role: .cancel) {
+                Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) {
                     remindersEnabled = false
                 }
             } message: {
-                Text("To receive watering reminders, please enable notifications in your iPhone Settings.", comment: "")
+                Text(NSLocalizedString("To receive watering reminders, please enable notifications in your iPhone Settings.", comment: ""))
             }
         }
     }
@@ -299,16 +323,16 @@ struct SettingsView: View {
         if remindersEnabled {
             NotificationManager.shared.scheduleAllReminders(for: store.plants)
         }
-        // Care alerts also use reminderHour, so reschedule those too
-        if careAlertsEnabled {
+        // CareAction Engine also uses reminderHour, so reschedule those too
+        if careActionEngineEnabled {
             NotificationManager.shared.scheduleAllCareAlerts(for: store.plants)
         }
     }
 
-    // MARK: - Handle Care Alerts Toggle
+    // MARK: - Handle CareAction Engine Toggle
 
-    private func handleCareAlertsToggle() {
-        if careAlertsEnabled {
+    private func handleCareActionEngineToggle() {
+        if careActionEngineEnabled {
             // Request permission (same as watering reminders)
             Task {
                 let granted = await NotificationManager.shared.requestPermission()
@@ -317,7 +341,7 @@ struct SettingsView: View {
                 } else {
                     await MainActor.run {
                         showingPermissionAlert = true
-                        careAlertsEnabled = false
+                        careActionEngineEnabled = false
                     }
                 }
             }
@@ -327,10 +351,23 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Care Alert Row
-    // A small row showing one type of care alert with an icon.
+    // MARK: - CareAction Engine Feature Row
 
-    private func careAlertRow(icon: String, text: String, color: Color) -> some View {
+    private func careActionRow(icon: String, text: String, color: Color) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.caption)
+                .foregroundStyle(color)
+                .frame(width: 20)
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    // MARK: - Arborist Engine Feature Row
+
+    private func arboristFeatureRow(icon: String, text: String, color: Color) -> some View {
         HStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.caption)

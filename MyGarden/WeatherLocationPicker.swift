@@ -25,7 +25,7 @@ struct WeatherLocationPicker: View {
                     Text(WeatherManager.shared.locationName)
                         .fontWeight(.medium)
                     Spacer()
-                    Text("Current")
+                    Text(NSLocalizedString("Current", comment: ""))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -37,7 +37,7 @@ struct WeatherLocationPicker: View {
                     cityRow(city)
                 }
             } header: {
-                Label("Ukraine", systemImage: "flag.fill")
+                Label(NSLocalizedString("Ukraine", comment: ""), systemImage: "flag.fill")
             }
 
             // Other cities
@@ -46,12 +46,12 @@ struct WeatherLocationPicker: View {
                     cityRow(city)
                 }
             } header: {
-                Label("Other", systemImage: "globe")
+                Label(NSLocalizedString("Other", comment: ""), systemImage: "globe")
             }
         }
-        .navigationTitle("Weather Location")
+        .navigationTitle(NSLocalizedString("Weather Location", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $searchText, prompt: "Search city...")
+        .searchable(text: $searchText, prompt: NSLocalizedString("Search city...", comment: ""))
     }
 
     private func cityRow(_ city: CityLocation) -> some View {

@@ -40,6 +40,7 @@ struct EditPlantView: View {
     @State private var selectedFrequency: WateringFrequency = .onceAWeek
     @State private var useCustomDays: Bool = false
     @State private var customDays: Int = 7
+    @State private var birthYear: Int = Calendar.current.component(.year, from: Date())
     @State private var plantingYear: Int = Calendar.current.component(.year, from: Date())
     @State private var knowsPlantingYear: Bool = false
     @State private var currentPhoto: UIImage?
@@ -53,17 +54,40 @@ struct EditPlantView: View {
                 // -- Section 1: Name & Variety --
                 nameSection
 
-                // -- Section 2: Planting Year --
+                // -- Section 2: Birth Year (required) & Planting Year (optional) --
                 Section {
-                    Toggle("I know when it was planted", isOn: $knowsPlantingYear)
+                    // Birth year — REQUIRED
+                    Stepper(
+                        String(format: NSLocalizedString("Born: %lld", comment: ""), birthYear),
+                        value: $birthYear,
+                        in: 1900...Calendar.current.component(.year, from: Date())
+                    )
+
+                    let age = Calendar.current.component(.year, from: Date()) - birthYear
+                    HStack {
+                        Image(systemName: "info.circle")
+                            .foregroundStyle(.orange)
+                        Text(age == 0
+                             ? NSLocalizedString("Newly planted this year", comment: "")
+                             : String(format: NSLocalizedString("About %lld year(s) old", comment: ""), age))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    // Planting year — optional
+                    Toggle(NSLocalizedString("I know when it was planted", comment: ""), isOn: $knowsPlantingYear)
 
                     if knowsPlantingYear {
-                        Stepper("Year: **\(plantingYear)**", value: $plantingYear, in: 1950...Calendar.current.component(.year, from: Date()))
+                        Stepper(
+                            String(format: NSLocalizedString("Planted: %lld", comment: ""), plantingYear),
+                            value: $plantingYear,
+                            in: 1950...Calendar.current.component(.year, from: Date())
+                        )
                     }
                 } header: {
-                    Text("Planting Year")
+                    Text(NSLocalizedString("How old is the tree?", comment: ""))
                 } footer: {
-                    Text("Helps Arborist adjust care recommendations based on age.")
+                    Text(NSLocalizedString("Birth year is used for age-based care. Arborist adjusts watering, pruning, and fertilizer recommendations based on tree age.", comment: ""))
                 }
 
                 // -- Section 3: Photo --
@@ -75,12 +99,12 @@ struct EditPlantView: View {
                 // -- Section 4: Plant Info (read-only) --
                 infoSection
             }
-            .navigationTitle("Edit Plant")
+            .navigationTitle(NSLocalizedString("Edit Plant", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 // Cancel button — discards all changes
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button(NSLocalizedString("Cancel", comment: "")) {
                         // If user took a new photo but cancels, clean up the file
                         if let id = newPhotoID {
                             PhotoManager.shared.delete(id: id)
@@ -91,7 +115,7 @@ struct EditPlantView: View {
 
                 // Save button — applies all changes
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(NSLocalizedString("Save", comment: "")) {
                         savePlant()
                     }
                     .fontWeight(.bold)
@@ -114,23 +138,23 @@ struct EditPlantView: View {
             // Plant name — required
             // TextField = a text box the user can type into
             HStack {
-                Label("Name", systemImage: "leaf.fill")
+                Label(NSLocalizedString("Name", comment: ""), systemImage: "leaf.fill")
                     .foregroundStyle(.secondary)
-                TextField("Plant name", text: $name)
+                TextField(NSLocalizedString("Plant name", comment: ""), text: $name)
                     .multilineTextAlignment(.trailing)
             }
 
             // Variety — optional
             HStack {
-                Label("Variety", systemImage: "tag.fill")
+                Label(NSLocalizedString("Variety", comment: ""), systemImage: "tag.fill")
                     .foregroundStyle(.secondary)
-                TextField("Variety (optional)", text: $variety)
+                TextField(NSLocalizedString("Variety (optional)", comment: ""), text: $variety)
                     .multilineTextAlignment(.trailing)
             }
         } header: {
-            Text("Name & Variety")
+            Text(NSLocalizedString("Name & Variety", comment: ""))
         } footer: {
-            Text("The name is what you see in the plant list. Variety is shown below it.")
+            Text(NSLocalizedString("The name is what you see in the plant list. Variety is shown below it.", comment: ""))
         }
     }
 
@@ -160,7 +184,7 @@ struct EditPlantView: View {
                         currentPhoto = nil
                         photoChanged = true
                     } label: {
-                        Label("Remove", systemImage: "xmark.circle.fill")
+                        Label(NSLocalizedString("Remove", comment: ""), systemImage: "xmark.circle.fill")
                             .font(.caption)
                     }
                 }
@@ -177,14 +201,14 @@ struct EditPlantView: View {
                 photoChanged = true
             }
         } header: {
-            Text("Photo")
+            Text(NSLocalizedString("Photo", comment: ""))
         } footer: {
             if plant.photoID != nil && !photoChanged {
-                Text("Your plant already has a photo. You can change it or remove it.")
+                Text(NSLocalizedString("Your plant already has a photo. You can change it or remove it.", comment: ""))
             } else if photoChanged {
-                Text("Photo will be updated when you save.")
+                Text(NSLocalizedString("Photo will be updated when you save.", comment: ""))
             } else {
-                Text("Add a photo to recognize your plant easily.")
+                Text(NSLocalizedString("Add a photo to recognize your plant easily.", comment: ""))
             }
         }
     }
@@ -195,7 +219,7 @@ struct EditPlantView: View {
     private var wateringSection: some View {
         Section {
             // Toggle between friendly presets and exact number of days
-            Toggle("Custom schedule", isOn: $useCustomDays)
+            Toggle(NSLocalizedString("Custom schedule", comment: ""), isOn: $useCustomDays)
 
             if useCustomDays {
                 // Stepper = +/- buttons to adjust a number
@@ -214,14 +238,14 @@ struct EditPlantView: View {
             HStack {
                 Image(systemName: "info.circle")
                     .foregroundStyle(.blue)
-                Text("Currently: every \(plant.wateringFrequencyDays) days")
+                Text(String(format: NSLocalizedString("Currently: every %lld days", comment: ""), plant.wateringFrequencyDays))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
         } header: {
-            Text("Watering Frequency")
+            Text(NSLocalizedString("Watering Frequency", comment: ""))
         } footer: {
-            Text("Adjust based on the season and your soil conditions.")
+            Text(NSLocalizedString("Adjust based on the season and your soil conditions.", comment: ""))
         }
     }
 
@@ -233,7 +257,7 @@ struct EditPlantView: View {
         Section {
             // Plant type — can't be changed (would need a different plant)
             HStack {
-                Label("Type", systemImage: plant.type.icon)
+                Label(NSLocalizedString("Type", comment: ""), systemImage: plant.type.icon)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(plant.type.localizedName)
@@ -243,7 +267,7 @@ struct EditPlantView: View {
 
             // Date added — historical, can't change
             HStack {
-                Label("Added", systemImage: "calendar.badge.plus")
+                Label(NSLocalizedString("Added to Garden", comment: ""), systemImage: "calendar.badge.plus")
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(plant.dateAdded, style: .date)
@@ -251,15 +275,15 @@ struct EditPlantView: View {
 
             // Activity count — informational
             HStack {
-                Label("Activities", systemImage: "clock.arrow.circlepath")
+                Label(NSLocalizedString("Activities", comment: ""), systemImage: "clock.arrow.circlepath")
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text("\(plant.activities.count)")
             }
         } header: {
-            Text("Plant Info")
+            Text(NSLocalizedString("Plant Info", comment: ""))
         } footer: {
-            Text("Type and date added can't be changed.")
+            Text(NSLocalizedString("Type and date added can't be changed.", comment: ""))
         }
     }
 
@@ -287,7 +311,10 @@ struct EditPlantView: View {
         }
         customDays = plant.wateringFrequencyDays
 
-        // Load planting year
+        // Load birth year (always present)
+        birthYear = plant.birthYear
+
+        // Load planting year (optional)
         if let year = plant.plantingYear {
             plantingYear = year
             knowsPlantingYear = true
@@ -313,6 +340,7 @@ struct EditPlantView: View {
         updated.name = name.trimmingCharacters(in: .whitespaces)
         updated.variety = variety.trimmingCharacters(in: .whitespaces).isEmpty ? nil : variety.trimmingCharacters(in: .whitespaces)
         updated.wateringFrequencyDays = useCustomDays ? customDays : selectedFrequency.days
+        updated.birthYear = birthYear
         updated.plantingYear = knowsPlantingYear ? plantingYear : nil
 
         // Handle photo changes

@@ -75,7 +75,7 @@ struct GardenMapView: View {
                 zoomControlsOverlay
             }
             .background(Color(red: 0.15, green: 0.35, blue: 0.15))
-            .navigationTitle("Garden Map")
+            .navigationTitle(NSLocalizedString("Garden Map", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 // Left: grid toggle
@@ -623,12 +623,12 @@ struct GardenMapView: View {
                 .font(.system(size: 50))
                 .foregroundStyle(.white.opacity(0.7))
 
-            Text("Your garden is empty")
+            Text(NSLocalizedString("Your garden is empty", comment: ""))
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundStyle(.white.opacity(0.8))
 
-            Text("Tap + to add your first plant!")
+            Text(NSLocalizedString("Tap + to add your first plant!", comment: ""))
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.6))
         }

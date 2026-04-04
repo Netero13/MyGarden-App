@@ -458,7 +458,7 @@ struct WeatherLoadingView: View {
                 .foregroundStyle(.secondary)
                 .symbolEffect(.pulse)
 
-            Text("Loading weather...")
+            Text(NSLocalizedString("Loading weather...", comment: ""))
                 .font(.caption)
                 .foregroundStyle(.secondary)
 

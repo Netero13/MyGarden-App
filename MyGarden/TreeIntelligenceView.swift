@@ -11,7 +11,7 @@ import SwiftUI
 struct TreeIntelligenceView: View {
 
     let species: PlantSpecies
-    let plantAge: Int?  // nil = unknown age
+    let plantAge: Int
 
     var body: some View {
         VStack(spacing: 16) {
@@ -42,8 +42,8 @@ struct TreeIntelligenceView: View {
             // -- Environment Info --
             environmentCard
 
-            // -- Pests & Diseases --
-            problemsCard
+            // Pests & diseases info moved to CareActionDetailView —
+            // tap a pest/disease treatment task on the dashboard to see details.
         }
     }
 
@@ -53,19 +53,17 @@ struct TreeIntelligenceView: View {
         HStack {
             Image(systemName: "brain.head.profile.fill")
                 .foregroundStyle(.orange)
-            Text(NSLocalizedString("Care Intelligence", comment: ""))
+            Text(NSLocalizedString("Tree Intelligence", comment: ""))
                 .font(.headline)
             Spacer()
-            if let age = plantAge {
-                Text(age == 0 ? NSLocalizedString("Newly planted", comment: "") : String(format: NSLocalizedString("%lld y old", comment: ""), age))
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(.orange.opacity(0.15))
-                    .foregroundStyle(.orange)
-                    .clipShape(Capsule())
-            }
+            Text(plantAge == 0 ? NSLocalizedString("Newly planted", comment: "") : String(format: NSLocalizedString("%lld y old", comment: ""), plantAge))
+                .font(.caption)
+                .fontWeight(.medium)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(.orange.opacity(0.15))
+                .foregroundStyle(.orange)
+                .clipShape(Capsule())
         }
     }
 
@@ -166,12 +164,9 @@ struct TreeIntelligenceView: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                ageRow(String(format: NSLocalizedString("Young (0-%lld y)", comment: ""), intel.yearsToMature), days: intel.youngWateringDays, isActive: (plantAge ?? 0) < intel.yearsToMature)
-                ageRow(String(format: NSLocalizedString("Mature (%lld-7 y)", comment: ""), intel.yearsToMature), days: intel.matureWateringDays, isActive: {
-                    guard let age = plantAge else { return false }
-                    return age >= intel.yearsToMature && age < 7
-                }())
-                ageRow(NSLocalizedString("Established (7y+)", comment: ""), days: intel.establishedWateringDays, isActive: (plantAge ?? 0) >= 7)
+                ageRow(String(format: NSLocalizedString("Young (0-%lld y)", comment: ""), intel.yearsToMature), days: intel.youngWateringDays, isActive: plantAge < intel.yearsToMature)
+                ageRow(String(format: NSLocalizedString("Mature (%lld-7 y)", comment: ""), intel.yearsToMature), days: intel.matureWateringDays, isActive: plantAge >= intel.yearsToMature && plantAge < 7)
+                ageRow(NSLocalizedString("Established (7y+)", comment: ""), days: intel.establishedWateringDays, isActive: plantAge >= 7)
             }
         }
         .padding()
@@ -231,7 +226,7 @@ struct TreeIntelligenceView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(CareIntelligence.monthNames(from: species.intelligence.pruningMonths))
+                Text(TreeIntelligence.monthNames(from: species.intelligence.pruningMonths))
                     .font(.caption)
                     .fontWeight(.medium)
             }
@@ -281,7 +276,7 @@ struct TreeIntelligenceView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Text(CareIntelligence.monthNames(from: species.intelligence.fertilizerMonths))
+                    Text(TreeIntelligence.monthNames(from: species.intelligence.fertilizerMonths))
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -328,7 +323,7 @@ struct TreeIntelligenceView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Text(CareIntelligence.monthNames(from: months))
+                    Text(TreeIntelligence.monthNames(from: months))
                         .font(.caption)
                         .fontWeight(.medium)
                         .foregroundStyle(.orange)
@@ -342,23 +337,17 @@ struct TreeIntelligenceView: View {
                         .foregroundStyle(.secondary)
                     Spacer()
 
-                    if let age = plantAge {
-                        if age >= years {
-                            Text(NSLocalizedString("Should be bearing!", comment: ""))
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.green)
-                        } else {
-                            let remaining = years - age
-                            Text(String(format: NSLocalizedString("%lld more year(s)", comment: ""), remaining))
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .foregroundStyle(.orange)
-                        }
-                    } else {
-                        Text(String(format: NSLocalizedString("~%lld years", comment: ""), years))
+                    if plantAge >= years {
+                        Text(NSLocalizedString("Should be bearing!", comment: ""))
                             .font(.caption)
                             .fontWeight(.medium)
+                            .foregroundStyle(.green)
+                    } else {
+                        let remaining = years - plantAge
+                        Text(String(format: NSLocalizedString("%lld more year(s)", comment: ""), remaining))
+                            .font(.caption)
+                            .fontWeight(.medium)
+                            .foregroundStyle(.orange)
                     }
                 }
             }
@@ -407,48 +396,6 @@ struct TreeIntelligenceView: View {
                 .font(.caption)
                 .fontWeight(.medium)
         }
-    }
-
-    // MARK: - Pests & Diseases Card
-
-    private var problemsCard: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red)
-                Text(NSLocalizedString("Watch Out For", comment: ""))
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                Spacer()
-            }
-
-            Divider()
-
-            if !species.intelligence.commonPests.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(NSLocalizedString("Pests", comment: ""))
-                        .font(.caption)
-                        .fontWeight(.medium)
-                    Text(species.intelligence.commonPests.joined(separator: " · "))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            if !species.intelligence.commonDiseases.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(NSLocalizedString("Diseases", comment: ""))
-                        .font(.caption)
-                        .fontWeight(.medium)
-                    Text(species.intelligence.commonDiseases.joined(separator: " · "))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-        .padding()
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     // MARK: - Helpers
@@ -522,7 +469,7 @@ struct TreeIntelligenceView: View {
 #Preview {
     ScrollView {
         TreeIntelligenceView(
-            species: PlantCatalog.fruitTrees[0],  // Cherry
+            species: TreeEncyclopedia.fruitTrees[0],  // Cherry
             plantAge: 3
         )
         .padding()

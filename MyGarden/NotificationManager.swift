@@ -213,12 +213,12 @@ class NotificationManager {
     // Each alert ID looks like: "plantUUID-prune-3" (prune in March)
 
     // MARK: - Schedule Care Alerts for One Plant
-    // Looks up the plant's CareIntelligence and schedules alerts
+    // Looks up the plant's TreeIntelligence and schedules alerts
     // for pruning, fertilizing, and harvesting months.
 
     func scheduleCareAlerts(for plant: Plant) {
-        // Look up this plant's intelligence data from the catalog
-        guard let species = PlantCatalog.find(name: plant.name) else { return }
+        // Look up this plant's intelligence data from the encyclopedia
+        guard let species = TreeEncyclopedia.find(name: plant.name) else { return }
         let intel = species.intelligence
 
         // Cancel any existing care alerts for this plant
@@ -276,6 +276,38 @@ class NotificationManager {
                                      currentMonth: currentMonth, currentYear: currentYear)
             }
         }
+
+        // -- Pest treatment alerts --
+        for month in intel.pestTreatmentMonths {
+            let id = "\(plant.id.uuidString)-pest-\(month)"
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("Pest treatment time! 🐛", comment: "")
+            content.body = String(
+                format: NSLocalizedString("Treat your %@ for pests this month. %@", comment: ""),
+                plant.displayName,
+                intel.pestTreatmentTip
+            )
+            content.sound = .default
+
+            scheduleMonthlyAlert(id: id, month: month, content: content,
+                                 currentMonth: currentMonth, currentYear: currentYear)
+        }
+
+        // -- Disease treatment alerts --
+        for month in intel.diseaseTreatmentMonths {
+            let id = "\(plant.id.uuidString)-disease-\(month)"
+            let content = UNMutableNotificationContent()
+            content.title = NSLocalizedString("Disease prevention time! 🛡️", comment: "")
+            content.body = String(
+                format: NSLocalizedString("Treat your %@ for diseases this month. %@", comment: ""),
+                plant.displayName,
+                intel.diseaseTreatmentTip
+            )
+            content.sound = .default
+
+            scheduleMonthlyAlert(id: id, month: month, content: content,
+                                 currentMonth: currentMonth, currentYear: currentYear)
+        }
     }
 
     // MARK: - Schedule a Single Monthly Alert
@@ -322,7 +354,7 @@ class NotificationManager {
     }
 
     // MARK: - Cancel Care Alerts for a Plant
-    // Removes all prune/fertilize/harvest alerts for a specific plant.
+    // Removes all prune/fertilize/harvest/pest/disease alerts for a specific plant.
     // We generate all possible IDs and remove them in bulk.
 
     func cancelCareAlerts(for plantID: UUID) {
@@ -334,17 +366,108 @@ class NotificationManager {
             ids.append("\(base)-prune-\(month)")
             ids.append("\(base)-fert-\(month)")
             ids.append("\(base)-harvest-\(month)")
+            ids.append("\(base)-pest-\(month)")
+            ids.append("\(base)-disease-\(month)")
         }
 
         center.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
-    // MARK: - Schedule All Care Alerts
-    // Loops through all plants and schedules care alerts for each.
+    // MARK: - Schedule All Care Alerts (Smart Limit)
+    // iOS only allows 64 pending notifications total.
+    // Watering reminders get ~20 slots. That leaves ~40 for care alerts.
+    // Instead of scheduling ALL months for ALL plants (could be 200+),
+    // we collect all upcoming care alerts, sort by date (soonest first),
+    // and schedule only the top 40. This way the most urgent alerts always fire.
+
+    private let careAlertBudget = 40  // max care notifications (out of 64 total)
 
     func scheduleAllCareAlerts(for plants: [Plant]) {
+        // Step 1: Cancel all existing care alerts
         for plant in plants {
-            scheduleCareAlerts(for: plant)
+            cancelCareAlerts(for: plant.id)
+        }
+
+        // Step 2: Collect ALL possible care alerts with their dates
+        let now = Date()
+        let currentMonth = Calendar.current.component(.month, from: now)
+        let currentYear = Calendar.current.component(.year, from: now)
+
+        // A temporary struct to sort alerts by date before scheduling
+        struct PendingAlert {
+            let id: String
+            let content: UNMutableNotificationContent
+            let month: Int
+            let year: Int
+        }
+
+        var pending: [PendingAlert] = []
+
+        for plant in plants {
+            guard let species = TreeEncyclopedia.find(name: plant.name) else { continue }
+            let intel = species.intelligence
+
+            // Helper: create a pending alert
+            func add(suffix: String, month: Int, title: String, body: String) {
+                let id = "\(plant.id.uuidString)-\(suffix)-\(month)"
+                let content = UNMutableNotificationContent()
+                content.title = title
+                content.body = body
+                content.sound = .default
+                let year = month <= currentMonth ? currentYear + 1 : currentYear
+                pending.append(PendingAlert(id: id, content: content, month: month, year: year))
+            }
+
+            for month in intel.pruningMonths {
+                add(suffix: "prune", month: month,
+                    title: NSLocalizedString("Time to prune! ✂️", comment: ""),
+                    body: String(format: NSLocalizedString("Your %@ should be pruned this month. %@", comment: ""),
+                                 plant.displayName, intel.pruningTips))
+            }
+
+            for month in intel.fertilizerMonths {
+                add(suffix: "fert", month: month,
+                    title: NSLocalizedString("Fertilizing time! 🧪", comment: ""),
+                    body: String(format: NSLocalizedString("Feed your %@ this month. Recommended: %@", comment: ""),
+                                 plant.displayName, intel.fertilizerType))
+            }
+
+            if let harvestMonths = intel.harvestMonths {
+                for month in harvestMonths {
+                    add(suffix: "harvest", month: month,
+                        title: NSLocalizedString("Harvest time! 🍎", comment: ""),
+                        body: String(format: NSLocalizedString("Your %@ is ready to harvest this month. Enjoy!", comment: ""),
+                                     plant.displayName))
+                }
+            }
+
+            for month in intel.pestTreatmentMonths {
+                add(suffix: "pest", month: month,
+                    title: NSLocalizedString("Pest treatment time! 🐛", comment: ""),
+                    body: String(format: NSLocalizedString("Treat your %@ for pests this month. %@", comment: ""),
+                                 plant.displayName, intel.pestTreatmentTip))
+            }
+
+            for month in intel.diseaseTreatmentMonths {
+                add(suffix: "disease", month: month,
+                    title: NSLocalizedString("Disease prevention time! 🛡️", comment: ""),
+                    body: String(format: NSLocalizedString("Treat your %@ for diseases this month. %@", comment: ""),
+                                 plant.displayName, intel.diseaseTreatmentTip))
+            }
+        }
+
+        // Step 3: Sort by date (soonest first) and take only the budget
+        pending.sort { a, b in
+            if a.year != b.year { return a.year < b.year }
+            return a.month < b.month
+        }
+
+        let toSchedule = pending.prefix(careAlertBudget)
+
+        // Step 4: Schedule the top alerts
+        for alert in toSchedule {
+            scheduleMonthlyAlert(id: alert.id, month: alert.month, content: alert.content,
+                                 currentMonth: currentMonth, currentYear: currentYear)
         }
     }
 

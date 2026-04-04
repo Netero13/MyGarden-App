@@ -21,7 +21,6 @@ struct OnboardingView: View {
 
     // User input
     @State private var userName: String = ""
-    @State private var userEmoji: String = "🧑‍🌾"
 
     var body: some View {
         TabView(selection: $currentPage) {
@@ -53,17 +52,17 @@ struct OnboardingView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(.green)
 
-            Text("Welcome to Arborist")
+            Text(NSLocalizedString("Welcome to Arborist", comment: ""))
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("Smart care for your trees & bushes")
+            Text(NSLocalizedString("Smart care for your trees & bushes", comment: ""))
                 .font(.title3)
                 .foregroundStyle(.secondary)
 
             Spacer()
 
-            Text("Swipe to continue")
+            Text(NSLocalizedString("Swipe to continue", comment: ""))
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .padding(.bottom, 40)
@@ -77,34 +76,34 @@ struct OnboardingView: View {
         VStack(spacing: 20) {
             Spacer()
 
-            Text("What you can do")
+            Text(NSLocalizedString("What you can do", comment: ""))
                 .font(.title)
                 .fontWeight(.bold)
 
             VStack(alignment: .leading, spacing: 16) {
                 featureRow(icon: "brain.head.profile.fill", color: .orange,
-                          title: "Smart care intelligence",
-                          subtitle: "Know when to prune, fertilize & harvest")
+                          title: NSLocalizedString("Smart care intelligence", comment: ""),
+                          subtitle: NSLocalizedString("Know when to prune, fertilize & harvest", comment: ""))
 
                 featureRow(icon: "tree.fill", color: .green,
-                          title: "Track your trees & bushes",
-                          subtitle: "Age-based watering recommendations")
+                          title: NSLocalizedString("Track your trees & bushes", comment: ""),
+                          subtitle: NSLocalizedString("Age-based watering recommendations", comment: ""))
 
                 featureRow(icon: "drop.fill", color: .blue,
-                          title: "Watering reminders",
-                          subtitle: "Adjusted for age and season")
+                          title: NSLocalizedString("Watering reminders", comment: ""),
+                          subtitle: NSLocalizedString("Adjusted for age and season", comment: ""))
 
                 featureRow(icon: "scissors", color: .brown,
-                          title: "Pruning & fertilizer guides",
-                          subtitle: "Species-specific, month-by-month")
+                          title: NSLocalizedString("Pruning & fertilizer guides", comment: ""),
+                          subtitle: NSLocalizedString("Species-specific, month-by-month", comment: ""))
 
                 featureRow(icon: "exclamationmark.triangle.fill", color: .red,
-                          title: "Pest & disease alerts",
-                          subtitle: "Know what to watch for")
+                          title: NSLocalizedString("Pest & disease alerts", comment: ""),
+                          subtitle: NSLocalizedString("Know what to watch for", comment: ""))
 
                 featureRow(icon: "cloud.sun.fill", color: .cyan,
-                          title: "Live weather",
-                          subtitle: "Seasonal tips for your climate")
+                          title: NSLocalizedString("Live weather", comment: ""),
+                          subtitle: NSLocalizedString("Seasonal tips for your climate", comment: ""))
             }
             .padding(.horizontal, 24)
 
@@ -139,45 +138,25 @@ struct OnboardingView: View {
         VStack(spacing: 24) {
             Spacer()
 
-            Text(userEmoji)
+            Image(systemName: "person.crop.circle.fill")
                 .font(.system(size: 70))
+                .foregroundStyle(.green)
 
-            Text("Who are you?")
+            Text(NSLocalizedString("What's your name?", comment: ""))
                 .font(.title)
                 .fontWeight(.bold)
 
-            Text("Set up your profile so the family knows who did what")
+            Text(NSLocalizedString("Your name will appear in the activity log", comment: ""))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
             // Name field
-            TextField("Your name", text: $userName)
+            TextField(NSLocalizedString("Your name", comment: ""), text: $userName)
                 .textFieldStyle(.roundedBorder)
                 .textInputAutocapitalization(.words)
                 .padding(.horizontal, 40)
-
-            // Emoji picker — pick your avatar
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 50))], spacing: 8) {
-                ForEach(emojiOptions, id: \.self) { e in
-                    Button {
-                        userEmoji = e
-                    } label: {
-                        Text(e)
-                            .font(.title2)
-                            .frame(width: 44, height: 44)
-                            .background(userEmoji == e ? .green.opacity(0.2) : .clear)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(userEmoji == e ? .green : .clear, lineWidth: 2)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-            .padding(.horizontal, 24)
 
             Spacer()
 
@@ -185,7 +164,7 @@ struct OnboardingView: View {
             Button {
                 completeOnboarding()
             } label: {
-                Text("Start Gardening!")
+                Text(NSLocalizedString("Start Gardening!", comment: ""))
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -196,8 +175,8 @@ struct OnboardingView: View {
             .disabled(userName.trimmingCharacters(in: .whitespaces).isEmpty)
             .padding(.horizontal, 24)
 
-            // Skip button for those who don't want a profile yet
-            Button("Skip for now") {
+            // Skip button for those who don't want a name yet
+            Button(NSLocalizedString("Skip for now", comment: "")) {
                 onComplete()
             }
             .font(.caption)
@@ -210,23 +189,13 @@ struct OnboardingView: View {
     // MARK: - Complete Onboarding
 
     private func completeOnboarding() {
-        // Create the first family member
+        // Save the user's name to UserDefaults
         let name = userName.trimmingCharacters(in: .whitespaces)
         if !name.isEmpty {
-            let member = FamilyMember(
-                name: name,
-                emoji: userEmoji
-            )
-            FamilyManager.shared.add(member)
+            UserDefaults.standard.set(name, forKey: "userName")
         }
 
         onComplete()
-    }
-
-    // Emoji options for avatar selection
-    private var emojiOptions: [String] {
-        ["🧑‍🌾", "👨‍🌾", "👩‍🌾", "👨", "👩", "👦", "👧", "👴", "👵", "🧑",
-         "👱", "🌻"]
     }
 }
 

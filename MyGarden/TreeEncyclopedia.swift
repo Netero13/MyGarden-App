@@ -1,8 +1,10 @@
 import Foundation
 
-// MARK: - Care Intelligence
-// The "brain" of Arborist — detailed care data for each tree/bush species.
-// This tells the user WHEN to do WHAT and WHY.
+// MARK: - Tree Intelligence
+// The knowledge base / encyclopedia of Arborist — detailed species data for
+// every tree and bush. Contains everything known about each species: care
+// schedules, environment requirements, pests, diseases, seasonal tips.
+// CareAction Engine reads this data to build personalized recommendations.
 //
 // All data is based on Ukrainian continental climate:
 // - Climate zone: mostly 5b-7a (USDA)
@@ -13,7 +15,7 @@ import Foundation
 // Age-based care is critical: a 1-year-old cherry needs MUCH more
 // water than a 10-year-old one. Arborist adjusts automatically.
 
-struct CareIntelligence: Codable {
+struct TreeIntelligence: Codable {
 
     // MARK: - Pruning
     let pruningMonths: [Int]           // which months to prune (1-12)
@@ -51,6 +53,14 @@ struct CareIntelligence: Codable {
     // MARK: - Common Problems
     let commonPests: [String]          // pests to watch for
     let commonDiseases: [String]       // diseases to watch for
+
+    // MARK: - Pest & Disease Treatments
+    // When to apply preventive treatments — works like fertilizerMonths.
+    // The app sends notifications on the 1st of each month.
+    let pestTreatmentMonths: [Int]     // months to spray for pests (1-12)
+    let pestTreatmentTip: String       // what to apply / how to treat
+    let diseaseTreatmentMonths: [Int]  // months to treat for diseases (1-12)
+    let diseaseTreatmentTip: String    // what fungicide / treatment to use
 
     // MARK: - Computed: Watering for Age
     // Returns the recommended watering frequency based on tree age.
@@ -95,6 +105,18 @@ struct CareIntelligence: Codable {
         return months.contains(month)
     }
 
+    // MARK: - Computed: Should Treat Pests Now?
+    func shouldTreatPestsThisMonth() -> Bool {
+        let month = Calendar.current.component(.month, from: Date())
+        return pestTreatmentMonths.contains(month)
+    }
+
+    // MARK: - Computed: Should Treat Diseases Now?
+    func shouldTreatDiseasesThisMonth() -> Bool {
+        let month = Calendar.current.component(.month, from: Date())
+        return diseaseTreatmentMonths.contains(month)
+    }
+
     // MARK: - Month Names Helper
     static func monthNames(from months: [Int]) -> String {
         let formatter = DateFormatter()
@@ -103,7 +125,7 @@ struct CareIntelligence: Codable {
 }
 
 // MARK: - Plant Species
-// Each species in the catalog with its care intelligence.
+// Each species in the catalog with its Tree Intelligence data.
 
 struct PlantSpecies: Identifiable, Codable {
     var id = UUID()
@@ -112,14 +134,14 @@ struct PlantSpecies: Identifiable, Codable {
     var type: PlantType           // .fruitTree, .forestTree, or .bush
     var defaultWateringDays: Int  // default watering frequency
     var varieties: [String]       // list of varieties to choose from
-    var intelligence: CareIntelligence  // the smart care data
+    var intelligence: TreeIntelligence  // species encyclopedia data
 }
 
-// MARK: - The Full Catalog
-// All trees and bushes the user can choose from.
-// Each species includes DEEP care intelligence for Ukrainian climate.
+// MARK: - The Full Encyclopedia
+// All trees and bushes known to Arborist.
+// Each species includes DEEP Tree Intelligence for Ukrainian climate.
 
-struct PlantCatalog {
+struct TreeEncyclopedia {
 
     // MARK: - Forest Trees (Лісові / Декоративні дерева)
     // Watering data is for YOUNG / newly planted trees (first 2-3 years).
@@ -130,7 +152,7 @@ struct PlantCatalog {
             name: "Oak", ukrainianName: "Дуб", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Звичайний", "Червоний", "Скельний", "Болотний"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 11],
                 pruningTips: "Remove dead and crossing branches in late winter. Shape young trees to a central leader. Mature oaks rarely need pruning — only remove damaged limbs.",
                 fertilizerMonths: [4, 5],
@@ -150,14 +172,18 @@ struct PlantCatalog {
                 autumnTip: "Don't remove fallen leaves — they're natural mulch. Apply final fertilizer in early October.",
                 winterTip: "Oaks are very hardy. Wrap young tree trunks to prevent frost cracks and sunscald.",
                 commonPests: ["Oak leaf roller", "Gypsy moth", "Oak bark beetle"],
-                commonDiseases: ["Powdery mildew", "Oak wilt", "Root rot"]
+                commonDiseases: ["Powdery mildew", "Oak wilt", "Root rot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Inspect for gypsy moth egg masses in spring. Spray with Bt (Bacillus thuringiensis) if caterpillars appear.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Apply copper fungicide in early spring if powdery mildew was present last year."
             )
         ),
         PlantSpecies(
             name: "Birch", ukrainianName: "Береза", type: .forestTree,
             defaultWateringDays: 5,
             varieties: ["Повисла", "Пухнаста", "Карликова"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [7, 8],
                 pruningTips: "ONLY prune in summer! Birch bleeds heavily if pruned in spring. Remove dead branches and light shaping only.",
                 fertilizerMonths: [4, 6],
@@ -177,14 +203,18 @@ struct PlantCatalog {
                 autumnTip: "Enjoy the golden autumn foliage! Reduce watering as leaves drop. Clean up fallen leaves if they have spots (disease prevention).",
                 winterTip: "Beautiful white bark stands out in winter. Protect young trunks from deer and rabbits with wire guards.",
                 commonPests: ["Birch leaf miner", "Bronze birch borer", "Aphids"],
-                commonDiseases: ["Birch dieback", "Rust", "Leaf spot"]
+                commonDiseases: ["Birch dieback", "Rust", "Leaf spot"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Watch for leaf miners — remove affected leaves. Spray insecticidal soap for aphids.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply fungicide if rust or leaf spot appeared last year. Keep area clean."
             )
         ),
         PlantSpecies(
             name: "Pine", ukrainianName: "Сосна", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Звичайна", "Кримська", "Гірська", "Веймутова"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [5, 6],
                 pruningTips: "Prune 'candles' (new growth tips) in late spring to control size. Remove dead branches any time. Never cut back into old wood — it won't regrow.",
                 fertilizerMonths: [4],
@@ -204,14 +234,18 @@ struct PlantCatalog {
                 autumnTip: "Normal for inner needles to turn yellow and drop — this is natural shedding. Don't worry unless outer needles yellow too.",
                 winterTip: "Shake heavy snow off branches to prevent breakage. Pines are extremely cold-hardy.",
                 commonPests: ["Pine bark beetle", "Pine sawfly", "Pine processionary moth"],
-                commonDiseases: ["Pine needle cast", "Dothistroma blight", "Root rot"]
+                commonDiseases: ["Pine needle cast", "Dothistroma blight", "Root rot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Inspect for processionary moth nests in spring. Remove and destroy them. Spray bark beetle traps.",
+                diseaseTreatmentMonths: [4, 9],
+                diseaseTreatmentTip: "Apply copper spray in early spring for needle cast prevention."
             )
         ),
         PlantSpecies(
             name: "Linden", ukrainianName: "Липа", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Серцелиста", "Дрібнолиста", "Європейська"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [1, 2, 3],
                 pruningTips: "Prune in late winter while dormant. Linden tolerates heavy pruning well — popular for formal shaping. Remove suckers from the base.",
                 fertilizerMonths: [4, 5],
@@ -231,14 +265,18 @@ struct PlantCatalog {
                 autumnTip: "Collect fallen leaves for compost. Apply mulch layer before winter. Check for aphid damage and plan treatment for spring.",
                 winterTip: "Very hardy tree. Protect young trunk from frost cracks with white tree wrap.",
                 commonPests: ["Linden aphid", "Spider mites", "Linden moth"],
-                commonDiseases: ["Leaf spot", "Anthracnose", "Sooty mold (from aphids)"]
+                commonDiseases: ["Leaf spot", "Anthracnose", "Sooty mold (from aphids)"],
+                pestTreatmentMonths: [5, 6, 7],
+                pestTreatmentTip: "Spray insecticidal soap for aphids — linden aphid is very common. Treat early before honeydew appears.",
+                diseaseTreatmentMonths: [5, 6],
+                diseaseTreatmentTip: "Apply fungicide after prolonged rain to prevent leaf spot and anthracnose."
             )
         ),
         PlantSpecies(
             name: "Maple", ukrainianName: "Клен", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Гостролистий", "Явір", "Татарський", "Цукровий"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [7, 8],
                 pruningTips: "Prune in summer only — maple bleeds heavily in spring like birch. Remove dead branches and crossing limbs. Shape young trees lightly.",
                 fertilizerMonths: [4, 5],
@@ -258,14 +296,18 @@ struct PlantCatalog {
                 autumnTip: "Enjoy the stunning autumn colors! Collect seeds (helicopters) if you don't want seedlings everywhere. Apply final fertilizer.",
                 winterTip: "Hardy tree. Protect young trunks from frost. Good time to plan pruning for next summer.",
                 commonPests: ["Maple aphid", "Maple borer", "Scale insects"],
-                commonDiseases: ["Tar spot", "Verticillium wilt", "Anthracnose"]
+                commonDiseases: ["Tar spot", "Verticillium wilt", "Anthracnose"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Check for scale insects on branches. Spray dormant oil in early spring if present last year.",
+                diseaseTreatmentMonths: [5, 6, 7],
+                diseaseTreatmentTip: "Tar spot is common but usually cosmetic. Apply fungicide only if severe. Clean up spotted leaves in autumn."
             )
         ),
         PlantSpecies(
             name: "Spruce", ukrainianName: "Ялина", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Європейська", "Блакитна", "Сербська", "Коніка"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [5, 6],
                 pruningTips: "Trim new growth in late spring for shaping. Never cut back to bare wood — spruce won't regrow from old branches. Remove dead lower branches as needed.",
                 fertilizerMonths: [4, 5],
@@ -285,14 +327,18 @@ struct PlantCatalog {
                 autumnTip: "Water well before ground freezes — evergreens lose moisture all winter through needles. Apply a layer of bark mulch.",
                 winterTip: "Brush heavy snow off branches. Watch for salt spray damage near roads. Blue spruce varieties are especially hardy.",
                 commonPests: ["Spruce spider mite", "Spruce bark beetle", "Spruce budworm"],
-                commonDiseases: ["Needle cast", "Cytospora canker", "Root rot"]
+                commonDiseases: ["Needle cast", "Cytospora canker", "Root rot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Spray for spruce spider mites in dry spring weather. Check needle undersides.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply copper fungicide if needle rust was present. Improve air circulation around tree."
             )
         ),
         PlantSpecies(
             name: "Beech", ukrainianName: "Бук", type: .forestTree,
             defaultWateringDays: 5,
             varieties: ["Лісовий", "Східний", "Пурпурний"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 8],
                 pruningTips: "Prune in late winter or late summer. Beech responds well to pruning — excellent for hedges. Remove dead branches and shape crown gradually.",
                 fertilizerMonths: [4, 5],
@@ -312,14 +358,18 @@ struct PlantCatalog {
                 autumnTip: "Beautiful golden-bronze autumn color. Some leaves persist through winter (marcescent). Apply mulch before frost.",
                 winterTip: "Moderate hardiness. Protect young trees from harsh winds. Dead leaves on branches provide some insulation.",
                 commonPests: ["Beech scale", "Woolly beech aphid", "Bark beetles"],
-                commonDiseases: ["Beech bark disease", "Leaf spot", "Phytophthora root rot"]
+                commonDiseases: ["Beech bark disease", "Leaf spot", "Phytophthora root rot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Inspect for beech scale in spring. Spray with horticultural oil if present. Remove woolly aphid colonies.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Apply copper fungicide in early spring for beech bark disease prevention. Improve drainage to prevent Phytophthora."
             )
         ),
         PlantSpecies(
             name: "Ash", ukrainianName: "Ясен", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Звичайний", "Вузьколистий", "Пенсильванський"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [11, 12, 1, 2],
                 pruningTips: "Prune while fully dormant (November-February). Remove crossing branches. Ash has a tendency to form co-dominant leaders — train to single leader when young.",
                 fertilizerMonths: [4],
@@ -339,14 +389,18 @@ struct PlantCatalog {
                 autumnTip: "First tree to drop leaves in fall. Clean up debris to prevent disease. Good time to assess structure for winter pruning.",
                 winterTip: "Best time to prune. Inspect for ash dieback symptoms (dead branches, diamond-shaped bark lesions). Very cold-hardy.",
                 commonPests: ["Emerald ash borer", "Ash bark beetle", "Ash bud moth"],
-                commonDiseases: ["Ash dieback (Chalara)", "Anthracnose", "Root rot"]
+                commonDiseases: ["Ash dieback (Chalara)", "Anthracnose", "Root rot"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Inspect for emerald ash borer signs (D-shaped exit holes). Report to local forestry if found.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply fungicide for ash dieback prevention. Remove and burn infected branches."
             )
         ),
         PlantSpecies(
             name: "Hornbeam", ukrainianName: "Граб", type: .forestTree,
             defaultWateringDays: 7,
             varieties: ["Звичайний", "Східний"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 8],
                 pruningTips: "Excellent hedge tree — tolerates heavy shaping. Prune hedges in August for a tidy winter look. For standalone trees, minimal pruning needed.",
                 fertilizerMonths: [4, 5],
@@ -366,14 +420,18 @@ struct PlantCatalog {
                 autumnTip: "Leaves turn golden-yellow. Like beech, some leaves persist through winter. Low maintenance in autumn.",
                 winterTip: "Very hardy and problem-free. Retained brown leaves add winter interest. Plan structural pruning if needed.",
                 commonPests: ["Hornbeam moth", "Aphids", "Scale insects"],
-                commonDiseases: ["Coral spot", "Powdery mildew", "Leaf spot"]
+                commonDiseases: ["Coral spot", "Powdery mildew", "Leaf spot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Inspect for scale insects and aphids in spring. Spray with insecticidal soap if needed. Generally low-pest tree.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply copper fungicide if powdery mildew was present last year. Usually very disease-resistant."
             )
         ),
         PlantSpecies(
             name: "Alder", ukrainianName: "Вільха", type: .forestTree,
             defaultWateringDays: 5,
             varieties: ["Чорна", "Сіра"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [11, 12, 1],
                 pruningTips: "Prune in dormant season. Alder fixes nitrogen in soil (like legumes) — great companion for other trees. Remove lower branches for clearance.",
                 fertilizerMonths: [],
@@ -393,7 +451,11 @@ struct PlantCatalog {
                 autumnTip: "Leaves drop early and green (don't change color much). Tiny cones remain through winter. Seeds feed birds.",
                 winterTip: "Very hardy. Good time to prune. Small woody cones on bare branches are attractive winter feature.",
                 commonPests: ["Alder beetle", "Alder woolly aphid"],
-                commonDiseases: ["Phytophthora (alder disease)", "Leaf curl"]
+                commonDiseases: ["Phytophthora (alder disease)", "Leaf curl"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Watch for alder beetle in spring. Spray insecticidal soap for woolly aphid if heavy infestation.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply copper fungicide if Phytophthora was present. Improve drainage around roots. Usually low-maintenance."
             )
         ),
     ]
@@ -404,7 +466,7 @@ struct PlantCatalog {
             name: "Cherry", ukrainianName: "Вишня", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Шпанка", "Любська", "Гріот київський", "Молодіжна", "Тургенівка"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [3, 7, 8],
                 pruningTips: "Light pruning after harvest (July-August) to prevent silver leaf disease. In March, remove dead and crossing branches. Never prune in autumn — wounds heal slowly.",
                 fertilizerMonths: [3, 4, 6],
@@ -424,14 +486,18 @@ struct PlantCatalog {
                 autumnTip: "Clean up fallen fruit to prevent brown rot. Apply potash fertilizer. Whitewash trunk to prevent frost cracks.",
                 winterTip: "Inspect for canker on branches. Plan spring pruning. Apply dormant oil spray against overwintering pests.",
                 commonPests: ["Cherry fruit fly", "Black cherry aphid", "Cherry bark moth"],
-                commonDiseases: ["Cherry leaf spot", "Brown rot", "Silver leaf disease"]
+                commonDiseases: ["Cherry leaf spot", "Brown rot", "Silver leaf disease"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray (horticultural oil) in March. Spray against cherry fruit fly in May-June. Use pheromone traps.",
+                diseaseTreatmentMonths: [3, 4, 5, 6, 7],
+                diseaseTreatmentTip: "Apply copper spray before bud break. Fungicide (e.g., Topsin) during bloom for moniliosis. Repeat after rain."
             )
         ),
         PlantSpecies(
             name: "Sweet Cherry", ukrainianName: "Черешня", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Великоплідна", "Валерій Чкалов", "Дрогана жовта", "Регіна", "Ревна"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [4, 7, 8],
                 pruningTips: "Prune after harvest or in early spring (after frost risk). Train to open center or vase shape. Sweet cherry grows vigorously — control height annually.",
                 fertilizerMonths: [3, 6],
@@ -451,14 +517,18 @@ struct PlantCatalog {
                 autumnTip: "Remove mummified fruit. Apply potassium fertilizer. Whitewash trunk. Clean up leaves to prevent brown rot.",
                 winterTip: "Less hardy than sour cherry — protect young trees from extreme cold. Inspect for bacterial canker (amber gum on bark).",
                 commonPests: ["Cherry fruit fly", "Birds", "Cherry blossom weevil"],
-                commonDiseases: ["Bacterial canker", "Brown rot", "Cracking (from rain during ripening)"]
+                commonDiseases: ["Bacterial canker", "Brown rot", "Cracking (from rain during ripening)"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Same as cherry — dormant spray in March, cherry fruit fly treatment May-June.",
+                diseaseTreatmentMonths: [3, 4, 5, 6, 7],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide during bloom for moniliosis and cherry leaf spot."
             )
         ),
         PlantSpecies(
             name: "Apple", ukrainianName: "Яблуня", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Антонівка", "Голден Делішес", "Семеренко", "Ренет Симиренка", "Гала", "Фуджі"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [1, 2, 3],
                 pruningTips: "Prune in winter while dormant. Open up the center for light and air. Remove water sprouts (vertical shoots) and crossing branches. Summer tip: remove excess fruit in June (thin to 1 per cluster).",
                 fertilizerMonths: [3, 4, 6, 9],
@@ -478,14 +548,18 @@ struct PlantCatalog {
                 autumnTip: "Harvest based on variety (August-October). Store late varieties in cool, dark place. Clean up windfalls. Apply potash fertilizer.",
                 winterTip: "Best pruning time! Remove 20-30% of growth. Apply dormant oil spray. Whitewash trunk. Wrap young bark to prevent rabbit/hare damage.",
                 commonPests: ["Codling moth", "Apple aphid", "Apple sawfly", "Apple blossom weevil"],
-                commonDiseases: ["Apple scab", "Powdery mildew", "Fire blight", "Canker"]
+                commonDiseases: ["Apple scab", "Powdery mildew", "Fire blight", "Canker"],
+                pestTreatmentMonths: [3, 4, 5, 6, 7],
+                pestTreatmentTip: "Dormant oil spray in March. Spray against codling moth from May (2-3 treatments, 14 days apart). Use traps.",
+                diseaseTreatmentMonths: [3, 4, 5, 6],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide during bloom and petal fall for scab prevention. Critical in wet springs."
             )
         ),
         PlantSpecies(
             name: "Pear", ukrainianName: "Груша", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Вільямс", "Конференція", "Ліщина", "Бере Боск", "Ноябрська"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [1, 2, 3],
                 pruningTips: "Prune in winter. Pear naturally grows upright — spread branches with weights or ties for better fruiting. Remove water sprouts. Less pruning needed than apple.",
                 fertilizerMonths: [3, 4, 6],
@@ -505,14 +579,18 @@ struct PlantCatalog {
                 autumnTip: "Late varieties: pick when stem separates easily. Store in cool conditions. Clean up fallen fruit. Apply mulch.",
                 winterTip: "Prune to maintain open center. Pear is very cold-hardy. Inspect for canker and fire blight scars.",
                 commonPests: ["Pear psylla", "Codling moth", "Pear midge"],
-                commonDiseases: ["Fire blight", "Pear scab", "Brown rot", "Pear rust"]
+                commonDiseases: ["Fire blight", "Pear scab", "Brown rot", "Pear rust"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray in March. Watch for pear psylla — spray insecticidal soap. Codling moth treatment same as apple.",
+                diseaseTreatmentMonths: [3, 4, 5, 6, 7],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide for scab and fire blight prevention. Remove fire blight strikes immediately."
             )
         ),
         PlantSpecies(
             name: "Plum", ukrainianName: "Слива", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Угорка", "Ренклод", "Синя птиця", "Стенлі", "Президент"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [3, 4, 7],
                 pruningTips: "Prune in spring as buds open (to prevent silver leaf disease). Summer prune to remove water sprouts. Keep tree open for light. Plum suckers from rootstock — remove them!",
                 fertilizerMonths: [3, 6],
@@ -532,14 +610,18 @@ struct PlantCatalog {
                 autumnTip: "Remove all mummified fruit from tree AND ground (brown rot prevention). Apply potash. Clean up fallen leaves.",
                 winterTip: "DO NOT prune in winter — risk of silver leaf disease! Inspect for bacterial canker. Plan spring pruning.",
                 commonPests: ["Plum moth", "Plum sawfly", "Aphids"],
-                commonDiseases: ["Silver leaf", "Brown rot", "Bacterial canker", "Plum pox virus"]
+                commonDiseases: ["Silver leaf", "Brown rot", "Bacterial canker", "Plum pox virus"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray in March. Plum moth treatment in May-June. Hang pheromone traps.",
+                diseaseTreatmentMonths: [3, 4, 5, 6],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide for plum pocket disease and moniliosis."
             )
         ),
         PlantSpecies(
             name: "Apricot", ukrainianName: "Абрикос", type: .fruitTree,
             defaultWateringDays: 10,
             varieties: ["Краснощокий", "Ананасний", "Мелітопольський ранній", "Шалах"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [3, 8],
                 pruningTips: "Prune in March (after frost risk) or August after harvest. Keep tree compact — apricot is prone to breaking under heavy crop. Thin branches for air circulation.",
                 fertilizerMonths: [3, 6],
@@ -559,14 +641,18 @@ struct PlantCatalog {
                 autumnTip: "Remove fallen fruit. Apply whitewash to trunk. Reduce watering to harden wood before winter.",
                 winterTip: "Less hardy than most fruit trees. Protect trunk from frost cracks. Avoid north-facing planting sites. Pray for no late spring frost!",
                 commonPests: ["Plum moth", "Aphids", "Shot hole borer"],
-                commonDiseases: ["Monilia (blossom blight)", "Shot hole disease", "Gummosis", "Bacterial canker"]
+                commonDiseases: ["Monilia (blossom blight)", "Shot hole disease", "Gummosis", "Bacterial canker"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray in March. Spray against aphids in April-May. Watch for plum moth.",
+                diseaseTreatmentMonths: [3, 4, 5, 6, 7],
+                diseaseTreatmentTip: "Critical: copper spray before bud break for moniliosis. Repeat fungicide during and after bloom. Apricots are very disease-prone."
             )
         ),
         PlantSpecies(
             name: "Peach", ukrainianName: "Персик", type: .fruitTree,
             defaultWateringDays: 7,
             varieties: ["Київський ранній", "Редхейвен", "Донецький жовтий", "Золотий ювілей", "Білий лебідь"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [3, 4],
                 pruningTips: "Prune in spring as flower buds swell (you can see which are fruit buds). Open vase shape is ideal. Peach fruits on last year's wood — remove old fruited branches.",
                 fertilizerMonths: [3, 5, 7],
@@ -586,14 +672,18 @@ struct PlantCatalog {
                 autumnTip: "After leaf fall, spray copper against leaf curl (most critical treatment!). Clean up ALL fallen leaves. Apply potash.",
                 winterTip: "Least hardy common fruit tree. Protect from cold wind. In northern Ukraine, consider growing against a south-facing wall.",
                 commonPests: ["Peach moth", "Aphids", "Scale insects"],
-                commonDiseases: ["Peach leaf curl", "Brown rot", "Powdery mildew", "Bacterial spot"]
+                commonDiseases: ["Peach leaf curl", "Brown rot", "Powdery mildew", "Bacterial spot"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray in March. Spray against peach aphid in spring. Oriental fruit moth traps in summer.",
+                diseaseTreatmentMonths: [2, 3, 4, 5, 6],
+                diseaseTreatmentTip: "EARLY copper spray in February for peach leaf curl (before bud swell!). Fungicide for brown rot during bloom."
             )
         ),
         PlantSpecies(
             name: "Walnut", ukrainianName: "Горіх", type: .fruitTree,
             defaultWateringDays: 10,
             varieties: ["Волоський", "Ідеал", "Буковинський", "Великоплідний"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [8, 9],
                 pruningTips: "Prune in late summer ONLY — walnut bleeds heavily in spring. Minimal pruning needed. Remove dead branches and low limbs for clearance. Walnuts self-shape well.",
                 fertilizerMonths: [4],
@@ -613,14 +703,18 @@ struct PlantCatalog {
                 autumnTip: "Harvest nuts when husks crack open. Dry nuts in a warm, airy place for 2 weeks. Wear gloves — walnut husks stain everything brown!",
                 winterTip: "Fairly hardy. Young trees may need trunk protection. Walnut wood is extremely valuable — protect from storm damage.",
                 commonPests: ["Walnut husk fly", "Codling moth", "Walnut aphid"],
-                commonDiseases: ["Walnut blight", "Anthracnose", "Root rot"]
+                commonDiseases: ["Walnut blight", "Anthracnose", "Root rot"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Inspect for walnut husk fly. Spray if codling moth present. Usually minimal treatment needed.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Copper spray in spring for walnut blight. Apply when leaves are half-expanded."
             )
         ),
         PlantSpecies(
             name: "Mulberry", ukrainianName: "Шовковиця", type: .fruitTree,
             defaultWateringDays: 10,
             varieties: ["Біла", "Чорна", "Червона"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [12, 1, 2],
                 pruningTips: "Prune in winter while dormant. Mulberry bleeds in spring. Can be kept small with hard pruning — very resilient. Remove low branches that spread fruit mess.",
                 fertilizerMonths: [3, 4],
@@ -640,14 +734,18 @@ struct PlantCatalog {
                 autumnTip: "Clean up fallen fruit. Apply light compost. Mulberry is very adaptable — tolerates poor soil, drought, and pollution.",
                 winterTip: "Prune now if needed. Very tough tree. Popular in Ukrainian villages — often grows to 100+ years. Little winter care needed.",
                 commonPests: ["Whitefly", "Scale insects", "Birds (love the fruit!)"],
-                commonDiseases: ["Bacterial blight", "Leaf spot", "Root rot (rare)"]
+                commonDiseases: ["Bacterial blight", "Leaf spot", "Root rot (rare)"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Minimal pest treatment needed. Watch for scale insects and spray oil if present.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Apply fungicide only if bacterial blight or leaf spot appeared. Usually disease-resistant."
             )
         ),
         PlantSpecies(
             name: "Quince", ukrainianName: "Айва", type: .fruitTree,
             defaultWateringDays: 10,
             varieties: ["Звичайна", "Японська", "Ананасна"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [1, 2, 3],
                 pruningTips: "Prune in winter. Train to open center. Remove crossing branches and suckers. Quince naturally grows as a large bush — can be trained to a small tree.",
                 fertilizerMonths: [3, 6],
@@ -667,7 +765,11 @@ struct PlantCatalog {
                 autumnTip: "Harvest after first light frost for best flavor. Fruit is hard and tart raw — cook into jam (айвове варення), paste, or bake. Aromatic!",
                 winterTip: "Moderate hardiness. Protect young trees in northern Ukraine. Prune to maintain shape. Remove any fire blight damage.",
                 commonPests: ["Codling moth", "Aphids", "Leaf miners"],
-                commonDiseases: ["Fire blight", "Leaf blight", "Brown rot"]
+                commonDiseases: ["Fire blight", "Leaf blight", "Brown rot"],
+                pestTreatmentMonths: [3, 4, 5, 6],
+                pestTreatmentTip: "Dormant spray in March. Codling moth same as apple — spray from May.",
+                diseaseTreatmentMonths: [3, 4, 5, 6, 7],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide for fire blight and leaf blight. Remove affected branches."
             )
         ),
     ]
@@ -678,7 +780,7 @@ struct PlantCatalog {
             name: "Currant", ukrainianName: "Смородина", type: .bush,
             defaultWateringDays: 5,
             varieties: ["Чорна Перлина", "Червона", "Біла", "Ядреная", "Добриня"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 11],
                 pruningTips: "Remove branches older than 3 years (they darken and produce less). Keep 8-12 main stems. Cut at base — don't shorten. Renew 1/3 of the bush each year.",
                 fertilizerMonths: [3, 4, 6],
@@ -698,14 +800,18 @@ struct PlantCatalog {
                 autumnTip: "After harvest, assess which old branches to remove. Apply potash fertilizer. Plant new bushes in October-November.",
                 winterTip: "Very hardy. Prune now or in early spring. Take hardwood cuttings for new plants. Virtually indestructible in Ukrainian climate.",
                 commonPests: ["Big bud mite", "Currant aphid", "Currant sawfly"],
-                commonDiseases: ["American gooseberry mildew", "Leaf spot", "Reversion virus"]
+                commonDiseases: ["American gooseberry mildew", "Leaf spot", "Reversion virus"],
+                pestTreatmentMonths: [3, 4, 5],
+                pestTreatmentTip: "Spray against bud mite before bud break. Hot water treatment (65°C) of dormant bushes in March. Aphid spray in April.",
+                diseaseTreatmentMonths: [3, 4, 5, 6],
+                diseaseTreatmentTip: "Copper spray before bud break. Fungicide for powdery mildew when shoots are 10cm. Repeat after bloom."
             )
         ),
         PlantSpecies(
             name: "Raspberry", ukrainianName: "Малина", type: .bush,
             defaultWateringDays: 4,
             varieties: ["Ремонтантна", "Полана", "Гусар", "Геракл", "Жовтий гігант"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 11],
                 pruningTips: "Summer varieties: cut fruited canes to ground after harvest. Remontant varieties: cut ALL canes to ground in late autumn for one big autumn crop, OR keep strongest for early summer + autumn crops.",
                 fertilizerMonths: [3, 4, 6],
@@ -725,14 +831,18 @@ struct PlantCatalog {
                 autumnTip: "Cut summer-fruited canes to ground. For remontant: decide strategy (cut all or keep some). Mulch heavily for winter protection.",
                 winterTip: "Canes are fairly hardy. In harsh winters, bend canes down and cover with snow/mulch. Plan trellis/support maintenance.",
                 commonPests: ["Raspberry beetle", "Aphids", "Spider mites"],
-                commonDiseases: ["Raspberry cane blight", "Grey mold (Botrytis)", "Root rot", "Raspberry mosaic virus"]
+                commonDiseases: ["Raspberry cane blight", "Grey mold (Botrytis)", "Root rot", "Raspberry mosaic virus"],
+                pestTreatmentMonths: [4, 5, 6],
+                pestTreatmentTip: "Spray against raspberry beetle before bloom. Remove and destroy raspberry cane borer affected canes.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Fungicide before bloom for grey mold (botrytis). Improve air circulation by thinning canes."
             )
         ),
         PlantSpecies(
             name: "Strawberry", ukrainianName: "Полуниця", type: .bush,
             defaultWateringDays: 3,
             varieties: ["Вікторія", "Полка", "Хоней", "Альбіон", "Елізабет"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [8, 9],
                 pruningTips: "After harvest, remove old leaves (but not the growing point!). Cut off runners unless you want new plants. Replace entire bed every 3-4 years for best yields.",
                 fertilizerMonths: [3, 4, 8],
@@ -752,14 +862,18 @@ struct PlantCatalog {
                 autumnTip: "Trim old leaves after harvest. Plant new beds in August-September. Apply mulch for winter. Rooted runners make free new plants!",
                 winterTip: "Cover with straw or agrofabric in cold regions. Strawberry crowns can freeze in severe winters without snow cover.",
                 commonPests: ["Strawberry mite", "Slugs", "Birds", "Weevils"],
-                commonDiseases: ["Grey mold (Botrytis)", "Powdery mildew", "Verticillium wilt", "Leaf spot"]
+                commonDiseases: ["Grey mold (Botrytis)", "Powdery mildew", "Verticillium wilt", "Leaf spot"],
+                pestTreatmentMonths: [4, 5],
+                pestTreatmentTip: "Spray against strawberry mite and weevil before bloom. Use slug traps or iron phosphate bait in spring.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Fungicide before bloom for grey mold prevention. Remove infected berries immediately. Ensure good air circulation."
             )
         ),
         PlantSpecies(
             name: "Blueberry", ukrainianName: "Лохина", type: .bush,
             defaultWateringDays: 3,
             varieties: ["Блюкроп", "Патріот", "Дюк", "Спартан", "Нортланд"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3],
                 pruningTips: "Remove branches older than 5 years (thickest, darkest). Keep 6-8 main stems. Tip-prune young branches to encourage branching. Don't prune first 2 years.",
                 fertilizerMonths: [3, 4, 5],
@@ -779,14 +893,18 @@ struct PlantCatalog {
                 autumnTip: "Foliage turns brilliant red — very decorative! Apply pine needle mulch for winter acidity. Stop fertilizing after August.",
                 winterTip: "Very hardy. Minimal winter care. This is the best time to prune old unproductive wood. Check soil pH and plan amendments.",
                 commonPests: ["Birds (biggest threat!)", "Blueberry maggot", "Aphids"],
-                commonDiseases: ["Mummy berry", "Botrytis blight", "Stem canker", "Chlorosis (from alkaline soil!)"]
+                commonDiseases: ["Mummy berry", "Botrytis blight", "Stem canker", "Chlorosis (from alkaline soil!)"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Minimal pest treatment. Watch for blueberry maggot fly with traps. Netting against birds.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Fungicide for mummy berry disease in spring. Keep mulch fresh to prevent fungal spores."
             )
         ),
         PlantSpecies(
             name: "Gooseberry", ukrainianName: "Аґрус", type: .bush,
             defaultWateringDays: 5,
             varieties: ["Машенька", "Фінік", "Чорний негус", "Малахіт"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [2, 3, 11],
                 pruningTips: "Similar to currant — remove branches older than 4 years. Keep center open for air circulation (mildew prevention). Thorns make pruning tricky — wear thick gloves!",
                 fertilizerMonths: [3, 6],
@@ -806,14 +924,18 @@ struct PlantCatalog {
                 autumnTip: "Prune after leaf fall. Remove crossing branches and old wood. Apply mulch. Very low-maintenance plant.",
                 winterTip: "Extremely hardy — one of the toughest berry bushes. Prune now if you didn't in autumn. Almost impossible to kill.",
                 commonPests: ["Gooseberry sawfly", "Aphids", "Gooseberry mite"],
-                commonDiseases: ["American gooseberry mildew", "Leaf spot", "Grey mold"]
+                commonDiseases: ["American gooseberry mildew", "Leaf spot", "Grey mold"],
+                pestTreatmentMonths: [3, 4, 5],
+                pestTreatmentTip: "Spray for gooseberry sawfly in April — check leaf undersides. Hot water treatment in March.",
+                diseaseTreatmentMonths: [3, 4, 5, 6],
+                diseaseTreatmentTip: "Powdery mildew is the main threat. Spray fungicide when shoots are 10cm. Sodium bicarbonate spray works too."
             )
         ),
         PlantSpecies(
             name: "Blackberry", ukrainianName: "Ожина", type: .bush,
             defaultWateringDays: 4,
             varieties: ["Торнфрі", "Блек Сатін", "Натчез", "Честер"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [9, 10, 2],
                 pruningTips: "Cut fruited canes to ground immediately after harvest. Tie new canes to support. Thornless varieties are much easier to manage! Tip-prune new canes in summer to encourage branching.",
                 fertilizerMonths: [3, 4, 6],
@@ -833,14 +955,18 @@ struct PlantCatalog {
                 autumnTip: "Cut all fruited canes to ground. Tie new canes for next year. In cold regions, lay thornless varieties down and cover with mulch.",
                 winterTip: "Thornless varieties are less hardy — protect in harsh winters. Thorny varieties are tougher. Prune dead/damaged canes.",
                 commonPests: ["Raspberry beetle", "Spider mites", "Aphids"],
-                commonDiseases: ["Cane blight", "Grey mold", "Anthracnose", "Orange rust"]
+                commonDiseases: ["Cane blight", "Grey mold", "Anthracnose", "Orange rust"],
+                pestTreatmentMonths: [4, 5, 6],
+                pestTreatmentTip: "Same as raspberry — spray for raspberry beetle. Remove affected canes.",
+                diseaseTreatmentMonths: [4, 5, 6],
+                diseaseTreatmentTip: "Fungicide for anthracnose and cane blight. Remove old fruiting canes after harvest."
             )
         ),
         PlantSpecies(
             name: "Sea Buckthorn", ukrainianName: "Обліпиха", type: .bush,
             defaultWateringDays: 7,
             varieties: ["Чуйська", "Золотий початок", "Московська красуня"],
-            intelligence: CareIntelligence(
+            intelligence: TreeIntelligence(
                 pruningMonths: [3, 4],
                 pruningTips: "Remove dead branches in early spring. Sea buckthorn can be shaped but recovers slowly. Need both male and female plants for fruit (1 male per 5-6 females).",
                 fertilizerMonths: [4],
@@ -860,7 +986,11 @@ struct PlantCatalog {
                 autumnTip: "Harvest in September. Sea buckthorn oil is incredibly valuable medicinally. Plant is almost indestructible — tolerates salt, wind, poor soil.",
                 winterTip: "One of the hardiest plants in the garden (-35°C!). Zero winter care needed. Spreads via suckers — control if needed.",
                 commonPests: ["Sea buckthorn fly", "Aphids"],
-                commonDiseases: ["Fusarium wilt", "Verticillium wilt (rare)"]
+                commonDiseases: ["Fusarium wilt", "Verticillium wilt (rare)"],
+                pestTreatmentMonths: [5, 6],
+                pestTreatmentTip: "Minimal treatment needed. Watch for sea buckthorn fly in June. Spray if berries affected.",
+                diseaseTreatmentMonths: [4, 5],
+                diseaseTreatmentTip: "Usually disease-resistant. Apply fungicide only if wilt symptoms appear."
             )
         ),
     ]

@@ -55,12 +55,12 @@ struct PlantRowView: View {
             //   🔴 Red = needs watering now (overdue or never watered)
             //   🔵 Blue = watered recently, all good
             if plant.needsWatering {
-                Label("Needs water", systemImage: "drop.fill")
+                Label(NSLocalizedString("Needs water", comment: ""), systemImage: "drop.fill")
                     .font(.caption)
                     .foregroundStyle(.red)
                     .labelStyle(.iconOnly)
             } else {
-                Label("Watered", systemImage: "drop.fill")
+                Label(NSLocalizedString("Watered", comment: ""), systemImage: "drop.fill")
                     .font(.caption)
                     .foregroundStyle(.blue)
                     .labelStyle(.iconOnly)

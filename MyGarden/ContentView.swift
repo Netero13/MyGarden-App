@@ -15,33 +15,27 @@ struct ContentView: View {
             // Tab 1: Trees & Bushes list (the main screen)
             PlantListView()
                 .tabItem {
-                    Label("Trees", systemImage: "tree.fill")
+                    Label(NSLocalizedString("Trees", comment: ""), systemImage: "tree.fill")
                 }
 
-            // Tab 2: Tree Encyclopedia (browsable catalog)
-            // Users come here to DISCOVER species before planting.
-            // Think of it as a "shopping catalog" for trees & bushes.
-            CatalogView()
+            EncyclopediaView()
                 .tabItem {
-                    Label("Catalog", systemImage: "books.vertical.fill")
+                    Label(NSLocalizedString("Encyclopedia", comment: ""), systemImage: "books.vertical.fill")
                 }
 
-            // Tab 3: Garden Map (visual bird's-eye view)
             GardenMapView()
                 .tabItem {
-                    Label("Garden", systemImage: "map.fill")
+                    Label(NSLocalizedString("Garden", comment: ""), systemImage: "map.fill")
                 }
 
-            // Tab 4: Activity Feed (all activities across all plants)
             ActivityFeedView()
                 .tabItem {
-                    Label("Activity", systemImage: "clock.arrow.circlepath")
+                    Label(NSLocalizedString("Activity", comment: ""), systemImage: "clock.arrow.circlepath")
                 }
 
-            // Tab 5: Settings
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gearshape.fill")
+                    Label(NSLocalizedString("Settings", comment: ""), systemImage: "gearshape.fill")
                 }
         }
     }
