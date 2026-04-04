@@ -325,7 +325,7 @@ struct SettingsView: View {
         }
         // CareAction Engine also uses reminderHour, so reschedule those too
         if careActionEngineEnabled {
-            NotificationManager.shared.scheduleAllCareAlerts(for: store.plants)
+            NotificationManager.shared.scheduleAllCareActionAlerts(for: store.plants)
         }
     }
 
@@ -337,7 +337,7 @@ struct SettingsView: View {
             Task {
                 let granted = await NotificationManager.shared.requestPermission()
                 if granted {
-                    NotificationManager.shared.scheduleAllCareAlerts(for: store.plants)
+                    NotificationManager.shared.scheduleAllCareActionAlerts(for: store.plants)
                 } else {
                     await MainActor.run {
                         showingPermissionAlert = true
@@ -347,7 +347,7 @@ struct SettingsView: View {
             }
         } else {
             // Cancel all care alerts
-            NotificationManager.shared.cancelAllCareAlerts(for: store.plants)
+            NotificationManager.shared.cancelAllCareActionAlerts(for: store.plants)
         }
     }
 

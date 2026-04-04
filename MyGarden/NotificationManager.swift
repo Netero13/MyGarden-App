@@ -7,7 +7,7 @@ import UserNotifications
 // 1. WATERING REMINDERS — "Your Cherry needs watering today!"
 //    Fires on the day each plant's next watering is due.
 //
-// 2. SEASONAL CARE ALERTS — "Time to prune your Cherry!"
+// 2. CAREACTION ENGINE ALERTS — "Time to prune your Cherry!"
 //    Fires on the 1st of the month when it's time to prune,
 //    fertilize, or harvest a specific plant.
 //
@@ -17,7 +17,7 @@ import UserNotifications
 // 3. iOS delivers them at the right time, even if the app is closed
 //
 // Each notification has a unique ID (we use the plant's UUID).
-// For care alerts, we add a suffix like "-prune-3" (prune in March).
+// For CareAction alerts, we add a suffix like "-prune-3" (prune in March).
 
 class NotificationManager {
 
@@ -164,7 +164,7 @@ class NotificationManager {
     }
 
     // MARK: - Cancel All Watering Reminders
-    // Note: this also cancels care alerts. Use with care.
+    // Note: this also cancels CareAction alerts. Use with care.
 
     func cancelAllReminders() {
         center.removeAllPendingNotificationRequests()
@@ -175,7 +175,7 @@ class NotificationManager {
     // Called when the user turns on reminders, changes time, or at app startup.
 
     func scheduleAllReminders(for plants: [Plant]) {
-        // Only cancel watering reminders (keep care alerts)
+        // Only cancel watering reminders (keep CareAction alerts)
         let wateringIDs = plants.map { $0.id.uuidString }
         center.removePendingNotificationRequests(withIdentifiers: wateringIDs)
 
@@ -200,7 +200,7 @@ class NotificationManager {
     }
 
     // ════════════════════════════════════════════════════════════════
-    // MARK: - SEASONAL CARE ALERTS
+    // MARK: - CAREACTION ENGINE ALERTS
     // ════════════════════════════════════════════════════════════════
     //
     // These are the "smart" notifications that make Arborist special.
@@ -212,17 +212,17 @@ class NotificationManager {
     // We schedule alerts for the NEXT 12 months so they're set up in advance.
     // Each alert ID looks like: "plantUUID-prune-3" (prune in March)
 
-    // MARK: - Schedule Care Alerts for One Plant
+    // MARK: - Schedule CareAction Alerts for One Plant
     // Looks up the plant's TreeIntelligence and schedules alerts
     // for pruning, fertilizing, and harvesting months.
 
-    func scheduleCareAlerts(for plant: Plant) {
+    func scheduleCareActionAlerts(for plant: Plant) {
         // Look up this plant's intelligence data from the encyclopedia
         guard let species = TreeEncyclopedia.find(name: plant.name) else { return }
         let intel = species.intelligence
 
-        // Cancel any existing care alerts for this plant
-        cancelCareAlerts(for: plant.id)
+        // Cancel any existing CareAction alerts for this plant
+        cancelCareActionAlerts(for: plant.id)
 
         let now = Date()
         let currentMonth = Calendar.current.component(.month, from: now)
@@ -348,16 +348,16 @@ class NotificationManager {
 
         center.add(request) { error in
             if let error = error {
-                print("❌ Failed to schedule care alert \(id): \(error)")
+                print("❌ Failed to schedule CareAction alert \(id): \(error)")
             }
         }
     }
 
-    // MARK: - Cancel Care Alerts for a Plant
+    // MARK: - Cancel CareAction Alerts for a Plant
     // Removes all prune/fertilize/harvest/pest/disease alerts for a specific plant.
     // We generate all possible IDs and remove them in bulk.
 
-    func cancelCareAlerts(for plantID: UUID) {
+    func cancelCareActionAlerts(for plantID: UUID) {
         var ids: [String] = []
         let base = plantID.uuidString
 
@@ -373,22 +373,22 @@ class NotificationManager {
         center.removePendingNotificationRequests(withIdentifiers: ids)
     }
 
-    // MARK: - Schedule All Care Alerts (Smart Limit)
+    // MARK: - Schedule All CareAction Alerts (Smart Limit)
     // iOS only allows 64 pending notifications total.
-    // Watering reminders get ~20 slots. That leaves ~40 for care alerts.
+    // Watering reminders get ~20 slots. That leaves ~40 for CareAction alerts.
     // Instead of scheduling ALL months for ALL plants (could be 200+),
-    // we collect all upcoming care alerts, sort by date (soonest first),
+    // we collect all upcoming CareAction alerts, sort by date (soonest first),
     // and schedule only the top 40. This way the most urgent alerts always fire.
 
-    private let careAlertBudget = 40  // max care notifications (out of 64 total)
+    private let careActionBudget = 40  // max care notifications (out of 64 total)
 
-    func scheduleAllCareAlerts(for plants: [Plant]) {
-        // Step 1: Cancel all existing care alerts
+    func scheduleAllCareActionAlerts(for plants: [Plant]) {
+        // Step 1: Cancel all existing CareAction alerts
         for plant in plants {
-            cancelCareAlerts(for: plant.id)
+            cancelCareActionAlerts(for: plant.id)
         }
 
-        // Step 2: Collect ALL possible care alerts with their dates
+        // Step 2: Collect ALL possible CareAction alerts with their dates
         let now = Date()
         let currentMonth = Calendar.current.component(.month, from: now)
         let currentYear = Calendar.current.component(.year, from: now)
@@ -462,7 +462,7 @@ class NotificationManager {
             return a.month < b.month
         }
 
-        let toSchedule = pending.prefix(careAlertBudget)
+        let toSchedule = pending.prefix(careActionBudget)
 
         // Step 4: Schedule the top alerts
         for alert in toSchedule {
@@ -472,11 +472,11 @@ class NotificationManager {
     }
 
     // MARK: - Cancel All Care Alerts
-    // Removes all care alerts for all plants.
+    // Removes all CareAction alerts for all plants.
 
-    func cancelAllCareAlerts(for plants: [Plant]) {
+    func cancelAllCareActionAlerts(for plants: [Plant]) {
         for plant in plants {
-            cancelCareAlerts(for: plant.id)
+            cancelCareActionAlerts(for: plant.id)
         }
     }
 }

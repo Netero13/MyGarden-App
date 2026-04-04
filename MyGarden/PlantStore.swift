@@ -55,7 +55,7 @@ class PlantStore {
         for offset in offsets {
             let id = plants[offset].id
             NotificationManager.shared.cancelReminder(for: id)
-            NotificationManager.shared.cancelCareAlerts(for: id)
+            NotificationManager.shared.cancelCareActionAlerts(for: id)
         }
         plants.remove(atOffsets: offsets)
         save()
@@ -65,7 +65,7 @@ class PlantStore {
     // Sometimes we know the plant's ID but not its position.
     func delete(id: UUID) {
         NotificationManager.shared.cancelReminder(for: id)
-        NotificationManager.shared.cancelCareAlerts(for: id)
+        NotificationManager.shared.cancelCareActionAlerts(for: id)
         plants.removeAll { $0.id == id }
         save()
     }
@@ -296,7 +296,7 @@ class PlantStore {
     private func scheduleCareActionsIfEnabled(for plant: Plant) {
         let careActionEngineEnabled = UserDefaults.standard.bool(forKey: "careActionEngineEnabled")
         if careActionEngineEnabled {
-            NotificationManager.shared.scheduleCareAlerts(for: plant)
+            NotificationManager.shared.scheduleCareActionAlerts(for: plant)
         }
     }
 
@@ -311,7 +311,7 @@ class PlantStore {
             NotificationManager.shared.scheduleAllReminders(for: plants)
         }
         if careActionEngineEnabled {
-            NotificationManager.shared.scheduleAllCareAlerts(for: plants)
+            NotificationManager.shared.scheduleAllCareActionAlerts(for: plants)
         }
     }
 
