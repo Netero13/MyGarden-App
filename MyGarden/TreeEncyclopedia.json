@@ -1,0 +1,2675 @@
+[
+  {
+    "name": "Oak",
+    "ukrainianName": "Дуб",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "5.5-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Compost or balanced fertilizer (NPK 10-10-10) around the drip line. Oaks prefer organic matter — mulch with leaf compost."
+      },
+      "pests": {
+        "common": ["Oak leaf roller", "Gypsy moth", "Oak bark beetle"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Inspect for gypsy moth egg masses in spring. Spray with Bt (Bacillus thuringiensis) if caterpillars appear."
+      },
+      "diseases": {
+        "common": ["Powdery mildew", "Oak wilt", "Root rot"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Apply copper fungicide in early spring if powdery mildew was present last year."
+      },
+      "seasonalTips": {
+        "spring": "Apply mulch around the base. Inspect for oak leaf roller moths. Begin watering young trees as soil thaws.",
+        "summer": "Water deeply during dry spells. Watch for powdery mildew in humid weather. Young oaks benefit from afternoon shade.",
+        "autumn": "Don't remove fallen leaves — they're natural mulch. Apply final fertilizer in early October.",
+        "winter": "Oaks are very hardy. Wrap young tree trunks to prevent frost cracks and sunscald."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Звичайний",
+        "photo": null,
+        "ukrainianRegion": "All regions of Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "25-30m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remove dead and crossing branches in late winter. Shape young trees to a central leader. Mature oaks rarely need pruning." },
+        "harvest": null,
+        "pollination": "Wind-pollinated, no partner needed",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good overall resistance, susceptible to powdery mildew in humid conditions",
+        "strengths": ["Extremely long-lived (500+ years)", "Very frost-hardy", "Iconic Ukrainian tree", "Excellent timber"],
+        "weaknesses": ["Very slow growth", "Massive root system", "Produces heavy acorn crop"],
+        "notes": "The classic European oak. Symbol of strength in Ukrainian culture. Can live for centuries. Acorns feed wildlife."
+      },
+      {
+        "name": "Червоний",
+        "photo": null,
+        "ukrainianRegion": "Central & Western Ukraine",
+        "frostHardiness": -30,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 11], "tips": "Minimal pruning needed. Remove dead branches in late winter. Naturally forms a broad, rounded crown." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More resistant to powdery mildew than common oak",
+        "strengths": ["Spectacular red autumn foliage", "Faster growth than common oak", "Disease resistant", "Great ornamental"],
+        "weaknesses": ["Smaller acorns (less wildlife value)", "Prefers acidic soil", "Not native to Ukraine"],
+        "notes": "North American species, popular as ornamental in Ukraine for stunning autumn color. Grows faster than native oak."
+      },
+      {
+        "name": "Скельний",
+        "photo": null,
+        "ukrainianRegion": "Western Ukraine, Carpathians",
+        "frostHardiness": -28,
+        "matureHeight": "20-30m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 11], "tips": "Similar to common oak. Less prone to epicormic shoots. Shape in youth for good structure." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good resistance, slightly more drought-tolerant than common oak",
+        "strengths": ["Tolerates drier soils", "Straight trunk form", "Wind-resistant"],
+        "weaknesses": ["Less frost-hardy than common oak", "Slower establishment"],
+        "notes": "Native to Carpathian region. Prefers well-drained, rocky hillside soils. Important timber tree in Western Ukraine."
+      },
+      {
+        "name": "Болотний",
+        "photo": null,
+        "ukrainianRegion": "Northern & Central Ukraine, river valleys",
+        "frostHardiness": -30,
+        "matureHeight": "15-20m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remove lower branches for clearance. Naturally forms a pyramidal crown when young, rounding with age." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good resistance, tolerates wet soil diseases",
+        "strengths": ["Thrives in wet/flooded soils", "Faster growth", "Beautiful autumn color", "Compact for an oak"],
+        "weaknesses": ["Needs acidic soil", "Chlorosis in alkaline conditions", "Small acorns"],
+        "notes": "Perfect for low-lying, wet areas where other oaks struggle. Deeply cut leaves and graceful pyramidal form. Popular as urban tree."
+      }
+    ]
+  },
+  {
+    "name": "Birch",
+    "ukrainianName": "Береза",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "5.0-6.5",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [4, 6],
+        "type": "Acidic fertilizer or ammonium sulfate. Birch prefers slightly acidic soil. Mulch with pine needles or bark."
+      },
+      "pests": {
+        "common": ["Birch leaf miner", "Bronze birch borer", "Aphids"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Watch for leaf miners — remove affected leaves. Spray insecticidal soap for aphids."
+      },
+      "diseases": {
+        "common": ["Birch dieback", "Rust", "Leaf spot"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply fungicide if rust or leaf spot appeared last year. Keep area clean."
+      },
+      "seasonalTips": {
+        "spring": "DO NOT prune — birch bleeds sap in spring! Apply acidic mulch. Water well as leaves emerge.",
+        "summer": "Birch needs consistent moisture — don't let soil dry out completely. This is the best time to prune if needed.",
+        "autumn": "Enjoy the golden autumn foliage! Reduce watering as leaves drop. Clean up fallen leaves if they have spots.",
+        "winter": "Beautiful white bark stands out in winter. Protect young trunks from deer and rabbits with wire guards."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Повисла",
+        "photo": null,
+        "ukrainianRegion": "All regions of Ukraine",
+        "frostHardiness": -40,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [7, 8], "tips": "ONLY prune in summer! Birch bleeds heavily if pruned in spring. Remove dead branches and light shaping only." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Susceptible to bronze birch borer in stress conditions",
+        "strengths": ["Iconic white bark", "Extremely frost-hardy", "Fast growth", "Beautiful weeping form"],
+        "weaknesses": ["Shallow roots (wind-prone)", "Needs consistent moisture", "Short-lived for a tree (80-100 years)"],
+        "notes": "The classic Ukrainian birch. Beloved for white bark and graceful pendulous branches. Sap can be collected in spring for birch juice (березовий сік)."
+      },
+      {
+        "name": "Пухнаста",
+        "photo": null,
+        "ukrainianRegion": "Northern Ukraine, Polissia wetlands",
+        "frostHardiness": -45,
+        "matureHeight": "15-20m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 10, "yearsToMature": 3 },
+        "pruning": { "months": [7, 8], "tips": "Same as silver birch — summer pruning only. Even more minimal pruning needed." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Better disease resistance than silver birch, tolerates wet feet",
+        "strengths": ["Tolerates waterlogged soil", "Most frost-hardy birch", "Thrives in boggy ground"],
+        "weaknesses": ["Less ornamental bark than silver birch", "Smaller tree", "Needs moist conditions"],
+        "notes": "Thrives in wet, boggy areas where silver birch won't grow. Common in Polissia wetlands. Bark is brownish-white, not as striking as silver birch."
+      },
+      {
+        "name": "Карликова",
+        "photo": null,
+        "ukrainianRegion": "Carpathian highlands, rare in lowlands",
+        "frostHardiness": -45,
+        "matureHeight": "0.5-1.5m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [7, 8], "tips": "Minimal pruning needed. Remove dead twigs in summer. Can be lightly shaped." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Very disease-resistant",
+        "strengths": ["Compact size for small gardens", "Extremely hardy", "Unique alpine look"],
+        "weaknesses": ["Slow growth", "Needs acidic, cool conditions", "Rare in nurseries"],
+        "notes": "A true dwarf birch from mountain tundra. Grows as a low shrub. Interesting choice for rock gardens or alpine plantings. Very rare in cultivation."
+      }
+    ]
+  },
+  {
+    "name": "Pine",
+    "ukrainianName": "Сосна",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "4.5-6.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4],
+        "type": "Acidic fertilizer for conifers. Pine needles naturally acidify soil — use them as mulch. Avoid high-nitrogen fertilizers."
+      },
+      "pests": {
+        "common": ["Pine bark beetle", "Pine sawfly", "Pine processionary moth"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Inspect for processionary moth nests in spring. Remove and destroy them. Spray bark beetle traps."
+      },
+      "diseases": {
+        "common": ["Pine needle cast", "Dothistroma blight", "Root rot"],
+        "treatmentMonths": [4, 9],
+        "treatmentTip": "Apply copper spray in early spring for needle cast prevention."
+      },
+      "seasonalTips": {
+        "spring": "Cut candles by half to encourage bushier growth. Apply conifer fertilizer. Check for pine sawfly larvae.",
+        "summer": "Established pines rarely need water. Water young pines during extended drought. Watch for resin bleeding (sign of bark beetle).",
+        "autumn": "Normal for inner needles to turn yellow and drop — this is natural shedding. Don't worry unless outer needles yellow too.",
+        "winter": "Shake heavy snow off branches to prevent breakage. Pines are extremely cold-hardy."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Звичайна",
+        "photo": null,
+        "ukrainianRegion": "All regions, dominant in Polissia",
+        "frostHardiness": -40,
+        "matureHeight": "25-40m",
+        "watering": { "youngDays": 5, "matureDays": 14, "establishedDays": 30, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Prune candles in late spring to control size. Never cut back into old wood — it won't regrow." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good resistance, vulnerable to bark beetle during drought stress",
+        "strengths": ["Extremely hardy", "Fast growth on sandy soil", "Valuable timber", "Thrives on poor soil"],
+        "weaknesses": ["Very tall at maturity", "Shallow roots in sandy soil", "Fire risk in dry conditions"],
+        "notes": "The most common pine in Ukraine. Dominates Polissia forests. Grows well on sandy, poor soils where other trees fail. Important timber species."
+      },
+      {
+        "name": "Кримська",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine, Crimean mountains",
+        "frostHardiness": -20,
+        "matureHeight": "20-30m",
+        "watering": { "youngDays": 5, "matureDays": 14, "establishedDays": 30, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Same as common pine. Naturally forms a broad, flat crown with age — very picturesque." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More drought-resistant than common pine",
+        "strengths": ["Drought-tolerant", "Beautiful flat crown", "Salt-tolerant", "Long dark needles"],
+        "weaknesses": ["Less frost-hardy", "Slower growth", "Limited to warmer regions"],
+        "notes": "Endemic to Crimean mountains. Beautiful dark green long needles. Develops a picturesque flat-topped crown with age. Protected species."
+      },
+      {
+        "name": "Гірська",
+        "photo": null,
+        "ukrainianRegion": "Carpathians, mountain regions",
+        "frostHardiness": -35,
+        "matureHeight": "3-8m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [5, 6], "tips": "Compact grower — minimal pruning needed. Can be shaped for formal gardens. Trim candles for dense growth." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Excellent disease resistance, very tough",
+        "strengths": ["Compact size", "Wind-resistant", "Thrives in poor soil", "Great for small gardens"],
+        "weaknesses": ["Slow growth", "Can look scrubby without shaping"],
+        "notes": "Native to Carpathian highlands. Perfect for small gardens, rockeries, or windbreaks. Very tough and adaptable. Available in many dwarf cultivars."
+      },
+      {
+        "name": "Веймутова",
+        "photo": null,
+        "ukrainianRegion": "Western & Central Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "20-35m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Light pruning of candles. Graceful natural form — avoid heavy shaping. Remove dead branches as needed." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Susceptible to white pine blister rust",
+        "strengths": ["Soft blue-green needles", "Very fast growth", "Graceful form", "Good shade tree"],
+        "weaknesses": ["Susceptible to blister rust", "Brittle branches in ice storms", "Needs space"],
+        "notes": "North American species, widely planted in Ukraine. Soft, feathery blue-green needles give elegant appearance. Fast grower but watch for blister rust."
+      }
+    ]
+  },
+  {
+    "name": "Linden",
+    "ukrainianName": "Липа",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Balanced fertilizer (NPK 10-10-10) or compost. Linden isn't fussy about soil — responds well to organic mulch."
+      },
+      "pests": {
+        "common": ["Linden aphid", "Spider mites", "Linden moth"],
+        "treatmentMonths": [5, 6, 7],
+        "treatmentTip": "Spray insecticidal soap for aphids — linden aphid is very common. Treat early before honeydew appears."
+      },
+      "diseases": {
+        "common": ["Leaf spot", "Anthracnose", "Sooty mold (from aphids)"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Apply fungicide after prolonged rain to prevent leaf spot and anthracnose."
+      },
+      "seasonalTips": {
+        "spring": "Final chance to prune before leaves emerge. Apply compost around base. Linden is a great honey tree — bees love the flowers!",
+        "summer": "Harvest linden flowers in June-July for tea (липовий чай)! Water during dry spells. Watch for aphid honeydew on leaves.",
+        "autumn": "Collect fallen leaves for compost. Apply mulch layer before winter. Check for aphid damage and plan treatment for spring.",
+        "winter": "Very hardy tree. Protect young trunk from frost cracks with white tree wrap."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Серцелиста",
+        "photo": null,
+        "ukrainianRegion": "All regions of Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "20-30m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Prune in late winter while dormant. Tolerates heavy pruning well — popular for formal shaping. Remove suckers from the base." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 10, "period": "mid" },
+        "pollination": "Insect-pollinated (bees)",
+        "fruit": { "color": "Yellow-green", "size": "Small nutlets", "taste": "Not edible — flowers are the harvest (for tea)" },
+        "yield": "Excellent honey production, flowers for tea",
+        "diseaseResistance": "Good overall, susceptible to aphid-related sooty mold",
+        "strengths": ["Best honey tree in Ukraine", "Fragrant flowers for tea", "Very long-lived", "Tolerates heavy pruning"],
+        "weaknesses": ["Aphid magnet (sticky honeydew)", "Large tree needs space", "Slow to establish"],
+        "notes": "The classic Ukrainian linden. Flowers make the best липовий чай and мед. A single tree can produce 15+ kg of honey per year. Sacred tree in Slavic tradition."
+      },
+      {
+        "name": "Дрібнолиста",
+        "photo": null,
+        "ukrainianRegion": "All regions, common in parks",
+        "frostHardiness": -30,
+        "matureHeight": "15-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Same as heart-leaved linden. Slightly more compact — good for urban planting and avenues." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 10, "period": "mid" },
+        "pollination": "Insect-pollinated (bees)",
+        "fruit": { "color": "Yellow-green", "size": "Tiny nutlets", "taste": "Flowers harvested for tea" },
+        "yield": "Good honey production",
+        "diseaseResistance": "Similar to heart-leaved, moderate aphid issues",
+        "strengths": ["More compact than heart-leaved", "Great for avenues", "Very fragrant", "Tolerates urban conditions"],
+        "weaknesses": ["Still attracts aphids", "Smaller flowers than heart-leaved"],
+        "notes": "Very similar to heart-leaved linden but slightly more compact. Extremely popular as a street and park tree throughout Ukraine."
+      },
+      {
+        "name": "Європейська",
+        "photo": null,
+        "ukrainianRegion": "Western & Central Ukraine",
+        "frostHardiness": -28,
+        "matureHeight": "25-35m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Natural hybrid — vigorous grower. Prune to maintain shape. Excellent for formal avenues." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 8, "period": "mid" },
+        "pollination": "Insect-pollinated (bees)",
+        "fruit": { "color": "Yellow-green", "size": "Small nutlets", "taste": "Flowers for tea" },
+        "yield": "Very good honey production",
+        "diseaseResistance": "Hybrid vigor — generally healthier",
+        "strengths": ["Vigorous hybrid", "Large flowers", "Fast growth", "Excellent honey tree"],
+        "weaknesses": ["Very large at maturity", "Needs space"],
+        "notes": "Natural hybrid between heart-leaved and large-leaved linden. Combines the best of both: vigor, large fragrant flowers, and good form."
+      }
+    ]
+  },
+  {
+    "name": "Maple",
+    "ukrainianName": "Клен",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Balanced slow-release fertilizer. Avoid over-fertilizing — maples prefer moderate nutrition. Mulch with composted leaves."
+      },
+      "pests": {
+        "common": ["Maple aphid", "Maple borer", "Scale insects"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Check for scale insects on branches. Spray dormant oil in early spring if present last year."
+      },
+      "diseases": {
+        "common": ["Tar spot", "Verticillium wilt", "Anthracnose"],
+        "treatmentMonths": [5, 6, 7],
+        "treatmentTip": "Tar spot is common but usually cosmetic. Apply fungicide only if severe. Clean up spotted leaves in autumn."
+      },
+      "seasonalTips": {
+        "spring": "DO NOT prune — maple bleeds sap heavily! Watch for tar spot disease on emerging leaves. Begin watering young trees.",
+        "summer": "Best time to prune. Water during drought — maples can get leaf scorch in dry heat. Spectacular canopy provides great shade.",
+        "autumn": "Enjoy the stunning autumn colors! Collect seeds (helicopters) if you don't want seedlings everywhere. Apply final fertilizer.",
+        "winter": "Hardy tree. Protect young trunks from frost. Good time to plan pruning for next summer."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Гостролистий",
+        "photo": null,
+        "ukrainianRegion": "All regions of Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [7, 8], "tips": "Prune in summer only — bleeds heavily in spring. Remove dead branches and crossing limbs. Shape young trees lightly." },
+        "harvest": null,
+        "pollination": "Insect-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Susceptible to tar spot (cosmetic), generally healthy",
+        "strengths": ["Spectacular autumn color", "Fast growth", "Excellent shade tree", "Very hardy"],
+        "weaknesses": ["Heavy seed production", "Surface roots can lift pavement", "Tar spot on leaves"],
+        "notes": "The most common maple in Ukraine. Stunning golden-orange autumn foliage. Very popular as a park and street tree. Helicopter seeds everywhere!"
+      },
+      {
+        "name": "Явір",
+        "photo": null,
+        "ukrainianRegion": "Western Ukraine, Carpathians",
+        "frostHardiness": -25,
+        "matureHeight": "25-35m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [7, 8], "tips": "Minimal pruning needed. Naturally forms a broad, rounded crown. Remove dead wood in summer." },
+        "harvest": null,
+        "pollination": "Insect-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More resistant to tar spot than Norway maple",
+        "strengths": ["Massive canopy", "Tolerates wind and exposure", "Beautiful bark patterns", "Very long-lived"],
+        "weaknesses": ["Very large — needs lots of space", "Less frost-hardy", "Heavy shade underneath"],
+        "notes": "Sycamore maple — the largest maple species in Ukraine. Common in Carpathian forests. Bark flakes to reveal patches of different colors."
+      },
+      {
+        "name": "Татарський",
+        "photo": null,
+        "ukrainianRegion": "Steppe & Forest-steppe zones",
+        "frostHardiness": -35,
+        "matureHeight": "5-10m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [7, 8], "tips": "Compact tree — can grow as large shrub. Light pruning for shape. Useful as hedge or screen." },
+        "harvest": null,
+        "pollination": "Insect-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Very disease-resistant, tough",
+        "strengths": ["Compact size", "Drought-tolerant", "Great for small gardens", "Beautiful red seed wings"],
+        "weaknesses": ["Not as showy autumn color", "Can sucker"],
+        "notes": "Small, tough maple native to Ukrainian steppe. Red-winged seeds (samaras) are very ornamental in summer. Good choice for hedges and small spaces."
+      },
+      {
+        "name": "Цукровий",
+        "photo": null,
+        "ukrainianRegion": "Western & Central Ukraine (planted)",
+        "frostHardiness": -30,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [7, 8], "tips": "Prune in summer. Train young trees to strong central leader. Avoid topping." },
+        "harvest": null,
+        "pollination": "Insect-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good, but sensitive to salt and pollution",
+        "strengths": ["Best autumn color of all maples", "Famous for maple syrup", "Elegant form"],
+        "weaknesses": ["Sensitive to urban conditions", "Slower growth", "Not native to Ukraine"],
+        "notes": "The Canadian maple syrup tree. Planted in Ukraine for its spectacular red-orange autumn color. Prefers clean air and deep soil."
+      }
+    ]
+  },
+  {
+    "name": "Spruce",
+    "ukrainianName": "Ялина",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "4.5-6.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Acidic conifer fertilizer. Mulch with bark chips or pine needles to maintain acidity. Avoid lime near spruce."
+      },
+      "pests": {
+        "common": ["Spruce spider mite", "Spruce bark beetle", "Spruce budworm"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Spray for spruce spider mites in dry spring weather. Check needle undersides."
+      },
+      "diseases": {
+        "common": ["Needle cast", "Cytospora canker", "Root rot"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply copper fungicide if needle rust was present. Improve air circulation around tree."
+      },
+      "seasonalTips": {
+        "spring": "Apply acidic fertilizer. Trim new candles to shape. Watch for spruce spider mites as weather warms.",
+        "summer": "Water young trees weekly during hot, dry weather. Check for spider mites. Needle drop from inner branches is normal.",
+        "autumn": "Water well before ground freezes — evergreens lose moisture all winter through needles. Apply bark mulch.",
+        "winter": "Brush heavy snow off branches. Watch for salt spray damage near roads. Blue spruce varieties are especially hardy."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Європейська",
+        "photo": null,
+        "ukrainianRegion": "Carpathians, Northern Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "30-40m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Trim new growth in late spring for shaping. Never cut back to bare wood — spruce won't regrow from old branches." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Susceptible to bark beetle during drought",
+        "strengths": ["Classic Christmas tree shape", "Important timber tree", "Very hardy", "Fast growth"],
+        "weaknesses": ["Very tall at maturity", "Shallow roots (wind-throw risk)", "Suffers in hot, dry conditions"],
+        "notes": "The native Carpathian spruce. Forms vast forests in the mountains. The classic Christmas tree. Important timber species. Sensitive to climate change and bark beetle."
+      },
+      {
+        "name": "Блакитна",
+        "photo": null,
+        "ukrainianRegion": "Planted throughout Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "15-20m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Minimal pruning needed — natural symmetrical form. Remove dead branches. Can be lightly shaped." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More drought-resistant than European spruce",
+        "strengths": ["Stunning silver-blue color", "Symmetrical form", "Drought-tolerant", "Very popular ornamental"],
+        "weaknesses": ["Slow growth", "Can lose blue color in shade", "Expensive in nurseries"],
+        "notes": "The famous Colorado blue spruce. Extremely popular in Ukrainian gardens and parks. Silvery-blue needles make it one of the most beautiful conifers."
+      },
+      {
+        "name": "Сербська",
+        "photo": null,
+        "ukrainianRegion": "Western & Central Ukraine (planted)",
+        "frostHardiness": -30,
+        "matureHeight": "15-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [5, 6], "tips": "Rarely needs pruning — elegant narrow form is natural. Remove dead branches only." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Good disease resistance, adapts to various soils",
+        "strengths": ["Very narrow, elegant form", "Adapts to alkaline soil", "Beautiful two-tone needles", "Great for tight spaces"],
+        "weaknesses": ["Slower growth", "Less cold-hardy than European", "Rare in nurseries"],
+        "notes": "One of the most elegant spruces — very narrow columnar form. Two-tone needles (green above, silver below). Perfect for narrow spaces."
+      },
+      {
+        "name": "Коніка",
+        "photo": null,
+        "ukrainianRegion": "All regions (container/garden plant)",
+        "frostHardiness": -30,
+        "matureHeight": "2-4m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 3 },
+        "pruning": { "months": [5, 6], "tips": "Naturally forms a perfect cone. No pruning needed! Just remove any odd shoots that break the shape." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Susceptible to spider mites and sunburn",
+        "strengths": ["Perfect miniature cone shape", "Great for containers", "No pruning needed", "Very popular"],
+        "weaknesses": ["Very susceptible to spider mites", "Burns in hot sun", "Slow growth"],
+        "notes": "The famous dwarf Alberta spruce. Perfect cone shape without pruning. Very popular in Ukrainian gardens but watch for spider mite — the #1 problem."
+      }
+    ]
+  },
+  {
+    "name": "Beech",
+    "ukrainianName": "Бук",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "5.5-7.0",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Organic compost or balanced slow-release fertilizer. Beech prefers rich, well-drained soil. Leaf mold is ideal mulch."
+      },
+      "pests": {
+        "common": ["Beech scale", "Woolly beech aphid", "Bark beetles"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Inspect for beech scale in spring. Spray with horticultural oil if present. Remove woolly aphid colonies."
+      },
+      "diseases": {
+        "common": ["Beech bark disease", "Leaf spot", "Phytophthora root rot"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Apply copper fungicide in early spring for beech bark disease prevention. Improve drainage to prevent Phytophthora."
+      },
+      "seasonalTips": {
+        "spring": "Apply compost. Watch for beech leaf disease. Young beech benefits from some shade — it's naturally an understory tree.",
+        "summer": "Keep soil moist — beech has shallow roots and suffers in drought. Thick canopy creates deep shade underneath.",
+        "autumn": "Beautiful golden-bronze autumn color. Some leaves persist through winter (marcescent). Apply mulch before frost.",
+        "winter": "Moderate hardiness. Protect young trees from harsh winds. Dead leaves on branches provide some insulation."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Лісовий",
+        "photo": null,
+        "ukrainianRegion": "Western Ukraine, Carpathians",
+        "frostHardiness": -25,
+        "matureHeight": "25-35m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 8], "tips": "Prune in late winter or late summer. Responds well to pruning — excellent for hedges." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Moderate — susceptible to beech bark disease complex",
+        "strengths": ["Magnificent forest tree", "Beautiful smooth bark", "Excellent hedge plant", "Golden autumn color"],
+        "weaknesses": ["Needs moist soil", "Shallow roots", "Sensitive to drought", "Slow to establish"],
+        "notes": "Dominant forest tree in Carpathian beech forests (UNESCO World Heritage). Smooth grey bark is distinctive. Beechnuts are edible (but small). Dead leaves persist on hedges through winter, providing privacy."
+      },
+      {
+        "name": "Східний",
+        "photo": null,
+        "ukrainianRegion": "Southern Carpathians, rare",
+        "frostHardiness": -22,
+        "matureHeight": "20-30m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 8], "tips": "Similar to European beech. Slightly more heat-tolerant." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Similar to European beech",
+        "strengths": ["More heat-tolerant", "Slightly smaller leaves", "Good for warmer climates"],
+        "weaknesses": ["Less frost-hardy", "Rare in cultivation"],
+        "notes": "Found at the eastern edge of beech range. More adapted to warmer, drier conditions than European beech."
+      },
+      {
+        "name": "Пурпурний",
+        "photo": null,
+        "ukrainianRegion": "Planted in parks throughout Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "20-30m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 8], "tips": "Same as European beech. The purple color is best in full sun — more shade = more green." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Same as European beech",
+        "strengths": ["Stunning dark purple foliage", "Dramatic focal point", "Unique color year-round"],
+        "weaknesses": ["Needs full sun for best color", "Expensive", "Same moisture needs as green form"],
+        "notes": "A cultivar of European beech with deep purple-red leaves. Extremely ornamental. One of the most striking trees in any garden. Color deepens in full sun."
+      }
+    ]
+  },
+  {
+    "name": "Ash",
+    "ukrainianName": "Ясен",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4],
+        "type": "Balanced fertilizer or compost. Ash is adaptable to most soils. Don't over-fertilize."
+      },
+      "pests": {
+        "common": ["Emerald ash borer", "Ash bark beetle", "Ash bud moth"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Inspect for emerald ash borer signs (D-shaped exit holes). Report to local forestry if found."
+      },
+      "diseases": {
+        "common": ["Ash dieback (Chalara)", "Anthracnose", "Root rot"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply fungicide for ash dieback prevention. Remove and burn infected branches."
+      },
+      "seasonalTips": {
+        "spring": "Last of deciduous trees to leaf out — don't worry if it's late. Watch for emerald ash borer damage. Apply fertilizer.",
+        "summer": "Fast grower — may need formative pruning while young. Water during drought. Handles urban conditions well.",
+        "autumn": "First tree to drop leaves in fall. Clean up debris to prevent disease. Assess structure for winter pruning.",
+        "winter": "Best time to prune. Inspect for ash dieback symptoms (dead branches, diamond-shaped bark lesions). Very cold-hardy."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Звичайний",
+        "photo": null,
+        "ukrainianRegion": "All regions of Ukraine",
+        "frostHardiness": -30,
+        "matureHeight": "25-30m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [11, 12, 1, 2], "tips": "Prune while fully dormant. Remove crossing branches. Train to single leader when young." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Highly susceptible to ash dieback (Chalara fraxinea)",
+        "strengths": ["Very fast growth", "Excellent timber", "Handles urban conditions", "Very cold-hardy"],
+        "weaknesses": ["Extremely vulnerable to ash dieback", "Late to leaf, early to drop", "Co-dominant stems need training"],
+        "notes": "Under severe threat from ash dieback disease across Europe. Very important timber tree. Some individuals show resistance — these are critical for breeding resistant strains."
+      },
+      {
+        "name": "Вузьколистий",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [11, 12, 1, 2], "tips": "Same dormant pruning as common ash. More compact form." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Slightly more resistant to ash dieback than common ash",
+        "strengths": ["More compact than common ash", "Elegant narrow leaves", "Good urban tree"],
+        "weaknesses": ["Less frost-hardy", "Still vulnerable to ash dieback"],
+        "notes": "Southern European species with more elegant, finer foliage. Better suited to warmer regions of Ukraine."
+      },
+      {
+        "name": "Пенсильванський",
+        "photo": null,
+        "ukrainianRegion": "Planted in parks, Central & Eastern Ukraine",
+        "frostHardiness": -35,
+        "matureHeight": "15-20m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [11, 12, 1, 2], "tips": "Prune in dormancy. More compact — less pruning needed than common ash." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More resistant to European ash dieback, but vulnerable to emerald ash borer",
+        "strengths": ["Very hardy", "Tolerates wet soil", "More compact", "Resistant to Chalara"],
+        "weaknesses": ["Can be invasive", "Vulnerable to emerald ash borer"],
+        "notes": "North American species. Widely planted in Eastern Ukraine. More resistant to ash dieback but faces emerald ash borer threat."
+      }
+    ]
+  },
+  {
+    "name": "Hornbeam",
+    "ukrainianName": "Граб",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "5.5-7.5",
+      "sun": "Full sun to full shade",
+      "fertilizing": {
+        "months": [4, 5],
+        "type": "Balanced fertilizer or compost. Hornbeam is very adaptable and low-maintenance."
+      },
+      "pests": {
+        "common": ["Hornbeam moth", "Aphids", "Scale insects"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Inspect for scale insects and aphids in spring. Spray with insecticidal soap if needed. Generally low-pest tree."
+      },
+      "diseases": {
+        "common": ["Coral spot", "Powdery mildew", "Leaf spot"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply copper fungicide if powdery mildew was present last year. Usually very disease-resistant."
+      },
+      "seasonalTips": {
+        "spring": "Formative prune before leaves emerge. Apply compost. Hornbeam leafs out early — one of the first signs of spring.",
+        "summer": "Very drought-tolerant once established. August is good for hedge trimming. Dense canopy provides excellent shade.",
+        "autumn": "Leaves turn golden-yellow. Like beech, some leaves persist through winter. Low maintenance in autumn.",
+        "winter": "Very hardy and problem-free. Retained brown leaves add winter interest. Plan structural pruning if needed."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Звичайний",
+        "photo": null,
+        "ukrainianRegion": "Western & Central Ukraine",
+        "frostHardiness": -28,
+        "matureHeight": "15-25m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 4 },
+        "pruning": { "months": [2, 3, 8], "tips": "Excellent hedge tree — tolerates heavy shaping. Prune hedges in August. Standalone trees need minimal pruning." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Excellent — one of the healthiest trees",
+        "strengths": ["Ultimate hedge tree", "Tolerates heavy pruning", "Shade-tolerant", "Very low-maintenance"],
+        "weaknesses": ["Not as ornamental as beech", "Slow growth", "Hard wood dulls tools"],
+        "notes": "The best hedging tree in Ukraine — retains dead leaves through winter like beech. Extremely hard wood (hence the name). Very problem-free tree."
+      },
+      {
+        "name": "Східний",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine, Crimea",
+        "frostHardiness": -22,
+        "matureHeight": "8-15m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3, 8], "tips": "Smaller than common hornbeam — less pruning needed. Good for medium hedges." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Very disease-resistant",
+        "strengths": ["Smaller size for gardens", "Heat-tolerant", "Good hedge plant"],
+        "weaknesses": ["Less frost-hardy", "Limited availability"],
+        "notes": "Smaller species suited to warmer climates. Native to southern Ukraine and Crimea. Good alternative to common hornbeam in smaller gardens."
+      }
+    ]
+  },
+  {
+    "name": "Alder",
+    "ukrainianName": "Вільха",
+    "type": "forestTree",
+    "speciesInfo": {
+      "soilPH": "5.0-7.0",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [],
+        "type": "Usually doesn't need fertilizer — alder fixes its own nitrogen from the air! Just mulch with organic matter."
+      },
+      "pests": {
+        "common": ["Alder beetle", "Alder woolly aphid"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Watch for alder beetle in spring. Spray insecticidal soap for woolly aphid if heavy infestation."
+      },
+      "diseases": {
+        "common": ["Phytophthora (alder disease)", "Leaf curl"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply copper fungicide if Phytophthora was present. Improve drainage around roots."
+      },
+      "seasonalTips": {
+        "spring": "Catkins appear before leaves. Alder improves soil for nearby plants. Great choice for wet areas.",
+        "summer": "Loves moisture — perfect near ponds or streams. One of the few trees that thrives in waterlogged soil.",
+        "autumn": "Leaves drop early and green (don't change color much). Tiny cones remain through winter.",
+        "winter": "Very hardy. Good time to prune. Small woody cones on bare branches are attractive winter feature."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Чорна",
+        "photo": null,
+        "ukrainianRegion": "All regions, river valleys and wetlands",
+        "frostHardiness": -30,
+        "matureHeight": "20-25m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [11, 12, 1], "tips": "Prune in dormant season. Remove lower branches for clearance. Fixes nitrogen in soil." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "Vulnerable to Phytophthora alni disease",
+        "strengths": ["Fixes nitrogen (improves soil)", "Thrives in waterlogged soil", "Fast growth", "Great for wetland restoration"],
+        "weaknesses": ["Needs wet soil", "Susceptible to Phytophthora", "Short-lived (60-100 years)"],
+        "notes": "The dominant wetland tree in Ukraine. Fixes nitrogen like legumes — improves soil for nearby plants. Essential for riverbank stabilization."
+      },
+      {
+        "name": "Сіра",
+        "photo": null,
+        "ukrainianRegion": "Northern Ukraine, Carpathian foothills",
+        "frostHardiness": -35,
+        "matureHeight": "10-20m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [11, 12, 1], "tips": "Often grows as multi-stemmed. Minimal pruning — remove dead stems. Can be coppiced." },
+        "harvest": null,
+        "pollination": "Wind-pollinated",
+        "fruit": null,
+        "yield": null,
+        "diseaseResistance": "More resistant to Phytophthora than black alder",
+        "strengths": ["Extremely hardy", "Tolerates poor soil", "Pioneer species", "Nitrogen fixer"],
+        "weaknesses": ["Smaller tree", "Less ornamental", "Can spread aggressively"],
+        "notes": "Pioneer species — colonizes bare ground quickly. Smaller and scruffier than black alder. Very useful for soil improvement and land reclamation."
+      }
+    ]
+  },
+  {
+    "name": "Cherry",
+    "ukrainianName": "Вишня",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 6],
+        "type": "Early spring: NPK 10-10-10. After flowering: potassium-rich fertilizer for fruit development. Avoid excess nitrogen."
+      },
+      "pests": {
+        "common": ["Cherry fruit fly", "Black cherry aphid", "Cherry bark moth"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray (horticultural oil) in March. Spray against cherry fruit fly in May-June. Use pheromone traps."
+      },
+      "diseases": {
+        "common": ["Cherry leaf spot", "Brown rot", "Silver leaf disease"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Apply copper spray before bud break. Fungicide (e.g., Topsin) during bloom for moniliosis. Repeat after rain."
+      },
+      "seasonalTips": {
+        "spring": "Protect blossoms from late frost with fleece. Apply nitrogen fertilizer as buds swell. Watch for cherry blossom blight.",
+        "summer": "Harvest when fully ripe (dark red). Water deeply during fruit development. Prune after harvest to shape crown.",
+        "autumn": "Clean up fallen fruit to prevent brown rot. Apply potash fertilizer. Whitewash trunk to prevent frost cracks.",
+        "winter": "Inspect for canker on branches. Plan spring pruning. Apply dormant oil spray against overwintering pests."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Шпанка",
+        "photo": null,
+        "ukrainianRegion": "Central & Northern Ukraine",
+        "frostHardiness": -30,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 7, 8], "tips": "Grows tall — maintain central leader. Thin crown for light penetration. Light pruning after harvest." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 5, "period": "mid" },
+        "pollination": "Partially self-fertile, better with Любська nearby",
+        "fruit": { "color": "Light red", "size": "6-7g", "taste": "Sweet-sour, excellent fresh eating" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate coccomycosis resistance",
+        "strengths": ["Very frost-hardy", "Reliable yields", "Classic Ukrainian variety", "Great fresh and for kompot"],
+        "weaknesses": ["Fruit bruises easily", "Tall tree harder to harvest", "Needs pollinator for best yield"],
+        "notes": "One of the oldest Ukrainian cherry varieties. Шпанка is practically synonymous with Ukrainian sour cherry. Excellent for компот and fresh eating."
+      },
+      {
+        "name": "Любська",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -25,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 7, 8], "tips": "Compact tree — light thinning is enough. Remove suckers regularly. Open center for air." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "4-5g", "taste": "Very sour, best for preserves and варення" },
+        "yield": "Medium-high (up to 25 kg/tree)",
+        "diseaseResistance": "Susceptible to coccomycosis",
+        "strengths": ["Self-fertile (no pollinator needed)", "Compact size", "Fruits early (year 3)", "Universal pollinator"],
+        "weaknesses": ["Very sour fresh", "Prone to coccomycosis", "Shorter-lived than Шпанка"],
+        "notes": "Most common sour cherry worldwide. Perfect for варення, вишневий пиріг, and вишнівка. Self-fertile — one tree is enough for fruit."
+      },
+      {
+        "name": "Гріот київський",
+        "photo": null,
+        "ukrainianRegion": "Central Ukraine, Kyiv region",
+        "frostHardiness": -27,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 7, 8], "tips": "Weeping form — thin drooping branches to prevent them touching ground. Remove dead wood." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Partially self-fertile, best with Шпанка or Любська",
+        "fruit": { "color": "Very dark red, almost black", "size": "5-6g", "taste": "Rich, sweet-sour, intensely flavored" },
+        "yield": "Medium (15-20 kg/tree)",
+        "diseaseResistance": "Good resistance to coccomycosis",
+        "strengths": ["Intensely flavored fruit", "Beautiful dark color", "Good disease resistance", "Compact weeping form"],
+        "weaknesses": ["Lower yield than Шпанка", "Needs pollinator", "Fruit quality drops in drought"],
+        "notes": "Classic Kyiv variety. Dark, intensely flavored cherries — the best for вишнівка (cherry liqueur). Beautiful weeping growth habit."
+      },
+      {
+        "name": "Молодіжна",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 7, 8], "tips": "Very compact — minimal pruning needed. Remove crossing branches. Keep center open." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "4-5g", "taste": "Sweet-sour, good fresh and for preserves" },
+        "yield": "High for its size (10-15 kg/tree)",
+        "diseaseResistance": "Moderate resistance",
+        "strengths": ["Very compact (2-3m)", "Self-fertile", "Heavy bearer for size", "Easy to harvest"],
+        "weaknesses": ["Smaller berries", "Moderate disease resistance"],
+        "notes": "Modern variety bred for small gardens. Very compact but productive. Self-fertile — perfect when you only have space for one tree."
+      },
+      {
+        "name": "Тургенівка",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 7, 8], "tips": "Upright growth — thin to prevent dense canopy. Standard cherry pruning." },
+        "harvest": { "months": [7], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Partially self-fertile, best with Любська or Молодіжна",
+        "fruit": { "color": "Dark red", "size": "5-6g", "taste": "Sour-sweet, good for all uses" },
+        "yield": "High (up to 25 kg/tree)",
+        "diseaseResistance": "Good resistance to coccomycosis and moniliosis",
+        "strengths": ["Very frost-hardy", "Good disease resistance", "Versatile fruit", "Reliable"],
+        "weaknesses": ["Needs pollinator for full yield", "Fruit is quite sour"],
+        "notes": "Reliable modern variety with good disease resistance and frost hardiness. Named after writer Turgenev. Dependable choice for any region."
+      }
+    ]
+  },
+  {
+    "name": "Sweet Cherry",
+    "ukrainianName": "Черешня",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 6],
+        "type": "Spring: balanced NPK. After harvest: potassium and phosphorus for next year's buds. Calcium prevents fruit cracking."
+      },
+      "pests": {
+        "common": ["Cherry fruit fly", "Birds", "Cherry blossom weevil"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March, cherry fruit fly treatment May-June."
+      },
+      "diseases": {
+        "common": ["Bacterial canker", "Brown rot", "Cracking (from rain during ripening)"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Copper spray before bud break. Fungicide during bloom for moniliosis and cherry leaf spot."
+      },
+      "seasonalTips": {
+        "spring": "Flowers are frost-sensitive — cover with fleece if late frost threatens. Apply nitrogen fertilizer. Watch for bacterial canker.",
+        "summer": "Net trees to protect fruit from birds. Harvest when firm and sweet. Don't over-water during ripening — causes cracking.",
+        "autumn": "Remove mummified fruit. Apply potassium fertilizer. Whitewash trunk. Clean up leaves.",
+        "winter": "Less hardy than sour cherry — protect young trees from extreme cold. Inspect for bacterial canker (amber gum on bark)."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Великоплідна",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [4, 7, 8], "tips": "Control height — naturally tall. Open vase shape for easy picking." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Needs pollinator (Валерій Чкалов, Дрогана жовта)",
+        "fruit": { "color": "Dark red", "size": "10-12g", "taste": "Sweet, juicy, excellent fresh" },
+        "yield": "Very high (up to 50 kg/tree)",
+        "diseaseResistance": "Good resistance to brown rot",
+        "strengths": ["Very large fruit (10-12g)", "High yield", "Good disease resistance", "Excellent taste"],
+        "weaknesses": ["Needs pollinator", "Not the hardiest", "Tall tree"],
+        "notes": "One of the largest-fruited sweet cherries. Ukrainian variety prized for enormous, sweet berries. A must-have for cherry lovers."
+      },
+      {
+        "name": "Валерій Чкалов",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -23,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [4, 7, 8], "tips": "Vigorous grower — control height annually. Spread branches for wider crown." },
+        "harvest": { "months": [6], "yearsToBearing": 5, "period": "early" },
+        "pollination": "Needs pollinator (Великоплідна, Дрогана жовта)",
+        "fruit": { "color": "Dark red, almost black", "size": "8-9g", "taste": "Rich sweet, slightly wine-like" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate — susceptible to grey rot in wet years",
+        "strengths": ["Very early ripening", "Rich flavor", "Large fruit", "Popular market variety"],
+        "weaknesses": ["Cracks in rain", "Moderate disease resistance", "Needs pollinator"],
+        "notes": "Classic early variety named after famous Soviet pilot. One of the first sweet cherries to ripen. Rich, dark fruit with wine-like undertones."
+      },
+      {
+        "name": "Дрогана жовта",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -25,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [4, 7, 8], "tips": "Strong grower — needs regular height control. Open center for light penetration." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Needs pollinator (Валерій Чкалов, Великоплідна)",
+        "fruit": { "color": "Golden yellow", "size": "7-8g", "taste": "Sweet, delicate, honey-like" },
+        "yield": "Very high (up to 60 kg/tree)",
+        "diseaseResistance": "Good overall resistance",
+        "strengths": ["Unique yellow color", "Extremely high yield", "Hardy for sweet cherry", "Delicate flavor"],
+        "weaknesses": ["Soft fruit (poor transport)", "Needs pollinator", "Birds love yellow cherries"],
+        "notes": "Beautiful golden-yellow sweet cherry. Extremely productive. The yellow color is unusual and decorative. Delicate honey flavor. Birds target it first!"
+      },
+      {
+        "name": "Регіна",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -25,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [4, 7, 8], "tips": "Naturally compact — less pruning than most sweet cherries. Maintain open center." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Dark red", "size": "9-10g", "taste": "Sweet, firm, excellent quality" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Excellent — crack-resistant",
+        "strengths": ["Late ripening (extends season)", "Crack-resistant", "Firm fruit transports well", "Partially self-fertile"],
+        "weaknesses": ["Late — may not ripen in short summers", "Moderate frost hardiness"],
+        "notes": "German variety that's become very popular in Ukraine. Late ripening extends the cherry season. Firm, crack-resistant fruit — the best for market."
+      },
+      {
+        "name": "Ревна",
+        "photo": null,
+        "ukrainianRegion": "Central & Northern Ukraine",
+        "frostHardiness": -27,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [4, 7, 8], "tips": "Moderate vigor — standard sweet cherry pruning. Compact pyramidal form." },
+        "harvest": { "months": [7], "yearsToBearing": 4, "period": "late" },
+        "pollination": "Partially self-fertile, better with Тютчевка or Іпуть",
+        "fruit": { "color": "Dark red, almost black", "size": "5-7g", "taste": "Sweet, rich, dessert quality" },
+        "yield": "High (up to 30 kg/tree)",
+        "diseaseResistance": "Excellent — very healthy variety",
+        "strengths": ["Most frost-hardy sweet cherry", "Excellent disease resistance", "Crack-resistant", "Rich flavor"],
+        "weaknesses": ["Smaller fruit than Великоплідна", "Late ripening"],
+        "notes": "One of the hardiest sweet cherry varieties. Bred for cold climates. Can grow successfully in Northern Ukraine where other sweet cherries struggle."
+      }
+    ]
+  },
+  {
+    "name": "Apple",
+    "ukrainianName": "Яблуня",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 6, 9],
+        "type": "Spring: nitrogen-rich (urea). Summer: balanced NPK after fruit set. Autumn: potassium + phosphorus for winter hardiness."
+      },
+      "pests": {
+        "common": ["Codling moth", "Apple aphid", "Apple sawfly", "Apple blossom weevil"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Dormant oil spray in March. Spray against codling moth from May (2-3 treatments, 14 days apart). Use traps."
+      },
+      "diseases": {
+        "common": ["Apple scab", "Powdery mildew", "Fire blight", "Canker"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Copper spray before bud break. Fungicide during bloom and petal fall for scab prevention. Critical in wet springs."
+      },
+      "seasonalTips": {
+        "spring": "Spray with copper fungicide at bud swell. Thin fruit clusters to 1 apple per cluster in June. Apply nitrogen fertilizer.",
+        "summer": "Water consistently during fruit development. Support heavily laden branches. Watch for codling moth.",
+        "autumn": "Harvest based on variety. Store late varieties in cool, dark place. Clean up windfalls. Apply potash fertilizer.",
+        "winter": "Best pruning time! Remove 20-30% of growth. Apply dormant oil spray. Whitewash trunk."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Антонівка",
+        "photo": null,
+        "ukrainianRegion": "All regions, especially Northern Ukraine",
+        "frostHardiness": -40,
+        "matureHeight": "6-8m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Strong grower — annual pruning essential. Open center for light. Remove water sprouts." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 5, "period": "late" },
+        "pollination": "Needs pollinator (Семеренко, Голден Делішес)",
+        "fruit": { "color": "Green-yellow", "size": "150-200g", "taste": "Sharp, aromatic, becomes sweet in storage" },
+        "yield": "Very high (up to 200 kg/tree when mature!)",
+        "diseaseResistance": "Moderate — susceptible to scab in wet years",
+        "strengths": ["Incredibly frost-hardy (-40°C)", "Massive yields", "Improves in storage", "Iconic Ukrainian apple"],
+        "weaknesses": ["Tart when fresh", "Large tree", "Alternate bearing (heavy year/light year)", "Scab susceptible"],
+        "notes": "THE classic Ukrainian apple. Unmistakable aroma. Tart when picked but sweetens in storage. The base for Ukrainian яблучний пиріг. Can yield 200+ kg per tree!"
+      },
+      {
+        "name": "Голден Делішес",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Naturally compact — moderate pruning. Thin fruit heavily for larger apples." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Partially self-fertile, better with another variety",
+        "fruit": { "color": "Golden yellow", "size": "150-180g", "taste": "Sweet, honey-like, aromatic" },
+        "yield": "High (50-80 kg/tree)",
+        "diseaseResistance": "Susceptible to powdery mildew and russeting",
+        "strengths": ["Sweet honey flavor", "Compact tree", "Fruits early (year 3)", "Universal pollinator"],
+        "weaknesses": ["Susceptible to powdery mildew", "Skin russets in wet weather", "Needs thinning"],
+        "notes": "World's most popular golden apple. Sweet, honey-flavored, and compact. Pollinates many other varieties — good companion tree."
+      },
+      {
+        "name": "Семеренко",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "5-7m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Vigorous grower — needs strong annual pruning. Open center essential for fruit color." },
+        "harvest": { "months": [10], "yearsToBearing": 4, "period": "late" },
+        "pollination": "Needs pollinator (Голден Делішес, Антонівка)",
+        "fruit": { "color": "Bright green", "size": "150-200g", "taste": "Sweet-tart, crisp, wine-like" },
+        "yield": "Very high (up to 100 kg/tree)",
+        "diseaseResistance": "Susceptible to scab and powdery mildew",
+        "strengths": ["Excellent storage (keeps until spring)", "Unique green color", "High yield", "Ukrainian heritage variety"],
+        "weaknesses": ["Disease susceptible", "Large vigorous tree", "Needs pollinator"],
+        "notes": "Named after Ukrainian pomologist Lev Simirenko. One of the best storage apples — keeps until April. Bright green even when ripe. Ukrainian national pride."
+      },
+      {
+        "name": "Ренет Симиренка",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Standard apple pruning. Moderate vigor. Keep center open for fruit quality." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 4, "period": "late" },
+        "pollination": "Needs pollinator",
+        "fruit": { "color": "Green with red blush", "size": "140-170g", "taste": "Balanced sweet-tart, aromatic" },
+        "yield": "High (60-80 kg/tree)",
+        "diseaseResistance": "Moderate resistance",
+        "strengths": ["Good storage", "Balanced flavor", "Reliable yields", "Hardy"],
+        "weaknesses": ["Needs pollinator", "Moderate disease resistance"],
+        "notes": "Another Simirenko creation. Well-balanced flavor between sweet and tart. Stores well through winter. Reliable garden variety."
+      },
+      {
+        "name": "Гала",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [1, 2, 3], "tips": "Compact — light pruning. MUST thin fruit aggressively — Gala overbears, causing tiny apples and exhaustion." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Needs pollinator (Голден Делішес, Фуджі)",
+        "fruit": { "color": "Red-orange striped over yellow", "size": "120-150g", "taste": "Sweet, mild, crisp" },
+        "yield": "Very high (needs thinning!)",
+        "diseaseResistance": "Moderate — some scab resistance",
+        "strengths": ["Very popular commercially", "Sweet mild flavor", "Compact tree", "Early harvest"],
+        "weaknesses": ["Must thin fruit (overbears)", "Less hardy", "Short storage"],
+        "notes": "The world's most commercially successful apple. Mild, sweet, universally liked. Popular in Ukrainian supermarkets. Compact tree for small gardens."
+      },
+      {
+        "name": "Фуджі",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -20,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Vigorous, spreading growth. Annual pruning important. Thin fruit for size." },
+        "harvest": { "months": [10, 11], "yearsToBearing": 4, "period": "late" },
+        "pollination": "Needs pollinator (Гала, Голден Делішес)",
+        "fruit": { "color": "Red-pink blush over green-yellow", "size": "200-250g", "taste": "Very sweet, crisp, honey-like" },
+        "yield": "High (up to 80 kg/tree)",
+        "diseaseResistance": "Susceptible to fire blight and scab",
+        "strengths": ["Exceptionally sweet", "Large fruit", "Long storage", "Premium apple"],
+        "weaknesses": ["Least frost-hardy", "Needs long warm season", "Disease susceptible"],
+        "notes": "Japanese variety that's become one of the sweetest apples in the world. Needs warm climate — best in Southern Ukraine. Very late ripening."
+      }
+    ]
+  },
+  {
+    "name": "Pear",
+    "ukrainianName": "Груша",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 6],
+        "type": "Similar to apple but less nitrogen — excess causes fire blight susceptibility. Potassium-rich for fruit quality."
+      },
+      "pests": {
+        "common": ["Pear psylla", "Codling moth", "Pear midge"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March. Watch for pear psylla. Codling moth treatment same as apple."
+      },
+      "diseases": {
+        "common": ["Fire blight", "Pear scab", "Brown rot", "Pear rust"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Copper spray before bud break. Fungicide for scab and fire blight. Remove fire blight strikes immediately."
+      },
+      "seasonalTips": {
+        "spring": "Watch for fire blight (blackened shoots). Remove infected branches 30cm below damage. Apply copper spray at bud break.",
+        "summer": "Water deeply during fruit development. Thin fruit if heavily loaded. Pick summer varieties when firm-ripe.",
+        "autumn": "Late varieties: pick when stem separates easily. Store in cool conditions. Clean up fallen fruit.",
+        "winter": "Prune to maintain open center. Pear is very cold-hardy. Inspect for canker and fire blight scars."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Вільямс",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -23,
+        "matureHeight": "5-7m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Upright growth — spread branches for better fruiting. Standard winter pruning." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Needs pollinator (Конференція, Бере Боск)",
+        "fruit": { "color": "Yellow-green with red blush", "size": "150-200g", "taste": "Sweet, musky, melting texture, aromatic" },
+        "yield": "High (up to 60 kg/tree)",
+        "diseaseResistance": "Susceptible to fire blight",
+        "strengths": ["World's best-flavored pear", "Melting, aromatic flesh", "Good yield"],
+        "weaknesses": ["Fire blight susceptible", "Short shelf life", "Needs warm climate"],
+        "notes": "Known as Bartlett in America. The benchmark for pear flavor worldwide. Incredibly aromatic, melting texture. Must be picked firm and ripened off the tree."
+      },
+      {
+        "name": "Конференція",
+        "photo": null,
+        "ukrainianRegion": "Central & Western Ukraine",
+        "frostHardiness": -26,
+        "matureHeight": "5-7m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Strong upright growth — annual pruning essential. Spread branches." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Green with brown russeting", "size": "140-180g", "taste": "Sweet, juicy, smooth" },
+        "yield": "Very high (up to 80 kg/tree)",
+        "diseaseResistance": "Good — moderate fire blight resistance",
+        "strengths": ["Partially self-fertile", "Heavy yields", "Good storage", "Reliable"],
+        "weaknesses": ["Not the prettiest pear (russet)", "Upright growth needs training"],
+        "notes": "The most commercially successful pear in Europe. Reliable, heavy-bearing, and partially self-fertile. Russet skin is unattractive but flavor is excellent."
+      },
+      {
+        "name": "Ліщина",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "4-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Moderate vigor — standard pear pruning. More compact than most pears." },
+        "harvest": { "months": [8], "yearsToBearing": 3, "period": "early" },
+        "pollination": "Needs pollinator",
+        "fruit": { "color": "Yellow", "size": "100-130g", "taste": "Sweet, aromatic, melting" },
+        "yield": "High (40-50 kg/tree)",
+        "diseaseResistance": "Good overall resistance",
+        "strengths": ["Very hardy", "Early ripening", "Compact tree", "Good flavor"],
+        "weaknesses": ["Smaller fruit", "Short storage life"],
+        "notes": "Hardy Ukrainian summer pear. Early ripening means fresh pears in August. Compact tree suitable for smaller gardens."
+      },
+      {
+        "name": "Бере Боск",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "6-8m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 5 },
+        "pruning": { "months": [1, 2, 3], "tips": "Large tree — strong structural pruning needed. Thin long branches." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 5, "period": "late" },
+        "pollination": "Needs pollinator (Вільямс, Конференція)",
+        "fruit": { "color": "Golden russet-brown", "size": "180-250g", "taste": "Rich, sweet, buttery, spicy" },
+        "yield": "High (up to 70 kg/tree)",
+        "diseaseResistance": "Moderate — some scab susceptibility",
+        "strengths": ["Exceptional rich flavor", "Large fruit", "Beautiful golden color", "Good storage"],
+        "weaknesses": ["Large tree", "Slow to bear (5 years)", "Less hardy", "Needs pollinator"],
+        "notes": "One of the finest-flavored pears in existence. Rich, buttery, spicy taste. Distinctive long neck and golden-brown russet skin. Premium quality."
+      },
+      {
+        "name": "Ноябрська",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "4-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 4 },
+        "pruning": { "months": [1, 2, 3], "tips": "Moderate growth — minimal pruning. Naturally forms a good shape." },
+        "harvest": { "months": [10, 11], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Green-yellow", "size": "180-250g", "taste": "Sweet, juicy, buttery" },
+        "yield": "Very high (up to 60 kg/tree)",
+        "diseaseResistance": "Excellent — very healthy variety",
+        "strengths": ["Stores until February", "Very hardy", "Disease resistant", "Large sweet fruit", "Partially self-fertile"],
+        "weaknesses": ["Latest ripening — needs long autumn", "Needs storage time to develop flavor"],
+        "notes": "The ultimate storage pear. Keeps until February. Flavor improves after 1 month in cold storage. One of the most reliable pear varieties for Ukrainian gardens."
+      }
+    ]
+  },
+  {
+    "name": "Plum",
+    "ukrainianName": "Слива",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 6],
+        "type": "Moderate nitrogen in spring. Potassium after flowering for fruit sweetness."
+      },
+      "pests": {
+        "common": ["Plum moth", "Plum sawfly", "Aphids"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March. Plum moth treatment in May-June. Hang pheromone traps."
+      },
+      "diseases": {
+        "common": ["Silver leaf", "Brown rot", "Bacterial canker", "Plum pox virus"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Copper spray before bud break. Fungicide for plum pocket disease and moniliosis."
+      },
+      "seasonalTips": {
+        "spring": "Thin fruit after June drop. Spray against plum moth. Prune NOW — never in winter (silver leaf risk).",
+        "summer": "Harvest when fruit pulls away easily. Support heavy branches. Water stress reduces next year's crop.",
+        "autumn": "Remove all mummified fruit. Apply potash. Clean up fallen leaves.",
+        "winter": "DO NOT prune in winter — silver leaf disease risk! Inspect for canker. Plan spring pruning."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Угорка",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "4-6m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4, 7], "tips": "Standard plum pruning in spring. Remove suckers from rootstock. Open center." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark blue-purple", "size": "25-35g", "taste": "Sweet, firm, excellent for drying" },
+        "yield": "Very high (up to 50 kg/tree)",
+        "diseaseResistance": "Good overall resistance",
+        "strengths": ["Self-fertile", "Best for drying (чорнослив)", "Very hardy", "Heavy bearer"],
+        "weaknesses": ["Smaller fruit", "Not the juiciest fresh"],
+        "notes": "The classic prune plum. THE variety for making чорнослив (dried plums). Self-fertile, reliable, and extremely productive. A must-have in every Ukrainian garden."
+      },
+      {
+        "name": "Ренклод",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "5-7m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4, 7], "tips": "Vigorous grower — needs annual height control. Remove water sprouts." },
+        "harvest": { "months": [8], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Needs pollinator (Угорка, Стенлі)",
+        "fruit": { "color": "Green-yellow to golden", "size": "30-40g", "taste": "Very sweet, juicy, honey-like, melting" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate — susceptible to brown rot",
+        "strengths": ["Best-tasting plum for fresh eating", "Sweet honey flavor", "Juicy melting flesh"],
+        "weaknesses": ["Needs pollinator", "Less hardy", "Susceptible to brown rot", "Short shelf life"],
+        "notes": "The finest dessert plum. Ренклод зелений is considered the gold standard for plum flavor. Sweet, honey-like, melting texture. Best eaten straight from the tree."
+      },
+      {
+        "name": "Синя птиця",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4, 7], "tips": "Moderate growth — standard pruning. Compact tree." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark blue with bloom", "size": "30-35g", "taste": "Sweet-sour, balanced, good for all uses" },
+        "yield": "High (up to 35 kg/tree)",
+        "diseaseResistance": "Good disease resistance",
+        "strengths": ["Self-fertile", "Good disease resistance", "Compact tree", "Versatile fruit"],
+        "weaknesses": ["Not outstanding in any single quality", "Moderate frost hardiness"],
+        "notes": "Reliable modern variety. 'Blue Bird' — versatile for fresh eating, jam, and compote. Self-fertile and compact."
+      },
+      {
+        "name": "Стенлі",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4, 7], "tips": "Moderate vigor. Remove suckers. Standard open center pruning." },
+        "harvest": { "months": [9], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark purple with heavy bloom", "size": "35-45g", "taste": "Sweet, firm, excellent quality" },
+        "yield": "Very high (up to 60 kg/tree)",
+        "diseaseResistance": "Good — resistant to plum pox",
+        "strengths": ["Self-fertile", "Very high yield", "Plum pox resistant", "Large fruit", "Hardy"],
+        "weaknesses": ["Late ripening", "Can overbear (thin fruit!)"],
+        "notes": "The world standard for prune plums. American variety that's become the #1 commercial plum in Ukraine. Self-fertile, heavy-bearing, disease-resistant. The complete package."
+      },
+      {
+        "name": "Президент",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4, 7], "tips": "Vigorous — annual pruning important. Control height." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 4, "period": "late" },
+        "pollination": "Partially self-fertile, better with Стенлі",
+        "fruit": { "color": "Dark purple-blue", "size": "45-60g", "taste": "Sweet, firm, excellent dessert quality" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate resistance",
+        "strengths": ["Very large fruit (up to 60g)", "Excellent flavor", "Good storage"],
+        "weaknesses": ["Less hardy", "Needs pollinator for best yield", "Late ripening"],
+        "notes": "One of the largest plum varieties. Premium dessert quality. Late ripening extends the plum season into October. Impressive fruit size."
+      }
+    ]
+  },
+  {
+    "name": "Apricot",
+    "ukrainianName": "Абрикос",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun, sheltered from cold wind",
+      "fertilizing": {
+        "months": [3, 6],
+        "type": "Moderate balanced fertilizer. Calcium is important for fruit quality. Don't over-fertilize with nitrogen."
+      },
+      "pests": {
+        "common": ["Plum moth", "Aphids", "Shot hole borer"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March. Spray against aphids in April-May. Watch for plum moth."
+      },
+      "diseases": {
+        "common": ["Monilia (blossom blight)", "Shot hole disease", "Gummosis", "Bacterial canker"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Critical: copper spray before bud break for moniliosis. Repeat fungicide during and after bloom. Apricots are very disease-prone."
+      },
+      "seasonalTips": {
+        "spring": "CRITICAL: apricot blooms very early — frost is the #1 enemy. Cover with fleece during late frost. Sheltered warm spot essential.",
+        "summer": "Harvest when fruit is golden and slightly soft. Thin heavy crops early. Deep water during dry spells.",
+        "autumn": "Remove fallen fruit. Apply whitewash to trunk. Reduce watering to harden wood before winter.",
+        "winter": "Less hardy than most fruit trees. Protect trunk from frost cracks. Avoid north-facing sites."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Краснощокий",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "4-6m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [3, 8], "tips": "Prune in March or August. Keep compact to prevent breakage under crop weight." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden-orange with red cheek", "size": "40-50g", "taste": "Sweet, aromatic, classic apricot" },
+        "yield": "High (up to 50 kg/tree)",
+        "diseaseResistance": "Moderate — susceptible to monilia in wet springs",
+        "strengths": ["Self-fertile", "Classic apricot flavor", "Reliable in warm regions", "Beautiful fruit color"],
+        "weaknesses": ["Frost-sensitive blooms", "Disease-prone in wet weather", "Not for cold regions"],
+        "notes": "The most popular apricot in Ukraine. 'Red-cheeked' — golden fruit with a red blush. Sweet, aromatic, perfect for fresh eating and jam. Plant in the warmest spot!"
+      },
+      {
+        "name": "Ананасний",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -20,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [3, 8], "tips": "Compact grower — moderate pruning. Thin fruit for larger size." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Pale yellow", "size": "35-50g", "taste": "Sweet, pineapple-like exotic aroma" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Good resistance for an apricot",
+        "strengths": ["Unique pineapple flavor", "Self-fertile", "Good disease resistance", "Compact tree"],
+        "weaknesses": ["Least frost-hardy", "Pale color (less attractive)", "Best only in warm regions"],
+        "notes": "Unusual variety with pineapple-like aroma and flavor. Pale yellow fruit looks different from typical apricots. Best in warm Southern Ukraine."
+      },
+      {
+        "name": "Мелітопольський ранній",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine, Zaporizhzhia region",
+        "frostHardiness": -22,
+        "matureHeight": "5-6m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [3, 8], "tips": "Vigorous grower — needs annual height control. Open center." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 3, "period": "early" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Orange with light blush", "size": "40-55g", "taste": "Sweet, juicy, very aromatic" },
+        "yield": "High (up to 45 kg/tree)",
+        "diseaseResistance": "Moderate resistance",
+        "strengths": ["Very early ripening", "Large fruit", "Self-fertile", "Sweet and aromatic"],
+        "weaknesses": ["Vigorous (needs pruning)", "Frost-sensitive", "Short shelf life"],
+        "notes": "Bred in Melitopol, Zaporizhzhia region. One of the earliest apricots — ripe in late June. Ukrainian breeding success story."
+      },
+      {
+        "name": "Шалах",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -18,
+        "matureHeight": "5-7m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [3, 8], "tips": "Large tree — control height. Thin branches for air circulation." },
+        "harvest": { "months": [7], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Light orange-yellow", "size": "50-65g", "taste": "Very sweet, juicy, melting" },
+        "yield": "High (up to 50 kg/tree)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Very large fruit", "Exceptional sweetness", "Juicy melting flesh"],
+        "weaknesses": ["Least frost-hardy", "Large tree", "Best only in warmest regions"],
+        "notes": "Armenian origin. One of the largest and sweetest apricot varieties. Premium quality but needs the warmest possible location. Southern coast or sheltered south-facing wall."
+      }
+    ]
+  },
+  {
+    "name": "Peach",
+    "ukrainianName": "Персик",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun, warm sheltered spot",
+      "fertilizing": {
+        "months": [3, 5, 7],
+        "type": "Higher nitrogen than other fruit trees — peach is a heavy feeder. Spring: NPK 12-12-12. Summer: potassium for fruit quality."
+      },
+      "pests": {
+        "common": ["Peach moth", "Aphids", "Scale insects"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March. Spray against peach aphid in spring. Oriental fruit moth traps in summer."
+      },
+      "diseases": {
+        "common": ["Peach leaf curl", "Brown rot", "Powdery mildew", "Bacterial spot"],
+        "treatmentMonths": [2, 3, 4, 5, 6],
+        "treatmentTip": "EARLY copper spray in February for peach leaf curl (before bud swell!). Fungicide for brown rot during bloom."
+      },
+      "seasonalTips": {
+        "spring": "Spray against peach leaf curl BEFORE buds open. Thin fruit aggressively — leave 15cm between fruit for good size.",
+        "summer": "Needs consistent water during fruit development. Harvest when fragrant and gives slightly to pressure. Enjoys heat!",
+        "autumn": "After leaf fall, spray copper against leaf curl (most critical treatment!). Clean up ALL fallen leaves. Apply potash.",
+        "winter": "Least hardy common fruit tree. Protect from cold wind. Consider growing against a south-facing wall."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Київський ранній",
+        "photo": null,
+        "ukrainianRegion": "Central Ukraine, Kyiv region",
+        "frostHardiness": -22,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4], "tips": "Prune in spring. Open vase shape. Remove old fruited wood — peach fruits on last year's growth." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "early" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Yellow-green with pink blush", "size": "60-80g", "taste": "Sweet-sour, juicy, aromatic" },
+        "yield": "Medium (15-25 kg/tree)",
+        "diseaseResistance": "Moderate leaf curl resistance for a peach",
+        "strengths": ["Most frost-hardy peach", "Early ripening", "Self-fertile", "Compact tree"],
+        "weaknesses": ["Smaller fruit", "Less sweet than southern varieties", "Still needs protection"],
+        "notes": "Bred specifically for Kyiv climate — the hardiest peach variety. Makes peach growing possible in Central Ukraine. Early ripening compensates for shorter season."
+      },
+      {
+        "name": "Редхейвен",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -20,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4], "tips": "Vigorous — annual pruning essential. Thin fruit to 15cm apart for large peaches." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Red over yellow", "size": "120-160g", "taste": "Sweet, juicy, classic peach perfection" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate — standard peach susceptibility",
+        "strengths": ["World standard for peach quality", "Beautiful red color", "Large fruit", "Self-fertile"],
+        "weaknesses": ["Needs warm climate", "Leaf curl susceptible", "Needs regular spraying"],
+        "notes": "THE benchmark peach variety worldwide. American origin but widely grown in Ukraine. Perfect balance of sweetness, juiciness, and aroma."
+      },
+      {
+        "name": "Донецький жовтий",
+        "photo": null,
+        "ukrainianRegion": "Eastern & Southern Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4], "tips": "Compact tree — moderate pruning. Open center for air circulation." },
+        "harvest": { "months": [8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden yellow", "size": "100-140g", "taste": "Sweet, aromatic, yellow-fleshed" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Good for a peach — better leaf curl resistance",
+        "strengths": ["Hardy for a peach", "Good disease resistance", "Golden flesh", "Self-fertile"],
+        "weaknesses": ["Less attractive skin color", "Needs warm summer for best flavor"],
+        "notes": "Ukrainian variety from Donetsk region. Yellow-fleshed with good hardiness. Proof that Ukraine can breed quality peach varieties."
+      },
+      {
+        "name": "Золотий ювілей",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -18,
+        "matureHeight": "4-5m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4], "tips": "Vigorous grower. Annual pruning and fruit thinning essential." },
+        "harvest": { "months": [8], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden-orange with red blush", "size": "150-200g", "taste": "Very sweet, aromatic, classic peach" },
+        "yield": "Very high (up to 50 kg/tree)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Very large fruit", "Classic peach flavor", "Heavy bearer", "Beautiful appearance"],
+        "weaknesses": ["Least hardy", "Needs the warmest location", "Leaf curl susceptible"],
+        "notes": "'Golden Jubilee' — classic American variety. Very large, beautiful, sweet peaches. Needs warmth — best in Southern Ukraine with full sun and wind protection."
+      },
+      {
+        "name": "Білий лебідь",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -18,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 4, "matureDays": 7, "establishedDays": 14, "yearsToMature": 3 },
+        "pruning": { "months": [3, 4], "tips": "Compact — moderate pruning. Standard vase shape." },
+        "harvest": { "months": [8], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Cream-white with slight blush", "size": "120-150g", "taste": "Very sweet, delicate, white-fleshed, floral" },
+        "yield": "Medium-high (25-35 kg/tree)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Unique white flesh", "Delicate floral flavor", "Beautiful fruit", "Self-fertile"],
+        "weaknesses": ["Needs warm climate", "Soft fruit bruises easily", "Short shelf life"],
+        "notes": "'White Swan' — elegant white-fleshed peach. Delicate, floral, honey-sweet flavor unlike any yellow peach. Premium dessert quality."
+      }
+    ]
+  },
+  {
+    "name": "Walnut",
+    "ukrainianName": "Горіх",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4],
+        "type": "Rarely needs fertilizer in good soil. Apply compost around drip line. Avoid fertilizers high in chloride."
+      },
+      "pests": {
+        "common": ["Walnut husk fly", "Codling moth", "Walnut aphid"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Inspect for walnut husk fly. Spray if codling moth present. Usually minimal treatment needed."
+      },
+      "diseases": {
+        "common": ["Walnut blight", "Anthracnose", "Root rot"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Copper spray in spring for walnut blight. Apply when leaves are half-expanded."
+      },
+      "seasonalTips": {
+        "spring": "DO NOT prune! Walnut leafs out late — don't worry. Roots release juglone — keep tomatoes, peppers far away.",
+        "summer": "Deep water during dry spells. Best time to prune if needed (August-September). Provides excellent shade.",
+        "autumn": "Harvest nuts when husks crack open. Dry in warm, airy place for 2 weeks. Wear gloves — husks stain!",
+        "winter": "Fairly hardy. Young trees may need trunk protection. Valuable wood — protect from storm damage."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Волоський",
+        "photo": null,
+        "ukrainianRegion": "All regions except far north",
+        "frostHardiness": -25,
+        "matureHeight": "15-25m",
+        "watering": { "youngDays": 7, "matureDays": 14, "establishedDays": 30, "yearsToMature": 5 },
+        "pruning": { "months": [8, 9], "tips": "Prune in late summer ONLY. Minimal pruning needed. Walnuts self-shape well." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 6, "period": "mid" },
+        "pollination": "Wind-pollinated, self-fertile (but better with another tree)",
+        "fruit": { "color": "Green husk, brown shell", "size": "10-15g kernel", "taste": "Rich, buttery, classic walnut" },
+        "yield": "High at maturity (50-100 kg/tree)",
+        "diseaseResistance": "Good overall, susceptible to walnut blight in wet springs",
+        "strengths": ["Very long-lived", "Massive yields at maturity", "Valuable timber", "Classic flavor"],
+        "weaknesses": ["Huge tree", "Slow to bear (6+ years)", "Juglone kills nearby plants", "Stains everything"],
+        "notes": "The classic walnut. Every Ukrainian village has one. Grows enormous — plan location carefully! Juglone from roots kills tomatoes, potatoes, peppers. Timber is extremely valuable."
+      },
+      {
+        "name": "Ідеал",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "5-8m",
+        "watering": { "youngDays": 7, "matureDays": 14, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [8, 9], "tips": "Compact — less pruning than standard walnut. Remove dead branches." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 2, "period": "early" },
+        "pollination": "Self-fertile, flowers twice per season",
+        "fruit": { "color": "Thin shell", "size": "8-12g kernel", "taste": "Mild, sweet, easy to crack" },
+        "yield": "High (30-50 kg/tree)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Bears fruit in 2-3 years!", "Compact tree (5-8m)", "Thin shell easy to crack", "Flowers and fruits twice"],
+        "weaknesses": ["Shorter-lived than standard walnut", "Slightly smaller nuts", "Less cold-hardy flowers"],
+        "notes": "Revolutionary variety — fruits in just 2-3 years instead of 6+! Compact tree at 5-8m instead of 20m. Flowers twice per season. The ideal garden walnut."
+      },
+      {
+        "name": "Буковинський",
+        "photo": null,
+        "ukrainianRegion": "Western Ukraine, Bukovina",
+        "frostHardiness": -27,
+        "matureHeight": "10-15m",
+        "watering": { "youngDays": 7, "matureDays": 14, "establishedDays": 30, "yearsToMature": 5 },
+        "pruning": { "months": [8, 9], "tips": "Standard walnut pruning. Late summer only." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 5, "period": "mid" },
+        "pollination": "Wind-pollinated",
+        "fruit": { "color": "Brown shell", "size": "12-16g kernel", "taste": "Rich, buttery" },
+        "yield": "High (60-80 kg/tree)",
+        "diseaseResistance": "Good — adapted to local conditions",
+        "strengths": ["Large nuts", "Hardy", "Adapted to Bukovinian climate", "High kernel ratio"],
+        "weaknesses": ["Large tree", "Slow to bear"],
+        "notes": "Local Bukovinian walnut variety with large, high-quality nuts. Well-adapted to the Carpathian foothills climate."
+      },
+      {
+        "name": "Великоплідний",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -23,
+        "matureHeight": "10-15m",
+        "watering": { "youngDays": 7, "matureDays": 14, "establishedDays": 30, "yearsToMature": 5 },
+        "pruning": { "months": [8, 9], "tips": "Moderate size — standard walnut pruning." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Wind-pollinated",
+        "fruit": { "color": "Light brown, thin shell", "size": "15-20g kernel", "taste": "Mild, sweet, large kernel" },
+        "yield": "Very high (70-100 kg/tree)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Very large nuts (up to 20g kernel!)", "Thin shell", "High yield"],
+        "weaknesses": ["Less hardy", "Needs good soil", "Large tree"],
+        "notes": "'Large-fruited' — walnut with enormous nuts. Thin shell means easy cracking. Impressive yields. Best in fertile, deep soil."
+      }
+    ]
+  },
+  {
+    "name": "Mulberry",
+    "ukrainianName": "Шовковиця",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4],
+        "type": "Light feeding only — mulberry is naturally vigorous. Compost is sufficient."
+      },
+      "pests": {
+        "common": ["Whitefly", "Scale insects", "Birds"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Minimal pest treatment needed. Watch for scale insects and spray oil if present."
+      },
+      "diseases": {
+        "common": ["Bacterial blight", "Leaf spot", "Root rot (rare)"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Apply fungicide only if bacterial blight or leaf spot appeared. Usually disease-resistant."
+      },
+      "seasonalTips": {
+        "spring": "Very easy tree — almost maintenance-free. Don't prune now (bleeds). Watch for new shoots.",
+        "summer": "Harvest berries daily — very perishable! Spread sheet under tree and shake. Warning: fruit stains!",
+        "autumn": "Clean up fallen fruit. Apply light compost. Very adaptable — tolerates poor soil and pollution.",
+        "winter": "Prune now if needed. Very tough tree. Popular in Ukrainian villages — often 100+ years old."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Біла",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "10-15m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 30, "yearsToMature": 3 },
+        "pruning": { "months": [12, 1, 2], "tips": "Prune in winter. Can be kept small with hard pruning. Very resilient." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile (monoecious or dioecious depending on variety)",
+        "fruit": { "color": "White to pale pink", "size": "2-3cm long", "taste": "Very sweet, mild, honey-like" },
+        "yield": "Very high (unlimited!)",
+        "diseaseResistance": "Excellent — almost disease-free",
+        "strengths": ["Extremely sweet", "Less staining than black", "Very hardy", "Almost indestructible"],
+        "weaknesses": ["Falls and makes mess", "Attracts insects", "Insipid flavor for some"],
+        "notes": "White mulberry — the silkworm food tree. Very sweet, honey-flavored fruit. Less staining than black mulberry. Common in every Ukrainian village."
+      },
+      {
+        "name": "Чорна",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "8-12m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 30, "yearsToMature": 3 },
+        "pruning": { "months": [12, 1, 2], "tips": "Prune in winter. More compact than white mulberry." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 4, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark purple-black", "size": "2-4cm long", "taste": "Rich, sweet-tart, complex, wine-like" },
+        "yield": "High",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Best-flavored mulberry", "Rich complex taste", "More compact tree"],
+        "weaknesses": ["INTENSE staining (clothes, walkways, cars!)", "Less frost-hardy", "Fruit is extremely perishable"],
+        "notes": "The gourmet mulberry. Rich, wine-like flavor far superior to white. WARNING: stains absolutely everything — do NOT plant near paths, cars, or laundry lines!"
+      },
+      {
+        "name": "Червона",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "10-15m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 30, "yearsToMature": 3 },
+        "pruning": { "months": [12, 1, 2], "tips": "Standard mulberry pruning. Moderate size." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "2-3cm long", "taste": "Sweet-tart, fruity, between white and black" },
+        "yield": "High",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Balanced flavor", "Hardy", "Good compromise between white and black"],
+        "weaknesses": ["Still stains", "Less available in nurseries"],
+        "notes": "Red mulberry — a compromise between sweet white and tart black. Moderate staining. Good all-round mulberry for gardens."
+      }
+    ]
+  },
+  {
+    "name": "Quince",
+    "ukrainianName": "Айва",
+    "type": "fruitTree",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 6],
+        "type": "Light balanced fertilizer in spring. Potassium after flowering. Not a heavy feeder."
+      },
+      "pests": {
+        "common": ["Codling moth", "Aphids", "Leaf miners"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Dormant spray in March. Codling moth same as apple."
+      },
+      "diseases": {
+        "common": ["Fire blight", "Leaf blight", "Brown rot"],
+        "treatmentMonths": [3, 4, 5, 6, 7],
+        "treatmentTip": "Copper spray before bud break. Fungicide for fire blight and leaf blight."
+      },
+      "seasonalTips": {
+        "spring": "Beautiful pink-white blossoms. Apply fertilizer. Blooms late — less frost risk.",
+        "summer": "Low-maintenance. Water during drought. Fruit develops slowly — stays hard and green until autumn.",
+        "autumn": "Harvest after first light frost for best flavor. Hard and tart raw — cook into jam or bake. Very aromatic!",
+        "winter": "Moderate hardiness. Protect young trees in north. Remove any fire blight damage."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Звичайна",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "4-6m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [1, 2, 3], "tips": "Prune in winter. Train to open center. Remove suckers. Can grow as bush or small tree." },
+        "harvest": { "months": [10, 11], "yearsToBearing": 3, "period": "late" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden yellow", "size": "200-400g", "taste": "Very tart and hard raw. Aromatic, excellent cooked" },
+        "yield": "High (up to 40 kg/tree)",
+        "diseaseResistance": "Moderate — fire blight susceptible",
+        "strengths": ["Self-fertile", "Very aromatic fruit", "Makes amazing jam", "Beautiful ornamental blossoms"],
+        "weaknesses": ["Inedible raw", "Fire blight risk", "Not hardy in north"],
+        "notes": "The classic quince — golden, aromatic, and rock-hard. Makes incredible айвове варення and paste. One quince perfumes an entire room. Must be cooked!"
+      },
+      {
+        "name": "Японська",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "1-2m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [3, 4], "tips": "Prune after flowering. Can be shaped as hedge. Remove old branches from center." },
+        "harvest": { "months": [9, 10], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Needs cross-pollination (plant 2+)",
+        "fruit": { "color": "Green-yellow", "size": "30-50g", "taste": "Very sour, lemon-like. Great for jam and flavoring" },
+        "yield": "Medium (3-5 kg/bush)",
+        "diseaseResistance": "Good — tough plant",
+        "strengths": ["Very hardy", "Compact bush", "Beautiful spring flowers", "Edible fruit", "Great hedge"],
+        "weaknesses": ["Small, very sour fruit", "Thorny", "Needs cross-pollination"],
+        "notes": "Not a true quince — Chaenomeles japonica. Grown mainly for stunning red/orange spring flowers. Small sour fruit makes excellent jam. Very thorny — good security hedge!"
+      },
+      {
+        "name": "Ананасна",
+        "photo": null,
+        "ukrainianRegion": "Southern Ukraine",
+        "frostHardiness": -20,
+        "matureHeight": "3-5m",
+        "watering": { "youngDays": 5, "matureDays": 10, "establishedDays": 21, "yearsToMature": 3 },
+        "pruning": { "months": [1, 2, 3], "tips": "Standard quince pruning. Compact grower." },
+        "harvest": { "months": [10], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden yellow", "size": "200-300g", "taste": "Aromatic, pineapple-like, less tart than common" },
+        "yield": "High (30-40 kg/tree)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Pineapple-like aroma", "Less tart than common", "Self-fertile", "Good disease resistance"],
+        "weaknesses": ["Less hardy", "Still mostly needs cooking"],
+        "notes": "Selected for pineapple-like aroma and milder flavor. Still hard and tart raw, but makes even more aromatic jam than common quince."
+      }
+    ]
+  },
+  {
+    "name": "Currant",
+    "ukrainianName": "Смородина",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [3, 4, 6],
+        "type": "High-potassium fertilizer for fruiting. Black currant loves nitrogen. Mulch with compost annually."
+      },
+      "pests": {
+        "common": ["Big bud mite", "Currant aphid", "Currant sawfly"],
+        "treatmentMonths": [3, 4, 5],
+        "treatmentTip": "Spray against bud mite before bud break. Hot water treatment (65°C) of dormant bushes in March."
+      },
+      "diseases": {
+        "common": ["American gooseberry mildew", "Leaf spot", "Reversion virus"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Copper spray before bud break. Fungicide for powdery mildew when shoots are 10cm."
+      },
+      "seasonalTips": {
+        "spring": "Apply nitrogen fertilizer. Mulch thickly. Watch for big bud mite (swollen round buds — remove them!).",
+        "summer": "Water well during fruit development. Harvest when fully colored. Black currant is rich in vitamin C!",
+        "autumn": "Assess which old branches to remove. Apply potash fertilizer. Plant new bushes in October-November.",
+        "winter": "Very hardy. Prune now or early spring. Take hardwood cuttings for new plants."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Чорна Перлина",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1-1.5m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remove branches older than 3 years. Keep 8-12 stems. Renew 1/3 each year." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Glossy black", "size": "1.5-2g per berry", "taste": "Rich, tart, classic black currant" },
+        "yield": "High (4-5 kg/bush)",
+        "diseaseResistance": "Good resistance to powdery mildew",
+        "strengths": ["Large berries", "Good disease resistance", "High vitamin C", "Self-fertile"],
+        "weaknesses": ["Needs consistent moisture", "Tart raw"],
+        "notes": "'Black Pearl' — premium black currant with large, glossy berries. Very high in vitamin C. Perfect for варення, компот, and juice."
+      },
+      {
+        "name": "Червона",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -33,
+        "matureHeight": "1-1.5m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Same as black but keep branches longer (productive up to 5 years). Less vigorous." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright red, translucent", "size": "0.8-1g per berry", "taste": "Tart, tangy, refreshing" },
+        "yield": "Very high (5-8 kg/bush)",
+        "diseaseResistance": "Excellent — very healthy",
+        "strengths": ["Very high yields", "Extremely hardy", "Beautiful translucent berries", "Excellent for jelly"],
+        "weaknesses": ["Very tart", "Smaller berries", "Less aromatic than black"],
+        "notes": "Red currant — produces stunning translucent red clusters. Very tart but makes beautiful jelly and sauce. More productive and healthier than black currant."
+      },
+      {
+        "name": "Біла",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -33,
+        "matureHeight": "1-1.5m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Same as red currant. Keep 5-year branches." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Translucent white-yellow", "size": "0.8-1g per berry", "taste": "Mildest currant, sweet-tart, delicate" },
+        "yield": "High (4-6 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Mildest flavor (least tart)", "Beautiful appearance", "Very hardy", "Good for fresh eating"],
+        "weaknesses": ["Less aromatic", "Lower demand/availability"],
+        "notes": "White currant — the mildest and sweetest of currants. Beautiful translucent golden berries. Best for fresh eating. Often overlooked but delicious."
+      },
+      {
+        "name": "Ядреная",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Vigorous — needs regular renewal pruning. Remove old wood aggressively." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Black", "size": "3-5g per berry (huge!)", "taste": "Sweet-tart, intense black currant" },
+        "yield": "Very high (6-8 kg/bush)",
+        "diseaseResistance": "Moderate — needs good air circulation",
+        "strengths": ["Enormous berries (up to 5g!)", "Very high yield", "Impressive clusters"],
+        "weaknesses": ["Needs more care", "Vigorous growth needs control", "Moderate disease resistance"],
+        "notes": "'Mighty' — black currant with enormous berries up to cherry-size. Impressive yields. Needs good care but rewards with massive harvests."
+      },
+      {
+        "name": "Добриня",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-1.8m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Standard black currant pruning. Moderate vigor." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Black", "size": "2-3g per berry", "taste": "Sweet, aromatic, excellent fresh" },
+        "yield": "High (4-6 kg/bush)",
+        "diseaseResistance": "Good — resistant to bud mite",
+        "strengths": ["Bud mite resistant", "Sweet flavor", "Good for fresh eating", "Reliable"],
+        "weaknesses": ["Moderate berry size"],
+        "notes": "Modern variety bred for bud mite resistance — the biggest currant problem. Sweet enough to eat fresh. Reliable all-round black currant."
+      }
+    ]
+  },
+  {
+    "name": "Raspberry",
+    "ukrainianName": "Малина",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "5.5-6.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 6],
+        "type": "High nitrogen in spring (urea). Potassium during fruiting. Heavy mulch with compost or manure."
+      },
+      "pests": {
+        "common": ["Raspberry beetle", "Aphids", "Spider mites"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Spray against raspberry beetle before bloom. Remove affected canes."
+      },
+      "diseases": {
+        "common": ["Raspberry cane blight", "Grey mold (Botrytis)", "Root rot", "Raspberry mosaic virus"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Fungicide before bloom for grey mold. Improve air circulation by thinning canes."
+      },
+      "seasonalTips": {
+        "spring": "Tie new canes to supports. Apply heavy mulch and nitrogen fertilizer. Thin canes to 8-10 per meter.",
+        "summer": "Pick every 2-3 days when ripe. Water consistently. Remontant varieties start autumn crop in August.",
+        "autumn": "Cut summer-fruited canes to ground. For remontant: decide strategy (cut all or keep some). Mulch heavily.",
+        "winter": "Canes are fairly hardy. In harsh winters, bend down and cover. Plan trellis maintenance."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Ремонтантна",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [2, 3, 11], "tips": "Cut ALL canes to ground in late autumn for one big autumn crop. Or keep strongest for summer + autumn crops." },
+        "harvest": { "months": [6, 7, 8, 9], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Red", "size": "4-6g", "taste": "Sweet-tart, classic raspberry" },
+        "yield": "High (3-4 kg/bush)",
+        "diseaseResistance": "Good — annual mowing removes diseases",
+        "strengths": ["Fruits in first year", "Extended harvest (June-September)", "Easy disease management", "Self-fertile"],
+        "weaknesses": ["Smaller berries than summer types", "Needs support"],
+        "notes": "Remontant = ever-bearing. Fruits twice or continuously. Simplest disease management — mow everything in autumn, fresh start each spring."
+      },
+      {
+        "name": "Полана",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remontant — can mow all canes in autumn. Very productive on new growth." },
+        "harvest": { "months": [7, 8, 9], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "4-7g", "taste": "Sweet-tart, excellent flavor" },
+        "yield": "Very high (4-6 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Extremely productive", "Excellent disease resistance", "Firm berries transport well", "Hardy"],
+        "weaknesses": ["Needs thinning for best berry size"],
+        "notes": "Polish variety that's become the most popular commercial raspberry in Ukraine. Incredibly productive with excellent disease resistance. The workhorse raspberry."
+      },
+      {
+        "name": "Гусар",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "2-2.5m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [2, 3, 11], "tips": "Summer-type — cut only fruited canes. New canes fruit next year. Tall — needs strong support." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright red", "size": "6-10g", "taste": "Very sweet, aromatic, excellent fresh" },
+        "yield": "High (3-5 kg/bush)",
+        "diseaseResistance": "Good — drought-tolerant",
+        "strengths": ["Very large berries", "Drought-tolerant", "Few thorns", "Sweet flavor"],
+        "weaknesses": ["Summer-only (one crop)", "Tall canes need support", "More pruning management"],
+        "notes": "'Hussar' — classic summer raspberry with large, sweet berries. Drought-tolerant and few thorns. One large summer crop rather than extended season."
+      },
+      {
+        "name": "Геракл",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remontant — cut all to ground in autumn for simplest management." },
+        "harvest": { "months": [7, 8, 9], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "7-10g", "taste": "Sweet-sour, firm, good for freezing" },
+        "yield": "Very high (4-6 kg/bush)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Enormous berries (up to 10g)", "Very productive", "Firm fruit freezes well", "Sturdy canes"],
+        "weaknesses": ["Can be sour in cool summers", "Thorny"],
+        "notes": "'Hercules' — named for its enormous berries. One of the largest-fruited raspberries. Great for freezing and preserves. Impressive size."
+      },
+      {
+        "name": "Жовтий гігант",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -28,
+        "matureHeight": "2-2.5m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [2, 3, 11], "tips": "Semi-remontant — cut old canes after fruiting. Keep new canes for next year." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Golden yellow", "size": "6-8g", "taste": "Very sweet, honey-like, mild" },
+        "yield": "High (3-5 kg/bush)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Unique yellow color", "Extremely sweet", "Hypoallergenic (good for kids)", "Large berries"],
+        "weaknesses": ["Soft fruit (poor transport)", "Tall canes", "Less aroma than red"],
+        "notes": "'Yellow Giant' — beautiful golden raspberry. Very sweet and mild. Great for children and allergy sufferers (no red pigments). Unique conversation piece in the garden."
+      }
+    ]
+  },
+  {
+    "name": "Strawberry",
+    "ukrainianName": "Полуниця",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "5.5-6.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 8],
+        "type": "Balanced fertilizer in spring. After harvest: phosphorus and potassium. Avoid excess nitrogen."
+      },
+      "pests": {
+        "common": ["Strawberry mite", "Slugs", "Birds", "Weevils"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Spray against strawberry mite and weevil before bloom. Use slug traps."
+      },
+      "diseases": {
+        "common": ["Grey mold (Botrytis)", "Powdery mildew", "Verticillium wilt", "Leaf spot"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Fungicide before bloom for grey mold. Remove infected berries immediately."
+      },
+      "seasonalTips": {
+        "spring": "Remove dead leaves. Apply straw mulch. Fertilize as growth starts.",
+        "summer": "Water at soil level. Pick every 2 days. Remove runners unless propagating. Net against birds.",
+        "autumn": "Trim old leaves after harvest. Plant new beds in August-September. Mulch for winter.",
+        "winter": "Cover with straw or agrofabric. Crowns can freeze in severe winters without snow."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Вікторія",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -22,
+        "matureHeight": "0.2-0.3m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 4, "yearsToMature": 1 },
+        "pruning": { "months": [8, 9], "tips": "Remove old leaves after harvest. Cut runners unless propagating." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright red", "size": "20-30g", "taste": "Classic sweet strawberry" },
+        "yield": "High (1-1.5 kg/plant)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Classic flavor", "Large berries", "Popular", "Good for jam"],
+        "weaknesses": ["One crop per year", "Needs replacement every 3-4 years"],
+        "notes": "The classic Ukrainian strawberry variety. In Ukraine, 'Вікторія' is often used as a generic name for all strawberries. Sweet, aromatic, traditional."
+      },
+      {
+        "name": "Полка",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -20,
+        "matureHeight": "0.2-0.3m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 4, "yearsToMature": 1 },
+        "pruning": { "months": [8, 9], "tips": "Standard strawberry care. Remove runners for bigger berries." },
+        "harvest": { "months": [6, 7], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red, glossy", "size": "25-40g", "taste": "Very sweet, caramel-like" },
+        "yield": "Very high (1.5-2 kg/plant)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Exceptional sweetness", "Glossy beautiful berries", "Very productive", "Good disease resistance"],
+        "weaknesses": ["Smaller in hot weather", "Needs regular watering"],
+        "notes": "Dutch variety that's become incredibly popular in Ukraine. Gorgeous glossy berries with caramel-sweet flavor. Very productive."
+      },
+      {
+        "name": "Хоней",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -22,
+        "matureHeight": "0.2-0.3m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 4, "yearsToMature": 1 },
+        "pruning": { "months": [8, 9], "tips": "Vigorous runner production — remove excess. Standard care." },
+        "harvest": { "months": [5, 6], "yearsToBearing": 1, "period": "early" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright red", "size": "30-40g", "taste": "Sweet-tart, firm, honey aroma" },
+        "yield": "High (1-1.5 kg/plant)",
+        "diseaseResistance": "Good — tolerates wet conditions",
+        "strengths": ["Very early ripening", "Large firm berries", "Handles wet weather", "Good transport"],
+        "weaknesses": ["Can be tart if not fully ripe", "Lots of runners to manage"],
+        "notes": "'Honeoye' — one of the earliest strawberries. First berries in late May! Firm, large berries with honey aroma. Popular commercial variety."
+      },
+      {
+        "name": "Альбіон",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -18,
+        "matureHeight": "0.2-0.3m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 3, "yearsToMature": 1 },
+        "pruning": { "months": [8, 9], "tips": "Ever-bearing — remove runners to direct energy to fruit. Replace every 2 years." },
+        "harvest": { "months": [5, 6, 7, 8, 9, 10], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red", "size": "30-50g", "taste": "Sweet, intense strawberry flavor" },
+        "yield": "Very high over season (2+ kg/plant)",
+        "diseaseResistance": "Good — bred for disease resistance",
+        "strengths": ["Ever-bearing (May-October!)", "Large berries", "Excellent flavor", "Good disease resistance"],
+        "weaknesses": ["Less frost-hardy", "Exhausts quickly (replace every 2 years)", "Needs more feeding"],
+        "notes": "The ultimate ever-bearing strawberry. Produces continuously from May to October. Large, sweet berries all season. Popular in Ukrainian gardens for extended harvest."
+      },
+      {
+        "name": "Елізабет",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -22,
+        "matureHeight": "0.2-0.3m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 3, "yearsToMature": 1 },
+        "pruning": { "months": [8, 9], "tips": "Ever-bearing. Remove runners. Feed monthly during fruiting." },
+        "harvest": { "months": [5, 6, 7, 8, 9], "yearsToBearing": 1, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright red", "size": "40-60g", "taste": "Very sweet, honey-like, aromatic" },
+        "yield": "Very high (2+ kg/plant)",
+        "diseaseResistance": "Moderate — needs care",
+        "strengths": ["Enormous berries (up to 60g!)", "Ever-bearing", "Excellent flavor", "Hardy for ever-bearer"],
+        "weaknesses": ["Needs intensive feeding", "Disease susceptible", "Replace every 2-3 years"],
+        "notes": "'Queen Elizabeth II' — ever-bearing with enormous berries up to 60g. Needs intensive care (monthly feeding) but rewards with huge, sweet fruit all season."
+      }
+    ]
+  },
+  {
+    "name": "Blueberry",
+    "ukrainianName": "Лохина",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "4.0-5.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 5],
+        "type": "ACIDIC fertilizer ONLY — ammonium sulfate or special blueberry fertilizer. NEVER use lime or alkaline fertilizers."
+      },
+      "pests": {
+        "common": ["Birds (biggest threat!)", "Blueberry maggot", "Aphids"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Minimal pest treatment. Watch for blueberry maggot fly. Netting against birds is essential."
+      },
+      "diseases": {
+        "common": ["Mummy berry", "Botrytis blight", "Stem canker", "Chlorosis (from alkaline soil!)"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Fungicide for mummy berry in spring. Keep mulch fresh. Chlorosis = soil too alkaline!"
+      },
+      "seasonalTips": {
+        "spring": "Apply sulfur or acidic fertilizer — pH 4.0-5.5 is CRITICAL. Test soil annually. Mulch with pine bark.",
+        "summer": "Water with rainwater if possible. Berries ripen over 2-3 weeks. Blue = ripe!",
+        "autumn": "Brilliant red foliage — very decorative! Apply pine needle mulch. Stop fertilizing after August.",
+        "winter": "Very hardy. Minimal care. Best time to prune old wood. Check soil pH and plan amendments."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Блюкроп",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 5, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3], "tips": "Remove branches older than 5 years. Keep 6-8 stems. Don't prune first 2 years." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Self-fertile, better with another variety",
+        "fruit": { "color": "Blue with white bloom", "size": "1.5-2g", "taste": "Sweet-tart, classic blueberry" },
+        "yield": "High (4-8 kg/bush)",
+        "diseaseResistance": "Good overall resistance",
+        "strengths": ["World standard blueberry", "Very hardy", "Reliable yields", "Good disease resistance"],
+        "weaknesses": ["Needs very acidic soil", "Not the largest berries"],
+        "notes": "THE benchmark blueberry variety worldwide. Reliable, productive, hardy. The safest choice for a first blueberry bush. Must have acidic soil (pH 4.0-5.5)!"
+      },
+      {
+        "name": "Патріот",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -35,
+        "matureHeight": "1.2-1.8m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 5, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3], "tips": "Upright growth — less spreading. Standard blueberry pruning." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "early" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Large, light blue", "size": "2-3g", "taste": "Sweet, mild, excellent fresh" },
+        "yield": "High (5-7 kg/bush)",
+        "diseaseResistance": "Excellent — resistant to Phytophthora root rot",
+        "strengths": ["Most frost-hardy blueberry", "Large berries", "Disease resistant", "Early ripening"],
+        "weaknesses": ["Upright form less decorative", "Needs acidic soil"],
+        "notes": "Most cold-hardy blueberry — survives -35°C. Early ripening with large, sweet berries. Excellent disease resistance. Best choice for Northern Ukraine."
+      },
+      {
+        "name": "Дюк",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 5, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3], "tips": "Vigorous — needs regular thinning. Remove oldest branches." },
+        "harvest": { "months": [7], "yearsToBearing": 3, "period": "early" },
+        "pollination": "Partially self-fertile",
+        "fruit": { "color": "Light blue, large", "size": "2-2.5g", "taste": "Sweet, mild, pleasant" },
+        "yield": "High (6-8 kg/bush)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Very early ripening", "Large berries", "High yield", "Good flavor"],
+        "weaknesses": ["Vigorous (needs management)", "Needs acidic soil"],
+        "notes": "One of the earliest blueberries to ripen. Large, sweet berries. Popular in commercial and garden plantings."
+      },
+      {
+        "name": "Спартан",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -25,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 5, "yearsToMature": 3 },
+        "pruning": { "months": [2, 3], "tips": "Upright growth. Standard pruning. Can be slow to establish." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Needs cross-pollination",
+        "fruit": { "color": "Light blue, very large", "size": "2-3g", "taste": "Excellent sweet flavor, aromatic" },
+        "yield": "Medium-high (4-6 kg/bush)",
+        "diseaseResistance": "Moderate",
+        "strengths": ["Best-flavored blueberry", "Very large berries", "Aromatic"],
+        "weaknesses": ["Slow to establish", "Needs cross-pollination", "Less hardy"],
+        "notes": "Considered by many to have the best blueberry flavor. Large, aromatic berries. Slow to establish but worth the wait. Plant with another variety for pollination."
+      },
+      {
+        "name": "Нортланд",
+        "photo": null,
+        "ukrainianRegion": "All regions, especially north",
+        "frostHardiness": -35,
+        "matureHeight": "1-1.2m",
+        "watering": { "youngDays": 2, "matureDays": 3, "establishedDays": 5, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3], "tips": "Compact — minimal pruning. Remove old branches every few years." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "early" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Medium blue", "size": "1-1.5g", "taste": "Sweet, mild" },
+        "yield": "High for size (3-5 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Extremely hardy (-35°C)", "Compact size", "Early bearing (year 2)", "Self-fertile"],
+        "weaknesses": ["Smaller berries", "Small bush"],
+        "notes": "Half-high blueberry — extremely compact and hardy. Perfect for containers, small gardens, or northern regions. Self-fertile, productive, and nearly indestructible."
+      }
+    ]
+  },
+  {
+    "name": "Gooseberry",
+    "ukrainianName": "Аґрус",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "6.0-7.0",
+      "sun": "Full sun to partial shade",
+      "fertilizing": {
+        "months": [3, 6],
+        "type": "Potassium-rich fertilizer. Avoid excess nitrogen — promotes mildew. Mulch with compost."
+      },
+      "pests": {
+        "common": ["Gooseberry sawfly", "Aphids", "Gooseberry mite"],
+        "treatmentMonths": [3, 4, 5],
+        "treatmentTip": "Spray for gooseberry sawfly in April. Check leaf undersides. Hot water treatment in March."
+      },
+      "diseases": {
+        "common": ["American gooseberry mildew", "Leaf spot", "Grey mold"],
+        "treatmentMonths": [3, 4, 5, 6],
+        "treatmentTip": "Powdery mildew is the main threat. Spray fungicide when shoots are 10cm. Sodium bicarbonate works too."
+      },
+      "seasonalTips": {
+        "spring": "Apply potash fertilizer. Watch for gooseberry sawfly caterpillars — they strip leaves in days!",
+        "summer": "Harvest when full-sized. Green = tart (for jam). Let ripen for sweet eating. Water during dry spells.",
+        "autumn": "Prune after leaf fall. Remove crossing branches and old wood. Apply mulch.",
+        "winter": "Extremely hardy — one of the toughest berry bushes. Prune now if you didn't in autumn."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Машенька",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1-1.3m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Remove branches older than 4 years. Keep center open for air (mildew prevention). Wear gloves — thorns!" },
+        "harvest": { "months": [6, 7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Red-purple", "size": "3-5g", "taste": "Sweet-tart, good fresh" },
+        "yield": "High (4-6 kg/bush)",
+        "diseaseResistance": "Good mildew resistance",
+        "strengths": ["Mildew resistant", "Good flavor", "Large berries", "Reliable"],
+        "weaknesses": ["Thorny", "Some pest susceptibility"],
+        "notes": "Popular Ukrainian variety with good mildew resistance. Sweet enough for fresh eating when fully ripe. Red-purple berries are attractive."
+      },
+      {
+        "name": "Фінік",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Vigorous bush — needs regular thinning. Remove old branches annually." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "late" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Dark red when ripe", "size": "6-10g (huge!)", "taste": "Sweet when fully ripe, plum-like" },
+        "yield": "Very high (8-12 kg/bush)",
+        "diseaseResistance": "Moderate — susceptible to mildew",
+        "strengths": ["Enormous berries", "Incredibly productive", "Sweet when ripe", "Long-lived bush"],
+        "weaknesses": ["Very thorny", "Mildew susceptible", "Late ripening"],
+        "notes": "'Date' — named for enormous berries that resemble dates. One of the most productive gooseberries. Very thorny but the yields are incredible."
+      },
+      {
+        "name": "Чорний негус",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1.5-2m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Vigorous — needs annual thinning. Very thorny — prune carefully." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Nearly black", "size": "4-6g", "taste": "Rich, wine-like, sweet-tart" },
+        "yield": "High (5-7 kg/bush)",
+        "diseaseResistance": "Excellent — mildew resistant",
+        "strengths": ["Unique dark color", "Rich wine-like flavor", "Mildew resistant", "Hardy"],
+        "weaknesses": ["Very thorny", "Berries are small-medium", "Hard to harvest"],
+        "notes": "Striking nearly-black gooseberries with rich, wine-like flavor. Excellent mildew resistance. Beautiful in the garden. Makes stunning dark jam."
+      },
+      {
+        "name": "Малахіт",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -30,
+        "matureHeight": "1-1.5m",
+        "watering": { "youngDays": 3, "matureDays": 5, "establishedDays": 7, "yearsToMature": 2 },
+        "pruning": { "months": [2, 3, 11], "tips": "Spreading habit — keep shape compact. Standard gooseberry pruning." },
+        "harvest": { "months": [7], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Bright green, translucent", "size": "5-7g", "taste": "Tart, excellent for jam and pies" },
+        "yield": "Very high (6-8 kg/bush)",
+        "diseaseResistance": "Good mildew resistance",
+        "strengths": ["Classic green gooseberry", "Large berries", "Mildew resistant", "Excellent for cooking"],
+        "weaknesses": ["Tart fresh", "Spreading habit", "Thorny"],
+        "notes": "'Malachite' — classic bright green gooseberry. The best for traditional gooseberry jam and pies. Large, translucent green berries. A Ukrainian garden staple."
+      }
+    ]
+  },
+  {
+    "name": "Blackberry",
+    "ukrainianName": "Ожина",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "5.5-7.0",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [3, 4, 6],
+        "type": "Balanced NPK in spring. Potassium during fruiting. Mulch heavily with compost."
+      },
+      "pests": {
+        "common": ["Raspberry beetle", "Spider mites", "Aphids"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Same as raspberry — spray for raspberry beetle. Remove affected canes."
+      },
+      "diseases": {
+        "common": ["Cane blight", "Grey mold", "Anthracnose", "Orange rust"],
+        "treatmentMonths": [4, 5, 6],
+        "treatmentTip": "Fungicide for anthracnose and cane blight. Remove old fruiting canes after harvest."
+      },
+      "seasonalTips": {
+        "spring": "Tie new canes to trellis. Apply nitrogen and thick mulch. Check for winter damage.",
+        "summer": "Pick when fully black and pull off easily. Water for bigger berries. Train canes regularly.",
+        "autumn": "Cut all fruited canes to ground. Tie new canes. In cold regions, lay down and cover.",
+        "winter": "Thornless less hardy — protect in harsh winters. Thorny tougher. Prune dead canes."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Торнфрі",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [9, 10, 2], "tips": "Cut fruited canes to ground after harvest. Tie new canes. Thornless — easy to handle!" },
+        "harvest": { "months": [8, 9], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Glossy black", "size": "5-8g", "taste": "Sweet when fully ripe, mild" },
+        "yield": "Very high (10-15 kg/bush!)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Thornless!", "Enormous yields", "Easy to manage", "Sweet when fully ripe"],
+        "weaknesses": ["Less hardy than thorny types", "Must wait for full ripeness (black ≠ ripe)", "Mild flavor"],
+        "notes": "'Thorn-Free' — the most popular thornless blackberry. Incredible yields (10-15 kg per bush!). IMPORTANT: berries are black long before ripe — wait until they're soft and sweet."
+      },
+      {
+        "name": "Блек Сатін",
+        "photo": null,
+        "ukrainianRegion": "Central & Southern Ukraine",
+        "frostHardiness": -22,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [9, 10, 2], "tips": "Semi-erect — needs trellis. Cut old canes after harvest. Thornless." },
+        "harvest": { "months": [7, 8, 9], "yearsToBearing": 2, "period": "mid" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Glossy black", "size": "5-7g", "taste": "Sweet-tart, aromatic, complex" },
+        "yield": "Very high (10-15 kg/bush)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Thornless", "Better flavor than Thornfree", "Long harvest period", "Heavy yields"],
+        "weaknesses": ["Semi-erect (needs support)", "Less hardy", "Soft berries"],
+        "notes": "'Black Satin' — thornless with better flavor than Thornfree. More aromatic and complex taste. Extended harvest period from July to September."
+      },
+      {
+        "name": "Натчез",
+        "photo": null,
+        "ukrainianRegion": "Southern & Central Ukraine",
+        "frostHardiness": -20,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [9, 10, 2], "tips": "Erect growth — less support needed. Thornless. Tip-prune for branching." },
+        "harvest": { "months": [7, 8], "yearsToBearing": 2, "period": "early" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Glossy black", "size": "8-12g (huge!)", "taste": "Very sweet, excellent" },
+        "yield": "High (8-10 kg/bush)",
+        "diseaseResistance": "Good resistance",
+        "strengths": ["Enormous berries (up to 12g!)", "Very sweet", "Early ripening", "Thornless"],
+        "weaknesses": ["Least frost-hardy", "Needs warmth", "Soft fruit"],
+        "notes": "'Natchez' — enormous, sweet, thornless berries. One of the earliest to ripen. Premium quality but needs warm climate. Impressive berry size."
+      },
+      {
+        "name": "Честер",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -26,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 3, "matureDays": 4, "establishedDays": 5, "yearsToMature": 1 },
+        "pruning": { "months": [9, 10, 2], "tips": "Semi-erect. Thornless. Standard blackberry pruning." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 2, "period": "late" },
+        "pollination": "Self-fertile",
+        "fruit": { "color": "Glossy black", "size": "5-8g", "taste": "Sweet, mild, pleasant" },
+        "yield": "Very high (10-15 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Hardiest thornless blackberry", "Excellent disease resistance", "Huge yields", "Late harvest extends season"],
+        "weaknesses": ["Late ripening", "Mild flavor (not as complex)"],
+        "notes": "'Chester' — the hardiest thornless blackberry, surviving -26°C. Late ripening extends the blackberry season into September. The safest thornless choice for colder regions."
+      }
+    ]
+  },
+  {
+    "name": "Sea Buckthorn",
+    "ukrainianName": "Обліпиха",
+    "type": "bush",
+    "speciesInfo": {
+      "soilPH": "6.0-7.5",
+      "sun": "Full sun",
+      "fertilizing": {
+        "months": [4],
+        "type": "Barely needs fertilizer — fixes nitrogen like alder! Light compost is sufficient."
+      },
+      "pests": {
+        "common": ["Sea buckthorn fly", "Aphids"],
+        "treatmentMonths": [5, 6],
+        "treatmentTip": "Minimal treatment needed. Watch for sea buckthorn fly in June."
+      },
+      "diseases": {
+        "common": ["Fusarium wilt", "Verticillium wilt (rare)"],
+        "treatmentMonths": [4, 5],
+        "treatmentTip": "Usually disease-resistant. Apply fungicide only if wilt symptoms appear."
+      },
+      "seasonalTips": {
+        "spring": "Light pruning only. Check male plants nearby for pollination. Fertilizer rarely needed.",
+        "summer": "Berries are VERY difficult to pick (thorns + berries burst). Cut whole branches and freeze, then shake off.",
+        "autumn": "Harvest in September. Sea buckthorn oil is incredibly valuable medicinally. Almost indestructible plant.",
+        "winter": "One of the hardiest plants (-35°C!). Zero winter care needed. Control spread via suckers."
+      }
+    },
+    "varieties": [
+      {
+        "name": "Чуйська",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -35,
+        "matureHeight": "3-4m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 2 },
+        "pruning": { "months": [3, 4], "tips": "Remove dead branches. Shape if needed. Need male + female plants for fruit." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Dioecious — needs male plant nearby (1 male per 5-6 females)",
+        "fruit": { "color": "Orange", "size": "0.7-0.9g", "taste": "Tart, citrusy, very nutritious" },
+        "yield": "High (8-12 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Fewer thorns than wild", "Large berries for sea buckthorn", "Very productive"],
+        "weaknesses": ["Still thorny", "Needs male pollinator", "Berries burst easily"],
+        "notes": "Most popular garden variety. Fewer thorns and larger berries than wild sea buckthorn. Still challenging to harvest — freeze branches method works best."
+      },
+      {
+        "name": "Золотий початок",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -35,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 2 },
+        "pruning": { "months": [3, 4], "tips": "More compact — less pruning needed. Remove dead wood." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "early" },
+        "pollination": "Dioecious — needs male plant",
+        "fruit": { "color": "Golden-orange", "size": "0.6-0.8g", "taste": "Less tart than others, mild citrus" },
+        "yield": "Medium-high (6-8 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["More compact", "Less tart fruit", "Early ripening", "Fewer thorns"],
+        "weaknesses": ["Smaller berries", "Needs male pollinator"],
+        "notes": "'Golden Beginning' — compact variety with milder-tasting berries. Good choice for smaller gardens. Early ripening."
+      },
+      {
+        "name": "Московська красуня",
+        "photo": null,
+        "ukrainianRegion": "All regions",
+        "frostHardiness": -35,
+        "matureHeight": "2-3m",
+        "watering": { "youngDays": 5, "matureDays": 7, "establishedDays": 14, "yearsToMature": 2 },
+        "pruning": { "months": [3, 4], "tips": "Minimal thorns — easier to manage. Standard sea buckthorn pruning." },
+        "harvest": { "months": [8, 9], "yearsToBearing": 3, "period": "mid" },
+        "pollination": "Dioecious — needs male plant",
+        "fruit": { "color": "Deep orange-red", "size": "0.8-1g (large!)", "taste": "Sweet-tart, rich flavor" },
+        "yield": "High (8-10 kg/bush)",
+        "diseaseResistance": "Excellent",
+        "strengths": ["Largest berries", "Minimal thorns", "Rich flavor", "Beautiful color"],
+        "weaknesses": ["Needs male pollinator", "Berries still burst when overripe"],
+        "notes": "'Moscow Beauty' — the best variety for large berries and minimal thorns. Deep orange-red color. If you grow one sea buckthorn, make it this one (plus a male!)."
+      }
+    ]
+  }
+]

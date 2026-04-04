@@ -378,7 +378,7 @@ struct PlantDetailView: View {
     // Which care actions are due this month and NOT yet done
     private var pendingCareActions: [CareAction] {
         guard let species = TreeEncyclopedia.find(name: plant.name) else { return [] }
-        let intel = species.intelligence
+        let intel = species.resolvedIntelligence(forVariety: plant.variety)
         var actions: [CareAction] = []
 
         if intel.shouldPruneThisMonth() && !plant.wasDoneThisMonth(.pruned) {
@@ -470,7 +470,7 @@ struct PlantDetailView: View {
     // Only include care types that this species actually uses
     private var careStatusRows: [CareStatusRow] {
         guard let species = TreeEncyclopedia.find(name: plant.name) else { return [] }
-        let intel = species.intelligence
+        let intel = species.resolvedIntelligence(forVariety: plant.variety)
         var rows: [CareStatusRow] = []
 
         if !intel.pruningMonths.isEmpty {

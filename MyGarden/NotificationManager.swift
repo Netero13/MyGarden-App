@@ -219,7 +219,7 @@ class NotificationManager {
     func scheduleCareActionAlerts(for plant: Plant) {
         // Look up this plant's intelligence data from the encyclopedia
         guard let species = TreeEncyclopedia.find(name: plant.name) else { return }
-        let intel = species.intelligence
+        let intel = species.resolvedIntelligence(forVariety: plant.variety)
 
         // Cancel any existing CareAction alerts for this plant
         cancelCareActionAlerts(for: plant.id)
@@ -405,7 +405,7 @@ class NotificationManager {
 
         for plant in plants {
             guard let species = TreeEncyclopedia.find(name: plant.name) else { continue }
-            let intel = species.intelligence
+            let intel = species.resolvedIntelligence(forVariety: plant.variety)
 
             // Helper: create a pending alert
             func add(suffix: String, month: Int, title: String, body: String) {

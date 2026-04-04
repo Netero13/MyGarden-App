@@ -12,6 +12,12 @@ struct TreeIntelligenceView: View {
 
     let species: PlantSpecies
     let plantAge: Int
+    var varietyName: String? = nil
+
+    // Resolved intelligence — merges species + variety data
+    private var intel: TreeIntelligence {
+        species.resolvedIntelligence(forVariety: varietyName)
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -35,7 +41,7 @@ struct TreeIntelligenceView: View {
             fertilizerCard
 
             // -- Harvest Info (fruit trees & bushes only) --
-            if species.intelligence.harvestMonths != nil {
+            if intel.harvestMonths != nil {
                 harvestCard
             }
 
@@ -79,7 +85,7 @@ struct TreeIntelligenceView: View {
                     .fontWeight(.semibold)
             }
 
-            Text(species.intelligence.currentSeasonTip())
+            Text(intel.currentSeasonTip())
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -149,7 +155,6 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            let intel = species.intelligence
             let recommended = intel.wateringDays(forAge: plantAge)
 
             HStack {
@@ -207,7 +212,7 @@ struct TreeIntelligenceView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
-                if species.intelligence.shouldPruneThisMonth() {
+                if intel.shouldPruneThisMonth() {
                     Text(NSLocalizedString("This month!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
@@ -226,12 +231,12 @@ struct TreeIntelligenceView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(TreeIntelligence.monthNames(from: species.intelligence.pruningMonths))
+                Text(TreeIntelligence.monthNames(from: intel.pruningMonths))
                     .font(.caption)
                     .fontWeight(.medium)
             }
 
-            Text(species.intelligence.pruningTips)
+            Text(intel.pruningTips)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -252,7 +257,7 @@ struct TreeIntelligenceView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
-                if species.intelligence.shouldFertilizeThisMonth() {
+                if intel.shouldFertilizeThisMonth() {
                     Text(NSLocalizedString("This month!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
@@ -266,7 +271,7 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            if species.intelligence.fertilizerMonths.isEmpty {
+            if intel.fertilizerMonths.isEmpty {
                 Text(NSLocalizedString("This species rarely needs fertilizer!", comment: ""))
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -276,13 +281,13 @@ struct TreeIntelligenceView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
-                    Text(TreeIntelligence.monthNames(from: species.intelligence.fertilizerMonths))
+                    Text(TreeIntelligence.monthNames(from: intel.fertilizerMonths))
                         .font(.caption)
                         .fontWeight(.medium)
                 }
             }
 
-            Text(species.intelligence.fertilizerType)
+            Text(intel.fertilizerType)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -303,7 +308,7 @@ struct TreeIntelligenceView: View {
                     .font(.subheadline)
                     .fontWeight(.semibold)
                 Spacer()
-                if species.intelligence.isHarvestTime() {
+                if intel.isHarvestTime() {
                     Text(NSLocalizedString("Harvest time!", comment: ""))
                         .font(.caption2)
                         .fontWeight(.bold)
@@ -317,7 +322,7 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            if let months = species.intelligence.harvestMonths {
+            if let months = intel.harvestMonths {
                 HStack {
                     Text(NSLocalizedString("Harvest months", comment: ""))
                         .font(.caption)
@@ -330,7 +335,7 @@ struct TreeIntelligenceView: View {
                 }
             }
 
-            if let years = species.intelligence.yearsToBearing {
+            if let years = intel.yearsToBearing {
                 HStack {
                     Text(NSLocalizedString("Years to first harvest", comment: ""))
                         .font(.caption)
@@ -372,10 +377,10 @@ struct TreeIntelligenceView: View {
 
             Divider()
 
-            envRow(icon: "sun.max.fill", label: NSLocalizedString("Sun", comment: ""), value: species.intelligence.sunExposure)
-            envRow(icon: "thermometer.snowflake", label: NSLocalizedString("Frost hardiness", comment: ""), value: "\(species.intelligence.frostHardiness)°C")
-            envRow(icon: "drop.halffull", label: NSLocalizedString("Ideal soil pH", comment: ""), value: species.intelligence.idealSoilPH)
-            envRow(icon: "arrow.up.to.line", label: NSLocalizedString("Mature height", comment: ""), value: species.intelligence.matureHeight)
+            envRow(icon: "sun.max.fill", label: NSLocalizedString("Sun", comment: ""), value: intel.sunExposure)
+            envRow(icon: "thermometer.snowflake", label: NSLocalizedString("Frost hardiness", comment: ""), value: "\(intel.frostHardiness)°C")
+            envRow(icon: "drop.halffull", label: NSLocalizedString("Ideal soil pH", comment: ""), value: intel.idealSoilPH)
+            envRow(icon: "arrow.up.to.line", label: NSLocalizedString("Mature height", comment: ""), value: intel.matureHeight)
         }
         .padding()
         .background(.ultraThinMaterial)
@@ -409,7 +414,6 @@ struct TreeIntelligenceView: View {
 
     private var currentAlerts: [AlertItem] {
         var alerts: [AlertItem] = []
-        let intel = species.intelligence
 
         if intel.shouldPruneThisMonth() {
             alerts.append(AlertItem(

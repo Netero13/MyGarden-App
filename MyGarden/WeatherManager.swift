@@ -150,7 +150,7 @@ struct WeatherIntelligence {
 
         // Look up species intelligence (if available)
         let species = TreeEncyclopedia.find(name: plant.name)
-        let intel = species?.intelligence
+        let intel = species?.resolvedIntelligence(forVariety: plant.variety)
         let age = plant.age
         let isYoung = age < (intel?.yearsToMature ?? 3)
 
@@ -297,7 +297,7 @@ struct WeatherIntelligence {
 
     static func wateringAdjustment(for plant: Plant, weather: WeatherData) -> WateringAdjustment {
         let species = TreeEncyclopedia.find(name: plant.name)
-        let intel = species?.intelligence
+        let intel = species?.resolvedIntelligence(forVariety: plant.variety)
         let isYoung = plant.age < (intel?.yearsToMature ?? 3)
 
         // Heavy rain today → skip

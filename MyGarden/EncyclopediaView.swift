@@ -158,32 +158,32 @@ struct EncyclopediaView: View {
 
             // Quick stats row
             HStack(spacing: 16) {
-                statBadge(
-                    icon: "arrow.up.to.line",
-                    value: species.intelligence.matureHeight,
-                    color: .brown
-                )
-                statBadge(
-                    icon: "thermometer.snowflake",
-                    value: "\(species.intelligence.frostHardiness)°C",
-                    color: .cyan
-                )
-                statBadge(
-                    icon: "sun.max.fill",
-                    value: shortSunLabel(species.intelligence.sunExposure),
-                    color: .orange
-                )
-                if let months = species.intelligence.harvestMonths {
+                if let firstVariety = species.varieties.first {
                     statBadge(
-                        icon: "basket.fill",
-                        value: shortHarvestLabel(months),
-                        color: .red
+                        icon: "arrow.up.to.line",
+                        value: firstVariety.matureHeight,
+                        color: .brown
+                    )
+                    statBadge(
+                        icon: "thermometer.snowflake",
+                        value: "\(firstVariety.frostHardiness)°C",
+                        color: .cyan
                     )
                 }
-                if let years = species.intelligence.yearsToBearing {
+                statBadge(
+                    icon: "sun.max.fill",
+                    value: shortSunLabel(species.speciesInfo.sun),
+                    color: .orange
+                )
+                if let harvest = species.varieties.first?.harvest {
+                    statBadge(
+                        icon: "basket.fill",
+                        value: shortHarvestLabel(harvest.months),
+                        color: .red
+                    )
                     statBadge(
                         icon: "hourglass",
-                        value: "\(years)y to fruit",
+                        value: "\(harvest.yearsToBearing)y to fruit",
                         color: .purple
                     )
                 }
@@ -194,7 +194,7 @@ struct EncyclopediaView: View {
                 Image(systemName: "tag.fill")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
-                Text(species.varieties.prefix(3).joined(separator: ", "))
+                Text(species.varieties.prefix(3).map(\.name).joined(separator: ", "))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -336,7 +336,7 @@ struct SpeciesDetailView: View {
                     .foregroundStyle(species.type.color)
                     .clipShape(Capsule())
 
-                if let years = species.intelligence.yearsToBearing {
+                if let years = species.varieties.first?.harvest?.yearsToBearing {
                     Text(String(format: NSLocalizedString("First fruit in ~%lld years", comment: ""), years))
                         .font(.caption)
                         .fontWeight(.medium)
@@ -365,21 +365,21 @@ struct SpeciesDetailView: View {
 
             Divider()
 
-            let intel = species.intelligence
+            let resolved = species.resolvedIntelligence()
 
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 10),
                 GridItem(.flexible(), spacing: 10)
             ], spacing: 10) {
-                factCell(icon: "arrow.up.to.line", label: "Height", value: intel.matureHeight, color: .brown)
-                factCell(icon: "thermometer.snowflake", label: "Hardiness", value: "\(intel.frostHardiness)°C", color: .cyan)
-                factCell(icon: "sun.max.fill", label: "Sun", value: intel.sunExposure, color: .orange)
-                factCell(icon: "drop.halffull", label: "Soil pH", value: intel.idealSoilPH, color: .teal)
-                factCell(icon: "drop.fill", label: "Water (young)", value: "Every \(intel.youngWateringDays)d", color: .blue)
-                factCell(icon: "drop.fill", label: "Water (mature)", value: "Every \(intel.establishedWateringDays)d", color: .blue.opacity(0.6))
+                factCell(icon: "arrow.up.to.line", label: "Height", value: resolved.matureHeight, color: .brown)
+                factCell(icon: "thermometer.snowflake", label: "Hardiness", value: "\(resolved.frostHardiness)°C", color: .cyan)
+                factCell(icon: "sun.max.fill", label: "Sun", value: resolved.sunExposure, color: .orange)
+                factCell(icon: "drop.halffull", label: "Soil pH", value: resolved.idealSoilPH, color: .teal)
+                factCell(icon: "drop.fill", label: "Water (young)", value: "Every \(resolved.youngWateringDays)d", color: .blue)
+                factCell(icon: "drop.fill", label: "Water (mature)", value: "Every \(resolved.establishedWateringDays)d", color: .blue.opacity(0.6))
             }
 
-            if let months = intel.harvestMonths {
+            if let months = resolved.harvestMonths {
                 HStack {
                     Image(systemName: "basket.fill")
                         .font(.caption)
@@ -440,8 +440,8 @@ struct SpeciesDetailView: View {
 
             // Wrap varieties as flowing tags
             FlowLayout(spacing: 6) {
-                ForEach(species.varieties, id: \.self) { variety in
-                    Text(variety)
+                ForEach(species.varieties) { variety in
+                    Text(variety.name)
                         .font(.caption)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
@@ -606,8 +606,8 @@ struct AddPlantFromEncyclopedia: View {
                             .textInputAutocapitalization(.words)
                     } else {
                         Picker("Variety", selection: $selectedVariety) {
-                            ForEach(species.varieties, id: \.self) { variety in
-                                Text(variety).tag(variety)
+                            ForEach(species.varieties) { variety in
+                                Text(variety.name).tag(variety.name)
                             }
                         }
                         .pickerStyle(.navigationLink)
@@ -692,7 +692,7 @@ struct AddPlantFromEncyclopedia: View {
             .onAppear {
                 // Pre-fill from encyclopedia
                 if let first = species.varieties.first {
-                    selectedVariety = first
+                    selectedVariety = first.name
                 }
                 let closest = WateringFrequency.closest(to: species.defaultWateringDays)
                 selectedFrequency = closest

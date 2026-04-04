@@ -30,7 +30,7 @@ struct CareActionDetailView: View {
     @State private var savedPhotoID: String?
     @State private var note: String = ""
 
-    private var intel: TreeIntelligence { species.intelligence }
+    private var intel: TreeIntelligence { species.resolvedIntelligence() }
 
     var body: some View {
         ScrollView {

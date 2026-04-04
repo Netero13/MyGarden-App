@@ -210,7 +210,7 @@ class PlantStore {
 
         for index in plants.indices {
             guard let species = TreeEncyclopedia.find(name: plants[index].name) else { continue }
-            let intel = species.intelligence
+            let intel = species.resolvedIntelligence(forVariety: plants[index].variety)
 
             // Each care type that TreeIntelligence says is due this month
             let careChecks: [(check: Bool, type: CareType)] = [
@@ -254,7 +254,7 @@ class PlantStore {
 
         let calendar = Calendar.current
         let now = Date()
-        let intel = species.intelligence
+        let intel = species.resolvedIntelligence(forVariety: plant.variety)
         var changed = false
 
         let careChecks: [(check: Bool, type: CareType)] = [

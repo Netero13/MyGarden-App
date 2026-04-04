@@ -114,7 +114,7 @@ struct AddPlantView: View {
                     customDays = species.defaultWateringDays
                     // Pre-select first variety
                     if let firstVariety = species.varieties.first {
-                        selectedVariety = firstVariety
+                        selectedVariety = firstVariety.name
                     }
                 }
             }
@@ -184,8 +184,8 @@ struct AddPlantView: View {
                 } else {
                     // Pick from encyclopedia varieties
                     Picker("Variety", selection: $selectedVariety) {
-                        ForEach(species.varieties, id: \.self) { variety in
-                            Text(variety).tag(variety)
+                        ForEach(species.varieties) { variety in
+                            Text(variety.name).tag(variety.name)
                         }
                     }
                     .pickerStyle(.navigationLink)

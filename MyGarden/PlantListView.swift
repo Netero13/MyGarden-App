@@ -530,7 +530,7 @@ struct PlantListView: View {
 
         for plant in store.plants {
             guard let species = TreeEncyclopedia.find(name: plant.name) else { continue }
-            let intel = species.intelligence
+            let intel = species.resolvedIntelligence(forVariety: plant.variety)
 
             // Only show actions that are due AND not already done this month
             if intel.shouldPruneThisMonth() && !plant.wasDoneThisMonth(.pruned) {
